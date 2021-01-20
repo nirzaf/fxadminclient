@@ -1,0 +1,35 @@
+/*  BEGIN BREADCRUMB HERE */
+
+.breadcrumb {
+    padding: 0px;
+    list-style: none;
+    margin: 0 0 20px 0;
+}
+
+.breadcrumb>li {
+    display: inline-block;
+    color: #b6aeab;
+    font-size: 11px;
+}
+
+.breadcrumb>li+li:before {
+    content: "/\00a0";
+    padding: 0 2px;
+    color: #959595;
+}
+
+.breadcrumb>.active {
+    color: #959595;
+}
+
+.breadcrumb-active {
+    color: #fd903f!important;
+}
+
+.breadcrumb-icon {
+    font-size: 18px;
+    color: #fd903f;
+}
+
+
+/* END BREADCRUMB HERE */

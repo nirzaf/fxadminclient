@@ -1,0 +1,542 @@
+@import '../config.scss';
+.home-icon {
+    padding: 4px;
+    position: absolute;
+    right: 10px;
+    top: 24px;
+    cursor: pointer;
+    color: #fd903f;
+}
+
+.rpt-heading {
+    font-size: 16px;
+    margin-left: 10px;
+    color: #2f2f2f;
+}
+
+.bar-ico {
+    margin-left: 25px;
+    font-size: 28px;
+    color: #e98f41;
+    cursor: pointer;
+    vertical-align: super;
+}
+
+// .router-main-container {
+//     margin-left: 60px;
+// }
+.app-enable .router-main-container {
+    margin: 0px;
+}
+
+.gui-controls>li {
+    position: relative;
+    margin-bottom: 2px;
+}
+
+.gui-controls li {
+    list-style: none;
+}
+
+.gui-icon {
+    position: absolute;
+    left: 14px;
+    top: 0;
+    width: 40px;
+    height: 40px;
+    font-size: 23px;
+    overflow: hidden;
+    -webkit-transition: all 0.15s linear;
+    transition: all 0.15s linear;
+    line-height: 2;
+    color: #ffffff;
+}
+
+.gui-controls>li>a {
+    position: relative;
+    display: block;
+    text-decoration: none;
+    padding: 15px 0px;
+    font-size: 12px;
+    line-height: normal;
+    border-radius: 0;
+    padding-left: 0;
+    min-height: 40px;
+    width: 300px;
+    z-index: 1;
+    background-color: #1e216c;
+}
+
+.gui-controls>li>a .title {
+    margin-left: 62px;
+}
+
+.gui-controls li .title {
+    position: relative;
+    left: -15px;
+    display: block;
+    padding-left: 6px;
+    text-shadow: none;
+    -webkit-transition: all 0.5s cubic-bezier(0.15, 0.99, 0.18, 1.01);
+    transition: all 0.5s cubic-bezier(0.15, 0.99, 0.18, 1.01);
+    font-size: 14px;
+    color: #ffffff;
+    z-index: 10;
+}
+
+.gui-controls>li ul>li>a {
+    position: relative;
+    display: block;
+    text-decoration: none;
+    font-size: 12px;
+    line-height: normal;
+    border-radius: 0;
+    border-bottom: 1px solid #1e216c;
+}
+
+.child-a {
+    margin-left: 60px;
+}
+
+.sub-child-a {
+    margin-left: 85px;
+    padding: 12px;
+    width: 196px;
+}
+
+.gui-controls>li ul>li a.active {
+    background-color: #161c4b;
+}
+
+.sub-child-list {
+    padding-left: 10px;
+}
+
+.rotate180 {
+    transform: rotate(-180deg);
+    -ms-transform: rotate(-180deg);
+    -webkit-transform: rotate(-180deg);
+    transform: rotate(-180deg);
+    -webkit-transition: all .3s ease;
+    -moz-transition: all .3s ease;
+    -ms-transition: all .3s ease;
+    -o-transition: all .3s ease;
+    transition: all .3s ease;
+}
+
+.child-label {
+    width: 230px;
+    padding: 10px;
+    cursor: pointer;
+    margin-left: 18px;
+}
+
+.gui-controls>li>ul>li>ul li:before {
+    left: 10px;
+}
+
+.gui-controls li .sub-child {
+    left: 0px;
+    font-size: 12px;
+}
+
+.gui-controls li .child {
+    top: 0px;
+}
+
+.child,
+.sub-child {
+    cursor: pointer;
+    color: #C0C0C0;
+}
+
+.gui-controls li label.pointer {
+    cursor: pointer;
+}
+
+.gui-controls li label {
+    font-size: 14px;
+    display: inline-flex;
+    line-height: 1;
+}
+
+.gui-controls li label i {
+    margin-right: 18px;
+}
+
+.gui-controls li input {
+    position: absolute;
+    left: 0;
+    margin-left: 0;
+    opacity: 0;
+    z-index: 2;
+    height: 1em;
+    width: 1em;
+}
+
+.gui-controls li input+ul {
+    height: 1em;
+}
+
+.gui-controls li input+ul>li {
+    display: none;
+    margin-left: -12px !important;
+}
+
+.gui-controls li input:checked+ul {
+    margin: -1.25em 0 0 -65px;
+    padding: 1.563em 0 0 80px;
+    height: auto;
+    transition: height 0.5s cubic-bezier(0.15, 0.99, 0.18, 1.01);
+}
+
+.gui-controls li input:checked+ul>li {
+    display: block;
+    transition: height 0.5s cubic-bezier(0.15, 0.99, 0.18, 1.01);
+}
+
+.hide {
+    display: none;
+}
+
+.dynamic-name,
+.title {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.collapse-li {
+    height: 70px;
+    line-height: 70px;
+}
+
+.rightview-arrow {
+    position: absolute;
+    color: #fff;
+    right: 42px;
+    top: 16px;
+    font-size: 10px !important;
+}
+
+.rightview-arrow1 {
+    position: absolute;
+    color: #fff;
+    right: 36px;
+    font-size: 10px !important;
+    top: 12px;
+}
+
+.toggle-button-first {
+    position: absolute;
+    top: 18px;
+    font-size: 23px;
+    background-color: #181d58;
+    color: #fff;
+    border: 0;
+    left: 5px;
+}
+
+.toggle-button-last {
+    border: 0;
+    background-color: #181d58;
+    color: #fff;
+    top: 19px;
+    position: absolute;
+    left: 235px;
+    cursor: pointer;
+}
+
+
+/*.toggle-button>em {
+  font-size: 23px;
+}*/
+
+.sub-title {
+    position: absolute;
+    top: 14px;
+    left: 55px;
+    font-size: 14px;
+    color: #3450a1;
+}
+
+.main-title {
+    position: absolute;
+    left: 55px;
+    top: -5px;
+    color: #3450a1;
+    font-size: 22px;
+}
+
+.logo_block {
+    margin-left: -15px;
+    padding: 16px 0px;
+    line-height: 20px;
+}
+
+.app-enable .logo_block {
+    margin: 0px;
+}
+
+.logo_heading {
+    display: inline;
+    margin-left: 18px;
+    font-size: 16px;
+    color: #444444;
+    font-weight: bold;
+}
+
+.logo_subheading {
+    display: block;
+    margin-left: 15px;
+    font-size: 11px;
+    color: rgb(93, 120, 206);
+    text-transform: uppercase;
+}
+
+
+/*///Property select*/
+
+.app-icon {
+    color: $primary-color;
+    font-size: 26px;
+    margin-top: 9px;
+}
+
+// css for custom scroll starts here
+
+/* SCROLLBAR */
+
+
+/* Let's get this party started */
+
+::-webkit-scrollbar {
+    width: 2px;
+}
+
+
+/* Track */
+
+::-webkit-scrollbar-track {
+    background: #eee;
+    border: 4px solid transparent;
+    //background-clip: content-box; // this is important
+    background-clip: border-box;
+}
+
+
+/* Handle */
+
+::-webkit-scrollbar-thumb {
+    background: #4763c9;
+    border: 1px solid #4763c9;
+}
+
+.hr-nomargin {
+    margin: 0px;
+}
+
+// css for custom scroll ends here.
+.main-menu .fa-2x {
+    font-size: 2em;
+}
+
+.main-menu .fa {
+    position: relative;
+    display: table-cell;
+    width: 60px;
+    height: 56px;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 20px;
+    padding-bottom: 4px;
+}
+
+.main-menu:hover,
+nav.main-menu.expanded {
+    width: 250px;
+    overflow: visible;
+}
+
+.main-menu {
+    background: $primary-color;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    height: 100%;
+    left: 0;
+    width: 60px;
+    overflow: hidden;
+    -webkit-transition: width .05s linear;
+    transition: width .20s linear;
+    -webkit-transform: translateZ(0) scale(1, 1);
+    z-index: 1000;
+}
+
+.main-menu>ul {
+    margin: 3.5px 0;
+    padding: 0px;
+}
+
+.main-menu li {
+    position: relative;
+    display: block;
+    width: 250px;
+    word-break: break-all;
+}
+
+.main-menu li>a {
+    position: relative;
+    display: table;
+    border-collapse: collapse;
+    border-spacing: 0;
+    color: #ffffff;
+    font-family: arial;
+    font-size: 14px;
+    text-decoration: none;
+    -webkit-transform: translateZ(0) scale(1, 1);
+    -webkit-transition: all .1s linear;
+    transition: all .1s linear;
+    border-bottom: 1px solid #ededed45;
+    cursor: pointer;
+}
+
+.main-menu li>a,
+a:focus {
+    color: #ffffff !important;
+}
+
+.main-menu .nav-icon {
+    position: relative;
+    display: table-cell;
+    width: 60px;
+    height: 36px;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 18px;
+}
+
+.main-menu .nav-text {
+    position: relative;
+    display: table-cell;
+    vertical-align: middle;
+    width: 190px;
+    font-family: 'Titillium Web', sans-serif;
+}
+
+.main-menu>ul.logout {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+}
+
+.demo-container {
+    margin-left: 40px;
+}
+
+.menu-span {
+    position: relative;
+    display: table-cell;
+    width: 60px;
+    height: 48px;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 19px;
+}
+
+.header-logo {
+    margin-left: 50px;
+    width: 50px;
+}
+
+.version-div {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #ff8021e8;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    padding: 10px;
+    font-size: 12px;
+}
+
+.accountingdate-container {
+    display: inline-block;
+    padding-left: 20px;
+    font-size: 12px;
+    color: #7c7c7c;
+    line-height: 18px;
+}
+
+.header-main {
+    padding: 10px 15px;
+    color: #7c7c7c;
+    background: #fff;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+    margin-left: 60px;
+    position: fixed;
+    min-height: auto;
+    box-sizing: border-box;
+    width: 100%;
+    z-index: 99;
+    top: 0px;
+}
+
+.text-heading {
+    display: inline-block;
+    margin-left: 12px;
+    font-size: 14px;
+    color: #2f2f2f;
+}
+
+.text-heading span.first {
+    position: relative;
+    top: 2px;
+}
+
+.text-sub-heading {
+    font-size: 12px;
+    color: #8c8989;
+    position: relative;
+    top: -2px;
+}
+
+.hotel-name {
+    position: absolute;
+    left: 415px;
+    top: 10px;
+    font-size: 16px;
+    color: #4d4d4d;
+    font-weight: normal;
+    letter-spacing: 0px;
+}
+
+.hotel_overview {
+    position: absolute;
+    top: 8px;
+    right: 200px;
+    p {
+        font-size: 13px;
+        color: #f68f3f;
+        cursor: pointer;
+    }
+}
+
+.shuffle_icon {
+    border: 1px solid #fff;
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 28px;
+}
+::ng-deep ngx-material-timepicker-content{
+
+    --clock-hand-color: #FF8E00 !important;
+  }
+ 
+
+  

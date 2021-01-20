@@ -1,0 +1,48 @@
+@import '../../config.scss';
+
+[class*=" icon-"],
+[class^=icon-] {
+  font-family: 'icomoon';
+  speak: none;
+  font-style: normal;
+  font-weight: 400;
+  font-variant: normal;
+  text-transform: none;
+  font-size: 19px;
+}
+
+@font-face {
+  font-family: icomoon;
+  src: url('../fonts/icomoon.eot?-l1vzoi');
+  src: url('../fonts/icomoon.eot?#iefix-l1vzoi') format("embedded-opentype"), url('../fonts/icomoon.woff?-l1vzoi') format("woff"), url('../fonts/icomoon.ttf?-l1vzoi') format("truetype"), url('../fonts/icomoon.svg?-l1vzoi#icomoon') format("svg");
+  font-weight: 400;
+  font-style: normal
+}
+
+/*icon class starts here*/
+
+.icon-Payment-option:before {
+  content: "\e90c";
+  color: #95989a;
+}
+
+.icon-Special-Instructions:before {
+  content: "\e90d";
+  color: #95989a;
+}
+
+.icon-Demography:before {
+  content: "\e904";
+}
+
+.icon-Documents:before {
+  content: "\e905";
+  color: #95989a;
+}
+.icon-Menu:before {
+  content: "\e90a";
+}
+
+.icon-More:before {
+  content: "\e90b";
+}

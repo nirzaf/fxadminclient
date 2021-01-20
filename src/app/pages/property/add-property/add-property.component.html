@@ -1,0 +1,279 @@
+
+
+
+<form [formGroup]="form">
+<h2 mat-dialog-title>Create Property</h2>
+<mat-dialog-content  class="mat-typography">
+  <div>
+    <div class="content" style="margin-bottom: 20px;" >
+      <div fxFlex="100%"  fxLayout="column wrap" fxLayoutGap="15px" >
+          <div fxFlex="25%"  style="font-size: 12px;opacity:0.7">
+            Holding Company
+          
+            </div>
+            <div fxFlex="25%">
+                Sarovar Hotels & Resorts
+              </div>
+            
+            </div>
+            <div fxFlex="100%"  fxLayout="column wrap" fxLayoutGap="15px" >
+                <div fxFlex="25%"  style="font-size: 12px;opacity:0.7">
+                    Group
+                   
+                     </div>
+            <div fxFlex="25%" >
+                Sarovar Hotels G1
+              </div>
+            
+          </div>
+</div>
+    <div formArrayName="times" *ngFor="let property of form.controls.times?.value; let i = index; trackBy:trackByFn" [attr.data-index]="i">
+      <div class="content">
+        <div fxFlex="100%"  fxLayout="row wrap" fxLayoutGap="15px" class="fx_border_bottom" >
+            <div fxFlex="80%" fxFlex.xs="75%" fxFlex.sm="100%" class="fx_subgroup_head">
+                Property {{i+1}}            
+              </div>
+              <div fxFlex="18%" fxFlex.xs="20%" fxLayoutAlign="end" >
+                  
+                <i  class="fas fa-angle-down themecolor iconSize moreicon"></i>
+               
+            </div>
+              
+            </div>
+      </div>
+   
+      <div class="content-0">
+      
+     
+    <div fxFlex="100%"  fxLayout="row wrap" fxLayoutGap="15px">
+        <div fxFlex="24%" fxFlex.xs="100%" fxFlex.sm="50%">
+            <mat-form-field [style.width.%]="100" floatLabel="always"> 
+                <mat-label>Code</mat-label>
+                <input matInput  placeholder="Code">
+                
+            </mat-form-field>
+          </div>
+          <div fxFlex="24%" fxFlex.xs="100%" fxFlex.sm="50%">
+            <mat-form-field [style.width.%]="100" floatLabel="always"> 
+                <mat-label>Name</mat-label>
+                <input matInput #input placeholder="Name">
+                
+            </mat-form-field>
+          </div>
+          <div fxFlex="48%" fxFlex.xs="100%" fxFlex.sm="50%">
+            <mat-form-field [style.width.%]="100" floatLabel="always"> 
+                <mat-label>Address</mat-label>
+                <input matInput #input placeholder="Address">
+                
+            </mat-form-field>
+          </div>
+        </div>
+    </div>
+    <div class="content">
+        <div fxFlex="100%"  fxLayout="row wrap" fxLayoutGap="15px" >
+            <div fxFlex="24%" fxFlex.xs="100%" fxFlex.sm="50%">
+              {{property.Items}}
+                <mat-form-field  [style.width.%]="100" floatLabel="always">
+                    <mat-label>Country</mat-label>
+                    <mat-select [(ngModel)]="property.CountryId" [ngModelOptions]="{standalone: true}">
+                        <mat-option *ngFor="let item of items" [value]="item.id">{{item.name}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+              </div>
+              <div fxFlex="24%" fxFlex.xs="100%" fxFlex.sm="50%">
+                <mat-form-field [style.width.%]="100" floatLabel="always"> 
+                    <mat-label>State</mat-label>
+                    <mat-select [(ngModel)]="property.StateId" [ngModelOptions]="{standalone: true}">
+                      <mat-option *ngFor="let item of items" [value]="item.id">{{item.name}}</mat-option>
+                    </mat-select>
+                    
+                </mat-form-field>
+              </div>
+              <div fxFlex="24%" fxFlex.xs="100%" fxFlex.sm="50%">
+                <mat-form-field [style.width.%]="100" floatLabel="always"> 
+                    <mat-label>City</mat-label>
+                    <mat-select [(ngModel)]="property.CityId" [ngModelOptions]="{standalone: true}">
+                      <mat-option *ngFor="let item of items" [value]="item.id">{{item.name}}</mat-option>
+                    </mat-select>
+                    
+                </mat-form-field>
+              </div>
+              <div fxFlex="22%" fxFlex.xs="100%" fxFlex.sm="50%">
+                <mat-form-field [style.width.%]="100" floatLabel="always"> 
+                    <mat-label>Pin/Zip</mat-label>
+                    <input matInput #input placeholder="Pin/Zip">
+                    
+                </mat-form-field>
+              </div>
+            </div>
+</div>
+<div class="content">
+    <div fxFlex="100%"  fxLayout="row wrap" fxLayoutGap="15px">
+        
+          <div fxFlex="24%" fxFlex.xs="100%" fxFlex.sm="50%">
+            <mat-form-field [style.width.%]="100" floatLabel="always"> 
+                <mat-label>Phone Number</mat-label>
+                <input matInput #input placeholder="Phone Number">
+                
+            </mat-form-field>
+          </div>
+          <div fxFlex="24%" fxFlex.xs="100%" fxFlex.sm="50%">
+            <mat-form-field [style.width.%]="100" floatLabel="always"> 
+                <mat-label>Hotel Type</mat-label>
+                <mat-select [(ngModel)]="property.HotelTypeId" [ngModelOptions]="{standalone: true}">
+                  <mat-option *ngFor="let item of items" [value]="item.id">{{item.name}}</mat-option>
+                </mat-select>
+                
+            </mat-form-field>
+          </div>
+          <div fxFlex="24%" fxFlex.xs="100%" fxFlex.sm="50%" fxLayout="row wrap">
+      
+             
+                <div fxFlex="50%" fxFlex.xs="100%" fxFlex.sm="50%">
+                  <mat-form-field [style.width.%]="100" floatLabel="always"> 
+                    <mat-label>Check in Time</mat-label>
+                    <div fxFlex="20%"><i class="fas fa-clock"></i></div>
+                    <div fxFlex="80%">
+                      <input matInput #input placeholder="Check in" [ngxTimepicker]="inpicker">
+                      <ngx-material-timepicker #inpicker></ngx-material-timepicker>
+                    </div>
+                    
+                    
+                </mat-form-field>
+                </div>
+                <div fxFlex="50%" fxFlex.xs="100%" fxFlex.sm="50%">
+                  <mat-form-field [style.width.%]="100" floatLabel="always"> 
+                    <mat-label>Check Out Time</mat-label>
+                    <div fxFlex="20%"><i class="fas fa-clock"></i></div>
+                    <div fxFlex="80%">
+                      <input matInput #input placeholder="Check out"  [ngxTimepicker]="outpicker">
+                      <ngx-material-timepicker #outpicker></ngx-material-timepicker>
+                    </div>
+                   
+                    
+                </mat-form-field>
+                </div>   
+          </div>
+          <div fxFlex="22%" fxFlex.xs="100%" fxFlex.sm="50%">
+            <mat-form-field [style.width.%]="100" floatLabel="always"> 
+                <mat-label>Website</mat-label>
+                <input matInput #input placeholder="Website">
+                
+            </mat-form-field>
+          </div>
+        </div>
+</div>
+<div class="content">
+  <div fxFlex="100%"  fxLayout="row wrap" fxLayoutGap="15px" >
+      <div fxFlex="24%" fxFlex.xs="100%" fxFlex.sm="50%">
+          <mat-form-field  [style.width.%]="100" floatLabel="always">
+              <mat-label>WeekDays</mat-label>
+              <mat-select [(ngModel)]="property.WeekDayId" [ngModelOptions]="{standalone: true}">
+                <mat-option *ngFor="let item of items" [value]="item.id">{{item.name}}</mat-option>
+              </mat-select>
+          </mat-form-field>
+        </div>
+        <div fxFlex="24%" fxFlex.xs="100%" fxFlex.sm="50%">
+          <mat-form-field [style.width.%]="100" floatLabel="always"> 
+              <mat-label>Weekends</mat-label>
+              <mat-select [(ngModel)]="property.WeekEndDayId" [ngModelOptions]="{standalone: true}">
+                <mat-option *ngFor="let item of items" [value]="item.id">{{item.name}}</mat-option>
+              </mat-select>
+              
+          </mat-form-field>
+        </div>
+        <div fxFlex="24%" fxFlex.xs="100%" fxFlex.sm="50%">
+          <mat-form-field [style.width.%]="100" floatLabel="always"> 
+              <mat-label>Currency</mat-label>
+              <mat-select [(ngModel)]="property.CurrencyId" [ngModelOptions]="{standalone: true}">
+                <mat-option *ngFor="let item of items" [value]="item.id">{{item.name}}</mat-option>
+              </mat-select>
+              
+          </mat-form-field>
+        </div>
+        <div fxFlex="22%" fxFlex.xs="100%" fxFlex.sm="50%">
+          <mat-form-field [style.width.%]="100" floatLabel="always"> 
+            <mat-label>Other Currency</mat-label>
+            <mat-select [(ngModel)]="property.OtherCurrencyId" [ngModelOptions]="{standalone: true}">
+              <mat-option *ngFor="let item of items" [value]="item.id">{{item.name}}</mat-option>
+            </mat-select>
+            
+        </mat-form-field>
+        </div>
+      </div>
+</div>
+<div class="content">
+  <div fxFlex="100%"  fxLayout="row wrap" fxLayoutGap="15px">
+    <mat-form-field class="network-ip-chip-list">
+      <mat-label>Property Network IP</mat-label>
+      <mat-chip-list #chipList aria-label="IP selection">
+        <mat-chip *ngFor="let netWorkIP of property.networkIPs" [selectable]="selectable"
+                 [removable]="removable" (removed)="removeNetworkIP(netWorkIP , i)">
+          {{netWorkIP.name}}
+          <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+        </mat-chip>
+        <input placeholder="Network IP"
+               [matChipInputFor]="chipList"
+               [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+               [matChipInputAddOnBlur]="addOnBlur"
+               (matChipInputTokenEnd)="addNetworkIP($event,i)">
+      </mat-chip-list>
+    </mat-form-field>
+    </div>
+    </div>
+    <div class="content">
+      <div fxFlex="100%"  fxLayout="row wrap" fxLayoutGap="15px">
+     
+        <mat-form-field class="network-ip-chip-list">
+          <mat-label>Network Mac ID</mat-label>
+          <mat-chip-list #macIdList aria-label="IP selection">
+            <mat-chip *ngFor="let macID of property.macIDs" [selectable]="selectable"
+                     [removable]="removable" (removed)="removeMacID(macID, i)">
+              {{macID.name}}
+              <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+            </mat-chip>
+            <input placeholder="Mac ID"
+                   [matChipInputFor]="macIdList"
+                   [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                   [matChipInputAddOnBlur]="addOnBlur"
+                   (matChipInputTokenEnd)="addMacID($event,i)">
+          </mat-chip-list>
+        </mat-form-field>
+        </div>
+        </div>
+        <div class="content">
+        
+          <div fxFlex="100%"  fxLayout="row wrap" fxLayoutGap="15px" class="fx_starRating">
+            <div fxFlex="100%">
+              Ratings
+            </div>
+            <div fxFlex="100%" fxLayout="row wrap" fxLayout.lt-sm="column">
+          <div fxFlex="40%" fxFlex.sm="100%" fxFlex.xs="100%">
+            <mat-star-rating [rating]="property.rating"  [starCount]="starCount" [color]="starColor" (ratingUpdated)="onRatingChanged($event , i)"></mat-star-rating>
+
+            <star-rating-comp [starType]="'svg'" [rating]="4"></star-rating-comp>
+          </div>
+          <div fxFlex="60%"  fxFlex.xs="100%"  fxLayout="row wrap" fxLayoutGap="15px" fxLayoutAlign="end end" >
+            <button  mat-button  class="border btnProperty btnAddMoreGroup themecolor" (click)="removeProperty(i)"><i class="fas fa-minus"></i>Remove Property</button>
+            </div>
+          </div>
+
+         
+            </div>
+            </div>
+ 
+</div>
+<div class="content">
+  <div fxFlex="100%"  fxLayout="row wrap" fxLayoutGap="15px" fxLayoutAlign="end end" >
+    <button  mat-button  class="border btnProperty btnAddMoreGroup themecolor" [autofocus]="false" (click)="addProperty()"><i class="fas fa-plus"></i>Add Property</button>
+    </div>
+    </div>
+</div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button  mat-button  class="border btnProperty" (click)="onNoClick()">Back</button>
+    <button  mat-button  class="border btnProperty" (click)="onNoClick()">Reset</button>
+    <button  mat-button class="button btnProperty" [mat-dialog-close]="data.animal" >Save</button>
+ 
+</mat-dialog-actions>
+</form>

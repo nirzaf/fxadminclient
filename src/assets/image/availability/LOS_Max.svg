@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24" height="24" viewBox="0 0 24 24">
+  <defs>
+    <clipPath id="clip-LOS_Max">
+      <rect width="24" height="24"/>
+    </clipPath>
+  </defs>
+  <g id="LOS_Max" data-name="LOS Max" clip-path="url(#clip-LOS_Max)">
+    <g id="Group_15816" data-name="Group 15816" transform="translate(-975 -130)">
+      <g id="Group_15749" data-name="Group 15749" transform="translate(978.25 137)">
+        <path id="Path_14701" data-name="Path 14701" d="M-26.641,1209.872h-1.738v10H-22.1v-1.387h-4.54Z" transform="translate(28.379 -1209.872)" fill="#a159bf"/>
+        <path id="Path_14702" data-name="Path 14702" d="M-16.5,1213.945v-3.908h-1.795v3.908H-22.2v1.795h3.908v3.908H-16.5v-3.908h3.908v-1.795Z" transform="translate(29.443 -1209.843)" fill="#a159bf"/>
+      </g>
+      <rect id="Rectangle_10424" data-name="Rectangle 10424" width="20" height="20" transform="translate(977 132)" fill="none"/>
+    </g>
+  </g>
+</svg>

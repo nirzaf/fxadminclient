@@ -1,0 +1,39 @@
+
+  .network-ip-chip-list{
+    width:100%;
+  }
+ 
+@import '../../../../config.scss';
+
+.btnAddMoreGroup .fa-plus{
+    padding-right: 7px;
+}
+.btnAddMoreGroup .fa-minus{
+    padding-right: 7px;
+}
+.btnAddMoreGroup {
+color:$primary-color;
+margin:10px 0px;
+}
+.fx_subgroup_head{
+   
+    font-weight: 550;
+}
+.fx_formGroup{
+    
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+}
+.themecolor{
+  color:$primary-color;
+}
+.iconSize{
+  font-size: 24px;
+}
+.fx_border_bottom{
+  border-bottom: 1.5px solid #949494;
+  padding-bottom: 5px;
+
+  margin-bottom: 10px;
+}
+

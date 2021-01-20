@@ -1,0 +1,187 @@
+
+
+
+<form [formGroup]="formGroup" novalidate (ngSubmit)="onSubmit()">
+  <h2 mat-dialog-title>Create Sub Group</h2>
+  <mat-dialog-content  class="mat-typography">
+    <div>
+      <div class="content"  >
+        <div fxFlex="100%"  fxLayout="column wrap" fxLayoutGap="15px" >
+            <div fxFlex="25%"  style="font-size: 12px;opacity:0.7">
+              Holding Company
+            
+              </div>
+              <div fxFlex="25%">
+                {{holdingCompanyData.holdingCompanyName}}
+                </div>
+              
+              </div>
+              <div fxFlex="100%"  fxLayout="column wrap" fxLayoutGap="15px" >
+                  <div fxFlex="25%"  style="font-size: 12px;opacity:0.7">
+                      Group
+                     
+                       </div>
+              <div fxFlex="25%" >
+                {{holdingCompanyData.groupName}}
+                </div>
+              
+            </div>
+  </div>
+      <div formArrayName="formArray1" *ngFor="let group of f.formArray1['controls']; let ix=index" [attr.data-index]="i">
+        <mat-accordion formGroupName="{{ix}}">
+     
+          <mat-expansion-panel [expanded]="DataArray[ix].PanelOpenState"  hideToggle="true" class="mat-elevation-z0"  (opened)="DataArray[ix].PanelOpenState = true"
+                               (closed)="DataArray[ix].PanelOpenState = false" >
+                             
+            <mat-expansion-panel-header #panelH (click)="panelH._toggle()">
+              <mat-panel-title>
+        <div class="content" (click)="panelH._toggle()">
+         
+          <div fxFlex="100%"  fxLayout="row wrap" fxLayoutGap="15px" class="fx_border_bottom" >
+              <div fxFlex="80%" fxFlex.xs="75%" fxFlex.sm="100%" class="fx_subgroup_head">
+                Sub Group {{ix+1}}           
+                </div>
+                <div fxFlex="18%" fxFlex.xs="20%" fxLayoutAlign="end">
+                    
+                
+                  <i  *ngIf="!DataArray[ix].PanelOpenState" class="fas fa-angle-down themecolor iconSize moreicon"></i>
+                  <i *ngIf="DataArray[ix].PanelOpenState" class="fas fa-angle-up themecolor iconSize moreicon"></i>
+              </div>
+                
+              </div>
+        </div>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div class="content-0">
+        
+       
+      <div fxFlex="100%"  fxLayout="row wrap" fxLayoutGap="15px">
+          <div fxFlex="24%" fxFlex.xs="100%" fxFlex.sm="50%">
+           
+              <mat-form-field [style.width.%]="100" floatLabel="always"> 
+                  <mat-label>Code</mat-label>
+                  <input matInput  placeholder="Code" formControlName="groupCode">
+                  <mat-error
+                  *ngIf="group['controls'].groupCode.hasError('required')">
+                  Code is <strong>required</strong>
+                </mat-error>
+               
+               
+              </mat-form-field>
+       
+            </div>
+            <div fxFlex="24%" fxFlex.xs="100%" fxFlex.sm="50%">
+              <mat-form-field [style.width.%]="100" floatLabel="always"> 
+                  <mat-label>Name</mat-label>
+                  <input matInput #input placeholder="Name" formControlName="groupName">
+                  <mat-error
+                  *ngIf="group['controls'].groupName.hasError('required')">
+                  Group Name is <strong>required</strong>
+                </mat-error>
+                  
+              </mat-form-field>
+            </div>
+            <div fxFlex="48%" fxFlex.xs="100%" fxFlex.sm="50%">
+              <mat-form-field [style.width.%]="100" floatLabel="always"> 
+                  <mat-label>Address</mat-label>
+                  <input matInput #input placeholder="Address" formControlName="groupAddress">
+                  <mat-error
+                  *ngIf="group['controls'].groupAddress.hasError('required')">
+                  Address is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+      </div>
+      <div class="content">
+          <div fxFlex="100%"  fxLayout="row wrap" fxLayoutGap="15px" >
+              <div fxFlex="24%" fxFlex.xs="100%" fxFlex.sm="50%">
+                  <mat-form-field  [style.width.%]="100" floatLabel="always">
+                      <mat-label>Country</mat-label>
+                      <mat-select  (selectionChange)="getStateList($event.value,ix)" formControlName="groupCountry">
+                        <mat-option  [value]="0">Selec Country</mat-option>
+                        <mat-option *ngFor="let country of DataArray[ix].countryList" [value]="country.countryID">{{country.countryName}}</mat-option>
+                      </mat-select>
+                      <mat-error
+                      *ngIf="group['controls'].groupCountry.hasError('min')">
+                      Country is <strong>required</strong>
+                    </mat-error>
+                  </mat-form-field>
+                
+                </div>
+                <div fxFlex="24%" fxFlex.xs="100%" fxFlex.sm="50%">
+                  <mat-form-field [style.width.%]="100" floatLabel="always"> 
+                      <mat-label>State</mat-label>
+                      <mat-select  [(ngModel)]="DataArray[ix].groupState"   (selectionChange)="getCityList($event.value,ix)" formControlName="groupState">
+                        <mat-option  [value]="0">Select State</mat-option>
+                        <mat-option *ngFor="let state of DataArray[ix].stateList" [value]="state.stateID">{{state.stateName}}</mat-option>
+                      </mat-select>               
+                      <mat-error
+                      *ngIf="group['controls'].groupState.hasError('min')">
+                      State is <strong>required</strong>
+                    </mat-error>
+                  </mat-form-field>
+                
+                </div>
+                <div fxFlex="24%" fxFlex.xs="100%" fxFlex.sm="50%">
+                  <mat-form-field [style.width.%]="100" floatLabel="always"> 
+                      <mat-label>City</mat-label>
+                      <mat-select  [(ngModel)]="DataArray[ix].groupCity" formControlName="groupCity">
+                        <mat-option [value]="0">Select City</mat-option>
+                        <mat-option *ngFor="let city of DataArray[ix].cityList" [value]="city.cityId">{{city.name}}</mat-option>
+                      </mat-select>
+                      <mat-error
+                      *ngIf="group['controls'].groupCity.hasError('min')">
+                      City is <strong>required</strong>
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div fxFlex="22%" fxFlex.xs="100%" fxFlex.sm="50%">
+                  <mat-form-field [style.width.%]="100" floatLabel="always"> 
+                      <mat-label>Pin/Zip</mat-label>
+                      <input matInput #input placeholder="Pin/Zip" formControlName="groupPinZip">
+                      <mat-error
+                      *ngIf="group['controls'].groupPinZip.hasError('required')">
+                      PinZip is <strong>required</strong>
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+  </div>
+  <div class="content">
+      <div fxFlex="100%"  fxLayout="row wrap" fxLayoutGap="15px">
+          
+            <div fxFlex="24%" fxFlex.xs="100%" fxFlex.sm="50%">
+              <mat-form-field [style.width.%]="100" floatLabel="always"> 
+                  <mat-label>Phone Number</mat-label>
+                  <input matInput #input placeholder="Phone Number" formControlName="groupPhone">
+                  <mat-error
+                  *ngIf="group['controls'].groupPhone.hasError('required')">
+                  Phone is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div fxFlex="74%"  fxFlex.xs="100%"  fxLayout="row wrap" fxLayoutGap="15px" fxLayoutAlign="end end" >
+              <button  mat-button type="button"  class="border btnProperty btnAddMoreGroup themecolor" (click)="removeX(i)"><i class="fas fa-minus"></i>Remove Sub Group</button>
+              </div>
+          </div>
+  </div>
+  </mat-expansion-panel>
+  </mat-accordion>
+  </div> 
+  <div class="content">
+    <div fxFlex="100%"  fxLayout="row wrap" fxLayoutGap="15px" fxLayoutAlign="end end" >
+      <button  mat-button type="button"  class="border btnProperty btnAddMoreGroup themecolor" [autofocus]="false" (click)="addX()"><i class="fas fa-plus"></i>Add Sub Group</button>
+      </div>
+      </div>
+  
+  </div>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+      <button   type="button" mat-button  class="border btnProperty" (click)="onNoClick()">Back</button>
+      <button type="button" mat-button  class="border btnProperty" (click)="resetForm()">Reset</button>
+      <button type="submit" mat-button class="button btnProperty" >Save</button>
+   
+  </mat-dialog-actions>
+  </form>
+  

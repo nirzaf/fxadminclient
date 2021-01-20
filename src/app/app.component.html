@@ -1,0 +1,48 @@
+<header id="header" class="header-main">
+  <img src="./assets/image/fxlogo.jpg" style="width: 150px;outline:0" (click)="backToHome()">
+
+  <div class="text-heading">
+      <h1 class="page_heading">
+       
+      </h1><br> 
+  </div>
+ 
+
+
+  <div class="logout">
+      <button mat-button [matMenuTriggerFor]="beforeMenu">
+          <img class="avatar" src="./assets/image/gravatar.1.jpg">
+          <i class="fa fa-chevron-down"></i>
+      </button>
+      <mat-menu #beforeMenu="matMenu" xPosition="before">
+          <button mat-menu-item (click)="logout()">{{TRANSLATE.GEM.LOG_OUT}}</button>
+      </mat-menu>
+  </div>
+</header>
+<div class="sidebar" id="mySidenav">
+  <nav class="main-menu" id="sideMenuBar">
+      <ul>
+          <li>
+              <a>
+                  <span class="menu-span"><i class="fas fa-random shuffle_icon"></i></span>
+                  <!-- <span class="fa fa-bars menu-span"></span> -->
+                  <span class="nav-text">
+                      <h3>{{TRANSLATE.GEM.GEM_MENU}}</h3>
+                  </span>
+              </a>
+          </li>
+          <li *ngFor="let m of sidemenuList">
+              <a (click)="navigatePage(m.url)">
+                  <span class="{{m.icon}} menu-span"></span>
+                  <span class="nav-text">
+                      {{m.name}}
+                  </span>
+              </a>
+          </li>
+      </ul>
+  </nav>
+
+</div>
+<div class="main-container" id="main_container">
+  <router-outlet></router-outlet>
+</div>

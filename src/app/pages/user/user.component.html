@@ -1,0 +1,76 @@
+<app-loader *ngIf="isProgressing" [msg]="loaderMessage"></app-loader>
+
+
+<div>
+    <h1 class="page_heading margin-padding-none">List - User</h1>
+    <app-breadcrumb [breadCrumbList]="breadCrumb"></app-breadcrumb>
+</div>
+
+
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <!-- Checkbox Column -->
+    <ng-container matColumnDef="select">
+        <th mat-header-cell *matHeaderCellDef>
+            <mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()" [indeterminate]="selection.hasValue() && !isAllSelected()" [aria-label]="checkboxLabel()">
+            </mat-checkbox>
+        </th>
+        <td mat-cell *matCellDef="let row">
+            <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null" [checked]="selection.isSelected(row)" [aria-label]="checkboxLabel(row)">
+            </mat-checkbox>
+        </td>
+    </ng-container>
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="position">
+        <th mat-header-cell *matHeaderCellDef> User ID </th>
+        <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="weight">
+        <th mat-header-cell *matHeaderCellDef> Email </th>
+        <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="symbol">
+        <th mat-header-cell *matHeaderCellDef> Status </th>
+        <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row)">
+    </tr>
+</table>
+
+<p>&nbsp;</p>
+
+<!-- numbersOnly -->
+<mat-card>
+    <div class="container no_padding">
+        <form class="example-form">
+            <mat-form-field class="example-full-width">
+                <input matInput placeholder="Favorite food" value="" numbersOnly>
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width">
+                <textarea matInput placeholder="Leave a comment"></textarea>
+            </mat-form-field>
+        </form>
+    </div>
+</mat-card>
+
+<mat-card>
+    <div class="container no_padding">
+        <p><button mat-button class="button">Save</button></p>
+        <p><button mat-button class="border">Cancel</button></p>
+    </div>
+</mat-card>

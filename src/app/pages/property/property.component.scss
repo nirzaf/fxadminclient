@@ -1,0 +1,119 @@
+@import '../../../config.scss';
+
+.example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+}
+
+.example-full-width {
+    width: 100%;
+}
+/*Sirojan CSS Start*/
+
+.iconSize{
+    font-size: 24px;
+}
+.searchspanicon {
+    float: right;
+    margin-right: 6px;
+    margin-top: -15px;
+    position: relative;
+    z-index: 2;
+    
+}
+.moreicon{
+    margin-top: 12px;
+}
+
+.moretext{
+    font-size: 10px;
+    margin-top: -5px;
+}
+.createicon{
+    font-size: 20px;
+    margin-top: 13px;
+    cursor:pointer;
+}
+.groupCreateIcon{
+    font-size: 20px;
+    margin-top: 0px;
+}
+.createtext{
+    font-size: 10px;
+    margin-top: -2px;
+    margin-left: -5px;
+    cursor:pointer;
+}
+.no_margin{
+    margin: 0px;;
+}
+.boxheader{
+    border-bottom: 1px solid #AEAEAE;
+    padding-bottom: 2px;
+    font-weight: 600;
+}
+.titleBorder{
+    border-bottom: 1px solid #AEAEAE;
+}
+.btnProperty{
+    
+width: 100%;
+}
+.sj_iconboxinner{
+    padding: 100px 300px;
+    float: left;
+    position: relative;
+
+}
+.propertyicon{
+    font-size: 64px;
+    opacity: 0.15;
+}
+.wd100{
+    width: 100%;
+}
+mat-toolbar {
+    justify-content: space-between;
+}
+
+
+
+.content > mat-card {
+    margin-bottom: 16px;
+}
+.fxam_imgHeight{
+    height: 270px;
+}
+.mat-dialog-container{
+    padding:0px !important;
+}
+.groupCreateIcon{
+    cursor: pointer;
+}
+.fxa_group_item .createtext{
+    margin-left:-12px;
+} 
+.fxa_group_item{
+    border-bottom: 1px solid rgba(204, 204, 204, .2);
+    padding:5px 0px;
+    margin-bottom: 5px;
+}
+.fxa_group_container{
+    min-height: 276px;
+}
+.fxa_sub_group_item{
+  
+    border-top: 1px solid rgba(204, 204, 204, .2);
+}
+.fxa_group_container .mat-expansion-panel-header{
+    padding-left: 0px;
+}
+ .fxa_property .moreicon{
+     margin-top:6px;
+ }
+.fxa_property .fxa_group_item{
+    padding:10px;
+}
+
+/*Sirojan CSS End*/

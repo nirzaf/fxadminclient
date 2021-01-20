@@ -1,0 +1,37 @@
+
+@import '../../../../config.scss';
+
+.btnAddMoreGroup .fa-plus{
+    padding-right: 7px;
+}
+.btnAddMoreGroup .fa-minus{
+    padding-right: 7px;
+}
+.btnAddMoreGroup {
+color:$primary-color;
+margin-top:10px;
+}
+.fx_border_bottom{
+    border-bottom: 1.5px solid #949494;
+    padding-bottom: 5px;
+  
+    margin-bottom: 10px;
+  }
+  .fx_subgroup_head{
+   
+    font-weight: 550;
+} 
+.themecolor{
+    color:$primary-color;
+  } 
+  .iconSize{
+    font-size: 24px;
+  }
+  .content{
+      margin-top:10px;
+  }
+  .content-0{
+    margin-top:10px;
+}
+
+ 

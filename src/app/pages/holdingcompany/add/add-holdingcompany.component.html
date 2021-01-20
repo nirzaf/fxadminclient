@@ -1,0 +1,130 @@
+
+
+
+
+<h2 mat-dialog-title>Create Holding Company</h2>
+<form [formGroup]="addCompanyForm" (submit)="submitForm()">
+<mat-dialog-content  class="mat-typography">
+
+  <div>
+    <div class="content-0">
+      
+     
+    <div fxFlex="100%"  fxLayout="row wrap" fxLayoutGap="15px">
+        <div fxFlex="24%" fxFlex.xs="100%">
+            <mat-form-field [style.width.%]="100" floatLabel="always"> 
+                <mat-label>Code</mat-label>
+                <input matInput  placeholder="Code" formControlName="holdingCompanyCode" >
+                <mat-error
+                *ngIf="addCompanyForm.get('holdingCompanyCode').hasError('required')">
+                Code is <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div fxFlex="24%" fxFlex.xs="100%">
+            <mat-form-field [style.width.%]="100" floatLabel="always"> 
+                <mat-label>Name</mat-label>
+                <input matInput #input placeholder="Name" formControlName="holdingCompanyName">
+                <mat-error
+                *ngIf="addCompanyForm.get('holdingCompanyName').hasError('required')">
+                Name is <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div fxFlex="48%" fxFlex.xs="100%" >
+            <mat-form-field [style.width.%]="100" floatLabel="always"> 
+                <mat-label>Address</mat-label>
+                <input matInput #input placeholder="Address" formControlName="holdingCompanyAddress">
+                <mat-error
+                *ngIf="addCompanyForm.get('holdingCompanyAddress').hasError('required')">
+                Address is <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+    </div>
+    <div class="content">
+        <div fxFlex="100%"  fxLayout="row wrap" fxLayoutGap="15px" class="form-input-row">
+            <div fxFlex="24%" fxFlex.xs="100%" >
+                <mat-form-field  [style.width.%]="100" floatLabel="always">
+                    <mat-label>Country</mat-label>
+                    <mat-select [(ngModel)]="country" (selectionChange)="getStateList($event.value)" formControlName="holdingCompanyCountry">
+                         <mat-option  [value]="0">Selec Country</mat-option>
+                      <mat-option *ngFor="let country of countryList" [value]="country.countryID">{{country.countryName}}</mat-option>
+                    
+                  </mat-select>
+
+                  <mat-error
+                  *ngIf="addCompanyForm.get('holdingCompanyCountry').hasError('min')">
+                  Country is <strong>required</strong>
+                </mat-error>
+            
+          
+                </mat-form-field>
+              </div>
+              <div fxFlex="24%" fxFlex.xs="100%">
+                <mat-form-field [style.width.%]="100" floatLabel="always"> 
+                    <mat-label>State</mat-label>
+                    <mat-select [(ngModel)]="state" (selectionChange)="getCityList($event.value)" formControlName="holdingCompanyState">
+                      <mat-option  [value]="0">Select State</mat-option>
+                        <mat-option *ngFor="let state of stateList" [value]="state.stateID">{{state.stateName}}</mat-option>
+                    </mat-select>
+                          <mat-error
+                  *ngIf="addCompanyForm.get('holdingCompanyState').hasError('min')">
+                  State is <strong>required</strong>
+                </mat-error>
+                </mat-form-field>
+              </div>
+              <div fxFlex="24%" fxFlex.xs="100%">
+                <mat-form-field [style.width.%]="100" floatLabel="always"> 
+                    <mat-label>City</mat-label>
+                    <mat-select [(ngModel)]="city" formControlName="holdingCompanyCity">
+                      <mat-option  [value]="0">Select City</mat-option>
+                        <mat-option *ngFor="let city of cityList" [value]="city.cityId">{{city.name}}</mat-option>
+                    </mat-select>
+                    <mat-error
+                    *ngIf="addCompanyForm.get('holdingCompanyCity').hasError('min')">
+                    City is <strong>required</strong>
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <div fxFlex="22%" fxFlex.xs="100%">
+                <mat-form-field [style.width.%]="100" floatLabel="always"> 
+                    <mat-label>Pin/Zip</mat-label>
+                    <input matInput #input placeholder="Pin/Zip" formControlName="holdingCompanyPinZip">
+                    <mat-error
+                    *ngIf="addCompanyForm.get('holdingCompanyPinZip').hasError('required')">
+                    PinZip is <strong>required</strong>
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+</div>
+<div class="content">
+    <div fxFlex="100%"  fxLayout="row wrap" fxLayoutGap="15px">
+        
+          <div fxFlex="24%" fxFlex.xs="100%">
+            <mat-form-field [style.width.%]="100" floatLabel="always"> 
+                <mat-label>Phone Number</mat-label>
+                <input matInput #input placeholder="Phone Number" formControlName="holdingCompanyPhone">
+                <mat-error
+                *ngIf="addCompanyForm.get('holdingCompanyPhone').hasError('required')">
+                Phone Number is <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+</div>
+
+  
+
+</div>
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button  mat-button type="button" class="border btnProperty" (click)="onNoClick()">Back</button>
+    <button  mat-button type="button" class="border btnProperty" (click)="onNoClick()">Reset</button>
+    <button  mat-button class="button btnProperty" type="submit" >Save</button>
+ 
+</mat-dialog-actions>
+</form>

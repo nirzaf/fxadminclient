@@ -1,0 +1,101 @@
+@font-face {
+  font-family: 'icomoon';
+  src:  url('fonts/icomoon.eot?b9d8n3');
+  src:  url('fonts/icomoon.eot?b9d8n3#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?b9d8n3') format('truetype'),
+    url('fonts/icomoon.woff?b9d8n3') format('woff'),
+    url('fonts/icomoon.svg?b9d8n3#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-Demography:before {
+  content: "\e904";
+  color: #fc8c00;
+}
+.icon-Documents:before {
+  content: "\e905";
+  color: #95989a;
+}
+.icon-Payment-option:before {
+  content: "\e90c";
+  color: #95989a;
+}
+.icon-Special-Instructions:before {
+  content: "\e90d";
+  color: #95989a;
+}
+.icon-Add-Reservations-to-Rooming-list:before {
+  content: "\e900";
+  color: #ebebec;
+}
+.icon-Apply-to-all:before {
+  content: "\e901";
+  color: #a7a7a7;
+}
+.icon-Calendar:before {
+  content: "\e902";
+  color: #95989a;
+}
+.icon-Create:before {
+  content: "\e903";
+  color: #ff8e00;
+}
+.icon-Done .path1:before {
+  content: "\e906";
+  color: rgb(255, 142, 0);
+}
+.icon-Done .path2:before {
+  content: "\e907";
+  margin-left: -1em;
+  color: rgb(255, 255, 255);
+}
+.icon-Group-Details .path1:before {
+  content: "\e908";
+  color: rgb(211, 211, 211);
+}
+.icon-Group-Details .path2:before {
+  content: "\e909";
+  margin-left: -1em;
+  color: rgb(255, 255, 255);
+}
+.icon-Menu:before {
+  content: "\e90a";
+  color: #ff8e00;
+}
+.icon-More:before {
+  content: "\e90b";
+  color: #ff8e00;
+}
+.icon-Pending-Room-Block .path1:before {
+  content: "\e90e";
+  color: rgb(211, 211, 211);
+}
+.icon-Pending-Room-Block .path2:before {
+  content: "\e90f";
+  margin-left: -1em;
+  color: rgb(255, 255, 255);
+}
+.icon-Release:before {
+  content: "\e910";
+  color: #a7a7a7;
+}
+.icon-select-the-Roomtype:before {
+  content: "\e911";
+  color: #95989a;
+}
