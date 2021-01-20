@@ -73,10 +73,17 @@ submitForm():void{
       this.webService.commonMethod('holdingcompany/post',postData,'POST',null)
       .subscribe(data=>{
         if(data.succeeded){
+          if(data.data==0){
+            this.toast.error("Code must be unique");
+          }
+          else{
+            this.holdingCompanyData.holdingCompanyID=data.data;
+            this.holdingCompanyData.holdingCompanyName='';
+            this.dialogRef.close( { event: 'close', data: this.holdingCompanyData });
+
+          }
           //this.countryList=data.data;
-          this.holdingCompanyData.holdingCompanyID=data.data.holdingCompanyID;
-          this.holdingCompanyData.holdingCompanyName=data.data.name;
-          this.dialogRef.close( { event: 'close', data: this.holdingCompanyData });
+      
         }
         else{
           this.toast.error(data.errors);

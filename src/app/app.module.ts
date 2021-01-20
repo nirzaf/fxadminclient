@@ -60,6 +60,9 @@ import { UserComponent } from './pages/user/user.component';
 import { ViewHoldingcompanyComponent } from './pages/holdingcompany/view-holdingcompany/view-holdingcompany.component';
 import { EditHoldingcompanyComponent } from './pages/holdingcompany/edit-holdingcompany/edit-holdingcompany.component';
 import { DeleteHoldingcompanyComponent } from './pages/holdingcompany/delete-holdingcompany/delete-holdingcompany.component';
+import { ViewGroupComponent } from './pages/group/view-group/view-group.component';
+import { EditGroupComponent } from './pages/group/edit-group/edit-group.component';
+import { DeleteGroupComponent } from './pages/group/delete-group/delete-group.component';
 
 
 @NgModule({
@@ -85,7 +88,10 @@ import { DeleteHoldingcompanyComponent } from './pages/holdingcompany/delete-hol
     UserComponent,
     ViewHoldingcompanyComponent,
     EditHoldingcompanyComponent,
-    DeleteHoldingcompanyComponent 
+    DeleteHoldingcompanyComponent,
+    ViewGroupComponent,
+    EditGroupComponent,
+    DeleteGroupComponent 
   ],
   imports: [
     BrowserModule,

@@ -74,7 +74,7 @@ export class AddSubGroupComponent  {
       groupCountry: [0, { validators: [Validators.min(1)], updateOn: "change" }],
       groupState: [0, { validators: [Validators.min(1)], updateOn: "change" }],
       groupCity: [0, { validators: [Validators.min(1)], updateOn: "change" }],
-      groupPinZip: [, {}],
+      groupPinZip: [, { validators: [Validators.required], updateOn: "change" }],
       groupPhone: [, { validators: [Validators.required], updateOn: "change" }],
 
       countryList: this.fb.array(this.countryList),

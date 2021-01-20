@@ -11,6 +11,7 @@ import { AddSubGroupComponent } from 'src/app/pages/group/add-sub-group/add-sub-
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { AddPropertyComponent } from './add-property/add-property.component';
 import { ViewHoldingcompanyComponent } from 'src/app/pages/holdingcompany/view-holdingcompany/view-holdingcompany.component';
+import { ViewGroupComponent } from 'src/app/pages/group/view-group/view-group.component';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
@@ -62,10 +63,13 @@ export class PropertyComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      
-      this.holdingCompanyName= result.data.holdingCompanyName;
-      this.holdingCompanyID=result.data.holdingCompanyID;
-      this.getHoldingCompanyList();
+      if(result.data.holdingCompanyID>0){
+        this.toast.success("Successfully Added");
+        this.holdingCompanyName= result.data.holdingCompanyName;
+        this.holdingCompanyID=result.data.holdingCompanyID;
+        this.getHoldingCompanyList();
+      }
+     
     });
   }
   viewCompany(): void {
@@ -111,6 +115,33 @@ export class PropertyComponent implements OnInit {
         console.log('The dialog was closed');
         this.holdingCompanyName= result.data.holdingCompanyName;
         this.holdingCompanyID=result.data.holdingCompanyID;
+      });
+    }else{
+      this.toast.error("please select holding company");
+     
+    }
+   
+  }
+  viewGroup(group): void {
+    if(this.holdingCompanyID!="" && this.holdingCompanyID!=null){
+      const dialogRef = this.dialog.open(ViewGroupComponent, {
+        panelClass: 'viewmore-dialog-container',
+        disableClose: true ,
+        //minHeight: '800px',    
+        data: {groupName: group.name, groupID:group.groupID}
+      });
+  
+      dialogRef.afterClosed().subscribe(result => {
+        if(result.data=="D"){
+           this.getCompanyGroupList(this.holdingCompanyID);
+           this.holdingCompanyID='';
+           this.holdingCompanyName='';
+           this.getHoldingCompanyList();
+           //this.SelectedHoldingCompany={};
+        }
+        console.log('The dialog was closed');
+        // this.holdingCompanyName= result.data.holdingCompanyName;
+        // this.holdingCompanyID=result.data.holdingCompanyID;
       });
     }else{
       this.toast.error("please select holding company");
@@ -242,9 +273,18 @@ console.log(this.companyGroupList);
     this.webService.commonMethod('holdingcompany/get?pageSize=1000',null,'GET',null)
     .subscribe(data=>{
       if(data.succeeded){
+        var holdingCompanyID=this.holdingCompanyID;
+        var holdingCompanyName='';
         console.log(data);
-        this.holdingCompanyOptions =data.data.map(function(a) {return {holdingCompanyID:a.holdingCompanyID,holdingCompanyName:a.name}});
-       
+        this.holdingCompanyOptions =data.data.map(function(a) {
+          if(holdingCompanyID==a.holdingCompanyID){
+         
+            holdingCompanyName=a.name;
+          }
+          return {holdingCompanyID:a.holdingCompanyID,holdingCompanyName:a.name}
+        }
+        );
+       this.holdingCompanyName=holdingCompanyName;
         this.filteredOptions = this.companyAutoCompleteControl.valueChanges
         .pipe(
           startWith<string | HoldingCompanyOption>(''),
