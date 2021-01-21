@@ -63,6 +63,9 @@ import { DeleteHoldingcompanyComponent } from './pages/holdingcompany/delete-hol
 import { ViewGroupComponent } from './pages/group/view-group/view-group.component';
 import { EditGroupComponent } from './pages/group/edit-group/edit-group.component';
 import { DeleteGroupComponent } from './pages/group/delete-group/delete-group.component';
+import { ViewSubGroupComponent } from './pages/group/view-sub-group/view-sub-group.component';
+import { EditSubGroupComponent } from './pages/group/edit-sub-group/edit-sub-group.component';
+import { DeleteSubGroupComponent } from './pages/group/delete-sub-group/delete-sub-group.component';
 
 
 @NgModule({
@@ -91,7 +94,10 @@ import { DeleteGroupComponent } from './pages/group/delete-group/delete-group.co
     DeleteHoldingcompanyComponent,
     ViewGroupComponent,
     EditGroupComponent,
-    DeleteGroupComponent 
+    DeleteGroupComponent,
+    ViewSubGroupComponent,
+    EditSubGroupComponent,
+    DeleteSubGroupComponent 
   ],
   imports: [
     BrowserModule,

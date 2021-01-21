@@ -91,7 +91,7 @@
                     </div>
                     <div fxFlex="54%" fxFlex.xs="100%">
                       <div fxFlex="22%" fxFlex.xs="20%">
-                        <i class="fas fa-ellipsis-h themecolor iconSize moreicon" (click)="viewGroup(group)"></i><br/>
+                        <i class="fas fa-ellipsis-h themecolor iconSize moreicon " (click)="viewGroup(group)"></i><br/>
                         <div class="themecolor moretext" (click)="viewGroup(group)">More</div>
                     </div>
                     <div fxFlex="20%">
@@ -119,8 +119,8 @@
                 <mat-radio-button value="{{childGroup.groupID}}"><span style="font-size: 11px;opacity: 0.7">Sub Group {{b+1}}</span><br/><span style="font-size: 12px;">{{childGroup.name}}</span></mat-radio-button>
                 </div>
                 <div fxFlex="10%" fxFlex.xs="12%" >
-                  <i class="fas fa-ellipsis-h themecolor iconSize moreicon"></i><br/>
-                  <div class="themecolor moretext">More</div>
+                  <i class="fas fa-ellipsis-h themecolor iconSize moreicon fxcursor_pointer" (click)="viewSubGroup(childGroup,group,b)"></i><br/>
+                  <div class="themecolor moretext fxcursor_pointer" (click)="viewSubGroup(childGroup,group,b)">More</div>
               </div>
             
             </div>
@@ -135,12 +135,12 @@
              
               <div fxFlex="100%" *ngIf="!group.hasChildGroup"   fxLayout="row wrap"  class="fxa_group_item" fxLayout.lt-sm="column">
                 <div fxFlex="42%" fxFlex.xs="100%">
-                <mat-radio-button value="{{group.groupID}}"><span style="font-size: 11px;opacity: 0.7">Group {{i+1}}</span><br/><span style="font-size: 12px;">{{group.name}}{{group.groupID}}</span></mat-radio-button>
+                <mat-radio-button value="{{group.groupID}}"><span style="font-size: 11px;opacity: 0.7">Group {{i+1}}</span><br/><span style="font-size: 12px;">{{group.name}}</span></mat-radio-button>
                 </div>
                 <div fxFlex="57%" fxFlex.xs="100%">
                   <div fxFlex="20%" >
-                    <i class="fas fa-ellipsis-h themecolor iconSize moreicon" (click)="viewGroup(group)"></i><br/>
-                    <div class="themecolor moretext" (click)="viewGroup(group)">More</div>
+                    <i class="fas fa-ellipsis-h themecolor iconSize moreicon fxcursor_pointer" (click)="viewGroup(group)"></i><br/>
+                    <div class="themecolor moretext fxcursor_pointer" (click)="viewGroup(group)">More</div>
                 </div>
                 <div fxFlex="20%" >
                   <i class="fas fa-plus themecolor  createicon" (click)="addSubGroup(group)"></i><br/>

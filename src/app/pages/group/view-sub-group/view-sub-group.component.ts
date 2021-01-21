@@ -2,24 +2,29 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ToastService } from 'src/app/shared/services/toast.service';
 import { WebService } from 'src/app/shared/services/web.service';
-import { EditGroupComponent } from '../edit-group/edit-group.component';
-import { DeleteGroupComponent } from '../delete-group/delete-group.component';
+import { EditSubGroupComponent } from '../edit-sub-group/edit-sub-group.component';
+import { DeleteSubGroupComponent } from '../delete-sub-group/delete-sub-group.component';
 export interface GroupData {
   groupID: string;
   groupName: string;
+  parentGroupName:string;
+  parentGroupID:string;
+  holdingCompanyName:string;
+  holdingCompanyID:string;
+  subGroupIndex:string
 }
 @Component({
-  selector: 'app-view-group',
-  templateUrl: './view-group.component.html',
-  styleUrls: ['./view-group.component.scss']
+  selector: 'app-view-sub-group',
+  templateUrl: './view-sub-group.component.html',
+  styleUrls: ['./view-sub-group.component.scss']
 })
-export class ViewGroupComponent implements OnInit {
+export class ViewSubGroupComponent implements OnInit {
 
   groupData:GroupData;
   groupObj={code:'',name:'',cityName:'',address:'',stateName:'',countryName:'',zipCode:'',   
                     phoneNumber:''};
 
-  constructor(    public dialogRef: MatDialogRef<ViewGroupComponent>,
+  constructor(    public dialogRef: MatDialogRef<ViewSubGroupComponent>,
     @Inject(MAT_DIALOG_DATA) public _groupData: GroupData,private webService:WebService,private toast:ToastService,public dialog: MatDialog
     ) {
       this.groupData = _groupData;
@@ -31,12 +36,17 @@ export class ViewGroupComponent implements OnInit {
   }
   editGroup(): void {
 
-      const dialogRef = this.dialog.open(EditGroupComponent, {
+      const dialogRef = this.dialog.open(EditSubGroupComponent, {
         panelClass: ['viewmore-dialog-container'],
         disableClose: true ,
         
         //minHeight: '800px',    
-        data: {groupName: this.groupData.groupName, groupID: this.groupData.groupID}
+        data: {groupName: this.groupData.groupName, groupID: this.groupData.groupID,
+          holdingCompanyName:this.groupData.holdingCompanyName,holdingCompanyID:this.groupData.holdingCompanyID,
+          parentGroupName:this.groupData.parentGroupName,parentGroupID:this.groupData.parentGroupID,
+          subGroupIndex:this.groupData.subGroupIndex
+        
+        }
       });
   
       dialogRef.afterClosed().subscribe(result => {
@@ -70,7 +80,7 @@ export class ViewGroupComponent implements OnInit {
     });
   }
   delete():void{
-    const dialogRef = this.dialog.open(DeleteGroupComponent, {
+    const dialogRef = this.dialog.open(DeleteSubGroupComponent, {
       //panelClass: ['viewmore-dialog-container'],
       disableClose: true ,
       

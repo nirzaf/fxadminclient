@@ -6,13 +6,18 @@ import { WebService } from 'src/app/shared/services/web.service';
 export interface GroupData {
   groupID: string;
   groupName: string;
+  parentGroupName:string;
+  parentGroupID:string;
+  holdingCompanyName:string;
+  holdingCompanyID:string;
+  subGroupIndex:string
 }
 @Component({
-  selector: 'app-edit-group',
-  templateUrl: './edit-group.component.html',
-  styleUrls: ['./edit-group.component.scss']
+  selector: 'app-edit-sub-group',
+  templateUrl: './edit-sub-group.component.html',
+  styleUrls: ['./edit-sub-group.component.scss']
 })
-export class EditGroupComponent implements OnInit {
+export class EditSubGroupComponent implements OnInit {
   editGroupForm: FormGroup = this.formBuilder.group({
     groupName: [, { validators: [Validators.required], updateOn: "change" }],
     groupCode: [, { validators: [Validators.required], updateOn: "change" }],
@@ -31,7 +36,7 @@ country:any=0;
 public cityList: any = [];
 public stateList: any = [];
 public countryList: any = [];
-  constructor( public dialogRef: MatDialogRef<EditGroupComponent>,
+  constructor( public dialogRef: MatDialogRef<EditSubGroupComponent>,
     @Inject(MAT_DIALOG_DATA) public _groupData: GroupData,private webService:WebService,private toast:ToastService,private formBuilder: FormBuilder) 
     {
       this.groupData = _groupData;

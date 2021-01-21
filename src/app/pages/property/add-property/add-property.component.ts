@@ -9,9 +9,10 @@ import { JsonPipe } from '@angular/common';
 import { FormControl, FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
 import { WebService } from 'src/app/shared/services/web.service';
 export interface DialogData {
-  animal: string;
-  name: string;
+  holdingCompanyID: string;
+  holdingCompanyName: string;
 }
+
 export interface NetworkIP {
   name: string;
 }

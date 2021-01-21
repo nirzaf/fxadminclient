@@ -1,0 +1,156 @@
+
+<h2 mat-dialog-title>
+    <div fxFlex="100%" fxLayout="row wrap" class="headercontainer" fxLayout.lt-sm="column">
+<div fxFlex="75%" fxFlex.xs="100%"><i class="fas fa-arrow-left themecolor titlearrowicon"   (click)="close()" style="font-size: 24px;"></i> View Sub Group</div>
+<div fxFlex="25%" fxFlex.xs="100%" class="headerAction">
+    <div fxFlex="50%" fxFlex.sm="40%" fxLayout="row wrap" class="editcontainer">
+        <div fxFlex="100%">
+            <i class="fas fa-pencil-alt themecolor fxcursor_pointer" (click)="editGroup()"></i>
+        </div>
+        <div fxFlex="100%" class="headeredittext fxcursor_pointer" (click)="editGroup()">
+            Edit
+        </div>
+     
+    </div>
+    <div fxFlex="50%" fxFlex.sm="40%" fxLayout="row wrap">
+        <div fxFlex="100%">
+            <i class="far fa-trash-alt themecolor fxcursor_pointer" (click)="delete()"></i>
+        </div>
+        <div fxFlex="100%" class="headerdeletetext fxcursor_pointer" (click)="delete()">
+            Delete
+        </div>
+      
+    </div>
+    
+   </div>
+    </div>
+   
+</h2>
+<mat-dialog-content  class="mat-typography">
+
+    <div>
+        <div class="content"  >
+            <div fxFlex="100%"  fxLayout="column wrap" fxLayoutGap="7px" >
+                <div fxFlex="25%"  style="font-size: 12px;opacity:0.7">
+                  Holding Company
+                
+                  </div>
+                  <div fxFlex="25%">
+                    {{groupData.holdingCompanyName}}
+                    </div>
+                  
+                  </div>
+                  <div fxFlex="100%"  fxLayout="column wrap" fxLayoutGap="7px" >
+                      <div fxFlex="25%"  style="font-size: 12px;opacity:0.7">
+                          Group
+                         
+                           </div>
+                  <div fxFlex="25%" >
+                    {{groupData.parentGroupName}}
+                    </div>
+                  
+                </div>
+      </div>
+      <div class="content">
+         
+        <div fxFlex="100%"  fxLayout="row wrap" fxLayoutGap="15px" class="fx_border_bottom" >
+            <div fxFlex="80%" fxFlex.xs="75%" fxFlex.sm="100%" class="fx_subgroup_head">
+              Sub Group {{groupData.subGroupIndex+1}}           
+              </div>
+             
+              
+            </div>
+      </div>
+      <div class="content-0">
+        
+       
+      <div fxFlex="100%"  fxLayout="row wrap" fxLayoutGap="15px">
+          <div fxFlex="24%" fxFlex.xs="100%" fxLayout="row wrap">
+              <div fxFlex="100%" class="labeltext">
+                  Code
+              </div>
+              <div fxFlex="100%">
+              {{groupObj.code}}
+            </div>
+           
+            </div>
+            <div fxFlex="24%" fxFlex.xs="100%" fxLayout="row wrap">
+                <div fxFlex="100%" class="labeltext">
+                    Name
+                </div>
+                <div fxFlex="100%">
+                    {{groupObj.name}}
+              </div>
+             
+              </div>
+              <div fxFlex="24%" fxFlex.xs="100%" fxLayout="row wrap">
+                <div fxFlex="100%" class="labeltext">
+                    Address
+                </div>
+                <div fxFlex="100%">
+                    {{groupObj.address}}
+              </div>
+             
+              </div>
+          </div>
+      </div>
+      <div class="content">
+        
+       
+        <div fxFlex="100%"  fxLayout="row wrap" fxLayoutGap="15px">
+            <div fxFlex="24%" fxFlex.xs="100%" fxLayout="row wrap">
+                <div fxFlex="100%" class="labeltext">
+                    Country
+                </div>
+                <div fxFlex="100%">
+                    {{groupObj.countryName}}
+              </div>
+             
+              </div>
+              <div fxFlex="24%" fxFlex.xs="100%" fxLayout="row wrap">
+                  <div fxFlex="100%" class="labeltext">
+                      State
+                  </div>
+                  <div fxFlex="100%">
+                    {{groupObj.stateName}}
+                </div>
+               
+                </div>
+                <div fxFlex="24%" fxFlex.xs="100%" fxLayout="row wrap">
+                  <div fxFlex="100%" class="labeltext">
+                      City
+                  </div>
+                  <div fxFlex="100%">
+                    {{groupObj.cityName}}
+                </div>
+               
+                </div>
+                <div fxFlex="22%" fxFlex.xs="100%" fxLayout="row wrap">
+                    <div fxFlex="100%" class="labeltext">
+                        Piz/Zip
+                    </div>
+                    <div fxFlex="100%">
+                        {{groupObj.zipCode}}
+                  </div>
+                 
+                  </div>
+            </div>
+        </div>
+        <div class="content">
+        
+       
+            <div fxFlex="100%"  fxLayout="row wrap" fxLayoutGap="15px">
+                <div fxFlex="24%" fxFlex.xs="100%" fxLayout="row wrap">
+                    <div fxFlex="100%" class="labeltext">
+                        Phone Number
+                    </div>
+                    <div fxFlex="100%">
+                        {{groupObj.phoneNumber}}
+                  </div>
+                 
+                  </div>
+                 
+                </div>
+            </div>
+      </div>
+      </mat-dialog-content>

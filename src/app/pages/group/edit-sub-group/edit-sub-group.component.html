@@ -1,7 +1,7 @@
 <form [formGroup]="editGroupForm" (submit)="submitForm()">
     <h2 mat-dialog-title>
         <div fxFlex="100%" fxLayout="row wrap" class="headercontainer" fxLayout.lt-sm="column">
-    <div fxFlex="70%" fxFlex.xs="100%"><i class="fas fa-arrow-left themecolor titlearrowicon"   (click)="close()" style="font-size: 24px;"></i> View Group</div>
+    <div fxFlex="70%" fxFlex.xs="100%"><i class="fas fa-arrow-left themecolor titlearrowicon"   (click)="close()" style="font-size: 24px;"></i> View Sub Group</div>
     <div fxFlex="30%" fxFlex.xs="100%" class="headerAction">
         <div fxFlex="33%"  fxLayout="row wrap" class="cancelcontainer">
             <div fxFlex="100%">
@@ -40,6 +40,38 @@
         <mat-dialog-content  class="mat-typography">
         
           <div>
+            <div class="content"  >
+                <div fxFlex="100%"  fxLayout="column wrap" fxLayoutGap="7px" >
+                    <div fxFlex="25%"  style="font-size: 12px;opacity:0.7">
+                      Holding Company
+                    
+                      </div>
+                      <div fxFlex="25%">
+                        {{groupData.holdingCompanyName}}
+                        </div>
+                      
+                      </div>
+                      <div fxFlex="100%"  fxLayout="column wrap" fxLayoutGap="7px" >
+                          <div fxFlex="25%"  style="font-size: 12px;opacity:0.7">
+                              Group
+                             
+                               </div>
+                      <div fxFlex="25%" >
+                        {{groupData.parentGroupName}}
+                        </div>
+                      
+                    </div>
+          </div>
+          <div class="content">
+             
+            <div fxFlex="100%"  fxLayout="row wrap" fxLayoutGap="15px" class="fx_border_bottom" >
+                <div fxFlex="80%" fxFlex.xs="75%" fxFlex.sm="100%" class="fx_subgroup_head">
+                  Sub Group {{groupData.subGroupIndex+1}}           
+                  </div>
+                 
+                  
+                </div>
+          </div>
             <div class="content-0">
               
              

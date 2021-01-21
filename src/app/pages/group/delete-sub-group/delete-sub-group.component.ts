@@ -7,14 +7,14 @@ export interface GroupData {
   groupName: string;
 }
 @Component({
-  selector: 'app-delete-group',
-  templateUrl: './delete-group.component.html',
-  styleUrls: ['./delete-group.component.scss']
+  selector: 'app-delete-sub-group',
+  templateUrl: './delete-sub-group.component.html',
+  styleUrls: ['./delete-sub-group.component.scss']
 })
-export class DeleteGroupComponent implements OnInit {
+export class DeleteSubGroupComponent implements OnInit {
 
   groupData:GroupData;
-  constructor(public dialogRef: MatDialogRef<DeleteGroupComponent>,
+  constructor(public dialogRef: MatDialogRef<DeleteSubGroupComponent>,
     @Inject(MAT_DIALOG_DATA) public _groupData: GroupData,private webService:WebService,private toast:ToastService) { 
 
       this.groupData = _groupData;

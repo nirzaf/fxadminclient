@@ -12,6 +12,7 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog
 import { AddPropertyComponent } from './add-property/add-property.component';
 import { ViewHoldingcompanyComponent } from 'src/app/pages/holdingcompany/view-holdingcompany/view-holdingcompany.component';
 import { ViewGroupComponent } from 'src/app/pages/group/view-group/view-group.component';
+import { ViewSubGroupComponent } from 'src/app/pages/group/view-sub-group/view-sub-group.component';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
@@ -132,13 +133,49 @@ export class PropertyComponent implements OnInit {
       });
   
       dialogRef.afterClosed().subscribe(result => {
+        this.getCompanyGroupList(this.holdingCompanyID);
         if(result.data=="D"){
-           this.getCompanyGroupList(this.holdingCompanyID);
-           this.holdingCompanyID='';
-           this.holdingCompanyName='';
+          
+           //this.holdingCompanyID='';
+           //this.holdingCompanyName='';
            this.getHoldingCompanyList();
            //this.SelectedHoldingCompany={};
         }
+    
+      
+        console.log('The dialog was closed');
+        // this.holdingCompanyName= result.data.holdingCompanyName;
+        // this.holdingCompanyID=result.data.holdingCompanyID;
+      });
+    }else{
+      this.toast.error("please select holding company");
+     
+    }
+   
+  }
+  viewSubGroup(group:any,parentGroup:any,subGroupIndex:string): void {
+alert(subGroupIndex);
+    if(this.holdingCompanyID!="" && this.holdingCompanyID!=null){
+      const dialogRef = this.dialog.open(ViewSubGroupComponent, {
+        panelClass: 'viewmore-dialog-container',
+        disableClose: true ,
+        //minHeight: '800px',    
+        data: {groupName: group.name, groupID:group.groupID,parentGroupName:parentGroup.name,parentGroupID:parentGroup.groupID,
+        holdingCompanyName:this.holdingCompanyName,holdingCompanyID:this.holdingCompanyID,subGroupIndex:subGroupIndex
+        }
+      });
+  
+      dialogRef.afterClosed().subscribe(result => {
+        this.getCompanyGroupList(this.holdingCompanyID);
+        if(result.data=="D"){
+          
+           //this.holdingCompanyID='';
+           //this.holdingCompanyName='';
+           this.getHoldingCompanyList();
+           //this.SelectedHoldingCompany={};
+        }
+    
+      
         console.log('The dialog was closed');
         // this.holdingCompanyName= result.data.holdingCompanyName;
         // this.holdingCompanyID=result.data.holdingCompanyID;
