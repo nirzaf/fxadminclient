@@ -8,6 +8,7 @@ import { OnInit } from '@angular/core';
 import { JsonPipe } from '@angular/common';
 import { FormControl, FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
 import { WebService } from 'src/app/shared/services/web.service';
+import { ToastService } from 'src/app/shared/services/toast.service';
 export interface DialogData {
   holdingCompanyID: string;
   holdingCompanyName: string;
@@ -39,66 +40,105 @@ export class AddPropertyComponent implements OnInit {
   selectable = true;
   removable = true;
   addOnBlur = true;
+  DataArray = [];
+  countryList = [];
+  cityList = [];
+  stateList = [];
+  formGroup: FormGroup;
+  holdingCompanyData: DialogData;
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
-  networkIPs: NetworkIP[] = [
-    { name: '192.168.3.1' },
-    { name: '192.168.3.2' },
-    { name: '192.168.3.3' },
-  ];
-  macIDs: MacID[] = [
-    { name: '00-14-22-01-23-45' },
-    { name: '00-14-22-01-23-46' },
-    { name: '00-14-22-01-23-47' },
-  ];
+  // networkIPs: NetworkIP[] = [
+  //   { name: '192.168.3.1' },
+  //   { name: '192.168.3.2' },
+  //   { name: '192.168.3.3' },
+  // ];
+ 
+  value = this.fb.group({
 
-  addProperty() {
-    const val = this.fb.group({
-      OrderName: new FormControl(),
-      OrderId: '2',
-      CountryId: '1',
-      StateId: '2',
-      CityId: '3',
-      HotelTypeId: '1',
-      WeekDayId: '1',
-      WeekEndDayId: '1',
-      CurrencyId: '1',
-      OtherCurrencyId: '1',
-      networkIPs: this.fb.array([{ name: '192.168.3.1' }, { name: '192.168.3.2' }, { name: '192.168.3.3' }]),
-      macIDs: this.fb.array([{ name: '00-14-22-01-23-45' }, { name: '00-14-22-01-23-46' }, { name: '00-14-22-01-23-47' },]),
-      rating: 2
+  });
+  public validate(): void {
+    this.formGroup = this.fb.group({
+      'formArray1': this.fb.array([
+        this.initX(true)
+      ])
     });
+   
+  }
+  get f() { return this.formGroup.controls; }
 
-    const form = this.form.get('times') as FormArray
-    form.push(val);
-    console
+  public initX(panelState): FormGroup {
+
+    this.DataArray.push({
+      countryList: this.countryList,
+      stateList: [],
+      cityList: [],
+      PanelOpenState: panelState,
+      propertyState:0,
+      propertyCity:0,
+      propertyCountry:0,
+      dayList:[],
+      currencyList:[],
+      propertyCurrency:0,
+      propertyOtherCurrency:0,
+      propertyWeekends:0,
+      propertyWeekDays:0,
+      propertyHotelType:0,
+      networkIPs:[],
+      rating:0,
+      hotelTypeList:[],
+      macIDs:[]
+
+    })
+ 
+    return this.fb.group({
+
+      propertyName: [, { validators: [Validators.required], updateOn: "change" }],
+      propertyCode: [, { validators: [Validators.required], updateOn: "change" }],
+      propertyAddress: [, { validators: [Validators.required], updateOn: "change" }],
+      propertyCountry: [0, { validators: [Validators.min(1)], updateOn: "change" }],
+      propertyState: [0, { validators: [Validators.min(1)], updateOn: "change" }],
+      propertyCity: [0, { validators: [Validators.min(1)], updateOn: "change" }],
+      propertyPinZip: [, { validators: [Validators.required], updateOn: "change" }],
+      propertyPhone: [, { validators: [Validators.required], updateOn: "change" }],
+      propertyHotelType: [0, { validators: [Validators.min(1)], updateOn: "change" }],
+      propertyCheckIn: [, { validators: [Validators.required], updateOn: "change" }],
+      propertyCheckOut: [, { validators: [Validators.required], updateOn: "change" }],
+      propertyWebsite: [, { validators: [Validators.required], updateOn: "change" }],
+      propertyWeekDays: [0, { validators: [Validators.min(1)], updateOn: "change" }],
+      propertyWeekends: [0, { validators: [Validators.min(1)], updateOn: "change" }],
+      propertyCurrency: [0, { validators: [Validators.min(1)], updateOn: "change" }],
+      propertyOtherCurrency: [0, { validators: [Validators.min(1)], updateOn: "change" }],
+      propertyNetworkIP: [, { validators: [], updateOn: "change" }],
+      propertyMacAddress: [, { validators: [], updateOn: "change" }],
+      propertyStarRating: [, { validators: [Validators.required], updateOn: "change" }],
+    });
+  }
+  public addX(): void {
+    const control = <FormArray>this.f.formArray1;
+    control.push(this.initX(false));
+  }
+
+
+
+  removeX(index) {
+    const control = <FormArray>this.f.formArray1;
+    control.removeAt(index);
 
   }
-  getItems() {
-    return [
-      { id: '1', name: 'Item 1' },
-      { id: '2', name: 'Item 2' },
-      { id: '3', name: 'Item 3' },
-      { id: '4', name: 'Item 4' }
-    ];
-  }
-  removeProperty(index) {
-    const form = this.form.get('times') as FormArray
-    form.removeAt(index);
-  }
+  
 
-  trackByFn(index: any, item: any) {
-    return index;
-  }
+  
+  
 
 
   addNetworkIP(event: MatChipInputEvent,i): void {
     const input = event.input;
     const value = event.value;
-    var arrayControl = this.form.get('times') as FormArray;
-    var item = arrayControl.at(i);
+
+  
     // Add our fruit
     if ((value || '').trim()) {
-      item.value.networkIPs.push({ name: value.trim() });
+      this.DataArray[i].networkIPs.push({ name: value.trim() });
      
     }
 
@@ -109,12 +149,12 @@ export class AddPropertyComponent implements OnInit {
   }
 
   removeNetworkIP(networkIP: NetworkIP,i): void {
-    var arrayControl = this.form.get('times') as FormArray;
-    var item = arrayControl.at(i);
-    const index = item.value.networkIPs.indexOf(networkIP);
+    
+    
+    const index = this.DataArray[i].networkIPs.indexOf(networkIP);
 
     if (index >= 0) {
-      item.value.networkIPs.splice(index, 1);
+      this.DataArray[i].networkIPs.splice(index, 1);
     }
   }
   addMacID(event: MatChipInputEvent,i): void {
@@ -125,7 +165,7 @@ export class AddPropertyComponent implements OnInit {
 
     // Add our fruit
     if ((value || '').trim()) {
-      item.value.macIDs.push({ name: value.trim() });
+      this.DataArray[i].macIDs.push({ name: value.trim() });
       
     }
 
@@ -136,50 +176,87 @@ export class AddPropertyComponent implements OnInit {
   }
 
   removeMacID(macID: MacID, i): void {
-    var arrayControl = this.form.get('times') as FormArray;
-    var item = arrayControl.at(i);
-    const index = item.value.macIDs.indexOf(macID);
+
+    const index = this.DataArray[i].macIDs.indexOf(macID);
     if (index >= 0) {
-      item.value.macIDs.splice(index, 1);
+      this.DataArray[i].macIDs.splice(index, 1);
     }
   }
-  defaultGroupCode: any = "aaa";
-  public GroupList: any = [];
+  
 
 
   constructor(
     public dialogRef: MatDialogRef<AddPropertyComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData, private fb: FormBuilder,private webService:WebService) {
+    @Inject(MAT_DIALOG_DATA) public data: DialogData, private fb: FormBuilder,private webService:WebService,private toast: ToastService) {
     
-    for (var i = 0; i < 5; i++) {
-      this.GroupList.push({
-        "GroupName": "test",
-        "GroupCode": "aaa",
-        "GroupID": i
-      })
-      this.form = this.fb.group({
-        times: this.fb.array([
-
-        ])
-      });
-      this.items = this.getItems();
-    }
-    this.addProperty();
-
-    console.log(this.form.get('times'))
-
-
+    this.getCountryList();
   }
   ngOnInit() {
+    this.validate();
   }
   onRatingChanged(rating, i) {
-    var arrayControl = this.form.get('times') as FormArray;
-    var item = arrayControl.at(i);
-    item.value.rating = rating
+ 
+    this.DataArray[i].rating = rating;
   }
 
   onNoClick(): void {
     this.dialogRef.close();
+  }
+  getCityList(stateID, i) {
+
+    this.webService.commonMethod('city/get/' + stateID, null, 'GET', null)
+      .subscribe(data => {
+        if (data.succeeded) {
+     
+          this.DataArray[i].cityList = data.data;
+          this.DataArray[i].propertyCity=0;
+        }
+        else {
+          this.toast.error(data.errors);
+        }
+        console.log(data);
+      
+      });
+  }
+
+  getCountryList() {
+    this.webService.commonMethod('country/get?pageSize=100', null, 'GET', null)
+      .subscribe(data => {
+        if (data.succeeded) {
+          
+          this.countryList = data.data;
+          this.DataArray[0].countryList = data.data;
+      
+        }
+        else {
+          this.toast.error(data.errors);
+        }
+
+      });
+  }
+  getStateList(countryID, i) {
+
+ 
+
+    this.webService.commonMethod('state/get/' + countryID, null, 'GET', null)
+      .subscribe(data => {
+        if (data.succeeded) {
+    
+       
+          this.DataArray[i].stateList = data.data;
+         // item.value.groupState = 0;
+          this.DataArray[i].propertyState=0;
+
+        }
+        else {
+          this.toast.error(data.errors);
+          this.stateList = [];
+        }
+
+
+   
+      
+      });
   }
 
 }

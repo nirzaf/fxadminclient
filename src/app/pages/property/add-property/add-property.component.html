@@ -1,7 +1,7 @@
 
 
 
-<form [formGroup]="form">
+<form [formGroup]="formGroup">
 <h2 mat-dialog-title>Create Property</h2>
 <mat-dialog-content  class="mat-typography">
   <div>
@@ -27,20 +27,31 @@
             
           </div>
 </div>
-    <div formArrayName="times" *ngFor="let property of form.controls.times?.value; let i = index; trackBy:trackByFn" [attr.data-index]="i">
-      <div class="content">
+    <div formArrayName="formArray1" *ngFor="let property of f.formArray1['controls']; let ix=index" [attr.data-index]="i">
+      <mat-accordion formGroupName="{{ix}}">
+   
+        <mat-expansion-panel [expanded]="DataArray[ix].PanelOpenState"  hideToggle="true" class="mat-elevation-z0"  (opened)="DataArray[ix].PanelOpenState = true"
+                             (closed)="DataArray[ix].PanelOpenState = false" >
+                           
+          <mat-expansion-panel-header #panelH (click)="panelH._toggle()">
+            <mat-panel-title>
+      
+      <div class="content" (click)="panelH._toggle()">
         <div fxFlex="100%"  fxLayout="row wrap" fxLayoutGap="15px" class="fx_border_bottom" >
             <div fxFlex="80%" fxFlex.xs="75%" fxFlex.sm="100%" class="fx_subgroup_head">
-                Property {{i+1}}            
+                Property {{ix+1}}            
               </div>
               <div fxFlex="18%" fxFlex.xs="20%" fxLayoutAlign="end" >
                   
-                <i  class="fas fa-angle-down themecolor iconSize moreicon"></i>
+                <i  *ngIf="!DataArray[ix].PanelOpenState" class="fas fa-angle-down themecolor iconSize moreicon"></i>
+                <i *ngIf="DataArray[ix].PanelOpenState" class="fas fa-angle-up themecolor iconSize moreicon"></i>
                
             </div>
               
             </div>
       </div>
+    </mat-panel-title>
+  </mat-expansion-panel-header>
    
       <div class="content-0">
       
@@ -49,22 +60,31 @@
         <div fxFlex="24%" fxFlex.xs="100%" fxFlex.sm="50%">
             <mat-form-field [style.width.%]="100" floatLabel="always"> 
                 <mat-label>Code</mat-label>
-                <input matInput  placeholder="Code">
-                
+                <input matInput  placeholder="Code" formControlName="propertyCode">
+                <mat-error
+                *ngIf="property['controls'].propertyCode.hasError('required')">
+                Code is <strong>required</strong>
+              </mat-error>
             </mat-form-field>
           </div>
           <div fxFlex="24%" fxFlex.xs="100%" fxFlex.sm="50%">
             <mat-form-field [style.width.%]="100" floatLabel="always"> 
                 <mat-label>Name</mat-label>
-                <input matInput #input placeholder="Name">
-                
+                <input matInput #input placeholder="Name" formControlName="propertyName">
+                <mat-error
+                *ngIf="property['controls'].propertyName.hasError('required')">
+                Group Name is <strong>required</strong>
+              </mat-error>
             </mat-form-field>
           </div>
           <div fxFlex="48%" fxFlex.xs="100%" fxFlex.sm="50%">
             <mat-form-field [style.width.%]="100" floatLabel="always"> 
                 <mat-label>Address</mat-label>
-                <input matInput #input placeholder="Address">
-                
+                <input matInput #input placeholder="Address" formControlName="propertyAddress">
+                <mat-error
+                *ngIf="property['controls'].propertyAddress.hasError('required')">
+                Address is <strong>required</strong>
+              </mat-error>
             </mat-form-field>
           </div>
         </div>
@@ -72,37 +92,53 @@
     <div class="content">
         <div fxFlex="100%"  fxLayout="row wrap" fxLayoutGap="15px" >
             <div fxFlex="24%" fxFlex.xs="100%" fxFlex.sm="50%">
-              {{property.Items}}
+              
                 <mat-form-field  [style.width.%]="100" floatLabel="always">
                     <mat-label>Country</mat-label>
-                    <mat-select [(ngModel)]="property.CountryId" [ngModelOptions]="{standalone: true}">
-                        <mat-option *ngFor="let item of items" [value]="item.id">{{item.name}}</mat-option>
+                    <mat-select [(ngModel)]="DataArray[ix].propertyCountry" (selectionChange)="getStateList($event.value,ix)" formControlName="propertyCountry">
+                      <mat-option  [value]="0" selected="true">Select Country</mat-option>
+                      <mat-option *ngFor="let country of DataArray[ix].countryList" [value]="country.countryID">{{country.countryName}}</mat-option>
                     </mat-select>
+                    <mat-error
+                    *ngIf="property['controls'].propertyCountry.hasError('min')">
+                    Country is <strong>required</strong>
+                  </mat-error>
                 </mat-form-field>
               </div>
               <div fxFlex="24%" fxFlex.xs="100%" fxFlex.sm="50%">
                 <mat-form-field [style.width.%]="100" floatLabel="always"> 
                     <mat-label>State</mat-label>
-                    <mat-select [(ngModel)]="property.StateId" [ngModelOptions]="{standalone: true}">
-                      <mat-option *ngFor="let item of items" [value]="item.id">{{item.name}}</mat-option>
+                    <mat-select [(ngModel)]="DataArray[ix].propertyState"   (selectionChange)="getCityList($event.value,ix)" formControlName="propertyState">
+                      <mat-option  [value]="0">Select State</mat-option>
+                      <mat-option *ngFor="let state of DataArray[ix].stateList" [value]="state.stateID">{{state.stateName}}</mat-option>
                     </mat-select>
-                    
+                    <mat-error
+                    *ngIf="property['controls'].propertyState.hasError('min')">
+                    State is <strong>required</strong>
+                  </mat-error>
                 </mat-form-field>
               </div>
               <div fxFlex="24%" fxFlex.xs="100%" fxFlex.sm="50%">
                 <mat-form-field [style.width.%]="100" floatLabel="always"> 
                     <mat-label>City</mat-label>
-                    <mat-select [(ngModel)]="property.CityId" [ngModelOptions]="{standalone: true}">
-                      <mat-option *ngFor="let item of items" [value]="item.id">{{item.name}}</mat-option>
+                    <mat-select [(ngModel)]="DataArray[ix].propertyCity" formControlName="propertyCity">
+                      <mat-option [value]="0">Select City</mat-option>
+                      <mat-option *ngFor="let city of DataArray[ix].cityList" [value]="city.cityId">{{city.name}}</mat-option>
                     </mat-select>
-                    
+                    <mat-error
+                    *ngIf="property['controls'].propertyCity.hasError('min')">
+                    City is <strong>required</strong>
+                  </mat-error>
                 </mat-form-field>
               </div>
               <div fxFlex="22%" fxFlex.xs="100%" fxFlex.sm="50%">
                 <mat-form-field [style.width.%]="100" floatLabel="always"> 
                     <mat-label>Pin/Zip</mat-label>
-                    <input matInput #input placeholder="Pin/Zip">
-                    
+                    <input matInput #input placeholder="Pin/Zip" formControlName="propertyPinZip">
+                    <mat-error
+                    *ngIf="property['controls'].propertyPinZip.hasError('required')">
+                    PinZip is <strong>required</strong>
+                  </mat-error>
                 </mat-form-field>
               </div>
             </div>
@@ -113,17 +149,24 @@
           <div fxFlex="24%" fxFlex.xs="100%" fxFlex.sm="50%">
             <mat-form-field [style.width.%]="100" floatLabel="always"> 
                 <mat-label>Phone Number</mat-label>
-                <input matInput #input placeholder="Phone Number">
-                
+                <input matInput #input placeholder="Phone Number" formControlName="propertyPhone">
+                <mat-error
+                *ngIf="property['controls'].propertyPhone.hasError('required')">
+                Phone is <strong>required</strong>
+              </mat-error>
             </mat-form-field>
           </div>
           <div fxFlex="24%" fxFlex.xs="100%" fxFlex.sm="50%">
             <mat-form-field [style.width.%]="100" floatLabel="always"> 
                 <mat-label>Hotel Type</mat-label>
-                <mat-select [(ngModel)]="property.HotelTypeId" [ngModelOptions]="{standalone: true}">
-                  <mat-option *ngFor="let item of items" [value]="item.id">{{item.name}}</mat-option>
+                <mat-select [(ngModel)]="DataArray[ix].propertyHotelType" formControlName="propertyHotelType">
+                  <mat-option [value]="0">Select Hotel Type</mat-option>
+                  <mat-option *ngFor="let hotelType of DataArray[ix].hotelTypeList" [value]="hotelType.hotelTypeId">{{hotelType.name}}</mat-option>
                 </mat-select>
-                
+                <mat-error
+                *ngIf="property['controls'].propertyHotelType.hasError('min')">
+                HotelType is <strong>required</strong>
+              </mat-error>
             </mat-form-field>
           </div>
           <div fxFlex="24%" fxFlex.xs="100%" fxFlex.sm="50%" fxLayout="row wrap">
@@ -134,10 +177,15 @@
                     <mat-label>Check in Time</mat-label>
                     <div fxFlex="20%"><i class="fas fa-clock"></i></div>
                     <div fxFlex="80%">
-                      <input matInput #input placeholder="Check in" [ngxTimepicker]="inpicker">
+                      <input matInput #input placeholder="Check in" [ngxTimepicker]="inpicker" formControlName="propertyCheckIn">
+                 
                       <ngx-material-timepicker #inpicker></ngx-material-timepicker>
+                   
                     </div>
-                    
+                    <mat-error
+                    *ngIf="property['controls'].propertyCheckIn.hasError('required')">
+                    CheckIn  is <strong>required</strong>
+                  </mat-error>
                     
                 </mat-form-field>
                 </div>
@@ -146,10 +194,15 @@
                     <mat-label>Check Out Time</mat-label>
                     <div fxFlex="20%"><i class="fas fa-clock"></i></div>
                     <div fxFlex="80%">
-                      <input matInput #input placeholder="Check out"  [ngxTimepicker]="outpicker">
+                      <input matInput #input placeholder="Check out"  [ngxTimepicker]="outpicker" formControlName="propertyCheckOut">
+                     
                       <ngx-material-timepicker #outpicker></ngx-material-timepicker>
+                     
                     </div>
-                   
+                    <mat-error
+                      *ngIf="property['controls'].propertyCheckOut.hasError('required')">
+                      CheckOut is <strong>required</strong>
+                    </mat-error>
                     
                 </mat-form-field>
                 </div>   
@@ -157,8 +210,11 @@
           <div fxFlex="22%" fxFlex.xs="100%" fxFlex.sm="50%">
             <mat-form-field [style.width.%]="100" floatLabel="always"> 
                 <mat-label>Website</mat-label>
-                <input matInput #input placeholder="Website">
-                
+                <input matInput #input placeholder="Website" formControlName="propertyWebsite">
+                <mat-error
+                *ngIf="property['controls'].propertyWebsite.hasError('required')">
+                Website is <strong>required</strong>
+              </mat-error>
             </mat-form-field>
           </div>
         </div>
@@ -168,55 +224,72 @@
       <div fxFlex="24%" fxFlex.xs="100%" fxFlex.sm="50%">
           <mat-form-field  [style.width.%]="100" floatLabel="always">
               <mat-label>WeekDays</mat-label>
-              <mat-select [(ngModel)]="property.WeekDayId" [ngModelOptions]="{standalone: true}">
-                <mat-option *ngFor="let item of items" [value]="item.id">{{item.name}}</mat-option>
+              <mat-select [(ngModel)]="DataArray[ix].propertyWeekDays" formControlName="propertyWeekDays">
+                <mat-option [value]="0">Select City</mat-option>
+                <mat-option *ngFor="let day of DataArray[ix].dayList" [value]="day.dayId">{{day.name}}</mat-option>
               </mat-select>
+              <mat-error
+              *ngIf="property['controls'].propertyWeekDays.hasError('min')">
+              WeekDay is <strong>required</strong>
+            </mat-error>
           </mat-form-field>
         </div>
         <div fxFlex="24%" fxFlex.xs="100%" fxFlex.sm="50%">
           <mat-form-field [style.width.%]="100" floatLabel="always"> 
               <mat-label>Weekends</mat-label>
-              <mat-select [(ngModel)]="property.WeekEndDayId" [ngModelOptions]="{standalone: true}">
-                <mat-option *ngFor="let item of items" [value]="item.id">{{item.name}}</mat-option>
+              <mat-select  [(ngModel)]="DataArray[ix].propertyWeekends" formControlName="propertyWeekends">
+                <mat-option [value]="0">Select Weekend</mat-option>
+                <mat-option *ngFor="let day of DataArray[ix].dayList" [value]="day.dayId">{{day.name}}</mat-option>
               </mat-select>
-              
+              <mat-error
+              *ngIf="property['controls'].propertyWeekends.hasError('min')">
+              WeekEnd is <strong>required</strong>
+            </mat-error>
           </mat-form-field>
         </div>
         <div fxFlex="24%" fxFlex.xs="100%" fxFlex.sm="50%">
           <mat-form-field [style.width.%]="100" floatLabel="always"> 
               <mat-label>Currency</mat-label>
-              <mat-select [(ngModel)]="property.CurrencyId" [ngModelOptions]="{standalone: true}">
-                <mat-option *ngFor="let item of items" [value]="item.id">{{item.name}}</mat-option>
+              <mat-select [(ngModel)]="DataArray[ix].propertyCurrency" formControlName="propertyCurrency">
+                <mat-option [value]="0">Select Currency</mat-option>
+                <mat-option *ngFor="let currency of DataArray[ix].currencyList" [value]="currency.currencyId">{{currency.name}}</mat-option>
               </mat-select>
-              
+              <mat-error
+              *ngIf="property['controls'].propertyCurrency.hasError('min')">
+              Currency is <strong>required</strong>
+            </mat-error>
           </mat-form-field>
         </div>
         <div fxFlex="22%" fxFlex.xs="100%" fxFlex.sm="50%">
           <mat-form-field [style.width.%]="100" floatLabel="always"> 
             <mat-label>Other Currency</mat-label>
-            <mat-select [(ngModel)]="property.OtherCurrencyId" [ngModelOptions]="{standalone: true}">
-              <mat-option *ngFor="let item of items" [value]="item.id">{{item.name}}</mat-option>
+            <mat-select [(ngModel)]="DataArray[ix].propertyOtherCurrency" formControlName="propertyOtherCurrency">
+              <mat-option [value]="0">Select Other urrency</mat-option>
+              <mat-option *ngFor="let currency of DataArray[ix].currencyList" [value]="currency.currencyId">{{currency.name}}</mat-option>
             </mat-select>
-            
+            <mat-error
+            *ngIf="property['controls'].propertyOtherCurrency.hasError('min')">
+           Other Currency is <strong>required</strong>
+          </mat-error>
         </mat-form-field>
         </div>
       </div>
 </div>
 <div class="content">
   <div fxFlex="100%"  fxLayout="row wrap" fxLayoutGap="15px">
-    <mat-form-field class="network-ip-chip-list">
+    <mat-form-field class="network-ip-chip-list" floatLabel="always">
       <mat-label>Property Network IP</mat-label>
       <mat-chip-list #chipList aria-label="IP selection">
-        <mat-chip *ngFor="let netWorkIP of property.networkIPs" [selectable]="selectable"
-                 [removable]="removable" (removed)="removeNetworkIP(netWorkIP , i)">
+        <mat-chip *ngFor="let netWorkIP of DataArray[ix].networkIPs" [selectable]="selectable"
+                 [removable]="removable" (removed)="removeNetworkIP(netWorkIP , ix)">
           {{netWorkIP.name}}
           <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
         </mat-chip>
-        <input placeholder="Network IP"
+        <input formControlName="propertyNetworkIP" placeholder="Network IP"
                [matChipInputFor]="chipList"
                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                [matChipInputAddOnBlur]="addOnBlur"
-               (matChipInputTokenEnd)="addNetworkIP($event,i)">
+               (matChipInputTokenEnd)="addNetworkIP($event,ix)">
       </mat-chip-list>
     </mat-form-field>
     </div>
@@ -224,20 +297,21 @@
     <div class="content">
       <div fxFlex="100%"  fxLayout="row wrap" fxLayoutGap="15px">
      
-        <mat-form-field class="network-ip-chip-list">
+        <mat-form-field class="network-ip-chip-list" floatLabel="always">
           <mat-label>Network Mac ID</mat-label>
           <mat-chip-list #macIdList aria-label="IP selection">
-            <mat-chip *ngFor="let macID of property.macIDs" [selectable]="selectable"
-                     [removable]="removable" (removed)="removeMacID(macID, i)">
+            <mat-chip *ngFor="let macID of DataArray[ix].macIDs" [selectable]="selectable"
+                     [removable]="removable" (removed)="removeMacID(macID, ix)">
               {{macID.name}}
               <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
             </mat-chip>
-            <input placeholder="Mac ID"
+            <input formControlName="propertyMacAddress" placeholder="Mac ID"
                    [matChipInputFor]="macIdList"
                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                    [matChipInputAddOnBlur]="addOnBlur"
                    (matChipInputTokenEnd)="addMacID($event,i)">
           </mat-chip-list>
+        
         </mat-form-field>
         </div>
         </div>
@@ -249,23 +323,25 @@
             </div>
             <div fxFlex="100%" fxLayout="row wrap" fxLayout.lt-sm="column">
           <div fxFlex="40%" fxFlex.sm="100%" fxFlex.xs="100%">
-            <mat-star-rating [rating]="property.rating"  [starCount]="starCount" [color]="starColor" (ratingUpdated)="onRatingChanged($event , i)"></mat-star-rating>
+            <mat-star-rating [rating]="DataArray[ix].rating"  [starCount]="starCount" [color]="starColor" (ratingUpdated)="onRatingChanged($event , ix)"></mat-star-rating>
 
             <star-rating-comp [starType]="'svg'" [rating]="4"></star-rating-comp>
           </div>
           <div fxFlex="60%"  fxFlex.xs="100%"  fxLayout="row wrap" fxLayoutGap="15px" fxLayoutAlign="end end" >
-            <button  mat-button  class="border btnProperty btnAddMoreGroup themecolor" (click)="removeProperty(i)"><i class="fas fa-minus"></i>Remove Property</button>
+            <button  mat-button type="button"  class="border btnProperty btnAddMoreGroup themecolor" (click)="removeX(ix)"><i class="fas fa-minus"></i>Remove Property</button>
             </div>
           </div>
 
          
             </div>
             </div>
+          </mat-expansion-panel>
+        </mat-accordion>
  
 </div>
 <div class="content">
   <div fxFlex="100%"  fxLayout="row wrap" fxLayoutGap="15px" fxLayoutAlign="end end" >
-    <button  mat-button  class="border btnProperty btnAddMoreGroup themecolor" [autofocus]="false" (click)="addProperty()"><i class="fas fa-plus"></i>Add Property</button>
+    <button  mat-button type="button" class="border btnProperty btnAddMoreGroup themecolor" [autofocus]="false" (click)="addX()"><i class="fas fa-plus"></i>Add Property</button>
     </div>
     </div>
 </div>
@@ -273,7 +349,7 @@
 <mat-dialog-actions align="end">
     <button  mat-button  class="border btnProperty" (click)="onNoClick()">Back</button>
     <button  mat-button  class="border btnProperty" (click)="onNoClick()">Reset</button>
-    <button  mat-button class="button btnProperty" [mat-dialog-close]="data.animal" >Save</button>
+    <button  mat-button class="button btnProperty">Save</button>
  
 </mat-dialog-actions>
 </form>
