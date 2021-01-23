@@ -42,6 +42,9 @@ export class AddPropertyComponent implements OnInit {
   addOnBlur = true;
   DataArray = [];
   countryList = [];
+  currencyList=[];
+  dayList=[];
+  hotelTypeList=[];
   cityList = [];
   stateList = [];
   formGroup: FormGroup;
@@ -76,8 +79,8 @@ export class AddPropertyComponent implements OnInit {
       propertyState:0,
       propertyCity:0,
       propertyCountry:0,
-      dayList:[],
-      currencyList:[],
+      dayList:this.dayList,
+      currencyList:this.currencyList,
       propertyCurrency:0,
       propertyOtherCurrency:0,
       propertyWeekends:0,
@@ -85,7 +88,7 @@ export class AddPropertyComponent implements OnInit {
       propertyHotelType:0,
       networkIPs:[],
       rating:0,
-      hotelTypeList:[],
+      hotelTypeList:this.hotelTypeList,
       macIDs:[]
 
     })
@@ -190,6 +193,9 @@ export class AddPropertyComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: DialogData, private fb: FormBuilder,private webService:WebService,private toast: ToastService) {
     
     this.getCountryList();
+    this.getCurrencyList();
+    this.getHotelTypeList();
+    this.getDayList();
   }
   ngOnInit() {
     this.validate();
@@ -226,6 +232,51 @@ export class AddPropertyComponent implements OnInit {
           
           this.countryList = data.data;
           this.DataArray[0].countryList = data.data;
+      
+        }
+        else {
+          this.toast.error(data.errors);
+        }
+
+      });
+  }
+  getCurrencyList() {
+    this.webService.commonMethod('currency/get?pageSize=10000', null, 'GET', null)
+      .subscribe(data => {
+        if (data.succeeded) {
+          
+          this.currencyList = data.data;
+          this.DataArray[0].currencyList = data.data;
+      
+        }
+        else {
+          this.toast.error(data.errors);
+        }
+
+      });
+  }
+  getHotelTypeList() {
+    this.webService.commonMethod('hotelType/get?pageSize=10000', null, 'GET', null)
+      .subscribe(data => {
+        if (data.succeeded) {
+          
+          this.hotelTypeList = data.data;
+          this.DataArray[0].hotelTypeList = data.data;
+      
+        }
+        else {
+          this.toast.error(data.errors);
+        }
+
+      });
+  }
+  getDayList() {
+    this.webService.commonMethod('day/get?pageSize=10000', null, 'GET', null)
+      .subscribe(data => {
+        if (data.succeeded) {
+          
+          this.dayList = data.data;
+          this.DataArray[0].dayList = data.data;
       
         }
         else {

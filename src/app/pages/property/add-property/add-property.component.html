@@ -161,7 +161,7 @@
                 <mat-label>Hotel Type</mat-label>
                 <mat-select [(ngModel)]="DataArray[ix].propertyHotelType" formControlName="propertyHotelType">
                   <mat-option [value]="0">Select Hotel Type</mat-option>
-                  <mat-option *ngFor="let hotelType of DataArray[ix].hotelTypeList" [value]="hotelType.hotelTypeId">{{hotelType.name}}</mat-option>
+                  <mat-option *ngFor="let hotelType of DataArray[ix].hotelTypeList" [value]="hotelType.hotelTypeID">{{hotelType.name}}</mat-option>
                 </mat-select>
                 <mat-error
                 *ngIf="property['controls'].propertyHotelType.hasError('min')">
@@ -224,9 +224,9 @@
       <div fxFlex="24%" fxFlex.xs="100%" fxFlex.sm="50%">
           <mat-form-field  [style.width.%]="100" floatLabel="always">
               <mat-label>WeekDays</mat-label>
-              <mat-select [(ngModel)]="DataArray[ix].propertyWeekDays" formControlName="propertyWeekDays">
+              <mat-select [(ngModel)]="DataArray[ix].propertyWeekDays" formControlName="propertyWeekDays" multiple>
                 <mat-option [value]="0">Select City</mat-option>
-                <mat-option *ngFor="let day of DataArray[ix].dayList" [value]="day.dayId">{{day.name}}</mat-option>
+                <mat-option *ngFor="let day of DataArray[ix].dayList" [value]="day.dayID">{{day.name}}</mat-option>
               </mat-select>
               <mat-error
               *ngIf="property['controls'].propertyWeekDays.hasError('min')">
@@ -237,9 +237,9 @@
         <div fxFlex="24%" fxFlex.xs="100%" fxFlex.sm="50%">
           <mat-form-field [style.width.%]="100" floatLabel="always"> 
               <mat-label>Weekends</mat-label>
-              <mat-select  [(ngModel)]="DataArray[ix].propertyWeekends" formControlName="propertyWeekends">
+              <mat-select  [(ngModel)]="DataArray[ix].propertyWeekends" formControlName="propertyWeekends" multiple>
                 <mat-option [value]="0">Select Weekend</mat-option>
-                <mat-option *ngFor="let day of DataArray[ix].dayList" [value]="day.dayId">{{day.name}}</mat-option>
+                <mat-option *ngFor="let day of DataArray[ix].dayList" [value]="day.dayID">{{day.name}}</mat-option>
               </mat-select>
               <mat-error
               *ngIf="property['controls'].propertyWeekends.hasError('min')">
@@ -252,7 +252,7 @@
               <mat-label>Currency</mat-label>
               <mat-select [(ngModel)]="DataArray[ix].propertyCurrency" formControlName="propertyCurrency">
                 <mat-option [value]="0">Select Currency</mat-option>
-                <mat-option *ngFor="let currency of DataArray[ix].currencyList" [value]="currency.currencyId">{{currency.name}}</mat-option>
+                <mat-option *ngFor="let currency of DataArray[ix].currencyList" [value]="currency.currencyID">{{currency.currencyName}}</mat-option>
               </mat-select>
               <mat-error
               *ngIf="property['controls'].propertyCurrency.hasError('min')">
@@ -263,9 +263,9 @@
         <div fxFlex="22%" fxFlex.xs="100%" fxFlex.sm="50%">
           <mat-form-field [style.width.%]="100" floatLabel="always"> 
             <mat-label>Other Currency</mat-label>
-            <mat-select [(ngModel)]="DataArray[ix].propertyOtherCurrency" formControlName="propertyOtherCurrency">
-              <mat-option [value]="0">Select Other urrency</mat-option>
-              <mat-option *ngFor="let currency of DataArray[ix].currencyList" [value]="currency.currencyId">{{currency.name}}</mat-option>
+            <mat-select [(ngModel)]="DataArray[ix].propertyOtherCurrency" formControlName="propertyOtherCurrency" multiple>
+              <mat-option [value]="0">Select Other Currency</mat-option>
+              <mat-option *ngFor="let currency of DataArray[ix].currencyList" [value]="currency.currencyID">{{currency.currencyName}}</mat-option>
             </mat-select>
             <mat-error
             *ngIf="property['controls'].propertyOtherCurrency.hasError('min')">
