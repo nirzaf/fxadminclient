@@ -12,6 +12,8 @@ import { ToastService } from 'src/app/shared/services/toast.service';
 export interface DialogData {
   holdingCompanyID: string;
   holdingCompanyName: string;
+  groupID:string;
+  groupName:string;
 }
 
 export interface NetworkIP {
@@ -50,11 +52,7 @@ export class AddPropertyComponent implements OnInit {
   formGroup: FormGroup;
   holdingCompanyData: DialogData;
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
-  // networkIPs: NetworkIP[] = [
-  //   { name: '192.168.3.1' },
-  //   { name: '192.168.3.2' },
-  //   { name: '192.168.3.3' },
-  // ];
+
  
   value = this.fb.group({
 
@@ -86,7 +84,9 @@ export class AddPropertyComponent implements OnInit {
       propertyWeekends:0,
       propertyWeekDays:0,
       propertyHotelType:0,
+      
       networkIPs:[],
+      
       rating:0,
       hotelTypeList:this.hotelTypeList,
       macIDs:[]
@@ -107,13 +107,13 @@ export class AddPropertyComponent implements OnInit {
       propertyCheckIn: [, { validators: [Validators.required], updateOn: "change" }],
       propertyCheckOut: [, { validators: [Validators.required], updateOn: "change" }],
       propertyWebsite: [, { validators: [Validators.required], updateOn: "change" }],
-      propertyWeekDays: [0, { validators: [Validators.min(1)], updateOn: "change" }],
-      propertyWeekends: [0, { validators: [Validators.min(1)], updateOn: "change" }],
-      propertyCurrency: [0, { validators: [Validators.min(1)], updateOn: "change" }],
-      propertyOtherCurrency: [0, { validators: [Validators.min(1)], updateOn: "change" }],
+      propertyWeekDays: [0, { validators: [], updateOn: "change" }],
+      propertyWeekends: [0, { validators: [], updateOn: "change" }],
+      propertyCurrency: [0, { validators: [], updateOn: "change" }],
+      propertyOtherCurrency: [0, { validators: [], updateOn: "change" }],
       propertyNetworkIP: [, { validators: [], updateOn: "change" }],
       propertyMacAddress: [, { validators: [], updateOn: "change" }],
-      propertyStarRating: [, { validators: [Validators.required], updateOn: "change" }],
+     
     });
   }
   public addX(): void {
@@ -121,19 +121,11 @@ export class AddPropertyComponent implements OnInit {
     control.push(this.initX(false));
   }
 
-
-
   removeX(index) {
     const control = <FormArray>this.f.formArray1;
     control.removeAt(index);
 
   }
-  
-
-  
-  
-
-
   addNetworkIP(event: MatChipInputEvent,i): void {
     const input = event.input;
     const value = event.value;
@@ -161,8 +153,7 @@ export class AddPropertyComponent implements OnInit {
     }
   }
   addMacID(event: MatChipInputEvent,i): void {
-    var arrayControl = this.form.get('times') as FormArray;
-    var item = arrayControl.at(i);
+    
     const input = event.input;
     const value = event.value;
 
@@ -191,7 +182,7 @@ export class AddPropertyComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<AddPropertyComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData, private fb: FormBuilder,private webService:WebService,private toast: ToastService) {
-    
+    this.holdingCompanyData=data;
     this.getCountryList();
     this.getCurrencyList();
     this.getHotelTypeList();
@@ -308,6 +299,88 @@ export class AddPropertyComponent implements OnInit {
    
       
       });
+  }
+  onSubmit() {
+   
+    if (this.formGroup.valid) {
+      var properties = [];
+      var i=0;
+      for (let control of this.formGroup.get('formArray1')['controls']) {
+        var otherCurrency=[];
+        for(let currency of this.DataArray[i].propertyOtherCurrency){
+          if(currency!=0){
+            otherCurrency.push({"CurrencyID":currency});
+          }        
+        }
+        var weekDayArr=[];
+        for(let weekDay of this.DataArray[i].propertyWeekDays){
+          if(weekDay!=0){
+            weekDayArr.push({"DayID":weekDay});
+          }        
+        }
+        var weekEndArr=[];
+        for(let weekEnd of this.DataArray[i].propertyWeekends){
+          if(weekEnd!=0){
+            weekEndArr.push({"DayID":weekEnd});
+          }        
+        }
+       
+        var macIDArr=[];
+        for(let macID of this.DataArray[i].macIDs){
+         
+          macIDArr.push({"MacAddress":macID.name});
+           
+        }
+        var netWorkIPArr=[];
+        for(let networkIP of this.DataArray[i].networkIPs){
+         
+          netWorkIPArr.push({"IPAddress":networkIP.name});
+           
+        }
+        var groupData = {
+          "GroupID": parseInt(this.holdingCompanyData.groupID),
+          "Name": control.controls["propertyName"].value,
+          "Code": control.controls["propertyCode"].value,
+          "CityID": control.controls["propertyCity"].value,
+          "StateId": control.controls["propertyState"].value,
+          "CountryId": control.controls["propertyCountry"].value,
+          "ZipCode": control.controls["propertyPinZip"].value,
+          "PhoneNumber": control.controls["propertyPhone"].value,
+          "Address": control.controls["propertyAddress"].value,
+          "CreatedBy": "Sirojan",          
+          "StarRating":this.DataArray[i].rating,
+          "Website": control.controls["propertyWebsite"].value,
+          "CurrencyID":control.controls["propertyCurrency"].value,
+          "HotelTypeID":control.controls["propertyHotelType"].value,
+          "OtherCurrencies":otherCurrency,
+          "PropertyWeekDays":weekDayArr,
+          "PropertyWeekends":weekEndArr,
+          "MacAddresses":macIDArr,
+          "IPAddresses":netWorkIPArr
+        }
+        properties.push(groupData);
+        
+        i++;
+
+
+      }
+    console.log(properties);
+      this.webService.commonMethod('property/post', { "properties": properties }, 'POST', null)
+        .subscribe(data => {
+          if (data.succeeded) {
+
+            this.dialogRef.close({ event: 'close', data: this.holdingCompanyData });
+          }
+          else {
+            this.toast.error(data.errors);
+          }
+        });
+      
+    }
+    else {
+      this.toast.error("form validation failed");
+    }
+
   }
 
 }

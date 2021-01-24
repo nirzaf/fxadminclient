@@ -87,7 +87,7 @@
                       <mat-panel-title>
                 <div fxFlex="100%" fxLayout="row wrap" fxLayout.lt-sm="column">
                   <div fxFlex="45%" fxFlex.xs="100%">
-                    <mat-radio-button value="{{group.groupID}}"><span style="font-size: 11px;opacity: 0.7">Group {{i+1}}</span><br/><span style="font-size: 12px;">{{group.name}}</span></mat-radio-button>
+                    <mat-radio-button value="{{group.groupID}}" (change)="groupChange($event,group)"><span style="font-size: 11px;opacity: 0.7">Group {{i+1}}</span><br/><span style="font-size: 12px;">{{group.name}}</span></mat-radio-button>
                     </div>
                     <div fxFlex="54%" fxFlex.xs="100%">
                       <div fxFlex="22%" fxFlex.xs="20%">
@@ -116,7 +116,7 @@
                    
             <div fxFlex="100%" class="fxa_sub_group_item" fxLayout="row wrap" > 
               <div fxFlex="42%" fxFlex.xs="88%" >
-                <mat-radio-button value="{{childGroup.groupID}}"><span style="font-size: 11px;opacity: 0.7">Sub Group {{b+1}}</span><br/><span style="font-size: 12px;">{{childGroup.name}}</span></mat-radio-button>
+                <mat-radio-button value="{{childGroup.groupID}}" (change)="groupChange($event,childGroup)"><span style="font-size: 11px;opacity: 0.7">Sub Group {{b+1}}</span><br/><span style="font-size: 12px;">{{childGroup.name}}</span></mat-radio-button>
                 </div>
                 <div fxFlex="10%" fxFlex.xs="12%" >
                   <i class="fas fa-ellipsis-h themecolor iconSize moreicon fxcursor_pointer" (click)="viewSubGroup(childGroup,group,b)"></i><br/>
@@ -135,7 +135,7 @@
              
               <div fxFlex="100%" *ngIf="!group.hasChildGroup"   fxLayout="row wrap"  class="fxa_group_item" fxLayout.lt-sm="column">
                 <div fxFlex="42%" fxFlex.xs="100%">
-                <mat-radio-button value="{{group.groupID}}"><span style="font-size: 11px;opacity: 0.7">Group {{i+1}}</span><br/><span style="font-size: 12px;">{{group.name}}</span></mat-radio-button>
+                <mat-radio-button value="{{group.groupID}}" (change)="groupChange($event,group)"><span style="font-size: 11px;opacity: 0.7">Group {{i+1}}</span><br/><span style="font-size: 12px;">{{group.name}}</span></mat-radio-button>
                 </div>
                 <div fxFlex="57%" fxFlex.xs="100%">
                   <div fxFlex="20%" >
@@ -179,75 +179,27 @@
               </mat-card-header>
             </div>
             <div fxLayout="row wrap" fxFlex="100%" class="fxa_group_container" fxLayout.lt-sm="column"  >
-              
+              <ng-container *ngFor="let property of propertyData; let i=index" >
             <div fxFlex="100%" fxLayout="row wrap"  class="fxa_group_item" fxLayout.lt-sm="column">
 
               <div fxFlex="30%" fxFlex.xs="100%">
-              <span style="font-size: 11px;opacity: 0.7">Property 1</span><br/><span style="font-size: 12px;">Sarovar Hotels Bengaluru</span>
+              <span style="font-size: 11px;opacity: 0.7">Property {{i+1}}</span><br/><span style="font-size: 12px;">{{property.name}}</span>
               </div>
               <div fxFlex="25%" fxFlex.xs="100%" fxLayout="row wrap">
                 <div fxFlex="60%" fxFlex.xs="30%">
-                  <span style="font-size: 11px;opacity: 0.7">Code</span><br/><span style="font-size: 12px;">1005</span>
+                  <span style="font-size: 11px;opacity: 0.7">Code</span><br/><span style="font-size: 12px;">{{property.code}}</span>
               </div>
                 <div fxFlex="40%" fxFlex.xs="30%">
                   <i class="fas fa-ellipsis-h themecolor iconSize moreicon"></i><br/>
                   <div class="themecolor moretext">More</div>
               </div>
               </div>
+            
              
             
             </div>
-            <div fxFlex="100%" fxLayout="row wrap"  class="fxa_group_item" fxLayout.lt-sm="column">
-
-              <div fxFlex="30%" fxFlex.xs="100%">
-              <span style="font-size: 11px;opacity: 0.7">Property 2</span><br/><span style="font-size: 12px;">Sarovar Hotels Bengaluru</span>
-              </div>
-              <div fxFlex="25%" fxFlex.xs="100%" fxLayout="row wrap">
-                <div fxFlex="60%" fxFlex.xs="30%">
-                  <span style="font-size: 11px;opacity: 0.7">Code</span><br/><span style="font-size: 12px;">1006</span>
-              </div>
-                <div fxFlex="40%" fxFlex.xs="30%">
-                  <i class="fas fa-ellipsis-h themecolor iconSize moreicon"></i><br/>
-                  <div class="themecolor moretext">More</div>
-              </div>
-              </div>
-             
-            
-            </div>
-            <div fxFlex="100%" fxLayout="row wrap"  class="fxa_group_item" fxLayout.lt-sm="column">
-
-              <div fxFlex="30%" fxFlex.xs="100%">
-              <span style="font-size: 11px;opacity: 0.7">Property 3</span><br/><span style="font-size: 12px;">Sarovar Hotels Bengaluru</span>
-              </div>
-              <div fxFlex="25%" fxFlex.xs="100%" fxLayout="row wrap">
-                <div fxFlex="60%" fxFlex.xs="30%">
-                  <span style="font-size: 11px;opacity: 0.7">Code</span><br/><span style="font-size: 12px;">1007</span>
-              </div>
-                <div fxFlex="40%" fxFlex.xs="30%">
-                  <i class="fas fa-ellipsis-h themecolor iconSize moreicon"></i><br/>
-                  <div class="themecolor moretext">More</div>
-              </div>
-              </div>
-             
-            
-            </div>
-            <div fxFlex="100%" fxLayout="row wrap"  class="fxa_group_item" fxLayout.lt-sm="column">
-
-              <div fxFlex="30%" fxFlex.xs="100%">
-              <span style="font-size: 11px;opacity: 0.7">Property 4</span><br/><span style="font-size: 12px;">Sarovar Hotels Bengaluru</span>
-              </div>
-              <div fxFlex="25%" fxFlex.xs="100%" fxLayout="row wrap">
-                <div fxFlex="60%" fxFlex.xs="30%">
-                  <span style="font-size: 11px;opacity: 0.7">Code</span><br/><span style="font-size: 12px;">1008</span>
-              </div>
-                <div fxFlex="40%" fxFlex.xs="30%">
-                  <i class="fas fa-ellipsis-h themecolor iconSize moreicon"></i><br/>
-                  <div class="themecolor moretext">More</div>
-              </div>
-              </div>
-             
-            
-            </div>
+          </ng-container>
+       
             <img mat-card-image height="100%" class="fxam_imgHeight" *ngIf="hasProperty" src="./assets/image/property.png">
           </div>
         

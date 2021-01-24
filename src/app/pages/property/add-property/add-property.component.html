@@ -1,7 +1,7 @@
 
 
 
-<form [formGroup]="formGroup">
+<form [formGroup]="formGroup" novalidate (ngSubmit)="onSubmit()">
 <h2 mat-dialog-title>Create Property</h2>
 <mat-dialog-content  class="mat-typography">
   <div>
@@ -12,7 +12,7 @@
           
             </div>
             <div fxFlex="25%">
-                Sarovar Hotels & Resorts
+                {{holdingCompanyData.holdingCompanyName}}
               </div>
             
             </div>
@@ -22,7 +22,7 @@
                    
                      </div>
             <div fxFlex="25%" >
-                Sarovar Hotels G1
+              {{holdingCompanyData.groupName}}
               </div>
             
           </div>
@@ -281,7 +281,7 @@
       <mat-label>Property Network IP</mat-label>
       <mat-chip-list #chipList aria-label="IP selection">
         <mat-chip *ngFor="let netWorkIP of DataArray[ix].networkIPs" [selectable]="selectable"
-                 [removable]="removable" (removed)="removeNetworkIP(netWorkIP , ix)">
+                 [removable]="removable" (removed)="removeNetworkIP(netWorkIP , ix)" >
           {{netWorkIP.name}}
           <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
         </mat-chip>
@@ -309,7 +309,7 @@
                    [matChipInputFor]="macIdList"
                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                    [matChipInputAddOnBlur]="addOnBlur"
-                   (matChipInputTokenEnd)="addMacID($event,i)">
+                   (matChipInputTokenEnd)="addMacID($event,ix)">
           </mat-chip-list>
         
         </mat-form-field>
@@ -347,9 +347,9 @@
 </div>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-    <button  mat-button  class="border btnProperty" (click)="onNoClick()">Back</button>
-    <button  mat-button  class="border btnProperty" (click)="onNoClick()">Reset</button>
-    <button  mat-button class="button btnProperty">Save</button>
+    <button  mat-button type="button" class="border btnProperty" (click)="onNoClick()">Back</button>
+    <button  mat-button type="button"  class="border btnProperty" (click)="onNoClick()">Reset</button>
+    <button type="submit" mat-button class="button btnProperty">Save</button>
  
 </mat-dialog-actions>
 </form>

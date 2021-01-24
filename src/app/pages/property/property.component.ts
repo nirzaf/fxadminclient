@@ -16,9 +16,14 @@ import { ViewSubGroupComponent } from 'src/app/pages/group/view-sub-group/view-s
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
+
 export interface HoldingCompanyOption {
   holdingCompanyID: string;
   holdingCompanyName: string;
+}
+export interface GroupData {
+  groupID: string;
+  groupName: string;
 }
 @Component({
   selector: 'app-property',
@@ -30,9 +35,13 @@ export class PropertyComponent implements OnInit {
   holdingCompanyOptions: HoldingCompanyOption[] = [{
     holdingCompanyID:'1', holdingCompanyName:"Sarovar Hotels 1"}
   ];
+  groupData:GroupData[];
+  propertyData:any[];
   filteredOptions: Observable<HoldingCompanyOption[]>;
   
   panelOpenState = false;
+  groupID:string;
+  groupName:string;
   holdingCompanyID: string;
   holdingCompanyName: string;
   public hasProperty: boolean = false;
@@ -48,13 +57,22 @@ export class PropertyComponent implements OnInit {
   public pmsCustCode: number = 20007;
   public GroupList: any = [];
   public PropertyList: any= [];
+  
   gridColumns = 3;
 
   toggleGridColumns() {
     this.gridColumns = this.gridColumns === 3 ? 4 : 3;
   }
 
- 
+  groupChange(evt:any,group:any) {
+    var target = evt.target;
+    this.groupID=evt.value;
+    this.groupName=group.name;
+    console.log("Radio Change");
+    this.propertyData=[];
+    this.getPropertyList(this.groupID);
+    console.log(evt);
+  }
   addHoldingCompnay(): void {
     const dialogRef = this.dialog.open(AddHoldingcompanyComponent, {
       panelClass: 'custom-dialog-container',
@@ -69,6 +87,7 @@ export class PropertyComponent implements OnInit {
         this.holdingCompanyName= result.data.holdingCompanyName;
         this.holdingCompanyID=result.data.holdingCompanyID;
         this.getHoldingCompanyList();
+       
       }
      
     });
@@ -154,7 +173,7 @@ export class PropertyComponent implements OnInit {
    
   }
   viewSubGroup(group:any,parentGroup:any,subGroupIndex:string): void {
-alert(subGroupIndex);
+
     if(this.holdingCompanyID!="" && this.holdingCompanyID!=null){
       const dialogRef = this.dialog.open(ViewSubGroupComponent, {
         panelClass: 'viewmore-dialog-container',
@@ -218,18 +237,25 @@ alert(subGroupIndex);
 
   
   addProperty(): void {
+    if(this.groupID!="" && this.groupID!=null){
     const dialogRef = this.dialog.open(AddPropertyComponent, {
       panelClass: 'custom-dialog-container',
       //minHeight: '800px',    
-      data: {holdingCompanyName: this.holdingCompanyName, holdingCompanyID: this.holdingCompanyID},
+      data: {holdingCompanyName: this.holdingCompanyName, holdingCompanyID: this.holdingCompanyID,groupID:this.groupID,
+      groupName:this.groupName},
       autoFocus: false
     });
 
     dialogRef.afterClosed().subscribe(result => {
      
-      this.holdingCompanyName= result;
+      //this.holdingCompanyName= result;
+      this.getPropertyList(this.groupID);
       
     });
+  }
+  else{
+    this.toast.error("please select a group");
+  }
   }
  
 
@@ -362,6 +388,9 @@ console.log(this.companyGroupList);
     this.holdingCompanyID=selectedCompany.holdingCompanyID;
     this.holdingCompanyName=selectedCompany.holdingCompanyName;
     this.getCompanyGroupList(selectedCompany.holdingCompanyID);
+    this.groupID="";
+    this.groupName="";
+    this.propertyData=[];
   }
 
   hasChildGroup(group,groupLIst):boolean{
@@ -373,6 +402,23 @@ console.log(this.companyGroupList);
     else{
       return false;
     }
+  }
+  getPropertyList(groupID) {
+
+    this.webService.commonMethod('property/getbygroup/' + groupID, null, 'GET', null)
+      .subscribe(data => {
+        if (data.succeeded) {
+     
+          this.propertyData = data.data;
+          //this.DataArray[i].propertyCity=0;
+        }
+        else {
+          this.propertyData =[];
+          this.toast.error(data.errors);
+        }
+        console.log(data);
+      
+      });
   }
 
 }

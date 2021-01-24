@@ -66,6 +66,9 @@ import { DeleteGroupComponent } from './pages/group/delete-group/delete-group.co
 import { ViewSubGroupComponent } from './pages/group/view-sub-group/view-sub-group.component';
 import { EditSubGroupComponent } from './pages/group/edit-sub-group/edit-sub-group.component';
 import { DeleteSubGroupComponent } from './pages/group/delete-sub-group/delete-sub-group.component';
+import { ViewPropertyComponent } from './pages/property/view-property/view-property.component';
+import { EditPropertyComponent } from './pages/property/edit-property/edit-property.component';
+import { DeletePropertyComponent } from './pages/property/delete-property/delete-property.component';
 
 
 @NgModule({
@@ -97,7 +100,10 @@ import { DeleteSubGroupComponent } from './pages/group/delete-sub-group/delete-s
     DeleteGroupComponent,
     ViewSubGroupComponent,
     EditSubGroupComponent,
-    DeleteSubGroupComponent 
+    DeleteSubGroupComponent,
+    ViewPropertyComponent,
+    EditPropertyComponent,
+    DeletePropertyComponent 
   ],
   imports: [
     BrowserModule,
