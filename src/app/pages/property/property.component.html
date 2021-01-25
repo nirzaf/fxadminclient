@@ -190,8 +190,8 @@
                   <span style="font-size: 11px;opacity: 0.7">Code</span><br/><span style="font-size: 12px;">{{property.code}}</span>
               </div>
                 <div fxFlex="40%" fxFlex.xs="30%">
-                  <i class="fas fa-ellipsis-h themecolor iconSize moreicon"></i><br/>
-                  <div class="themecolor moretext">More</div>
+                  <i class="fas fa-ellipsis-h themecolor iconSize moreicon fxcursor_pointer" (click)="viewProperty(property,i)"></i><br/>
+                  <div class="themecolor moretext fxcursor_pointer" (click)="viewProperty(property,i)">More</div>
               </div>
               </div>
             
@@ -200,7 +200,7 @@
             </div>
           </ng-container>
        
-            <img mat-card-image height="100%" class="fxam_imgHeight" *ngIf="hasProperty" src="./assets/image/property.png">
+            <img  height="100%" class="fxam_imgHeight" *ngIf="propertyData?.length < 1" src="./assets/image/property.png">
           </div>
         
           </mat-card>

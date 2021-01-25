@@ -107,15 +107,16 @@ export class AddPropertyComponent implements OnInit {
       propertyCheckIn: [, { validators: [Validators.required], updateOn: "change" }],
       propertyCheckOut: [, { validators: [Validators.required], updateOn: "change" }],
       propertyWebsite: [, { validators: [Validators.required], updateOn: "change" }],
-      propertyWeekDays: [0, { validators: [], updateOn: "change" }],
-      propertyWeekends: [0, { validators: [], updateOn: "change" }],
-      propertyCurrency: [0, { validators: [], updateOn: "change" }],
-      propertyOtherCurrency: [0, { validators: [], updateOn: "change" }],
+      propertyWeekDays: [, { validators: [Validators.required], updateOn: "change" }],
+      propertyWeekends: [, { validators: [Validators.required], updateOn: "change" }],
+      propertyCurrency: [0, { validators: [Validators.min(1)], updateOn: "change" }],
+      propertyOtherCurrency: [, { validators: [Validators.required], updateOn: "change" }],
       propertyNetworkIP: [, { validators: [], updateOn: "change" }],
       propertyMacAddress: [, { validators: [], updateOn: "change" }],
      
     });
   }
+  
   public addX(): void {
     const control = <FormArray>this.f.formArray1;
     control.push(this.initX(false));
@@ -307,19 +308,19 @@ export class AddPropertyComponent implements OnInit {
       var i=0;
       for (let control of this.formGroup.get('formArray1')['controls']) {
         var otherCurrency=[];
-        for(let currency of this.DataArray[i].propertyOtherCurrency){
+        for(let currency of control.controls["propertyOtherCurrency"].value){
           if(currency!=0){
             otherCurrency.push({"CurrencyID":currency});
           }        
         }
         var weekDayArr=[];
-        for(let weekDay of this.DataArray[i].propertyWeekDays){
+        for(let weekDay of control.controls["propertyWeekDays"].value){
           if(weekDay!=0){
             weekDayArr.push({"DayID":weekDay});
           }        
         }
         var weekEndArr=[];
-        for(let weekEnd of this.DataArray[i].propertyWeekends){
+        for(let weekEnd of control.controls["propertyWeekends"].value){
           if(weekEnd!=0){
             weekEndArr.push({"DayID":weekEnd});
           }        

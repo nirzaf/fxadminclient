@@ -1,1 +1,340 @@
-<p>view-property works!</p>
+
+<h2 mat-dialog-title>
+    <div fxFlex="100%" fxLayout="row wrap" class="headercontainer" fxLayout.lt-sm="column">
+<div fxFlex="75%" fxFlex.xs="100%"><i class="fas fa-arrow-left themecolor titlearrowicon"   (click)="close()" style="font-size: 24px;"></i> View Property</div>
+<div fxFlex="25%" fxFlex.xs="100%" class="headerAction">
+    <div fxFlex="50%" fxFlex.sm="40%" fxLayout="row wrap" class="editcontainer">
+        <div fxFlex="100%">
+            <i class="fas fa-pencil-alt themecolor fxcursor_pointer" (click)="editProperty()"></i>
+        </div>
+        <div fxFlex="100%" class="headeredittext fxcursor_pointer" (click)="editProperty()">
+            Edit
+        </div>
+     
+    </div>
+    <div fxFlex="50%" fxFlex.sm="40%" fxLayout="row wrap">
+        <div fxFlex="100%">
+            <i class="far fa-trash-alt themecolor fxcursor_pointer" (click)="delete()"></i>
+        </div>
+        <div fxFlex="100%" class="headerdeletetext fxcursor_pointer" (click)="delete()">
+            Delete
+        </div>
+      
+    </div>
+    
+   </div>
+    </div>
+   
+</h2>
+<mat-dialog-content  class="mat-typography">
+
+    <div>
+        <div class="content-0"  >
+            <div fxFlex="100%"  fxLayout="column wrap" fxLayoutGap="5px" >
+                <div fxFlex="25%"  style="font-size: 12px;opacity:0.7">
+                  Holding Company
+                
+                  </div>
+                  <div fxFlex="25%">
+                      {{propertyData.holdingCompanyName}}
+                    </div>
+                  
+                  </div>
+                  <div fxFlex="100%"  fxLayout="column wrap" fxLayoutGap="5px" >
+                      <div fxFlex="25%"  style="font-size: 12px;opacity:0.7">
+                          Group
+                         
+                           </div>
+                  <div fxFlex="25%" >
+                    {{propertyData.groupName}}
+                    </div>
+                  
+                </div>
+      </div>
+      <div class="content-0">
+        <div fxFlex="100%"  fxLayout="row wrap" fxLayoutGap="15px" class="fx_border_bottom" >
+            <div fxFlex="80%" fxFlex.xs="75%" fxFlex.sm="100%" class="fx_subgroup_head">
+                Property {{propertyData.propertyIndex+1}}            
+              </div>
+              <div fxFlex="18%" fxFlex.xs="20%" fxLayoutAlign="end" >
+                  
+                <i  class="fas fa-angle-down themecolor iconSize moreicon"></i>
+                
+               
+            </div>
+              
+            </div>
+      </div>
+      <div class="content">
+        
+       
+      <div fxFlex="100%"  fxLayout="row wrap" fxLayoutGap="15px">
+          <div fxFlex="24%" fxFlex.xs="100%" fxLayout="row wrap">
+              <div fxFlex="100%" class="labeltext">
+                  Code
+              </div>
+              <div fxFlex="100%">
+              {{propertyObj.code}}
+            </div>
+           
+            </div>
+            <div fxFlex="24%" fxFlex.xs="100%" fxLayout="row wrap">
+                <div fxFlex="100%" class="labeltext">
+                    Name
+                </div>
+                <div fxFlex="100%">
+                    {{propertyObj.name}}
+              </div>
+             
+              </div>
+              <div fxFlex="48%" fxFlex.xs="100%" fxLayout="row wrap">
+                <div fxFlex="100%" class="labeltext">
+                    Address
+                </div>
+                <div fxFlex="100%">
+                    {{propertyObj.address}}
+              </div>
+             
+              </div>
+          </div>
+      </div>
+      <div class="content">
+        
+       
+        <div fxFlex="100%"  fxLayout="row wrap" fxLayoutGap="15px">
+            <div fxFlex="24%" fxFlex.xs="100%" fxLayout="row wrap">
+                <div fxFlex="100%" class="labeltext">
+                    Country
+                </div>
+                <div fxFlex="100%">
+                    {{propertyObj.countryName}}
+              </div>
+             
+              </div>
+              <div fxFlex="24%" fxFlex.xs="100%" fxLayout="row wrap">
+                  <div fxFlex="100%" class="labeltext">
+                      State
+                  </div>
+                  <div fxFlex="100%">
+                    {{propertyObj.stateName}}
+                </div>
+               
+                </div>
+                <div fxFlex="24%" fxFlex.xs="100%" fxLayout="row wrap">
+                  <div fxFlex="100%" class="labeltext">
+                      City
+                  </div>
+                  <div fxFlex="100%">
+                    {{propertyObj.cityName}}
+                </div>
+               
+                </div>
+                <div fxFlex="22%" fxFlex.xs="100%" fxLayout="row wrap">
+                    <div fxFlex="100%" class="labeltext">
+                        Piz/Zip
+                    </div>
+                    <div fxFlex="100%">
+                        {{propertyObj.zipCode}}
+                  </div>
+                 
+                  </div>
+            </div>
+        </div>
+        <div class="content">
+        
+       
+            <div fxFlex="100%"  fxLayout="row wrap" fxLayoutGap="15px">
+                <div fxFlex="24%" fxFlex.xs="100%" fxLayout="row wrap">
+                    <div fxFlex="100%" class="labeltext">
+                        Phone Number
+                    </div>
+                    <div fxFlex="100%">
+                        {{propertyObj.phoneNumber}}
+                  </div>
+                 
+                  </div>
+                  <div fxFlex="24%" fxFlex.xs="100%" fxLayout="row wrap">
+                    <div fxFlex="100%" class="labeltext">
+                        Hotel Type
+                    </div>
+                    <div fxFlex="100%">
+                        {{propertyObj.hotelTypeName}}
+                  </div>
+                 
+                  </div>
+                  <div fxFlex="24%" fxFlex.xs="100%" fxLayout="row wrap">
+                    <div fxFlex="50%" fxFlex.xs="100%" fxLayout="row wrap">
+                        <div fxFlex="100%" class="labeltext">
+                            Check-in Time
+                        </div>
+                        <div fxFlex="100%">
+                            <div fxFlex="20%"><i class="fas fa-clock"></i></div>
+                            <div fxFlex="80%">
+                            {{propertyObj.checkInTime}}
+                            </div>
+                      </div>
+                     
+                      </div>
+                      <div fxFlex="50%" fxFlex.xs="100%" fxLayout="row wrap">
+                        <div fxFlex="100%" class="labeltext">
+                           Check-Out Time
+                        </div>
+                        <div fxFlex="100%">
+                            <div fxFlex="20%"><i class="fas fa-clock"></i></div>
+                            <div fxFlex="80%">
+                            {{propertyObj.checkOutTime}}
+                            </div>
+                      </div>
+                     
+                      </div>
+                 
+                  </div>
+                  <div fxFlex="22%" fxFlex.xs="100%" fxLayout="row wrap">
+                    <div fxFlex="100%" class="labeltext">
+                        Website
+                    </div>
+                    <div fxFlex="100%">
+                        {{propertyObj.website}}
+                  </div>
+                 
+                  </div>
+                 
+                </div>
+            </div>
+            <div class="content">
+            <div fxFlex="100%"  fxLayout="row wrap" fxLayoutGap="15px">
+                <div fxFlex="24%" fxFlex.xs="100%" fxLayout="row wrap">
+                    <div fxFlex="100%" class="labeltext">
+                        WeekDays
+                    </div>
+                    <div fxFlex="100%">
+                        <ng-container *ngFor="let day of propertyObj.weekDays; let ix=index" >
+                            <ng-container *ngIf="ix==0">
+                                {{day.dayName}}
+                            </ng-container>
+                            <ng-container *ngIf="ix!=0">
+                                , {{day.dayName}}
+                            </ng-container>
+                            </ng-container>
+                        
+                  </div>
+                 
+                  </div>
+                  <div fxFlex="24%" fxFlex.xs="100%" fxLayout="row wrap">
+                      <div fxFlex="100%" class="labeltext">
+                          WeekEnds
+                      </div>
+                      <div fxFlex="100%">
+                        <ng-container *ngFor="let day of propertyObj.weekend; let ix=index" >
+                            <ng-container *ngIf="ix==0">
+                                {{day.dayName}}
+                            </ng-container>
+                            <ng-container *ngIf="ix!=0">
+                                , {{day.dayName}}
+                            </ng-container>
+                            </ng-container>
+                    </div>
+                   
+                    </div>
+                    <div fxFlex="24%" fxFlex.xs="100%" fxLayout="row wrap">
+                      <div fxFlex="100%" class="labeltext">
+                          Currency
+                      </div>
+                      <div fxFlex="100%">
+                        {{propertyObj.currencyName}}
+                    </div>
+                   
+                    </div>
+                    <div fxFlex="22%" fxFlex.xs="100%" fxLayout="row wrap">
+                        <div fxFlex="100%" class="labeltext">
+                           Other Currency
+                        </div>
+                        <div fxFlex="100%">
+                            <ng-container *ngFor="let currency of propertyObj.otherCurrencies; let ix=index" >
+                                <ng-container *ngIf="ix==0">
+                                    {{currency.currentName}}
+                                </ng-container>
+                                <ng-container *ngIf="ix!=0">
+                                    , {{currency.currentName}}
+                                </ng-container>
+                                </ng-container>
+                      </div>
+                     
+                      </div>
+                </div>
+            </div>
+            <div class="content">
+                <div fxFlex="100%"  fxLayout="row wrap" fxLayoutGap="15px">
+                    
+                        <!-- <div fxFlex="100%" class="labeltext">
+                            Property Network IP
+                        </div> -->
+                        <div fxFlex="100%">
+                            <mat-form-field class="network-ip-chip-list " floatLabel="always">
+                                <mat-label> Property Network IP</mat-label>
+                                <mat-chip-list #chipList aria-label="IP selection">
+                                  <mat-chip *ngFor="let netWorkIP of propertyObj.networkIPs" [selectable]="false"
+                                           [removable]="true" >
+                                    {{netWorkIP.ipAddress}}
+                                    <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                                  </mat-chip>
+                                  
+                                </mat-chip-list>
+                              </mat-form-field>
+                            
+                      </div>
+                     
+                     
+                   
+                      
+                   
+                    </div>
+                </div>
+                <div class="content">
+                    <div fxFlex="100%"  fxLayout="row wrap" fxLayoutGap="15px">
+                        
+                            <!-- <div fxFlex="100%" class="labeltext">
+                                Property Network IP
+                            </div> -->
+                            <div fxFlex="100%">
+                                <mat-form-field class="network-ip-chip-list" floatLabel="always">
+                                    <mat-label>  Network Mac ID</mat-label>
+                                    <mat-chip-list #chipList aria-label="IP selection">
+                                      <mat-chip *ngFor="let macAddress of propertyObj.macAddresses" [selectable]="false"
+                                               [removable]="true" >
+                                        {{macAddress.macAddress}}
+                                        <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                                      </mat-chip>
+                                      
+                                    </mat-chip-list>
+                                  </mat-form-field>
+                                
+                          </div>
+                         
+                         
+                       
+                          
+                       
+                        </div>
+                    </div>
+                    <div class="content">
+                        <div fxFlex="100%"  fxLayout="row wrap" fxLayoutGap="15px" class="fx_starRating">
+                            
+                                <div fxFlex="100%" class="labeltext">
+                                    Ratings
+                                </div>
+                                <div fxFlex="100%">
+                                    <mat-star-rating [rating]="propertyObj.starRating"  [starCount]="starCount" [color]="starColor" ></mat-star-rating>
+
+                                  
+                                    
+                              </div>
+                             
+                             
+                           
+                              
+                           
+                            </div>
+                        </div>
+      </div>
+      </mat-dialog-content>

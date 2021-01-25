@@ -1,1 +1,371 @@
-<p>edit-property works!</p>
+
+
+
+<form [formGroup]="formGroup" novalidate (ngSubmit)="submitForm()">
+    <h2 mat-dialog-title> <div fxFlex="100%" fxLayout="row wrap" class="headercontainer" fxLayout.lt-sm="column">
+        <div fxFlex="70%" fxFlex.xs="100%"><i class="fas fa-arrow-left themecolor titlearrowicon"   (click)="close()" style="font-size: 24px;"></i> View Poperty</div>
+        <div fxFlex="30%" fxFlex.xs="100%" class="headerAction">
+            <div fxFlex="33%"  fxLayout="row wrap" class="cancelcontainer">
+                <div fxFlex="100%">
+                    <i class="fas fa-times themecolor cancelicon" (click)="close()" ></i>
+                </div>
+                <div fxFlex="100%" class="headercanceltext" (click)="close()">
+                    Cancel
+                </div>
+             
+            </div>
+            <div fxFlex="33%"  fxLayout="row wrap">
+                <div fxFlex="100%">
+                   <i class="far fa-check-circle themecolor saveicon" (click)="submitForm()"></i>
+                </div>
+                <div fxFlex="100%" class="headersavetext" (click)="submitForm()">
+                   Save
+                </div>
+              
+            </div>
+            <div fxFlex="33%"  fxLayout="row wrap" class="disablecontainer">
+                <div fxFlex="100%">
+                    <i class="far fa-trash-alt themecolor deleteicon"></i>
+                </div>
+                <div fxFlex="100%" class="e_headerdeletetext">
+                    Delete
+                </div>
+              
+            </div>
+            
+           </div>
+            </div>
+        </h2>
+    <mat-dialog-content  class="mat-typography">
+      <div>
+        <div class="content" style="margin-bottom: 20px;" >
+          <div fxFlex="100%"  fxLayout="column wrap" fxLayoutGap="15px" >
+              <div fxFlex="25%"  style="font-size: 12px;opacity:0.7">
+                Holding Company
+              
+                </div>
+                <div fxFlex="25%">
+                    {{propertyData.holdingCompanyName}}
+                  </div>
+                
+                </div>
+                <div fxFlex="100%"  fxLayout="column wrap" fxLayoutGap="15px" >
+                    <div fxFlex="25%"  style="font-size: 12px;opacity:0.7">
+                        Group
+                       
+                         </div>
+                <div fxFlex="25%" >
+                  {{propertyData.groupName}}
+                  </div>
+                
+              </div>
+    </div>
+     
+        
+          
+          <div class="content">
+            <div fxFlex="100%"  fxLayout="row wrap" fxLayoutGap="15px" class="fx_border_bottom" >
+                <div fxFlex="80%" fxFlex.xs="75%" fxFlex.sm="100%" class="fx_subgroup_head">
+                    Property  {{propertyData.propertyIndex+1}}            
+                  </div>
+                  <div fxFlex="18%" fxFlex.xs="20%" fxLayoutAlign="end" >
+                      
+                    <i   class="fas fa-angle-down themecolor iconSize moreicon"></i>
+                   
+                   
+                </div>
+                  
+                </div>
+          </div>
+
+       
+          <div class="content-0">
+          
+         
+        <div fxFlex="100%"  fxLayout="row wrap" fxLayoutGap="15px">
+            <div fxFlex="24%" fxFlex.xs="100%" fxFlex.sm="50%">
+                <mat-form-field [style.width.%]="100" floatLabel="always"> 
+                    <mat-label>Code</mat-label>
+                    <input matInput  placeholder="Code" formControlName="propertyCode">
+                    <mat-error
+                    *ngIf="formGroup.get('propertyCode').hasError('required')">
+                    Code is <strong>required</strong>
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <div fxFlex="24%" fxFlex.xs="100%" fxFlex.sm="50%">
+                <mat-form-field [style.width.%]="100" floatLabel="always"> 
+                    <mat-label>Name</mat-label>
+                    <input matInput #input placeholder="Name" formControlName="propertyName">
+                    <mat-error
+                    *ngIf="formGroup.get('propertyName').hasError('required')">
+                    Property Name is <strong>required</strong>
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <div fxFlex="48%" fxFlex.xs="100%" fxFlex.sm="50%">
+                <mat-form-field [style.width.%]="100" floatLabel="always"> 
+                    <mat-label>Address</mat-label>
+                    <input matInput #input placeholder="Address" formControlName="propertyAddress">
+                    <mat-error
+                    *ngIf="formGroup.get('propertyAddress').hasError('required')">
+                    Address is <strong>required</strong>
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+        </div>
+        <div class="content">
+            <div fxFlex="100%"  fxLayout="row wrap" fxLayoutGap="15px" >
+                <div fxFlex="24%" fxFlex.xs="100%" fxFlex.sm="50%">
+                  
+                    <mat-form-field  [style.width.%]="100" floatLabel="always">
+                        <mat-label>Country</mat-label>
+                        <mat-select [(ngModel)]="DataObj.propertyCountry" (selectionChange)="getStateList($event.value,false)" formControlName="propertyCountry">
+                          <mat-option  [value]="0" selected="true">Select Country</mat-option>
+                          <mat-option *ngFor="let country of DataObj.countryList" [value]="country.countryID">{{country.countryName}}</mat-option>
+                        </mat-select>
+                        <mat-error
+                        *ngIf="formGroup.get('propertyCountry').hasError('min')">
+                        Country is <strong>required</strong>
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                  <div fxFlex="24%" fxFlex.xs="100%" fxFlex.sm="50%">
+                    <mat-form-field [style.width.%]="100" floatLabel="always"> 
+                        <mat-label>State</mat-label>
+                        <mat-select [(ngModel)]="DataObj.propertyState"   (selectionChange)="getCityList($event.value,false)" formControlName="propertyState">
+                          <mat-option  [value]="0">Select State</mat-option>
+                          <mat-option *ngFor="let state of DataObj.stateList" [value]="state.stateID">{{state.stateName}}</mat-option>
+                        </mat-select>
+                        <mat-error
+                        *ngIf="formGroup.get('propertyState').hasError('min')">
+                        State is <strong>required</strong>
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                  <div fxFlex="24%" fxFlex.xs="100%" fxFlex.sm="50%">
+                    <mat-form-field [style.width.%]="100" floatLabel="always"> 
+                        <mat-label>City</mat-label>
+                        <mat-select [(ngModel)]="DataObj.propertyCity" formControlName="propertyCity">
+                          <mat-option [value]="0">Select City</mat-option>
+                          <mat-option *ngFor="let city of DataObj.cityList" [value]="city.cityId">{{city.name}}</mat-option>
+                        </mat-select>
+                        <mat-error
+                        *ngIf="formGroup.get('propertyCity').hasError('min')">
+                        City is <strong>required</strong>
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                  <div fxFlex="22%" fxFlex.xs="100%" fxFlex.sm="50%">
+                    <mat-form-field [style.width.%]="100" floatLabel="always"> 
+                        <mat-label>Pin/Zip</mat-label>
+                        <input matInput #input placeholder="Pin/Zip" formControlName="propertyPinZip">
+                        <mat-error
+                        *ngIf="formGroup.get('propertyPinZip').hasError('required')">
+                        PinZip is <strong>required</strong>
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+    </div>
+    <div class="content">
+        <div fxFlex="100%"  fxLayout="row wrap" fxLayoutGap="15px">
+            
+              <div fxFlex="24%" fxFlex.xs="100%" fxFlex.sm="50%">
+                <mat-form-field [style.width.%]="100" floatLabel="always"> 
+                    <mat-label>Phone Number</mat-label>
+                    <input matInput #input placeholder="Phone Number" formControlName="propertyPhone">
+                    <mat-error
+                    *ngIf="formGroup.get('propertyPhone').hasError('required')">
+                    Phone is <strong>required</strong>
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <div fxFlex="24%" fxFlex.xs="100%" fxFlex.sm="50%">
+                <mat-form-field [style.width.%]="100" floatLabel="always"> 
+                    <mat-label>Hotel Type</mat-label>
+                    <mat-select [(ngModel)]="DataObj.propertyHotelType" formControlName="propertyHotelType">
+                      <mat-option [value]="0">Select Hotel Type</mat-option>
+                      <mat-option *ngFor="let hotelType of DataObj.hotelTypeList" [value]="hotelType.hotelTypeID">{{hotelType.name}}</mat-option>
+                    </mat-select>
+                    <mat-error
+                    *ngIf="formGroup.get('propertyHotelType').hasError('min')">
+                    HotelType is <strong>required</strong>
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <div fxFlex="24%" fxFlex.xs="100%" fxFlex.sm="50%" fxLayout="row wrap">
+          
+                 
+                    <div fxFlex="50%" fxFlex.xs="100%" fxFlex.sm="50%">
+                      <mat-form-field [style.width.%]="100" floatLabel="always"> 
+                        <mat-label>Check in Time</mat-label>
+                        <div fxFlex="20%"><i class="fas fa-clock"></i></div>
+                        <div fxFlex="80%">
+                          <input matInput #input placeholder="Check in" [ngxTimepicker]="inpicker" formControlName="propertyCheckIn">
+                     
+                          <ngx-material-timepicker #inpicker></ngx-material-timepicker>
+                       
+                        </div>
+                        <mat-error
+                        *ngIf="formGroup.get('propertyCheckIn').hasError('required')">
+                        CheckIn  is <strong>required</strong>
+                      </mat-error>
+                        
+                    </mat-form-field>
+                    </div>
+                    <div fxFlex="50%" fxFlex.xs="100%" fxFlex.sm="50%">
+                      <mat-form-field [style.width.%]="100" floatLabel="always"> 
+                        <mat-label>Check Out Time</mat-label>
+                        <div fxFlex="20%"><i class="fas fa-clock"></i></div>
+                        <div fxFlex="80%">
+                          <input matInput #input placeholder="Check out"  [ngxTimepicker]="outpicker" formControlName="propertyCheckOut">
+                         
+                          <ngx-material-timepicker #outpicker></ngx-material-timepicker>
+                         
+                        </div>
+                        <mat-error
+                          *ngIf="formGroup.get('propertyCheckOut').hasError('required')">
+                          CheckOut is <strong>required</strong>
+                        </mat-error>
+                        
+                    </mat-form-field>
+                    </div>   
+              </div>
+              <div fxFlex="22%" fxFlex.xs="100%" fxFlex.sm="50%">
+                <mat-form-field [style.width.%]="100" floatLabel="always"> 
+                    <mat-label>Website</mat-label>
+                    <input matInput #input placeholder="Website" formControlName="propertyWebsite">
+                    <mat-error
+                    *ngIf="formGroup.get('propertyWebsite').hasError('required')">
+                    Website is <strong>required</strong>
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+    </div>
+    <div class="content">
+      <div fxFlex="100%"  fxLayout="row wrap" fxLayoutGap="15px" >
+          <div fxFlex="24%" fxFlex.xs="100%" fxFlex.sm="50%">
+              <mat-form-field  [style.width.%]="100" floatLabel="always">
+                  <mat-label>WeekDays</mat-label>
+                  <mat-select  placeholder="Select Weekdays" formControlName="propertyWeekDays" multiple>
+                   
+                    <mat-option *ngFor="let day of DataObj.dayList" [value]="day.dayID">{{day.name}}</mat-option>
+                  </mat-select>
+                  <mat-error
+                  *ngIf="formGroup.get('propertyWeekDays').hasError('required')">
+                  WeekDay is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            
+            </div>
+            <div fxFlex="24%" fxFlex.xs="100%" fxFlex.sm="50%">
+              <mat-form-field [style.width.%]="100" floatLabel="always"> 
+                  <mat-label>Weekends</mat-label>
+                  <mat-select  placeholder="Select WeekEnds" formControlName="propertyWeekends" multiple>
+                    
+                    <mat-option *ngFor="let day of DataObj.dayList" [value]="day.dayID">{{day.name}}</mat-option>
+                  </mat-select>
+                  <mat-error
+                  *ngIf="formGroup.get('propertyWeekends').hasError('required')">
+                  WeekEnd is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div fxFlex="24%" fxFlex.xs="100%" fxFlex.sm="50%">
+              <mat-form-field [style.width.%]="100" floatLabel="always"> 
+                  <mat-label>Currency</mat-label>
+                  <mat-select [(ngModel)]="DataObj.propertyCurrency" formControlName="propertyCurrency">
+                    <mat-option [value]="0">Select Currency</mat-option>
+                    <mat-option *ngFor="let currency of DataObj.currencyList" [value]="currency.currencyID">{{currency.currencyName}}</mat-option>
+                  </mat-select>
+                  <mat-error
+                  *ngIf="formGroup.get('propertyCurrency').hasError('min')">
+                  Currency is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div fxFlex="22%" fxFlex.xs="100%" fxFlex.sm="50%">
+              <mat-form-field [style.width.%]="100" floatLabel="always"> 
+                <mat-label>Other Currency</mat-label>
+                <mat-select placeholder="Select Othercurrency" formControlName="propertyOtherCurrency" multiple>
+                  
+                  <mat-option *ngFor="let currency of DataObj.currencyList" [value]="currency.currencyID">{{currency.currencyName}}</mat-option>
+                </mat-select>
+                <mat-error
+                *ngIf="formGroup.get('propertyOtherCurrency').hasError('required')">
+               Other Currency is <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+            </div>
+          </div>
+    </div>
+    <div class="content">
+      <div fxFlex="100%"  fxLayout="row wrap" fxLayoutGap="15px">
+        <mat-form-field class="network-ip-chip-list" floatLabel="always">
+          <mat-label>Property Network IP</mat-label>
+          <mat-chip-list #chipList aria-label="IP selection">
+            <mat-chip *ngFor="let netWorkIP of DataObj.networkIPs" [selectable]="selectable"
+                     [removable]="removable" (removed)="removeNetworkIP(netWorkIP)" >
+              {{netWorkIP.name}}
+              <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+            </mat-chip>
+            <input formControlName="propertyNetworkIP" placeholder="Network IP"
+                   [matChipInputFor]="chipList"
+                   [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                   [matChipInputAddOnBlur]="addOnBlur"
+                   (matChipInputTokenEnd)="addNetworkIP($event)">
+          </mat-chip-list>
+        </mat-form-field>
+        </div>
+        </div>
+        <div class="content">
+          <div fxFlex="100%"  fxLayout="row wrap" fxLayoutGap="15px">
+         
+            <mat-form-field class="network-ip-chip-list" floatLabel="always">
+              <mat-label>Network Mac ID</mat-label>
+              <mat-chip-list #macIdList aria-label="IP selection">
+                <mat-chip *ngFor="let macID of DataObj.macIDs" [selectable]="selectable"
+                         [removable]="removable" (removed)="removeMacID(macID)">
+                  {{macID.name}}
+                  <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                </mat-chip>
+                <input formControlName="propertyMacAddress" placeholder="Mac ID"
+                       [matChipInputFor]="macIdList"
+                       [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                       [matChipInputAddOnBlur]="addOnBlur"
+                       (matChipInputTokenEnd)="addMacID($event)">
+              </mat-chip-list>
+            
+            </mat-form-field>
+            </div>
+            </div>
+            <div class="content">
+            
+              <div fxFlex="100%"  fxLayout="row wrap" fxLayoutGap="15px" class="fx_starRating">
+                <div fxFlex="100%">
+                  Ratings
+                </div>
+                <div fxFlex="100%" fxLayout="row wrap" fxLayout.lt-sm="column">
+              <div fxFlex="40%" fxFlex.sm="100%" fxFlex.xs="100%">
+                <mat-star-rating [rating]="DataObj.rating"  [starCount]="starCount" [color]="starColor" (ratingUpdated)="onRatingChanged($event)"></mat-star-rating>
+    
+                
+              </div>
+           
+              </div>
+    
+             
+                </div>
+                </div>
+            
+     
+
+   
+    </div>
+    </mat-dialog-content>
+
+    </form>
+    

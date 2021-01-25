@@ -16,6 +16,7 @@ import { ViewSubGroupComponent } from 'src/app/pages/group/view-sub-group/view-s
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
+import { ViewPropertyComponent } from './view-property/view-property.component';
 
 export interface HoldingCompanyOption {
   holdingCompanyID: string;
@@ -419,6 +420,41 @@ console.log(this.companyGroupList);
         console.log(data);
       
       });
+  }
+  viewProperty(property:any,propertyIndex:string): void {
+
+    if(this.holdingCompanyID!="" && this.holdingCompanyID!=null){
+      const dialogRef = this.dialog.open(ViewPropertyComponent ,{
+        panelClass: 'viewmore-dialog-container',
+        disableClose: true ,
+        //minHeight: '800px',    
+        data: {groupName: this.groupName, groupID:this.groupID,
+        holdingCompanyName:this.holdingCompanyName,holdingCompanyID:this.holdingCompanyID,propertyIndex:propertyIndex,
+        propertyName:property.name,propertyID:property.propertyID }
+      });
+  
+      dialogRef.afterClosed().subscribe(result => {
+        this.getCompanyGroupList(this.holdingCompanyID);
+        this.getPropertyList(this.groupID);
+        if(result.data=="D"){
+          
+           //this.holdingCompanyID='';
+           //this.holdingCompanyName='';
+           
+           this.getHoldingCompanyList();
+           //this.SelectedHoldingCompany={};
+        }
+    
+      
+        console.log('The dialog was closed');
+        // this.holdingCompanyName= result.data.holdingCompanyName;
+        // this.holdingCompanyID=result.data.holdingCompanyID;
+      });
+    }else{
+      this.toast.error("please select holding company");
+     
+    }
+   
   }
 
 }

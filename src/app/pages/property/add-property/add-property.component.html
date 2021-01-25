@@ -5,7 +5,7 @@
 <h2 mat-dialog-title>Create Property</h2>
 <mat-dialog-content  class="mat-typography">
   <div>
-    <div class="content" style="margin-bottom: 20px;" >
+    <div class="content">
       <div fxFlex="100%"  fxLayout="column wrap" fxLayoutGap="15px" >
           <div fxFlex="25%"  style="font-size: 12px;opacity:0.7">
             Holding Company
@@ -224,12 +224,12 @@
       <div fxFlex="24%" fxFlex.xs="100%" fxFlex.sm="50%">
           <mat-form-field  [style.width.%]="100" floatLabel="always">
               <mat-label>WeekDays</mat-label>
-              <mat-select [(ngModel)]="DataArray[ix].propertyWeekDays" formControlName="propertyWeekDays" multiple>
-                <mat-option [value]="0">Select City</mat-option>
+              <mat-select placeholder="Select Weekday" formControlName="propertyWeekDays" multiple>
+             
                 <mat-option *ngFor="let day of DataArray[ix].dayList" [value]="day.dayID">{{day.name}}</mat-option>
               </mat-select>
               <mat-error
-              *ngIf="property['controls'].propertyWeekDays.hasError('min')">
+              *ngIf="property['controls'].propertyWeekDays.hasError('required')">
               WeekDay is <strong>required</strong>
             </mat-error>
           </mat-form-field>
@@ -237,12 +237,12 @@
         <div fxFlex="24%" fxFlex.xs="100%" fxFlex.sm="50%">
           <mat-form-field [style.width.%]="100" floatLabel="always"> 
               <mat-label>Weekends</mat-label>
-              <mat-select  [(ngModel)]="DataArray[ix].propertyWeekends" formControlName="propertyWeekends" multiple>
-                <mat-option [value]="0">Select Weekend</mat-option>
+              <mat-select   placeholder="Select WeekEnd" formControlName="propertyWeekends" multiple>
+              
                 <mat-option *ngFor="let day of DataArray[ix].dayList" [value]="day.dayID">{{day.name}}</mat-option>
               </mat-select>
               <mat-error
-              *ngIf="property['controls'].propertyWeekends.hasError('min')">
+              *ngIf="property['controls'].propertyWeekends.hasError('required')">
               WeekEnd is <strong>required</strong>
             </mat-error>
           </mat-form-field>
@@ -250,7 +250,7 @@
         <div fxFlex="24%" fxFlex.xs="100%" fxFlex.sm="50%">
           <mat-form-field [style.width.%]="100" floatLabel="always"> 
               <mat-label>Currency</mat-label>
-              <mat-select [(ngModel)]="DataArray[ix].propertyCurrency" formControlName="propertyCurrency">
+              <mat-select [(ngModel)]="DataArray[ix].propertyCurrency"  formControlName="propertyCurrency">
                 <mat-option [value]="0">Select Currency</mat-option>
                 <mat-option *ngFor="let currency of DataArray[ix].currencyList" [value]="currency.currencyID">{{currency.currencyName}}</mat-option>
               </mat-select>
@@ -263,12 +263,12 @@
         <div fxFlex="22%" fxFlex.xs="100%" fxFlex.sm="50%">
           <mat-form-field [style.width.%]="100" floatLabel="always"> 
             <mat-label>Other Currency</mat-label>
-            <mat-select [(ngModel)]="DataArray[ix].propertyOtherCurrency" formControlName="propertyOtherCurrency" multiple>
-              <mat-option [value]="0">Select Other Currency</mat-option>
+            <mat-select  formControlName="propertyOtherCurrency" placeholder="Select Other Currency" multiple>
+              
               <mat-option *ngFor="let currency of DataArray[ix].currencyList" [value]="currency.currencyID">{{currency.currencyName}}</mat-option>
             </mat-select>
             <mat-error
-            *ngIf="property['controls'].propertyOtherCurrency.hasError('min')">
+            *ngIf="property['controls'].propertyOtherCurrency.hasError('required')">
            Other Currency is <strong>required</strong>
           </mat-error>
         </mat-form-field>
@@ -291,6 +291,7 @@
                [matChipInputAddOnBlur]="addOnBlur"
                (matChipInputTokenEnd)="addNetworkIP($event,ix)">
       </mat-chip-list>
+      <mat-error>Atleast 1 ip need to be added</mat-error>
     </mat-form-field>
     </div>
     </div>
