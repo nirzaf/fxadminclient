@@ -252,7 +252,7 @@
               <mat-label>Currency</mat-label>
               <mat-select [(ngModel)]="DataArray[ix].propertyCurrency"  formControlName="propertyCurrency">
                 <mat-option [value]="0">Select Currency</mat-option>
-                <mat-option *ngFor="let currency of DataArray[ix].currencyList" [value]="currency.currencyID">{{currency.currencyName}}</mat-option>
+                <mat-option *ngFor="let currency of DataArray[ix].currencyList" [value]="currency.currencyID">{{currency.currencyCode}}</mat-option>
               </mat-select>
               <mat-error
               *ngIf="property['controls'].propertyCurrency.hasError('min')">
@@ -265,7 +265,7 @@
             <mat-label>Other Currency</mat-label>
             <mat-select  formControlName="propertyOtherCurrency" placeholder="Select Other Currency" multiple>
               
-              <mat-option *ngFor="let currency of DataArray[ix].currencyList" [value]="currency.currencyID">{{currency.currencyName}}</mat-option>
+              <mat-option *ngFor="let currency of DataArray[ix].currencyList" [value]="currency.currencyID">{{currency.currencyCode}}</mat-option>
             </mat-select>
             <mat-error
             *ngIf="property['controls'].propertyOtherCurrency.hasError('required')">

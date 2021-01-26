@@ -107,6 +107,7 @@ submitForm():void{
     .subscribe(data=>{
       if(data.succeeded){
         this.cityList=data.data;
+        this.addCompanyForm.get('holdingCompanyCity').setValue(0);
        
       }
       else{
@@ -142,6 +143,7 @@ submitForm():void{
     .subscribe(data=>{
       if(data.succeeded){
         this.stateList=data.data;
+        this.addCompanyForm.get('holdingCompanyState').setValue(0);
       }
       else{
         this.toast.error(data.errors);

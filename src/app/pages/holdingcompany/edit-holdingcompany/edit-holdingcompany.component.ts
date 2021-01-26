@@ -46,12 +46,14 @@ public countryList: any = [];
    
     this.dialogRef.close( { event: 'close', data: null });
   }
-  getCityList(stateID){
+  getCityList(stateID:string,isInitial:boolean){
     this.webService.commonMethod('city/get/'+stateID,null,'GET',null)
     .subscribe(data=>{
       if(data.succeeded){
         this.cityList=data.data;
-       
+        if(!isInitial){
+          this.editCompanyForm.get('holdingCompanyCity').setValue(0);
+        }
       }
       else{
         this.toast.error(data.errors);
@@ -80,12 +82,15 @@ public countryList: any = [];
       //this.isProgressing = false;
     });
   }
-  getStateList(countryID){
+  getStateList(countryID:string,isInitial:boolean){
     
     this.webService.commonMethod('state/get/'+countryID,null,'GET',null)
     .subscribe(data=>{
       if(data.succeeded){
         this.stateList=data.data;
+        if(!isInitial){
+          this.editCompanyForm.get('holdingCompanyState').setValue(0);
+        }
       }
       else{
         this.toast.error(data.errors);
@@ -110,8 +115,8 @@ public countryList: any = [];
         this.editCompanyForm.get('holdingCompanyState').setValue(data.data.stateId);
     
         this.editCompanyForm.get('holdingCompanyCity').setValue(data.data.cityId);
-        this.getStateList(data.data.countryId);
-        this.getCityList(data.data.stateId);
+        this.getStateList(data.data.countryId,true);
+        this.getCityList(data.data.stateId,true);
         this.editCompanyForm.get('holdingCompanyPinZip').setValue(data.data.zipCode);
         this.editCompanyForm.get('holdingCompanyPhone').setValue(data.data.phoneNumber);
         //this.holdingCompanyObj=data.data;

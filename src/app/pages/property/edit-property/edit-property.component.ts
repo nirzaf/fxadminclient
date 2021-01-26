@@ -355,6 +355,8 @@ export class EditPropertyComponent implements OnInit {
           "PropertyWeekends":weekEndArr,
           "MacAddresses":macIDArr,
           "IPAddresses":netWorkIPArr,
+          "CheckInTime":this.convertTime(this.formGroup.controls["propertyCheckIn"].value),
+          "CheckOutTime":this.convertTime(this.formGroup.controls["propertyCheckOut"].value),
           "ModifiedBy":"Sirojan"
         }
         //properties.push(groupData);
@@ -409,8 +411,8 @@ export class EditPropertyComponent implements OnInit {
         this.formGroup.get('propertyPinZip').setValue(data.data.zipCode);
         this.formGroup.get('propertyPhone').setValue(data.data.phoneNumber);
         this.formGroup.get('propertyHotelType').setValue(data.data.hotelTypeID);
-        this.formGroup.get('propertyCheckIn').setValue(data.data.checkInTime);
-        this.formGroup.get('propertyCheckOut').setValue(data.data.checkOutTime);
+        this.formGroup.get('propertyCheckIn').setValue(this.tConvert(data.data.checkInTime));
+        this.formGroup.get('propertyCheckOut').setValue(this.tConvert(data.data.checkOutTime));
         this.formGroup.get('propertyWebsite').setValue(data.data.website);
         this.DataObj.propertyWeekDays=responseData.weekDays.map(function(a) {   
          
@@ -446,6 +448,45 @@ export class EditPropertyComponent implements OnInit {
   close(): void {
    
     this.dialogRef.close( { event: 'close', data: null });
+  }
+
+  convertTime(time:any): any{
+   if(time){
+    var time = time;
+    var hours = Number(time.match(/^(\d+)/)[1]);
+    var minutes = Number(time.match(/:(\d+)/)[1]);
+    var AMPM = time.match(/\s(.*)$/)[1];
+    if(AMPM == "PM" && hours<12) hours = hours+12;
+    if(AMPM == "AM" && hours==12) hours = hours-12;
+    var sHours = hours.toString();
+    var sMinutes = minutes.toString();
+    if(hours<10) sHours = "0" + sHours;
+    if(minutes<10) sMinutes = "0" + sMinutes;
+
+    return (sHours + ":" + sMinutes);
+   }
+   else{
+     return null;
+   }
+  
+
+  }
+  tConvert(time) {
+    if(time){
+      time = time.toString().match(/^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/) || [time];
+
+      if (time.length > 1) { // If time format correct
+        time = time.slice(1); // Remove full string match value
+        time[5] = +time[0] < 12 ? ' AM' : ' PM'; // Set AM/PM
+        time[0] = +time[0] % 12 || 12; // Adjust hours
+      }
+      return time.join(''); // return adjusted time or original string
+    }
+    else{
+      return null;
+    }
+    // Check correct time format and split into components
+  
   }
 
 }

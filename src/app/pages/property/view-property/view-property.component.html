@@ -53,7 +53,7 @@
       </div>
       <div class="content-0">
         <div fxFlex="100%"  fxLayout="row wrap" fxLayoutGap="15px" class="fx_border_bottom" >
-            <div fxFlex="80%" fxFlex.xs="75%" fxFlex.sm="100%" class="fx_subgroup_head">
+            <div fxFlex="80%" fxFlex.xs="70%" fxFlex.sm="100%" class="fx_subgroup_head">
                 Property {{propertyData.propertyIndex+1}}            
               </div>
               <div fxFlex="18%" fxFlex.xs="20%" fxLayoutAlign="end" >
@@ -241,7 +241,7 @@
                           Currency
                       </div>
                       <div fxFlex="100%">
-                        {{propertyObj.currencyName}}
+                        {{propertyObj.currencyCode}}
                     </div>
                    
                     </div>
@@ -252,10 +252,10 @@
                         <div fxFlex="100%">
                             <ng-container *ngFor="let currency of propertyObj.otherCurrencies; let ix=index" >
                                 <ng-container *ngIf="ix==0">
-                                    {{currency.currentName}}
+                                    {{currency.currencyCode}}
                                 </ng-container>
                                 <ng-container *ngIf="ix!=0">
-                                    , {{currency.currentName}}
+                                    , {{currency.currencyCode}}
                                 </ng-container>
                                 </ng-container>
                       </div>
@@ -264,23 +264,21 @@
                 </div>
             </div>
             <div class="content">
-                <div fxFlex="100%"  fxLayout="row wrap" fxLayoutGap="15px">
+                <div fxFlex="100%"  fxLayout="row wrap" fxLayoutGap="0px" class="view-property-chip">
                     
-                        <!-- <div fxFlex="100%" class="labeltext">
+                        <div fxFlex="100%" class="labeltext">
                             Property Network IP
-                        </div> -->
+                        </div>
                         <div fxFlex="100%">
-                            <mat-form-field class="network-ip-chip-list " floatLabel="always">
-                                <mat-label> Property Network IP</mat-label>
-                                <mat-chip-list #chipList aria-label="IP selection">
-                                  <mat-chip *ngFor="let netWorkIP of propertyObj.networkIPs" [selectable]="false"
-                                           [removable]="true" >
-                                    {{netWorkIP.ipAddress}}
-                                    <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
-                                  </mat-chip>
-                                  
-                                </mat-chip-list>
-                              </mat-form-field>
+                            <mat-chip-list #chipList aria-label="IP selection">
+                                <mat-chip *ngFor="let netWorkIP of propertyObj.networkIPs" [selectable]="false"
+                                         [removable]="true" >
+                                  {{netWorkIP.ipAddress}}
+                                  <mat-icon matChipRemove *ngIf="true">cancel</mat-icon>
+                                </mat-chip>
+                                
+                              </mat-chip-list>
+                          
                             
                       </div>
                      
@@ -291,23 +289,21 @@
                     </div>
                 </div>
                 <div class="content">
-                    <div fxFlex="100%"  fxLayout="row wrap" fxLayoutGap="15px">
+                    <div fxFlex="100%"  fxLayout="row wrap" fxLayoutGap="15px" class="view-property-chip">
                         
-                            <!-- <div fxFlex="100%" class="labeltext">
-                                Property Network IP
-                            </div> -->
+                            <div fxFlex="100%" class="labeltext">
+                               Network Mac ID
+                            </div>
                             <div fxFlex="100%">
-                                <mat-form-field class="network-ip-chip-list" floatLabel="always">
-                                    <mat-label>  Network Mac ID</mat-label>
-                                    <mat-chip-list #chipList aria-label="IP selection">
-                                      <mat-chip *ngFor="let macAddress of propertyObj.macAddresses" [selectable]="false"
-                                               [removable]="true" >
-                                        {{macAddress.macAddress}}
-                                        <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
-                                      </mat-chip>
-                                      
-                                    </mat-chip-list>
-                                  </mat-form-field>
+                                <mat-chip-list #chipList aria-label="IP selection">
+                                    <mat-chip *ngFor="let macAddress of propertyObj.macAddresses" [selectable]="false"
+                                             [removable]="true" >
+                                      {{macAddress.macAddress}}
+                                      <mat-icon matChipRemove *ngIf="true">cancel</mat-icon>
+                                    </mat-chip>
+                                    
+                                  </mat-chip-list>
+                            
                                 
                           </div>
                          
@@ -318,7 +314,7 @@
                         </div>
                     </div>
                     <div class="content">
-                        <div fxFlex="100%"  fxLayout="row wrap" fxLayoutGap="15px" class="fx_starRating">
+                        <div fxFlex="100%"  fxLayout="row wrap" fxLayoutGap="15px" class="fx_starRating fx_disable_focus">
                             
                                 <div fxFlex="100%" class="labeltext">
                                     Ratings

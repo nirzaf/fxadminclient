@@ -1,7 +1,7 @@
 
 
 
-<form [formGroup]="formGroup" novalidate (ngSubmit)="submitForm()">
+<form #editForm="ngForm" [formGroup]="formGroup" novalidate (ngSubmit)="submitForm()">
     <h2 mat-dialog-title> <div fxFlex="100%" fxLayout="row wrap" class="headercontainer" fxLayout.lt-sm="column">
         <div fxFlex="70%" fxFlex.xs="100%"><i class="fas fa-arrow-left themecolor titlearrowicon"   (click)="close()" style="font-size: 24px;"></i> View Poperty</div>
         <div fxFlex="30%" fxFlex.xs="100%" class="headerAction">
@@ -16,9 +16,9 @@
             </div>
             <div fxFlex="33%"  fxLayout="row wrap">
                 <div fxFlex="100%">
-                   <i class="far fa-check-circle themecolor saveicon" (click)="submitForm()"></i>
+                   <i class="far fa-check-circle themecolor saveicon" (click)="editForm.submitted = true; editForm.ngSubmit.emit()"></i>
                 </div>
-                <div fxFlex="100%" class="headersavetext" (click)="submitForm()">
+                <div fxFlex="100%" class="headersavetext"  (click)="editForm.submitted = true; editForm.ngSubmit.emit()">
                    Save
                 </div>
               
@@ -279,7 +279,7 @@
                   <mat-label>Currency</mat-label>
                   <mat-select [(ngModel)]="DataObj.propertyCurrency" formControlName="propertyCurrency">
                     <mat-option [value]="0">Select Currency</mat-option>
-                    <mat-option *ngFor="let currency of DataObj.currencyList" [value]="currency.currencyID">{{currency.currencyName}}</mat-option>
+                    <mat-option *ngFor="let currency of DataObj.currencyList" [value]="currency.currencyID">{{currency.currencyCode}}</mat-option>
                   </mat-select>
                   <mat-error
                   *ngIf="formGroup.get('propertyCurrency').hasError('min')">
@@ -292,7 +292,7 @@
                 <mat-label>Other Currency</mat-label>
                 <mat-select placeholder="Select Othercurrency" formControlName="propertyOtherCurrency" multiple>
                   
-                  <mat-option *ngFor="let currency of DataObj.currencyList" [value]="currency.currencyID">{{currency.currencyName}}</mat-option>
+                  <mat-option *ngFor="let currency of DataObj.currencyList" [value]="currency.currencyID">{{currency.currencyCode}}</mat-option>
                 </mat-select>
                 <mat-error
                 *ngIf="formGroup.get('propertyOtherCurrency').hasError('required')">

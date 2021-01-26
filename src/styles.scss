@@ -1694,5 +1694,13 @@ padding:0px;
 .mat-primary .mat-pseudo-checkbox-checked{
     background:$primary-color ;
 }
-
+.view-property-chip .mat-chip-list-wrapper{
+    margin-top:0px !important
+  }
+  .fx_disable_focus button:focus{
+      border:none !important;
+      background:none !important;
+      outline: none !important;
+  }
+  
  /*Sirojan css */

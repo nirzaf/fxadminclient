@@ -5,7 +5,7 @@ import { ToastService } from 'src/app/shared/services/toast.service';
 import { WebService } from 'src/app/shared/services/web.service';
 import { DeletePropertyComponent } from '../delete-property/delete-property.component';
 import { EditPropertyComponent } from '../edit-property/edit-property.component';
-import { MatChipInputEvent } from '@angular/material/chips';
+
 import { MatIconRegistry } from '@angular/material/icon/icon-registry';
 
 import { FormControl, FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
@@ -29,14 +29,15 @@ export class ViewPropertyComponent implements OnInit {
   starColor: StarRatingColor = StarRatingColor.primary;
   starColorP: StarRatingColor = StarRatingColor.primary;
   starColorW: StarRatingColor = StarRatingColor.warn;
+
   
   propertyData:PropertyData;
   propertyObj={code:'',name:'',cityName:'',address:'',stateName:'',countryName:'',zipCode:'',   
-                    phoneNumber:'',website:'',currencyName:'',hotelTypeName:'',checkInTime:'',checkOutTime:'',otherCurrencies:[],hotelType:'',weekDays:[],weekend:[],
+                    phoneNumber:'',website:'',currencyCode:'',hotelTypeName:'',checkInTime:'',checkOutTime:'',otherCurrencies:[],hotelType:'',weekDays:[],weekend:[],
                     macAddresses:[],starRating:0,networkIPs:[]};
 
   constructor(    public dialogRef: MatDialogRef<ViewPropertyComponent>,
-    @Inject(MAT_DIALOG_DATA) public _propertyData: PropertyData,private webService:WebService,private toast:ToastService,public dialog: MatDialog
+    @Inject(MAT_DIALOG_DATA) public _propertyData: PropertyData, private fb: FormBuilder,private webService:WebService,private toast:ToastService,public dialog: MatDialog
     ) {
       this.propertyData = _propertyData;
       this.getPropertyData(_propertyData.propertyID);

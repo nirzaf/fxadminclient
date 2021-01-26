@@ -32,6 +32,8 @@ export interface GroupData {
   styleUrls: ['./property.component.scss']
 })
 export class PropertyComponent implements OnInit {
+  radioParentGroup:any;
+  radioChildGroup:any;
   companyAutoCompleteControl = new FormControl();
   holdingCompanyOptions: HoldingCompanyOption[] = [{
     holdingCompanyID:'1', holdingCompanyName:"Sarovar Hotels 1"}
@@ -65,13 +67,29 @@ export class PropertyComponent implements OnInit {
     this.gridColumns = this.gridColumns === 3 ? 4 : 3;
   }
 
-  groupChange(evt:any,group:any) {
+  parentGroupChange(evt:any,group:any) {
     var target = evt.target;
     this.groupID=evt.value;
     this.groupName=group.name;
+
     console.log("Radio Change");
     this.propertyData=[];
     this.getPropertyList(this.groupID);
+    this.radioChildGroup='';
+    this.radioParentGroup=group.groupID;
+    console.log(evt);
+  }
+  childGroupChange(evt:any,group:any,parentGroup:any) {
+    var target = evt.target;
+    this.groupID=evt.value;
+   
+
+    console.log("Radio Change");
+    this.propertyData=[];
+    this.getPropertyList(this.groupID);
+    this.radioChildGroup=group.groupID;
+    this.radioParentGroup=parentGroup.groupID;
+    this.groupName=group.name;
     console.log(evt);
   }
   addHoldingCompnay(): void {
@@ -265,34 +283,13 @@ export class PropertyComponent implements OnInit {
   ngOnInit() {
     
     this.breadCrumb = ["Admin", "Hotel Creation"];
-    this.GetPropertyAndGroup();
+    
     this.getHoldingCompanyList();
     this.getAPIlist();
     
   }
  
-  GetPropertyAndGroup() {
-    let serverResponse = {"Response":"Success","Code":"FCS00001","Description":"Property And Group List","Data":[{"propertyGroupID":40531,"propertyGroupCode":40531,"propertyGroupName":"FXFD QA Group","propertyList":[{"propertyID":40529,"pmsCustCode":20007,"propertyName":"FXFD QA1 Property","hotelConnStr":"Server=;Database=;User ID=;Password=;Trusted_Connection=False","pmsVendor":"FX1","crsApplicable":false,"isGSTApplicable":false,"isInterfaceApplicable":false}]}]};
-    for (let a of serverResponse.Data) {
-      this.GroupList.push({
-        "GroupName": a.propertyGroupName,
-        "GroupCode": "" + a.propertyGroupCode,
-        "GroupID": a.propertyGroupID
-      })
-      for (let b of a.propertyList) {
-     
-          this.PropertyList.push({
-            "propertyID": b.propertyID,
-            "pmsCustCode": b.pmsCustCode,
-            "propertyName": b.propertyName,
-            "isGSTApplicable": b.isGSTApplicable,
-            "isInterfaceApplicable": b.isInterfaceApplicable,
-            "pmsVendor": b.pmsVendor
-          })
-        }
-      }    
-    
-  }
+  
 
 
   getAPIlist(){
@@ -327,6 +324,17 @@ getCompanyGroupList(holdingCompanyID){
       
 console.log(this.companyGroupList);
      
+    }else{
+      this.toast.error(data.errors);
+    }
+
+  });
+}
+getPropertyListByCompany(holdingCompanyID){
+  this.webService.commonMethod('property/GetByHoldingCompany/'+holdingCompanyID,null,'GET',null)
+  .subscribe(data=>{
+    if(data.succeeded){
+      this.propertyData=data.data;
     }else{
       this.toast.error(data.errors);
     }
@@ -389,6 +397,7 @@ console.log(this.companyGroupList);
     this.holdingCompanyID=selectedCompany.holdingCompanyID;
     this.holdingCompanyName=selectedCompany.holdingCompanyName;
     this.getCompanyGroupList(selectedCompany.holdingCompanyID);
+    this.getPropertyListByCompany(selectedCompany.holdingCompanyID);
     this.groupID="";
     this.groupName="";
     this.propertyData=[];

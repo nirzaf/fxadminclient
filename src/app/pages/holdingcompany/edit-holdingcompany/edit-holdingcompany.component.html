@@ -81,7 +81,7 @@
                 <div fxFlex="24%" fxFlex.xs="100%" >
                     <mat-form-field  [style.width.%]="100" floatLabel="always">
                         <mat-label>Country</mat-label>
-                        <mat-select [(ngModel)]="country" (selectionChange)="getStateList($event.value)" formControlName="holdingCompanyCountry">
+                        <mat-select [(ngModel)]="country" (selectionChange)="getStateList($event.value,false)" formControlName="holdingCompanyCountry">
                              <mat-option  [value]="0">Selec Country</mat-option>
                           <mat-option *ngFor="let country of countryList" [value]="country.countryID">{{country.countryName}}</mat-option>
                         
@@ -98,7 +98,7 @@
                   <div fxFlex="24%" fxFlex.xs="100%">
                     <mat-form-field [style.width.%]="100" floatLabel="always"> 
                         <mat-label>State</mat-label>
-                        <mat-select [(ngModel)]="state" (selectionChange)="getCityList($event.value)" formControlName="holdingCompanyState">
+                        <mat-select [(ngModel)]="state" (selectionChange)="getCityList($event.value,false)" formControlName="holdingCompanyState">
                           <mat-option  [value]="0">Select State</mat-option>
                             <mat-option *ngFor="let state of stateList" [value]="state.stateID">{{state.stateName}}</mat-option>
                         </mat-select>

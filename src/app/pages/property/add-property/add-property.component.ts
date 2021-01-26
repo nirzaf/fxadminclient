@@ -340,6 +340,7 @@ export class AddPropertyComponent implements OnInit {
         }
         var groupData = {
           "GroupID": parseInt(this.holdingCompanyData.groupID),
+          "HoldingCompanyID": parseInt(this.holdingCompanyData.holdingCompanyID),
           "Name": control.controls["propertyName"].value,
           "Code": control.controls["propertyCode"].value,
           "CityID": control.controls["propertyCity"].value,
@@ -349,6 +350,8 @@ export class AddPropertyComponent implements OnInit {
           "PhoneNumber": control.controls["propertyPhone"].value,
           "Address": control.controls["propertyAddress"].value,
           "CreatedBy": "Sirojan",          
+          "CheckInTime":this.convertTime(control.controls["propertyCheckIn"].value),
+          "CheckOutTime":this.convertTime(control.controls["propertyCheckOut"].value),
           "StarRating":this.DataArray[i].rating,
           "Website": control.controls["propertyWebsite"].value,
           "CurrencyID":control.controls["propertyCurrency"].value,
@@ -381,6 +384,26 @@ export class AddPropertyComponent implements OnInit {
     else {
       this.toast.error("form validation failed");
     }
+
+  }
+  convertTime(time:any): any{
+    if(time){
+      var time = time;
+      var hours = Number(time.match(/^(\d+)/)[1]);
+      var minutes = Number(time.match(/:(\d+)/)[1]);
+      var AMPM = time.match(/\s(.*)$/)[1];
+      if(AMPM == "PM" && hours<12) hours = hours+12;
+      if(AMPM == "AM" && hours==12) hours = hours-12;
+      var sHours = hours.toString();
+      var sMinutes = minutes.toString();
+      if(hours<10) sHours = "0" + sHours;
+      if(minutes<10) sMinutes = "0" + sMinutes;
+  
+      return (sHours + ":" + sMinutes);
+    }else{
+      return null;
+    }
+  
 
   }
 
