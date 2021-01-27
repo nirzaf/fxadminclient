@@ -174,7 +174,7 @@ export class AddGroupComponent {
         if (data.succeeded) {
      
           this.DataArray[i].cityList = data.data;
-          this.DataArray[i].groupCity=0;
+         
         }
         else {
           this.toast.error(data.errors);
@@ -190,8 +190,7 @@ export class AddGroupComponent {
         if (data.succeeded) {
           this.DataArray[0].countryList = data.data;
           this.countryList = data.data;
-          console.log(this.formGroup.value);
-          this.formGroup.value.formArray1[0].countryList = data.data;
+         
       
         }
         else {
@@ -213,8 +212,9 @@ export class AddGroupComponent {
           
           //this.formGroup.get('formArray1')['controls'][i]["groupState"]=0;
           this.DataArray[i].stateList = data.data;
+          this.DataArray[i].cityList=[];
          // item.value.groupState = 0;
-          this.DataArray[i].groupState=0;
+         
 
         }
         else {

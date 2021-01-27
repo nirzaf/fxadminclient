@@ -51,22 +51,17 @@ public countryList: any = [];
    
     this.dialogRef.close( { event: 'close', data: null });
   }
-  getCityList(stateID:string,isInitial:boolean){
+  getCityList(stateID:string){
     this.webService.commonMethod('city/get/'+stateID,null,'GET',null)
     .subscribe(data=>{
       if(data.succeeded){
         this.cityList=data.data;
-        if(!isInitial){
-          this.editGroupForm.get('groupCity').setValue(0);
-        }
+       
       }
       else{
         this.toast.error(data.errors);
-      }
-      
-      
-       console.log(data);
-      //this.isProgressing = false;
+      }      
+ 
     });
   }
 
@@ -83,19 +78,16 @@ public countryList: any = [];
       }
       
       
-       console.log(data);
-      //this.isProgressing = false;
+  
     });
   }
-  getStateList(countryID:string,isInitial:boolean){
-    
+  getStateList(countryID:string){
+    this.cityList=[];
     this.webService.commonMethod('state/get/'+countryID,null,'GET',null)
     .subscribe(data=>{
       if(data.succeeded){
         this.stateList=data.data;
-        if(!isInitial){
-          this.editGroupForm.get('groupState').setValue(0);
-        }
+       
       }
       else{
         this.toast.error(data.errors);
@@ -120,8 +112,8 @@ public countryList: any = [];
         this.editGroupForm.get('groupState').setValue(data.data.stateId);
     
         this.editGroupForm.get('groupCity').setValue(data.data.cityId);
-        this.getStateList(data.data.countryId,true);
-        this.getCityList(data.data.stateId,true);
+        this.getStateList(data.data.countryId);
+        this.getCityList(data.data.stateId);
         this.editGroupForm.get('groupPinZip').setValue(data.data.zipCode);
         this.editGroupForm.get('groupPhone').setValue(data.data.phoneNumber);
         //this.groupObj=data.data;
@@ -132,8 +124,7 @@ public countryList: any = [];
       }
       
       
-       console.log(data);
-      //this.isProgressing = false;
+      
     });
   }
   submitForm():void{
@@ -149,8 +140,7 @@ public countryList: any = [];
         "PhoneNumber":this.editGroupForm.controls['groupPhone'].value,
         "Address":this.editGroupForm.controls['groupAddress'].value,            
         "ModifiedBy":"Sirojan",
-        // "CreatedDateTime":"2012-04-23",
-        // "ModifiedDateTime":"2012-04-23"
+   
         }
         this.webService.commonMethod('group/put/'+this.groupData.groupID,postData,'PUT',null)
         .subscribe(data=>{

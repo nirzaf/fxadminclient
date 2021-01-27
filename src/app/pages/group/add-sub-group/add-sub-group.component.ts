@@ -192,14 +192,14 @@ export class AddSubGroupComponent  {
           // item.value.stateList=state;
           // item.value.cityList=data.data;
           this.DataArray[i].cityList = data.data;
-          this.DataArray[i].groupCity=0;
+         
         }
         else {
           this.toast.error(data.errors);
         }
 
 
-        console.log(data);
+       
         //this.isProgressing = false;
       });
   }
@@ -209,65 +209,43 @@ export class AddSubGroupComponent  {
       .subscribe(data => {
         if (data.succeeded) {
           this.DataArray[0].countryList = data.data;
-          this.countryList = data.data;
-          console.log(this.formGroup.value);
-          this.formGroup.value.formArray1[0].countryList = data.data;
-          // var arrayControl = this.formGroup.get('formArray1') as FormArray;
-          // var item = arrayControl.at(0);
-          //arrayControl.at(0).value.countryList.patchValue(data.data);
-          //  item.value.countryList=data.data;
-          //arrayControl.setValue(item)
+          this.countryList = data.data;          
+        
         }
         else {
           this.toast.error(data.errors);
         }
 
 
-        console.log(data);
+        
         //this.isProgressing = false;
       });
   }
   getStateList(countryID, i) {
     var arrayControl = this.formGroup.get('formArray1') as FormArray;
     var item = arrayControl.at(i);
-    // item.value.groupCountry.setValue(countryID, {
-    //   onlySelf: true
-    // })
-    console.log(countryID);
+    
     this.webService.commonMethod('state/get/' + countryID, null, 'GET', null)
       .subscribe(data => {
         if (data.succeeded) {
           var arrayControl = this.formGroup.get('formArray1') as FormArray;
           var item = arrayControl.at(i);
           console.log(item.value);
-          //this.formGroup.get('formArray1')['controls'][i]["groupState"]=0;
+  
           this.DataArray[i].stateList = data.data;
-         // item.value.groupState = 0;
-          this.DataArray[i].groupState=0;
-          //console.log(arrayControl);
-
-
-
-          // this.formGroup.value.patchValue({
-          //   formArray1: arrayControl
-          // })
-
-
-          // this.formGroup.setValue({'formArray1':[arrayControl]});
+          this.DataArray[i].cityList=[];
         }
         else {
           this.toast.error(data.errors);
           this.stateList = [];
         }
-
-
         console.log(data);
-        //this.isProgressing = false;
+      
       });
   }
 
   onNoClick(): void {
-    this.dialogRef.close();
+    this.dialogRef.close({ event: 'close', data: this.holdingCompanyData });
   }
 
 

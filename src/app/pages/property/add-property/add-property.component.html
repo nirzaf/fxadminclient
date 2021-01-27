@@ -95,8 +95,8 @@
               
                 <mat-form-field  [style.width.%]="100" floatLabel="always">
                     <mat-label>Country</mat-label>
-                    <mat-select [(ngModel)]="DataArray[ix].propertyCountry" (selectionChange)="getStateList($event.value,ix)" formControlName="propertyCountry">
-                      <mat-option  [value]="0" selected="true">Select Country</mat-option>
+                    <mat-select placeholder="Select Country" (selectionChange)="getStateList($event.value,ix)" formControlName="propertyCountry">
+                     
                       <mat-option *ngFor="let country of DataArray[ix].countryList" [value]="country.countryID">{{country.countryName}}</mat-option>
                     </mat-select>
                     <mat-error
@@ -108,8 +108,8 @@
               <div fxFlex="24%" fxFlex.xs="100%" fxFlex.sm="50%">
                 <mat-form-field [style.width.%]="100" floatLabel="always"> 
                     <mat-label>State</mat-label>
-                    <mat-select [(ngModel)]="DataArray[ix].propertyState"   (selectionChange)="getCityList($event.value,ix)" formControlName="propertyState">
-                      <mat-option  [value]="0">Select State</mat-option>
+                    <mat-select placeholder="Select State"   (selectionChange)="getCityList($event.value,ix)" formControlName="propertyState">
+                     
                       <mat-option *ngFor="let state of DataArray[ix].stateList" [value]="state.stateID">{{state.stateName}}</mat-option>
                     </mat-select>
                     <mat-error
@@ -121,8 +121,8 @@
               <div fxFlex="24%" fxFlex.xs="100%" fxFlex.sm="50%">
                 <mat-form-field [style.width.%]="100" floatLabel="always"> 
                     <mat-label>City</mat-label>
-                    <mat-select [(ngModel)]="DataArray[ix].propertyCity" formControlName="propertyCity">
-                      <mat-option [value]="0">Select City</mat-option>
+                    <mat-select placeholder="Select City" formControlName="propertyCity">
+                    
                       <mat-option *ngFor="let city of DataArray[ix].cityList" [value]="city.cityId">{{city.name}}</mat-option>
                     </mat-select>
                     <mat-error
@@ -159,8 +159,8 @@
           <div fxFlex="24%" fxFlex.xs="100%" fxFlex.sm="50%">
             <mat-form-field [style.width.%]="100" floatLabel="always"> 
                 <mat-label>Hotel Type</mat-label>
-                <mat-select [(ngModel)]="DataArray[ix].propertyHotelType" formControlName="propertyHotelType">
-                  <mat-option [value]="0">Select Hotel Type</mat-option>
+                <mat-select placeholder="Select Hotel Type" formControlName="propertyHotelType">
+                  
                   <mat-option *ngFor="let hotelType of DataArray[ix].hotelTypeList" [value]="hotelType.hotelTypeID">{{hotelType.name}}</mat-option>
                 </mat-select>
                 <mat-error
@@ -250,8 +250,8 @@
         <div fxFlex="24%" fxFlex.xs="100%" fxFlex.sm="50%">
           <mat-form-field [style.width.%]="100" floatLabel="always"> 
               <mat-label>Currency</mat-label>
-              <mat-select [(ngModel)]="DataArray[ix].propertyCurrency"  formControlName="propertyCurrency">
-                <mat-option [value]="0">Select Currency</mat-option>
+              <mat-select placeholder="Select Currency"  formControlName="propertyCurrency">
+                
                 <mat-option *ngFor="let currency of DataArray[ix].currencyList" [value]="currency.currencyID">{{currency.currencyCode}}</mat-option>
               </mat-select>
               <mat-error
@@ -349,7 +349,7 @@
 </mat-dialog-content>
 <mat-dialog-actions align="end">
     <button  mat-button type="button" class="border btnProperty" (click)="onNoClick()">Back</button>
-    <button  mat-button type="button"  class="border btnProperty" (click)="onNoClick()">Reset</button>
+    <button  mat-button type="button"  class="border btnProperty" (click)="resetForm()">Reset</button>
     <button type="submit" mat-button class="button btnProperty">Save</button>
  
 </mat-dialog-actions>

@@ -88,8 +88,8 @@
             <div fxFlex="24%" fxFlex.xs="100%" fxFlex.sm="50%">
                 <mat-form-field  [style.width.%]="100" floatLabel="always">
                     <mat-label>Country</mat-label>
-                    <mat-select    [(ngModel)]="DataArray[ix].groupCountry" (selectionChange)="getStateList($event.value,ix)" formControlName="groupCountry">
-                      <mat-option  [value]="0" selected="true">Select Country</mat-option>
+                    <mat-select   placeholder="Select Country" (selectionChange)="getStateList($event.value,ix)" formControlName="groupCountry">
+                     
                       <mat-option *ngFor="let country of DataArray[ix].countryList" [value]="country.countryID">{{country.countryName}}</mat-option>
                     </mat-select>
                     <mat-error
@@ -103,8 +103,8 @@
               <div fxFlex="24%" fxFlex.xs="100%" fxFlex.sm="50%">
                 <mat-form-field [style.width.%]="100" floatLabel="always"> 
                     <mat-label>State</mat-label>
-                    <mat-select  [(ngModel)]="DataArray[ix].groupState"   (selectionChange)="getCityList($event.value,ix)" formControlName="groupState">
-                      <mat-option  [value]="0">Select State</mat-option>
+                    <mat-select  placeholder="Select State"   (selectionChange)="getCityList($event.value,ix)" formControlName="groupState">
+                    
                       <mat-option *ngFor="let state of DataArray[ix].stateList" [value]="state.stateID">{{state.stateName}}</mat-option>
                     </mat-select>               
                     <mat-error
@@ -117,8 +117,8 @@
               <div fxFlex="24%" fxFlex.xs="100%" fxFlex.sm="50%">
                 <mat-form-field [style.width.%]="100" floatLabel="always"> 
                     <mat-label>City</mat-label>
-                    <mat-select  [(ngModel)]="DataArray[ix].groupCity" formControlName="groupCity">
-                      <mat-option [value]="0">Select City</mat-option>
+                    <mat-select   placeholder="Select City" formControlName="groupCity">
+                     
                       <mat-option *ngFor="let city of DataArray[ix].cityList" [value]="city.cityId">{{city.name}}</mat-option>
                     </mat-select>
                     <mat-error

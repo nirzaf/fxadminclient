@@ -18,7 +18,7 @@
                     <mat-form-field [style.width.%]="100" floatLabel="always"> 
                         <mat-label>Hodling Company</mat-label>
                         <input type="text"
-                        placeholder="Pick one"
+                        placeholder="Holding Company"
                         aria-label="Number"
                         matInput
                         [formControl]="companyAutoCompleteControl"
@@ -76,7 +76,7 @@
           </mat-card-header>
           <mat-radio-group aria-label="Select an option" [(ngModel)]="radioParentGroup">
             <div fxLayout="row wrap" fxFlex="100%" *ngIf="companyGroupList?.length > 0"  class="fxa_group_container" fxLayout.lt-sm="column" >
-              {{radioParentGroup}}---{{radioChildGroup}}
+            
               <ng-container *ngFor="let group of companyGroupList; let i=index" >
                
               <div fxFlex="100%"  class="fxa_group_item" *ngIf="group.hasChildGroup">
@@ -112,12 +112,12 @@
                 </mat-panel-title>
               </mat-expansion-panel-header>
             
-                <mat-radio-group aria-label="Select an option"  class="subGroupRadio" [(ngModel)]="radioChildGroup"> 
+                <mat-radio-group aria-label="Select an option"  class="subGroupRadio" [(ngModel)]="radioParentGroup"> 
                   <ng-container *ngFor="let childGroup of group.childGroupList; let b=index" >
                    
-            <div fxFlex="100%" class="fxa_sub_group_item" fxLayout="row wrap" > 
-              <div fxFlex="42%" fxFlex.xs="88%" >
-                <mat-radio-button value="{{childGroup.groupID}}" (change)="childGroupChange($event,childGroup,group)"><span style="font-size: 11px;opacity: 0.7">Sub Group {{b+1}}</span><br/><span style="font-size: 12px;">{{childGroup.name}}</span></mat-radio-button>
+            <div fxFlex="100%" class="fxa_sub_group_item" fxLayout="row wrap" [class.subGroupSelected]="childGroup.groupID==radioParentGroup"> 
+              <div fxFlex="37%" fxFlex.xs="78%" style="margin-left: 5%;" >
+                <mat-radio-button value="{{childGroup.groupID}}"  (change)="childGroupChange($event,childGroup,group)"><span style="font-size: 11px;opacity: 0.7">Sub Group {{b+1}}</span><br/><span style="font-size: 12px;">{{childGroup.name}}</span></mat-radio-button>
                 </div>
                 <div fxFlex="10%" fxFlex.xs="12%" >
                   <i class="fas fa-ellipsis-h themecolor iconSize moreicon fxcursor_pointer" (click)="viewSubGroup(childGroup,group,b)"></i><br/>

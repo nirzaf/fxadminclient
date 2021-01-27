@@ -198,7 +198,7 @@ export class AddPropertyComponent implements OnInit {
   }
 
   onNoClick(): void {
-    this.dialogRef.close();
+    this.dialogRef.close({ event: 'close', data: this.holdingCompanyData });
   }
   getCityList(stateID, i) {
 
@@ -405,6 +405,23 @@ export class AddPropertyComponent implements OnInit {
     }
   
 
+  }
+  resetForm() {
+    this.formGroup.reset();
+    var i=0;
+    for (let control of this.formGroup.get('formArray1')['controls']) {
+      // control.controls["groupCountry"].setValue(0);
+      // control.controls["groupState"].setValue(0);
+      // control.controls["groupCity"].setValue(0);
+      this.DataArray[i].stateList=[];
+      this.DataArray[i].cityList=[];
+      this.DataArray[i].networkIPs=[];
+      this.DataArray[i].macIDs=[];
+      this.DataArray[i].rating=0;
+      i++;
+    }
+   
+   
   }
 
 }
