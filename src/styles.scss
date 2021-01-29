@@ -1485,20 +1485,7 @@
   .fx_starRating .mat-icon-button.mat-primary{
     color:$primary-color;
   }
-  @media screen and (max-width: 599px) {
-    .fxa_group_container .mat-expansion-panel-header{
-        
-        height:auto;
-        padding-right: 0px;
-    }
-    .viewmore-dialog-container .editcontainer{
-        margin-left:20px;
-    }
-    .viewmore-dialog-container .content{
-        margin-top:0px;
-    }
-   
-  }
+  
   .custom-dialog-container{
     right: 0;  
     
@@ -1710,3 +1697,36 @@ padding:0px;
     background-color: rgba(255, 142, 0, 0.05)
   }
  /*Sirojan css */
+ @media screen and (max-width: 599px) {
+    .fxa_group_container .mat-expansion-panel-header{
+        
+        height:auto;
+        padding-right: 0px;
+    }
+    .viewmore-dialog-container .editcontainer{
+        margin-left:20px;
+    }
+    .viewmore-dialog-container .content{
+        margin-top:0px;
+    }
+    .viewmore-dialog-container{
+        right: 0;  
+        
+        position: absolute !important;
+        max-width: 100% !important;
+        width: 100% !important;
+        height: 99.5vh;
+      }
+      .custom-dialog-container{
+        right: 0;  
+        
+        position: absolute !important;
+        max-width: 100% !important;
+        width: 100% !important;
+        height: 99.5vh;
+      }
+      .viewmore-dialog-container .cancelcontainer{
+          margin-left:20px;
+      }
+   
+  }

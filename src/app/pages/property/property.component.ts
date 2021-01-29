@@ -69,8 +69,8 @@ export class PropertyComponent implements OnInit {
     console.log("Radio Change");
     this.propertyData = [];
     this.getPropertyList(this.groupID);
-    this.radioChildGroup = '';
-    this.radioParentGroup = group.groupID;
+   
+    
 
   }
   childGroupChange(evt: any, group: any, parentGroup: any) {
@@ -156,21 +156,26 @@ export class PropertyComponent implements OnInit {
   }
   viewGroup(group): void {
     if (this.holdingCompanyID != "" && this.holdingCompanyID != null) {
-      const dialogRef = this.dialog.open(ViewGroupComponent, {
-        panelClass: 'viewmore-dialog-container',
-        disableClose: true,
-        //minHeight: '800px',    
-        data: { groupName: group.name, groupID: group.groupID }
-      });
-
-      dialogRef.afterClosed().subscribe(result => {
-        this.getCompanyGroupList(this.holdingCompanyID);
-        if (result.data == "D") {
-          this.getHoldingCompanyList();
-        }
-        console.log('The dialog was closed');
-
-      });
+      if(this.radioParentGroup==group.groupID){
+        const dialogRef = this.dialog.open(ViewGroupComponent, {
+          panelClass: 'viewmore-dialog-container',
+          disableClose: true,
+          //minHeight: '800px',    
+          data: { groupName: group.name, groupID: group.groupID }
+        });
+  
+        dialogRef.afterClosed().subscribe(result => {
+          this.getCompanyGroupList(this.holdingCompanyID);
+          if (result.data == "D") {
+            this.getHoldingCompanyList();
+          }
+          console.log('The dialog was closed');
+  
+        });
+      }else{
+        this.toast.error("please select the Group to view details");
+      }
+      
     } else {
       this.toast.error("please select holding company");
 
@@ -180,6 +185,7 @@ export class PropertyComponent implements OnInit {
   viewSubGroup(group: any, parentGroup: any, subGroupIndex: string): void {
 
     if (this.holdingCompanyID != "" && this.holdingCompanyID != null) {
+      if(this.radioParentGroup==group.groupID){
       const dialogRef = this.dialog.open(ViewSubGroupComponent, {
         panelClass: 'viewmore-dialog-container',
         disableClose: true,
@@ -196,6 +202,9 @@ export class PropertyComponent implements OnInit {
           this.getHoldingCompanyList();
         }
       });
+    }else{
+      this.toast.error("please select the Sub Group to view details");
+    }
     } else {
       this.toast.error("please select holding company");
 
@@ -215,7 +224,7 @@ export class PropertyComponent implements OnInit {
     });
   }
   addSubGroup(group): void {
-
+    if(this.radioParentGroup==group.groupID){
     const dialogRef = this.dialog.open(AddSubGroupComponent, {
       panelClass: 'custom-dialog-container',
 
@@ -230,6 +239,9 @@ export class PropertyComponent implements OnInit {
       this.holdingCompanyName = result.data.holdingCompanyName;
       this.holdingCompanyID = result.data.holdingCompanyID;
     });
+  }else{
+    this.toast.error("please select the  Group First");
+  }
   }
 
 
@@ -393,7 +405,7 @@ export class PropertyComponent implements OnInit {
   }
   viewProperty(property: any, propertyIndex: string): void {
 
-    if (this.holdingCompanyID != "" && this.holdingCompanyID != null) {
+    if (this.groupID != "" && this.groupID != null) {
       const dialogRef = this.dialog.open(ViewPropertyComponent, {
         panelClass: 'viewmore-dialog-container',
         disableClose: true,
@@ -420,7 +432,7 @@ export class PropertyComponent implements OnInit {
 
       });
     } else {
-      this.toast.error("please select holding company");
+      this.toast.error("please select the Holding company & Group");
 
     }
 
