@@ -1696,6 +1696,9 @@ padding:0px;
    
     background-color: rgba(255, 142, 0, 0.05)
   }
+  .mat-slide-toggle.mat-checked .mat-slide-toggle-thumb{
+      background-color: $primary-color !important;
+  }
  /*Sirojan css */
  @media screen and (max-width: 599px) {
     .fxa_group_container .mat-expansion-panel-header{
