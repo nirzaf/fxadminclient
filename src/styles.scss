@@ -1696,9 +1696,31 @@ padding:0px;
    
     background-color: rgba(255, 142, 0, 0.05)
   }
-  .mat-slide-toggle.mat-checked .mat-slide-toggle-thumb{
+  .user-landing .mat-slide-toggle.mat-checked .mat-slide-toggle-thumb{
       background-color: $primary-color !important;
   }
+ .mat-checkbox .mat-checkbox-frame {
+    border-color:$primary-color !important;
+  }
+  .user-landing  .mat-table{
+      background:#fff;
+  }
+  .user-landing .mat-elevation-z8{
+box-shadow: none;
+  }
+  .user-landing  .mat-paginator-icon {
+    color:$primary-color;
+}
+.user-landing  .mat-button-disabled  .mat-paginator-icon{
+    color:inherit;
+}
+.user-landing .mat-select-arrow{
+    color:$primary-color;
+}
+.create-user-modal{
+    max-width: 98% !important;
+    width:91% !important;
+}
  /*Sirojan css */
  @media screen and (max-width: 599px) {
     .fxa_group_container .mat-expansion-panel-header{

@@ -69,6 +69,8 @@ import { DeleteSubGroupComponent } from './pages/group/delete-sub-group/delete-s
 import { ViewPropertyComponent } from './pages/property/view-property/view-property.component';
 import { EditPropertyComponent } from './pages/property/edit-property/edit-property.component';
 import { DeletePropertyComponent } from './pages/property/delete-property/delete-property.component';
+import { CreateUserComponent } from './pages/user/create-user/create-user.component';
+import { MatPaginatorGotoComponent } from './shared/mat-paginator-goto/mat-paginator-goto.component';
 
 
 @NgModule({
@@ -103,7 +105,9 @@ import { DeletePropertyComponent } from './pages/property/delete-property/delete
     DeleteSubGroupComponent,
     ViewPropertyComponent,
     EditPropertyComponent,
-    DeletePropertyComponent 
+    DeletePropertyComponent,
+    CreateUserComponent,
+    MatPaginatorGotoComponent 
   ],
   imports: [
     BrowserModule,

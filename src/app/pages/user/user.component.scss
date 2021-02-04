@@ -1,3 +1,4 @@
+@import '../../../config.scss';
 .example-form {
     min-width: 150px;
     max-width: 500px;
@@ -11,4 +12,48 @@
     font-weight: bold;
     color:#000;
     
+}
+.searchspanicon {
+    float: right;
+    margin-right: 6px;
+    margin-top: -15px;
+    position: relative;
+    z-index: 2;
+    
+}
+.disableicon{
+    opacity: 0.5;
+}
+.iconSize{
+    font-size: 24px;
+}
+.searchspanicon {
+    float: right;
+    margin-right: 6px;
+    margin-top: -15px;
+    position: relative;
+    z-index: 2;
+    
+}
+
+.moretext{
+    font-size: 10px;
+  
+}
+.moreicon{
+    margin-left: 5px;
+}
+.createicon{
+    font-size: 20px;
+   
+    cursor:pointer;
+}
+.createtext{
+    font-size: 10px;
+    margin-top: -2px;
+    margin-left: -5px;
+    cursor:pointer;
+}
+.no_margin{
+    margin: 0px;
 }

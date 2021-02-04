@@ -1,9 +1,12 @@
 import { SelectionModel } from '@angular/cdk/collections';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 
 import { WebService } from 'src/app/shared/services/web.service';
 import { ToastService } from 'src/app/shared/services/toast.service';
+import {MatPaginator} from '@angular/material/paginator';
+import { MatDialog } from '@angular/material/dialog';
+import { CreateUserComponent } from './create-user/create-user.component';
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
@@ -26,7 +29,7 @@ export class UserComponent implements OnInit {
 
   
 
-  constructor(private webService:WebService,private toast:ToastService) { }
+  constructor(private webService:WebService,private toast:ToastService,public dialog: MatDialog) { }
 
   ngOnInit() {
     this.breadCrumb = ["Admin", "User Configuration"];
@@ -57,7 +60,23 @@ export class UserComponent implements OnInit {
     
   }
 
+  CreateUser(): void {
+  
+      const dialogRef = this.dialog.open(CreateUserComponent, {
+        panelClass:['custom-dialog-container','create-user-modal'] ,
+        //minHeight: '800px',    
+        data: {
+ 
+        },
+        autoFocus: false
+      });
 
+      dialogRef.afterClosed().subscribe(result => {
+        //this.getPropertyList(this.groupID);
+
+      });
+   
+  }
   getAPIlist(){
     this.webService.commonMethod('PropertyAndGroup/list-by-login',{"LoginID":"nitish.kumar@idsnext.com"},'POST','fxauth')
     .subscribe(data=>{
@@ -73,6 +92,11 @@ export class UserComponent implements OnInit {
   displayedColumns: string[] = ['select', 'position', 'name', 'weight', 'symbol'];
   dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
   selection = new SelectionModel<PeriodicElement>(true, []);
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+  }
 
   /** Whether the number of selected elements matches the total number of rows. */
   isAllSelected() {
@@ -112,8 +136,5 @@ const ELEMENT_DATA: PeriodicElement[] = [
   {position: 3984, name: 'John Lee',email: 'john@gmail.com', weight: 4.0026, symbol: 'He'},
   {position: 3984, name: 'John Lee',email: 'john@gmail.com', weight: 4.0026, symbol: 'He'},
   {position: 3984, name: 'John Lee',email: 'john@gmail.com', weight: 4.0026, symbol: 'He'},
-  {position: 3984, name: 'John Lee',email: 'john@gmail.com', weight: 4.0026, symbol: 'He'},
-  {position: 3984, name: 'John Lee',email: 'john@gmail.com', weight: 4.0026, symbol: 'He'},
-  {position: 3984, name: 'John Lee',email: 'john@gmail.com', weight: 4.0026, symbol: 'He'},
-  {position: 3984, name: 'John Lee',email: 'john@gmail.com', weight: 4.0026, symbol: 'He'},
+
 ];

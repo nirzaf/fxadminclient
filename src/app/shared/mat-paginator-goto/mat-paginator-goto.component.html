@@ -1,0 +1,14 @@
+<div class="d-flex">
+	<mat-paginator [length]="length" [pageIndex]="pageIndex" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="paginationChange($event)">
+	</mat-paginator>
+	<div class="go-to-container">
+		<div class="go-to-label">Go To: </div>
+		<mat-form-field>
+			<mat-select [(ngModel)]="goTo" (selectionChange)="goToChange()">
+				<mat-option *ngFor="let pageNumber of pageNumbers" [value]="pageNumber">{{pageNumber}}</mat-option>
+			</mat-select>
+		</mat-form-field>
+	</div>
+</div>
+
+<!-- Created by Sameer Khan -->

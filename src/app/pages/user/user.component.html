@@ -6,71 +6,109 @@
     <app-breadcrumb [breadCrumbList]="breadCrumb"></app-breadcrumb>
 </div>
 
+<div class="user-landing"  fxLayout="column wrap">
+    
 
+   
+    <div fxFlex="100%" fxLayout="row wrap">
+        <mat-card fxFlex="100%" fxLayout="row wrap" style="padding-left: 0px !important;">
+            <div fxFlex="100%" fxFlex.xs="100%" fxFlex.sm="100%" fxLayout="row"  fxLayout.lt-sm="column"   fxLayoutGap="15px">
+                <div fxFlex="75%" fxFlex.xs="100%" fxLayout="row wrap" fxFlex.sm="50%" fxLayoutAlign="end start" class="disableicon" style="opacity: 0.5;"> 
+                   
+                    <div fxFlex="7%" fxFlex.sm="33%" fxFlex.xs="33%" >
+                        <i class="fas fa-trash-alt   createicon"></i><br/>
+                        <div class="createtext">Delete</div>
+                    </div>
+                    <div fxFlex="7%" fxFlex.sm="33%" fxFlex.xs="33%" >
+                        <i class="fas fa-sitemap   createicon"></i><br/>
+                        <div class="createtext">Hierarchy</div>
+                    </div>
+                  </div>
+                <div fxFlex="25%" fxFlex.xs="100%" fxLayoutGap="25px" fxLayout.lt-xs="column">
+                  <mat-form-field [style.width.%]="90" floatLabel="always"> 
+                      <mat-label>Search User Name/ Holding company/ Group/ Property</mat-label>
+                      <input type="text"
+                      placeholder="User Name"
+                      aria-label="Number"
+                      matInput
+                      
+                     >
+       
+                    
+                      <span class="fas fa-search searchspanicon themecolor"></span>
+                  
+                  </mat-form-field>
+                  <div fxFlex="10%"  >
+                    <i class="fas fa-ellipsis-v themecolor iconSize moreicon fxcursor_pointer"></i><br/>
+                    <div class="themecolor moretext fxcursor_pointer">More</div>
+                </div>
+                </div>
+               
+            </div>
+            <div fxFlex="100%" fxFlex.xs="100%" fxFlex.sm="100%" fxLayout="column"  fxLayout.lt-sm="column"   fxLayoutGap="15px">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-
-    <!-- Checkbox Column -->
-    <ng-container matColumnDef="select">
-        <th mat-header-cell *matHeaderCellDef>
-            <mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()" [indeterminate]="selection.hasValue() && !isAllSelected()" [aria-label]="checkboxLabel()">
-            </mat-checkbox>
-        </th>
-        <td mat-cell *matCellDef="let row">
-            <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null" [checked]="selection.isSelected(row)" [aria-label]="checkboxLabel(row)">
-            </mat-checkbox>
-        </td>
-    </ng-container>
-
-    <!-- Position Column -->
-    <ng-container matColumnDef="position">
-        <th mat-header-cell *matHeaderCellDef> User ID </th>
-        <td mat-cell *matCellDef="let element"> {{element.position}} </td>
-    </ng-container>
-
-    <!-- Name Column -->
-    <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef> Name </th>
-        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-    </ng-container>
-
-    <!-- Weight Column -->
-    <ng-container matColumnDef="weight">
-        <th mat-header-cell *matHeaderCellDef> Email </th>
-        <td mat-cell *matCellDef="let element"> {{element.email}} </td>
-    </ng-container>
-
-    <!-- Symbol Column -->
-    <ng-container matColumnDef="symbol">
-        <th mat-header-cell *matHeaderCellDef> Status </th>
-        <td mat-cell *matCellDef="let element"> <mat-slide-toggle></mat-slide-toggle> </td>
-    </ng-container>
-
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row)">
-    </tr>
-</table>
-
-<p>&nbsp;</p>
-
-<!-- numbersOnly -->
-<mat-card>
-    <div class="container no_padding">
-        <form class="example-form">
-            <mat-form-field class="example-full-width">
-                <input matInput placeholder="Favorite food" value="" numbersOnly>
-            </mat-form-field>
-
-            <mat-form-field class="example-full-width">
-                <textarea matInput placeholder="Leave a comment"></textarea>
-            </mat-form-field>
-        </form>
+        <!-- Checkbox Column -->
+        <ng-container matColumnDef="select">
+            <th mat-header-cell *matHeaderCellDef>
+                <mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()" [indeterminate]="selection.hasValue() && !isAllSelected()" [aria-label]="checkboxLabel()">
+                </mat-checkbox>
+            </th>
+            <td mat-cell *matCellDef="let row">
+                <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null" [checked]="selection.isSelected(row)" [aria-label]="checkboxLabel(row)">
+                </mat-checkbox>
+            </td>
+        </ng-container>
+    
+        <!-- Position Column -->
+        <ng-container matColumnDef="position">
+            <th mat-header-cell *matHeaderCellDef> User ID </th>
+            <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+        </ng-container>
+    
+        <!-- Name Column -->
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef> Name </th>
+            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        </ng-container>
+    
+        <!-- Weight Column -->
+        <ng-container matColumnDef="weight">
+            <th mat-header-cell *matHeaderCellDef> Email </th>
+            <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+        </ng-container>
+    
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="symbol">
+            <th mat-header-cell *matHeaderCellDef> Status </th>
+            <td mat-cell *matCellDef="let element"> <mat-slide-toggle></mat-slide-toggle> </td>
+        </ng-container>
+    
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row)">
+        </tr>
+    </table>
+    <div fxFlex="100%">
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+        <!-- <mat-paginator-goto [pageSizeOptions]="[5, 10, 25, 100]"
+        showFirstLastButtons></mat-paginator-goto> -->
+        <button type="button" mat-button  class="border" style="padding:0px 32px;" (click)="CreateUser()">Create</button>
     </div>
-</mat-card>
 
-<mat-card>
-    <div class="container no_padding">
-        <p><button mat-button class="button">Save</button></p>
-        <p><button mat-button class="border">Cancel</button></p>
-    </div>
+</div>
 </mat-card>
+    <p>&nbsp;</p>
+
+</div>
+    <!-- numbersOnly -->
+ 
+    
+    <mat-card>
+        <div class="container no_padding" fxLayout="row wrap" fxFlex="100%"  fxLayoutAlign="end end">
+            <div fxFlex="10%" fxFlex.xs="100%">
+            <button mat-button class="border" style="padding:0px 32px;">Back</button>
+            </div>
+        </div>
+    </mat-card>
+</div>
+
