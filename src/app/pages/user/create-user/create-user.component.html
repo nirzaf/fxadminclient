@@ -112,6 +112,69 @@
             </div>
 </div>
 <div class="content">
+  <div fxFlex="100%"  fxLayout="row wrap" fxLayoutGap="15px" class="form-input-row">
+      <div fxFlex="24%" fxFlex.xs="100%" >
+        <mat-form-field [style.width.%]="100" floatLabel="always"> 
+          <mat-label>Designation</mat-label>
+          <input matInput #input placeholder="Last Name">
+          <!-- <mat-error
+          *ngIf="addCompanyForm.get('holdingCompanyPinZip').hasError('required')">
+          PinZip is <strong>required</strong>
+        </mat-error> -->
+      </mat-form-field>
+        </div>
+        <div fxFlex="24%" fxFlex.xs="100%">
+          <mat-form-field [style.width.%]="100" floatLabel="always"> 
+            <mat-label>Department</mat-label>
+            <mat-select placeholder="Select Department">
+             
+                <!-- <mat-option *ngFor="let state of stateList" [value]="state.stateID">{{state.stateName}}</mat-option> -->
+            </mat-select>
+                  <!-- <mat-error
+          *ngIf="addCompanyForm.get('holdingCompanyState').hasError('min')">
+          State is <strong>required</strong>
+        </mat-error> -->
+        </mat-form-field>
+       
+        </div>
+        <div fxFlex="24%" fxFlex.xs="100%" FxLayout="row wrap">         
+            <mat-form-field [style.width.%]="100" floatLabel="always"> 
+              <mat-label>Valid From</mat-label>
+              <div fxFlex="20%"><i class="fas fa-clock"></i></div>
+              <div fxFlex="80%">
+                <input matInput #input placeholder="Check in" [ngxTimepicker]="inpicker">
+           
+                <ngx-material-timepicker #inpicker></ngx-material-timepicker>
+             
+              </div>
+              <!-- <mat-error
+              *ngIf="property['controls'].propertyCheckIn.hasError('required')">
+              CheckIn  is <strong>required</strong>
+              </mat-error> -->
+              
+          </mat-form-field>
+        
+        </div>
+        <div fxFlex="22%" fxFlex.xs="100%">
+          <mat-form-field [style.width.%]="100" floatLabel="always"> 
+            <mat-label>Valid To</mat-label>
+            <div fxFlex="20%"><i class="fas fa-clock"></i></div>
+            <div fxFlex="80%">
+              <input matInput #input placeholder="Check in" [ngxTimepicker]="inpicker">
+         
+              <ngx-material-timepicker #inpicker></ngx-material-timepicker>
+           
+            </div>
+            <!-- <mat-error
+            *ngIf="property['controls'].propertyCheckIn.hasError('required')">
+            CheckIn  is <strong>required</strong>
+            </mat-error> -->
+            
+        </mat-form-field>
+        </div>
+      </div>
+</div>
+<div class="content">
     <div fxFlex="100%"  fxLayout="row wrap" fxLayoutGap="15px">
         
           <div fxFlex="24%" fxFlex.xs="100%">
@@ -124,10 +187,454 @@
               </mat-error> -->
             </mat-form-field>
           </div>
+          <div fxFlex="73%" fxFlex.xs="100%"  fxLayout="row wrap">
+            <div fxFlex="100%" fxLayoutGap="15px" >
+            <div fxFlex="33%" fxFlex.xs="100%">
+              <mat-form-field [style.width.%]="100" floatLabel="always"> 
+                <mat-label>User</mat-label>
+                <mat-select placeholder="Select User">
+             
+                  <!-- <mat-option *ngFor="let state of stateList" [value]="state.stateID">{{state.stateName}}</mat-option> -->
+              </mat-select>
+                <!-- <mat-error
+                *ngIf="addCompanyForm.get('holdingCompanyPhone').hasError('required')">
+                Phone Number is <strong>required</strong>
+              </mat-error> -->
+            </mat-form-field>
+            </div>
+            <div fxFlex="33%" fxFlex.xs="100%">
+              <mat-form-field [style.width.%]="100" floatLabel="always"> 
+                  <mat-label>Login ID</mat-label>
+                  <input matInput #input placeholder="Phone Number">
+                  <!-- <mat-error
+                  *ngIf="addCompanyForm.get('holdingCompanyPhone').hasError('required')">
+                  Phone Number is <strong>required</strong>
+                </mat-error> -->
+              </mat-form-field>
+            </div>
+            <div fxFlex="30%" fxFlex.xs="100%">
+              <mat-form-field [style.width.%]="100" floatLabel="always"> 
+                <mat-label>Password Expiry</mat-label>
+                <mat-select placeholder="Password Expiry">
+             
+                  <!-- <mat-option *ngFor="let state of stateList" [value]="state.stateID">{{state.stateName}}</mat-option> -->
+              </mat-select>
+                <!-- <mat-error
+                *ngIf="addCompanyForm.get('holdingCompanyPhone').hasError('required')">
+                Phone Number is <strong>required</strong>
+              </mat-error> -->
+            </mat-form-field>
+            </div>
+          </div>
+       
+         
+        <div fxFlex="100%">
+          <mat-form-field class="network-ip-chip-list user-chip" floatLabel="always">
+            <mat-label>Property Network IP</mat-label>
+            <mat-chip-list #chipList aria-label="IP selection">
+              <mat-chip *ngFor="let netWorkIP of networkIPs" [selectable]="selectable"
+                       [removable]="removable" (removed)="removeNetworkIP(netWorkIP)" >
+                {{netWorkIP.name}}
+                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+              </mat-chip>
+              <input  placeholder="Network IP"
+                     [matChipInputFor]="chipList"
+                     [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                     [matChipInputAddOnBlur]="addOnBlur"
+                     (matChipInputTokenEnd)="addNetworkIP($event)">
+            </mat-chip-list>
+            <mat-error>Atleast 1 ip need to be added</mat-error>
+          </mat-form-field>
+          </div>
         </div>
+         
+      </div>
 </div>
+<div class="content-0">
+      
+     
+  <div fxFlex="100%"  fxLayout="row wrap" fxLayoutGap="15px">
+   
+        <div fxFlex="73%" fxFlex.xs="100%" >
+         
+          <mat-form-field class="network-ip-chip-list user-chip" floatLabel="always">
+            <mat-label>Network Mac ID</mat-label>
+            <mat-chip-list #macIdList aria-label="IP selection">
+              <mat-chip *ngFor="let macID of macIDs" [selectable]="selectable"
+                       [removable]="removable" (removed)="removeMacID(macID)">
+                {{macID.name}}
+                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+              </mat-chip>
+              <input  placeholder="Mac ID"
+                     [matChipInputFor]="macIdList"
+                     [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                     [matChipInputAddOnBlur]="addOnBlur"
+                     (matChipInputTokenEnd)="addMacID($event)">
+            </mat-chip-list>
+          
+          </mat-form-field>
 
+          
+           
+        
+        
+        </div>
+ 
+        <div fxFlex="22%" fxFlex.xs="100%" fxLayout="column wrap" fxLayoutGap="15px">
+          <div FxFlex="100%" style="font-size: 12px;opacity: 0.5;">
+            Authorized For License
+          </div>
+          <div FxFlex="100%">
+            <mat-radio-group aria-label="Select an option">
+              <mat-radio-button value="1">Yes</mat-radio-button>
+              <mat-radio-button value="2">No</mat-radio-button>
+            </mat-radio-group>
+          </div>
+       
+      
+        </div>
+      </div>
+  </div>
+  <div class="content">
+    <div fxFlex="100%"  fxLayout="row wrap" fxLayoutGap="15px" class="fx_border_bottom" >
+        <div fxFlex="80%" fxFlex.xs="75%" fxFlex.sm="100%" class="fx_subgroup_head">
+            Official Contact           
+          </div>
+          <div fxFlex="18%" fxFlex.xs="20%" fxLayoutAlign="end" >
+              
+      
+           
+        </div>
+          
+        </div>
+  </div>
+  <div class="content">
+    <div fxFlex="100%"  fxLayout="row wrap" fxLayoutGap="15px">
+        
+          <div fxFlex="48%" fxFlex.xs="100%">
+            <mat-form-field [style.width.%]="100" floatLabel="always"> 
+                <mat-label>Address</mat-label>
+                <textarea matInput rows="4"  placeholder="Address" style="margin-top:9px;"></textarea>
+                <!-- <mat-error
+                *ngIf="addCompanyForm.get('holdingCompanyPhone').hasError('required')">
+                Phone Number is <strong>required</strong>
+              </mat-error> -->
+            </mat-form-field>
+          </div>
+          <div fxFlex="50%" fxFlex.xs="100%"  fxLayout="row wrap">
+            <div fxFlex="100%" fxLayoutGap="15px" >
+            <div fxFlex="50%" fxFlex.xs="100%">
+              <mat-form-field [style.width.%]="100" floatLabel="always"> 
+                <mat-label>Country</mat-label>
+                <mat-select placeholder="Select Country">
+             
+                  <!-- <mat-option *ngFor="let state of stateList" [value]="state.stateID">{{state.stateName}}</mat-option> -->
+              </mat-select>
+                <!-- <mat-error
+                *ngIf="addCompanyForm.get('holdingCompanyPhone').hasError('required')">
+                Phone Number is <strong>required</strong>
+              </mat-error> -->
+            </mat-form-field>
+            </div>
+           
+            <div fxFlex="50%" fxFlex.xs="100%">
+              <mat-form-field [style.width.%]="100" floatLabel="always"> 
+                <mat-label>State</mat-label>
+                <mat-select placeholder="Select State">
+             
+                  <!-- <mat-option *ngFor="let state of stateList" [value]="state.stateID">{{state.stateName}}</mat-option> -->
+              </mat-select>
+                <!-- <mat-error
+                *ngIf="addCompanyForm.get('holdingCompanyPhone').hasError('required')">
+                Phone Number is <strong>required</strong>
+              </mat-error> -->
+            </mat-form-field>
+            </div>
+          </div>
+       
+         
+        <div fxFlex="100%" fxLayoutGap="15px">
+          <div fxFlex="50%" fxFlex.xs="100%">
+            <mat-form-field [style.width.%]="100" floatLabel="always"> 
+              <mat-label>City</mat-label>
+              <mat-select placeholder="Select City">
+           
+                <!-- <mat-option *ngFor="let state of stateList" [value]="state.stateID">{{state.stateName}}</mat-option> -->
+            </mat-select>
+              <!-- <mat-error
+              *ngIf="addCompanyForm.get('holdingCompanyPhone').hasError('required')">
+              Phone Number is <strong>required</strong>
+            </mat-error> -->
+          </mat-form-field>
+          </div>
+         
+          <div fxFlex="50%" fxFlex.xs="100%">
+            <mat-form-field [style.width.%]="100" floatLabel="always"> 
+              <mat-label>Zip / Postal Code</mat-label>
+              <input matInput #input placeholder="Phone Number">
+              <!-- <mat-error
+              *ngIf="addCompanyForm.get('holdingCompanyPhone').hasError('required')">
+              Phone Number is <strong>required</strong>
+            </mat-error> -->
+          </mat-form-field>
+          </div>
+          </div>
+        </div>
+         
+      </div>
+</div>
+<div class="content">
+  <div fxFlex="100%"  fxLayout="row wrap"  class="form-input-row">
+      <div fxFlex="24%" fxFlex.xs="100%" style="margin-right: 15px !important;">
+        <mat-form-field [style.width.%]="20" floatLabel="always"> 
+          <mat-label>Mobile</mat-label>
+          <mat-select placeholder="Select Code">
+           
+            <!-- <mat-option *ngFor="let state of stateList" [value]="state.stateID">{{state.stateName}}</mat-option> -->
+        </mat-select>
+          
+          <!-- <mat-error
+          *ngIf="addCompanyForm.get('holdingCompanyPinZip').hasError('required')">
+          PinZip is <strong>required</strong>
+        </mat-error> -->
+      </mat-form-field>
+      <mat-form-field [style.width.%]="75" floatLabel="always" style="margin-left:10px;"> 
+        <mat-label></mat-label>
   
+        <input matInput #input placeholder="Mobile">
+        <!-- <mat-error
+        *ngIf="addCompanyForm.get('holdingCompanyPinZip').hasError('required')">
+        PinZip is <strong>required</strong>
+      </mat-error> -->
+    </mat-form-field>
+        </div>
+        <div fxFlex="24%" fxFlex.xs="100%" >
+          <mat-form-field [style.width.%]="20" floatLabel="always"> 
+            <mat-label>Phone</mat-label>
+            <mat-select placeholder="Select Code">
+             
+              <!-- <mat-option *ngFor="let state of stateList" [value]="state.stateID">{{state.stateName}}</mat-option> -->
+          </mat-select>
+            
+            <!-- <mat-error
+            *ngIf="addCompanyForm.get('holdingCompanyPinZip').hasError('required')">
+            PinZip is <strong>required</strong>
+          </mat-error> -->
+        </mat-form-field>
+        <mat-form-field [style.width.%]="75" floatLabel="always" style="margin-left:10px;"> 
+          <mat-label></mat-label>
+    
+          <input matInput #input placeholder="Phone NO">
+          <!-- <mat-error
+          *ngIf="addCompanyForm.get('holdingCompanyPinZip').hasError('required')">
+          PinZip is <strong>required</strong>
+        </mat-error> -->
+      </mat-form-field>
+       
+        </div>
+        <div fxFlex="25%" fxFlex.xs="100%" style="margin-right:10px;">
+          <mat-form-field [style.width.%]="100" floatLabel="always"> 
+            <mat-label>Extension</mat-label>
+            <input matInput #input placeholder="Extension">
+            <!-- <mat-error
+            *ngIf="addCompanyForm.get('holdingCompanyPinZip').hasError('required')">
+            PinZip is <strong>required</strong>
+          </mat-error> -->
+        </mat-form-field>
+        </div>
+        <div fxFlex="24%" fxFlex.xs="100%" >
+          <mat-form-field [style.width.%]="100" floatLabel="always"> 
+            <mat-label>Email</mat-label>
+            <input matInput #input placeholder="Email">
+                  <!-- <mat-error
+          *ngIf="addCompanyForm.get('holdingCompanyState').hasError('min')">
+          State is <strong>required</strong>
+        </mat-error> -->
+        </mat-form-field>
+        </div>
+      </div>
+</div>
+<div class="content">
+  <div fxFlex="100%"  fxLayout="row wrap" fxLayoutGap="15px" class="fx_border_bottom" >
+      <div fxFlex="80%" fxFlex.xs="75%" fxFlex.sm="100%" class="fx_subgroup_head">
+          Personal Contact           
+        </div>
+        <div fxFlex="18%" fxFlex.xs="20%" fxLayoutAlign="end" >
+            
+    
+         
+      </div>
+        
+      </div>
+</div>
+<div class="content">
+  <div fxFlex="100%"  fxLayout="row wrap" fxLayoutGap="15px">
+      
+        <div fxFlex="48%" fxFlex.xs="100%">
+          <mat-form-field [style.width.%]="100" floatLabel="always"> 
+              <mat-label>Address</mat-label>
+              <textarea matInput rows="4"  placeholder="Address" style="margin-top:9px;"></textarea>
+              <!-- <mat-error
+              *ngIf="addCompanyForm.get('holdingCompanyPhone').hasError('required')">
+              Phone Number is <strong>required</strong>
+            </mat-error> -->
+          </mat-form-field>
+        </div>
+        <div fxFlex="50%" fxFlex.xs="100%"  fxLayout="row wrap">
+          <div fxFlex="100%" fxLayoutGap="15px" >
+          <div fxFlex="50%" fxFlex.xs="100%">
+            <mat-form-field [style.width.%]="100" floatLabel="always"> 
+              <mat-label>Country</mat-label>
+              <mat-select placeholder="Select Country">
+           
+                <!-- <mat-option *ngFor="let state of stateList" [value]="state.stateID">{{state.stateName}}</mat-option> -->
+            </mat-select>
+              <!-- <mat-error
+              *ngIf="addCompanyForm.get('holdingCompanyPhone').hasError('required')">
+              Phone Number is <strong>required</strong>
+            </mat-error> -->
+          </mat-form-field>
+          </div>
+         
+          <div fxFlex="50%" fxFlex.xs="100%">
+            <mat-form-field [style.width.%]="100" floatLabel="always"> 
+              <mat-label>State</mat-label>
+              <mat-select placeholder="Select State">
+           
+                <!-- <mat-option *ngFor="let state of stateList" [value]="state.stateID">{{state.stateName}}</mat-option> -->
+            </mat-select>
+              <!-- <mat-error
+              *ngIf="addCompanyForm.get('holdingCompanyPhone').hasError('required')">
+              Phone Number is <strong>required</strong>
+            </mat-error> -->
+          </mat-form-field>
+          </div>
+        </div>
+     
+       
+      <div fxFlex="100%" fxLayoutGap="15px">
+        <div fxFlex="50%" fxFlex.xs="100%">
+          <mat-form-field [style.width.%]="100" floatLabel="always"> 
+            <mat-label>City</mat-label>
+            <mat-select placeholder="Select City">
+         
+              <!-- <mat-option *ngFor="let state of stateList" [value]="state.stateID">{{state.stateName}}</mat-option> -->
+          </mat-select>
+            <!-- <mat-error
+            *ngIf="addCompanyForm.get('holdingCompanyPhone').hasError('required')">
+            Phone Number is <strong>required</strong>
+          </mat-error> -->
+        </mat-form-field>
+        </div>
+       
+        <div fxFlex="50%" fxFlex.xs="100%">
+          <mat-form-field [style.width.%]="100" floatLabel="always"> 
+            <mat-label>Zip / Postal Code</mat-label>
+            <input matInput #input placeholder="Phone Number">
+            <!-- <mat-error
+            *ngIf="addCompanyForm.get('holdingCompanyPhone').hasError('required')">
+            Phone Number is <strong>required</strong>
+          </mat-error> -->
+        </mat-form-field>
+        </div>
+        </div>
+      </div>
+       
+    </div>
+</div>
+<div class="content">
+<div fxFlex="100%"  fxLayout="row wrap"  class="form-input-row">
+    <div fxFlex="24%" fxFlex.xs="100%" style="margin-right: 15px !important;">
+      <mat-form-field [style.width.%]="20" floatLabel="always"> 
+        <mat-label>Mobile</mat-label>
+        <mat-select placeholder="Select Code">
+         
+          <!-- <mat-option *ngFor="let state of stateList" [value]="state.stateID">{{state.stateName}}</mat-option> -->
+      </mat-select>
+        
+        <!-- <mat-error
+        *ngIf="addCompanyForm.get('holdingCompanyPinZip').hasError('required')">
+        PinZip is <strong>required</strong>
+      </mat-error> -->
+    </mat-form-field>
+    <mat-form-field [style.width.%]="75" floatLabel="always" style="margin-left:10px;"> 
+      <mat-label></mat-label>
+
+      <input matInput #input placeholder="Mobile">
+      <!-- <mat-error
+      *ngIf="addCompanyForm.get('holdingCompanyPinZip').hasError('required')">
+      PinZip is <strong>required</strong>
+    </mat-error> -->
+  </mat-form-field>
+      </div>
+      <div fxFlex="24%" fxFlex.xs="100%" >
+        <mat-form-field [style.width.%]="20" floatLabel="always"> 
+          <mat-label>Phone</mat-label>
+          <mat-select placeholder="Select Code">
+           
+            <!-- <mat-option *ngFor="let state of stateList" [value]="state.stateID">{{state.stateName}}</mat-option> -->
+        </mat-select>
+          
+          <!-- <mat-error
+          *ngIf="addCompanyForm.get('holdingCompanyPinZip').hasError('required')">
+          PinZip is <strong>required</strong>
+        </mat-error> -->
+      </mat-form-field>
+      <mat-form-field [style.width.%]="75" floatLabel="always" style="margin-left:10px;"> 
+        <mat-label></mat-label>
+  
+        <input matInput #input placeholder="Phone NO">
+        <!-- <mat-error
+        *ngIf="addCompanyForm.get('holdingCompanyPinZip').hasError('required')">
+        PinZip is <strong>required</strong>
+      </mat-error> -->
+    </mat-form-field>
+     
+      </div>
+      <div fxFlex="25%" fxFlex.xs="100%" style="margin-right:10px;">
+        <mat-form-field [style.width.%]="100" floatLabel="always"> 
+          <mat-label>Extension</mat-label>
+          <input matInput #input placeholder="Extension">
+          <!-- <mat-error
+          *ngIf="addCompanyForm.get('holdingCompanyPinZip').hasError('required')">
+          PinZip is <strong>required</strong>
+        </mat-error> -->
+      </mat-form-field>
+      </div>
+      <div fxFlex="24%" fxFlex.xs="100%" >
+        <mat-form-field [style.width.%]="100" floatLabel="always"> 
+          <mat-label>Birth Date</mat-label>
+          <div fxFlex="20%"><i class="fas fa-clock"></i></div>
+          <div fxFlex="80%">
+            <input matInput #input placeholder="Check in" [ngxTimepicker]="inpicker">
+       
+            <ngx-material-timepicker #inpicker></ngx-material-timepicker>
+         
+          </div>
+          <!-- <mat-error
+          *ngIf="property['controls'].propertyCheckIn.hasError('required')">
+          CheckIn  is <strong>required</strong>
+          </mat-error> -->
+          
+      </mat-form-field>
+      </div>
+    </div>
+</div>
+<div class="content">
+  <div fxFlex="100%"  fxLayout="row wrap" fxLayoutGap="15px">
+      
+        <div fxFlex="48%" fxFlex.xs="100%">
+          <mat-form-field [style.width.%]="100" floatLabel="always"> 
+              <mat-label>Remarks</mat-label>
+              <textarea matInput rows="2"  placeholder="Remarks" ></textarea>
+              <!-- <mat-error
+              *ngIf="addCompanyForm.get('holdingCompanyPhone').hasError('required')">
+              Phone Number is <strong>required</strong>
+            </mat-error> -->
+          </mat-form-field>
+        </div>
+        </div>
+        </div>
 
 </div>
 

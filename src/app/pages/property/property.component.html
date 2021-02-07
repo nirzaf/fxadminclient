@@ -165,13 +165,26 @@
             <div fxFlex="100%" >
               <mat-card-header class="titleBorder"> 
                 <div fxFlex="100%">
-                    <div fxFlex="80%" fxFlex.xs="60%">
+                    <div fxFlex="40%" fxFlex.xs="50%">
                         Property
                     </div>
-                    <div fxFlex="10%" fxFlex.xs="20%">
-                      <i class="fas fa-search themecolor  groupCreateIcon" (click)="addProperty()"></i><br/>
-            <div class="themecolor createtext">Search</div>
+                    <div fxFlex="50%" fxFlex.xs="30%" fxLayoutAlign="end start" fxLayoutGap="10px">
+                      <div fxFlex="80%">
+                        <mat-form-field [style.width.%]="100" floatLabel="always" *ngIf="searchEnable" style="margin-top: -15px;"> 
+                            <mat-label></mat-label>
+                            <input  matInput #input placeholder="Search by name" [(ngModel)]="searchText">
+                            <!-- <mat-error
+                            *ngIf="addCompanyForm.get('holdingCompanyPhone').hasError('required')">
+                            Phone Number is <strong>required</strong>
+                          </mat-error> -->
+                        </mat-form-field>
+                      </div>
+                      <div fxFlex="20%" >
+                     
+                      <i class="fas fa-search themecolor  groupCreateIcon" (click)="showSearch()" *ngIf="propertyData?.length > 1" ></i><br/>
+            <div class="themecolor createtext" *ngIf="propertyData?.length > 1" (click)="showSearch()">Search</div>
                   </div>
+                    </div>
                     <div fxFlex="10%" fxFlex.xs="20%">
                         <i class="fas fa-plus themecolor  groupCreateIcon" (click)="addProperty()"></i><br/>
               <div class="themecolor createtext">Create</div>
@@ -180,7 +193,7 @@
               </mat-card-header>
             </div>
             <div fxLayout="row wrap" fxFlex="100%" class="fxa_group_container" fxLayout.lt-sm="column"  >
-              <ng-container *ngFor="let property of propertyData; let i=index" >
+              <ng-container *ngFor="let property of propertyData | filter:searchText; let i=index" >
             <div fxFlex="100%" fxLayout="row wrap"  class="fxa_group_item" fxLayout.lt-sm="column">
 
               <div fxFlex="30%" fxFlex.xs="100%">

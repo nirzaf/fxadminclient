@@ -32,6 +32,8 @@ export interface GroupData {
   styleUrls: ['./property.component.scss']
 })
 export class PropertyComponent implements OnInit {
+  searchText;
+  searchEnable=false;
   radioParentGroup: any;
   radioChildGroup: any;
   companyAutoCompleteControl = new FormControl();
@@ -72,6 +74,9 @@ export class PropertyComponent implements OnInit {
    
     
 
+  }
+  showSearch(){
+    this.searchEnable=!this.searchEnable;
   }
   childGroupChange(evt: any, group: any, parentGroup: any) {
     var target = evt.target;

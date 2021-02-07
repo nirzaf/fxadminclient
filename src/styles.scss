@@ -1721,6 +1721,9 @@ box-shadow: none;
     max-width: 98% !important;
     width:91% !important;
 }
+.user-chip .mat-chip-list-wrapper{
+    min-height:40px !important;
+  }
  /*Sirojan css */
  @media screen and (max-width: 599px) {
     .fxa_group_container .mat-expansion-panel-header{
