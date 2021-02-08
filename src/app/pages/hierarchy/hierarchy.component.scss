@@ -1,3 +1,4 @@
+@import '../../../config.scss';
 .example-tree-progress-bar {
     margin-left: 30px;
   }
@@ -35,7 +36,7 @@
   
   li {
     padding-left: 40px;
-    border: 1px dotted grey;
+    border: 1px dotted $primary-color;
     border-width: 0 0 1px 1px;
     position: relative;
     top: -18px;
@@ -49,7 +50,7 @@
   }
   
   li ul {
-    border-top: 1px dotted grey;
+    border-top: 1px dotted $primary-color;
     margin-left: -40px;
     padding-left: 60px;
   }

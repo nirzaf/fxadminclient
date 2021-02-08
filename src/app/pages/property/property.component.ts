@@ -71,7 +71,7 @@ export class PropertyComponent implements OnInit {
     console.log("Radio Change");
     this.propertyData = [];
     this.getPropertyList(this.groupID);
-   
+    this.searchText='';
     
 
   }
@@ -86,7 +86,7 @@ export class PropertyComponent implements OnInit {
     console.log("Radio Change");
     this.propertyData = [];
     this.getPropertyList(this.groupID);
-
+    this.searchText='';
     this.groupName = group.name;
 
   }
@@ -217,16 +217,21 @@ export class PropertyComponent implements OnInit {
 
   }
   showHirarchy(): void {
+    if (this.holdingCompanyID != "" && this.holdingCompanyID != null) {
     const dialogRef = this.dialog.open(HierarchyComponent, {
       panelClass: 'custom-dialog-container',
-
+      disableClose: true,
       data: { holdingCompanyName: this.holdingCompanyName, holdingCompanyID: this.holdingCompanyID }
     });
 
     dialogRef.afterClosed().subscribe(result => {
 
-      this.holdingCompanyName = result;
+      //this.holdingCompanyName = result;
     });
+  } else {
+    this.toast.error("please select holding company");
+
+  }
   }
   addSubGroup(group): void {
     if(this.radioParentGroup==group.groupID){
@@ -378,6 +383,8 @@ export class PropertyComponent implements OnInit {
     this.holdingCompanyName = selectedCompany.holdingCompanyName;
     this.getCompanyGroupList(selectedCompany.holdingCompanyID);
     this.getPropertyListByCompany(selectedCompany.holdingCompanyID);
+    this.searchEnable=false;
+    this.searchText="";
     this.groupID = "";
     this.groupName = "";
     this.propertyData = [];

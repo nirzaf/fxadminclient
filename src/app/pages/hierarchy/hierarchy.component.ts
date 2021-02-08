@@ -3,46 +3,58 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { BehaviorSubject } from 'rxjs';
 import { MatTreeFlattener, MatTreeNestedDataSource } from '@angular/material/tree';
 import { NestedTreeControl } from '@angular/cdk/tree';
-export interface DialogData {
-  animal: string;
-  name: string;
+import { WebService } from 'src/app/shared/services/web.service';
+import { ToastService } from 'src/app/shared/services/toast.service';
+export interface CompanyData {
+  holdingCompanyID: string;
+  holdingCompanyName: string;
 }
-export class GameNode {
-  children: BehaviorSubject<GameNode[]>;
-  constructor(public item: string, children?: GameNode[], public parent?: GameNode) {
+export class HierarchyNode {
+  children: BehaviorSubject<HierarchyNode[]>;
+  constructor(public item: string, children?: HierarchyNode[], public parent?: HierarchyNode) {
     this.children = new BehaviorSubject(children === undefined ? [] : children);
   }
 }
 const TREE_DATA = [
-  new GameNode(`Sarovar Hotels G1`, [
-    new GameNode(`Sarovar Hotels P1`),
-    new GameNode(`Sarovar Hotels P2`),
-    new GameNode(`Sarovar Hotels P3`),
-    new GameNode(`Sarovar Hotels P4`),
-    new GameNode(`Sarovar Hotels P5`),
-    new GameNode(`Sarovar Hotels P6`),
-    new GameNode(`Sarovar Hotels P7`),
-    new GameNode(`Sarovar Hotels P8`),
+  new HierarchyNode(`Sarovar Hotels G1`, [
+    new HierarchyNode(`Sarovar Hotels SG1`, [
+      new HierarchyNode(`Sarovar Hotels P2`),
+      new HierarchyNode(`Sarovar Hotels P3`),
+      new HierarchyNode(`Sarovar Hotels P4`),
+    ]),
+    new HierarchyNode(`Sarovar Hotels SG2`, [
+      new HierarchyNode(`Sarovar Hotels P2`),
+      new HierarchyNode(`Sarovar Hotels P3`),
+      new HierarchyNode(`Sarovar Hotels P4`),
+      new HierarchyNode(`Sarovar Hotels P5`),
+    ]),
+    new HierarchyNode(`Sarovar Hotels P2`),
+    new HierarchyNode(`Sarovar Hotels P3`),
+    new HierarchyNode(`Sarovar Hotels P4`),
+    new HierarchyNode(`Sarovar Hotels P5`),
+    new HierarchyNode(`Sarovar Hotels P6`),
+    new HierarchyNode(`Sarovar Hotels P7`),
+    new HierarchyNode(`Sarovar Hotels P8`),
   ]),
-  new GameNode(`Sarovar Hotels G2`, [
-    new GameNode(`Sarovar Hotels P1`),
-    new GameNode(`Sarovar Hotels P2`),
-    new GameNode(`Sarovar Hotels P3`),
-    new GameNode(`Sarovar Hotels P4`),
-    new GameNode(`Sarovar Hotels P5`),
-    new GameNode(`Sarovar Hotels P6`),
-    new GameNode(`Sarovar Hotels P7`),
-    new GameNode(`Sarovar Hotels P8`),
+  new HierarchyNode(`Sarovar Hotels G2`, [
+    new HierarchyNode(`Sarovar Hotels P1`),
+    new HierarchyNode(`Sarovar Hotels P2`),
+    new HierarchyNode(`Sarovar Hotels P3`),
+    new HierarchyNode(`Sarovar Hotels P4`),
+    new HierarchyNode(`Sarovar Hotels P5`),
+    new HierarchyNode(`Sarovar Hotels P6`),
+    new HierarchyNode(`Sarovar Hotels P7`),
+    new HierarchyNode(`Sarovar Hotels P8`),
   ]),
-  new GameNode(`Sarovar Hotels G3`, [
-    new GameNode(`Sarovar Hotels P1`),
-    new GameNode(`Sarovar Hotels P2`),
-    new GameNode(`Sarovar Hotels P3`),
-    new GameNode(`Sarovar Hotels P4`),
-    new GameNode(`Sarovar Hotels P5`),
-    new GameNode(`Sarovar Hotels P6`),
-    new GameNode(`Sarovar Hotels P7`),
-    new GameNode(`Sarovar Hotels P8`),
+  new HierarchyNode(`Sarovar Hotels G3`, [
+    new HierarchyNode(`Sarovar Hotels P1`),
+    new HierarchyNode(`Sarovar Hotels P2`),
+    new HierarchyNode(`Sarovar Hotels P3`),
+    new HierarchyNode(`Sarovar Hotels P4`),
+    new HierarchyNode(`Sarovar Hotels P5`),
+    new HierarchyNode(`Sarovar Hotels P6`),
+    new HierarchyNode(`Sarovar Hotels P7`),
+    new HierarchyNode(`Sarovar Hotels P8`),
   ])
 ];
 @Component({
@@ -52,28 +64,78 @@ const TREE_DATA = [
 })
 export class HierarchyComponent {
 
+  holdingCompanyData: CompanyData;
   recursive: boolean = false;
-  levels = new Map<GameNode, number>();
-  treeControl: NestedTreeControl<GameNode>;
+  levels = new Map<HierarchyNode, number>();
+  treeControl: NestedTreeControl<HierarchyNode>;
 
 
-  dataSource: MatTreeNestedDataSource<GameNode>;
+  dataSource: MatTreeNestedDataSource<HierarchyNode>;
 
-  constructor(private changeDetectorRef: ChangeDetectorRef, public dialogRef: MatDialogRef<HierarchyComponent>) {
-
-    this.treeControl = new NestedTreeControl<GameNode>(this.getChildren);
+  constructor(private changeDetectorRef: ChangeDetectorRef, public dialogRef: MatDialogRef<HierarchyComponent>, @Inject(MAT_DIALOG_DATA) public _holdingCompanyData: CompanyData,
+    private webService: WebService, private toast: ToastService
+  ) {
+    this.holdingCompanyData = _holdingCompanyData;
+    this.treeControl = new NestedTreeControl<HierarchyNode>(this.getChildren);
     this.dataSource = new MatTreeNestedDataSource();
-    this.dataSource.data = TREE_DATA;
+    this.dataSource.data = [];
+    this.getHierarchyData(_holdingCompanyData.holdingCompanyID);
+
+
+
   }
-  getChildren = (node: GameNode) => {
+  getChildren = (node: HierarchyNode) => {
     return node.children;
   };
 
-  hasChildren = (index: number, node: GameNode) => {
+  hasChildren = (index: number, node: HierarchyNode) => {
     return node.children.value.length > 0;
   }
   onNoClick(): void {
-    this.dialogRef.close();
+    this.dialogRef.close({ event: 'close', data: null });
+  }
+  getHierarchyData(holdingCompanyID: string) {
+    this.webService.commonMethod('holdingcompany/gethierarchy/' + holdingCompanyID, null, 'GET', null)
+      .subscribe(data => {
+        if (data.succeeded) {
+          var hierarrchyData = [];
+          data.data.groups.map(function (group) {
+
+            var subGroupData = [];
+            group.subGroups.map(function (subgroup) {
+              var propertyData = [];
+              subgroup.properties.map(function (property) {
+                propertyData.push(new HierarchyNode(property.propertyName));
+
+
+              });
+              subGroupData.push(new HierarchyNode(subgroup.subGroupName, propertyData));
+
+            });
+            
+            group.properties.map(function (property) {
+              subGroupData.push(new HierarchyNode(property.propertyName));
+
+
+            });
+           
+            var groupData = new HierarchyNode(group.groupName, subGroupData);
+            hierarrchyData.push(groupData);
+
+
+
+          });
+          console.log(hierarrchyData);
+
+
+          this.dataSource.data = hierarrchyData;
+        }
+        else {
+          this.toast.error(data.errors);
+        }
+
+
+      });
   }
 
   /**
@@ -82,16 +144,18 @@ export class HierarchyComponent {
   toggleNode(node) {
     console.log(node);
     let index = this.dataSource.data.findIndex(x => x.item == node.item);
-    if(!this.treeControl.isExpanded(node)){
-      this.treeControl.collapseAll();
+
+    if (!this.treeControl.isExpanded(node)) {
       this.treeControl.expand(this.dataSource.data[index])
-    }else{
-      this.treeControl.collapseAll();
+      //this.treeControl.collapseAll();
+
+    } else {
+      this.treeControl.collapse(this.dataSource.data[index]);
     }
-    
-    
-    
-   
-   
+
+
+
+
+
   }
 }

@@ -170,7 +170,7 @@
                     </div>
                     <div fxFlex="50%" fxFlex.xs="30%" fxLayoutAlign="end start" fxLayoutGap="10px">
                       <div fxFlex="80%">
-                        <mat-form-field [style.width.%]="100" floatLabel="always" *ngIf="searchEnable" style="margin-top: -15px;"> 
+                        <mat-form-field [style.width.%]="100" floatLabel="always" *ngIf="searchEnable && propertyData?.length > 1" style="margin-top: -15px;"> 
                             <mat-label></mat-label>
                             <input  matInput #input placeholder="Search by name" [(ngModel)]="searchText">
                             <!-- <mat-error
