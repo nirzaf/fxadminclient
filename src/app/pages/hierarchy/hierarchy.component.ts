@@ -63,7 +63,8 @@ const TREE_DATA = [
   styleUrls: ['./hierarchy.component.scss']
 })
 export class HierarchyComponent {
-
+  public isProgressing: boolean = true;
+  public loaderMessage: string = "Loading...";
   holdingCompanyData: CompanyData;
   recursive: boolean = false;
   levels = new Map<HierarchyNode, number>();
@@ -129,6 +130,7 @@ export class HierarchyComponent {
 
 
           this.dataSource.data = hierarrchyData;
+          this.isProgressing=false;
         }
         else {
           this.toast.error(data.errors);

@@ -1,5 +1,5 @@
 
-
+<app-loader *ngIf="isProgressing" [msg]="loaderMessage"></app-loader>
 
 
 <h2 mat-dialog-title>Hierarchy</h2>
@@ -51,9 +51,8 @@
 </div>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-    <button  mat-button  class="border btnProperty" (click)="onNoClick()">Back</button>
-    <button  mat-button  class="border btnProperty" (click)="onNoClick()">Reset</button>
-    <button  mat-button class="button btnProperty">Save</button>
+    <button  mat-button type="button"  class="border btnProperty" >Back</button>
+
  
 </mat-dialog-actions>
 
