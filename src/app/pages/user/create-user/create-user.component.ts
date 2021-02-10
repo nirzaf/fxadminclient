@@ -18,6 +18,7 @@ export interface MacID {
   styleUrls: ['./create-user.component.scss']
 })
 export class CreateUserComponent implements OnInit {
+  linkProperty=false;
   networkIPs=[];
   visible = true;
   selectable = true;
@@ -83,6 +84,9 @@ export class CreateUserComponent implements OnInit {
     if (index >= 0) {
       this.macIDs.splice(index, 1);
     }
+  }
+  submitForm(){
+this.linkProperty=true;
   }
 
 }

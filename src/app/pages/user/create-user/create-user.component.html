@@ -3,10 +3,24 @@
 
 
 <h2 mat-dialog-title>Create User</h2>
-<form>
+<app-link-product *ngIf="linkProperty"></app-link-product>
+<form *ngIf="!linkProperty">
 <mat-dialog-content  class="mat-typography">
 
   <div>
+    <div class="content">
+      <div fxFlex="100%">
+        <ul>
+          <li>1</li>
+          <li>2</li>
+          <li>3</li>
+          <li class="active">4</li>
+          <li>5</li>
+          <li>6</li>
+          <li>7</li>
+        </ul>  
+      </div>
+    </div>
     <div class="content">
       <div fxFlex="100%"  fxLayout="row wrap" fxLayoutGap="15px" class="fx_border_bottom" >
           <div fxFlex="80%" fxFlex.xs="75%" fxFlex.sm="100%" class="fx_subgroup_head">
@@ -641,8 +655,8 @@
 </mat-dialog-content>
 <mat-dialog-actions align="end">
     <button  mat-button type="button" class="border btnProperty" (click)="onNoClick()">Back</button>
-    <button  mat-button type="button" class="border btnProperty" (click)="onNoClick()">Reset</button>
-    <button  mat-button class="button btnProperty" type="submit" >Save</button>
+    <button  mat-button class="button btnProperty" type="submit" >Save & Continue</button>
+    <button  mat-button class="button btnProperty" type="submit" (click)="submitForm()">Save</button>
  
 </mat-dialog-actions>
 </form>

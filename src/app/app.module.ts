@@ -71,6 +71,7 @@ import { EditPropertyComponent } from './pages/property/edit-property/edit-prope
 import { DeletePropertyComponent } from './pages/property/delete-property/delete-property.component';
 import { CreateUserComponent } from './pages/user/create-user/create-user.component';
 import { MatPaginatorGotoComponent } from './shared/mat-paginator-goto/mat-paginator-goto.component';
+import { LinkProductComponent } from './pages/user/link-product/link-product.component';
 
 
 @NgModule({
@@ -107,7 +108,8 @@ import { MatPaginatorGotoComponent } from './shared/mat-paginator-goto/mat-pagin
     EditPropertyComponent,
     DeletePropertyComponent,
     CreateUserComponent,
-    MatPaginatorGotoComponent 
+    MatPaginatorGotoComponent,
+    LinkProductComponent 
   ],
   imports: [
     BrowserModule,
