@@ -221,19 +221,7 @@
 </div>
 <div class="content">
   <div fxFlex="100%"  fxLayout="row wrap" fxLayoutGap="15px" >
-      <div fxFlex="24%" fxFlex.xs="100%" fxFlex.sm="50%">
-          <mat-form-field  [style.width.%]="100" floatLabel="always">
-              <mat-label>WeekDays</mat-label>
-              <mat-select placeholder="Select Weekday" formControlName="propertyWeekDays" multiple>
-             
-                <mat-option *ngFor="let day of DataArray[ix].dayList" [value]="day.dayID">{{day.name}}</mat-option>
-              </mat-select>
-              <mat-error
-              *ngIf="property['controls'].propertyWeekDays.hasError('required')">
-              WeekDay is <strong>required</strong>
-            </mat-error>
-          </mat-form-field>
-        </div>
+      
         <div fxFlex="24%" fxFlex.xs="100%" fxFlex.sm="50%">
           <mat-form-field [style.width.%]="100" floatLabel="always"> 
               <mat-label>Weekends</mat-label>
@@ -260,7 +248,7 @@
             </mat-error>
           </mat-form-field>
         </div>
-        <div fxFlex="22%" fxFlex.xs="100%" fxFlex.sm="50%">
+        <div fxFlex="24%" fxFlex.xs="100%" fxFlex.sm="50%">
           <mat-form-field [style.width.%]="100" floatLabel="always"> 
             <mat-label>Other Currency</mat-label>
             <mat-select  formControlName="propertyOtherCurrency" placeholder="Select Other Currency" multiple>

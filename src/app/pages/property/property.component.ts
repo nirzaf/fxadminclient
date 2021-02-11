@@ -78,6 +78,16 @@ export class PropertyComponent implements OnInit {
   showSearch(){
     this.searchEnable=!this.searchEnable;
   }
+  clearCompany(){
+    this.propertyData=[];
+    this.companyGroupList=[];
+    this.holdingCompanyID='';
+    this.holdingCompanyName='';
+
+    this.SelectedHoldingCompany=null;
+ 
+
+  }
   childGroupChange(evt: any, group: any, parentGroup: any) {
     var target = evt.target;
     this.groupID = evt.value;
@@ -346,7 +356,7 @@ export class PropertyComponent implements OnInit {
           this.filteredOptions = this.companyAutoCompleteControl.valueChanges
             .pipe(
               startWith<string | HoldingCompanyOption>(''),
-              map(value => typeof value === 'string' ? value : value.holdingCompanyName),
+              map(value => typeof value === 'string' ? value : value?.holdingCompanyName),
               map(holdingCompanyName => holdingCompanyName ? this._filter(holdingCompanyName) : this.holdingCompanyOptions.slice())
             );
 

@@ -24,7 +24,8 @@
                         [formControl]="companyAutoCompleteControl"
                         [matAutocomplete]="auto" [(ngModel)]="SelectedHoldingCompany">
          
-                      
+                       
+                        <span class="fas fa-times-circle clearspanicon themecolor fxcursor_pointer" (click)="clearCompany()" *ngIf="holdingCompanyID !='' && holdingCompanyID !=null"></span>
                         <span class="fas fa-search searchspanicon themecolor"></span>
                         <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
                           <mat-option  (click)="OnCompanySelected(SelectedHoldingCompany)" *ngFor="let option of filteredOptions | async" [value]="option">

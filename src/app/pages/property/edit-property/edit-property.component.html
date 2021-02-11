@@ -86,7 +86,7 @@
             <div fxFlex="24%" fxFlex.xs="100%" fxFlex.sm="50%">
                 <mat-form-field [style.width.%]="100" floatLabel="always"> 
                     <mat-label>Code</mat-label>
-                    <input matInput  placeholder="Code" formControlName="propertyCode">
+                    <input matInput  placeholder="Code" formControlName="propertyCode" readonly>
                     <mat-error
                     *ngIf="formGroup.get('propertyCode').hasError('required')">
                     Code is <strong>required</strong>
@@ -247,20 +247,7 @@
     </div>
     <div class="content">
       <div fxFlex="100%"  fxLayout="row wrap" fxLayoutGap="15px" >
-          <div fxFlex="24%" fxFlex.xs="100%" fxFlex.sm="50%">
-              <mat-form-field  [style.width.%]="100" floatLabel="always">
-                  <mat-label>WeekDays</mat-label>
-                  <mat-select  placeholder="Select Weekdays" formControlName="propertyWeekDays" multiple>
-                   
-                    <mat-option *ngFor="let day of DataObj.dayList" [value]="day.dayID">{{day.name}}</mat-option>
-                  </mat-select>
-                  <mat-error
-                  *ngIf="formGroup.get('propertyWeekDays').hasError('required')">
-                  WeekDay is <strong>required</strong>
-                </mat-error>
-              </mat-form-field>
-            
-            </div>
+       
             <div fxFlex="24%" fxFlex.xs="100%" fxFlex.sm="50%">
               <mat-form-field [style.width.%]="100" floatLabel="always"> 
                   <mat-label>Weekends</mat-label>
@@ -287,7 +274,7 @@
                 </mat-error>
               </mat-form-field>
             </div>
-            <div fxFlex="22%" fxFlex.xs="100%" fxFlex.sm="50%">
+            <div fxFlex="24%" fxFlex.xs="100%" fxFlex.sm="50%">
               <mat-form-field [style.width.%]="100" floatLabel="always"> 
                 <mat-label>Other Currency</mat-label>
                 <mat-select placeholder="Select Othercurrency" formControlName="propertyOtherCurrency" multiple>

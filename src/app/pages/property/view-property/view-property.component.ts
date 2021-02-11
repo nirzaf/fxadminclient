@@ -9,6 +9,7 @@ import { EditPropertyComponent } from '../edit-property/edit-property.component'
 import { MatIconRegistry } from '@angular/material/icon/icon-registry';
 
 import { FormControl, FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
+import  *  as  dayList  from  'src/app/shared/data/day.json';
 export interface PropertyData {
   propertyID: string;
   propertyName: string;
@@ -32,8 +33,9 @@ export class ViewPropertyComponent implements OnInit {
 
   
   propertyData:PropertyData;
+  dayListArr= (dayList  as  any).default;
   propertyObj={code:'',name:'',cityName:'',address:'',stateName:'',countryName:'',zipCode:'',   
-                    phoneNumber:'',website:'',currencyCode:'',hotelTypeName:'',checkInTime:'',checkOutTime:'',otherCurrencies:[],hotelType:'',weekDays:[],weekend:[],
+                    phoneNumber:'',website:'',currencyCode:'',hotelTypeName:'',checkInTime:'',checkOutTime:'',otherCurrencies:[],hotelType:'',weekDays:'',weekEnds:'',
                     macAddresses:[],starRating:0,networkIPs:[]};
 
   constructor(    public dialogRef: MatDialogRef<ViewPropertyComponent>,
@@ -73,10 +75,53 @@ export class ViewPropertyComponent implements OnInit {
    
    
   }
+  getDayNameById(id:string):any{
+
+    return this.dayListArr.filter(x => x.dayID == id);
+  }
   getPropertyData(propertyID){
     this.webService.commonMethod('property/get/'+propertyID,null,'GET',null)
     .subscribe(data=>{
       if(data.succeeded){
+        if(data.data.weekEnds){
+         
+          var weekEndArr = data.data.weekEnds.split(',');
+         
+          var WeekEndVal='';
+          var i=0;
+          var WeekDayArr=[...this.dayListArr];
+          for(let weekEnd of  weekEndArr)
+          {
+            if(i!=0){
+              WeekEndVal=WeekEndVal+','+this.getDayNameById(weekEnd)[0].name;
+            }else{
+              WeekEndVal=this.getDayNameById(weekEnd)[0].name;
+            }
+            var index = WeekDayArr.map(x => {
+              return x.dayID;
+            }).indexOf(weekEnd);
+            
+            WeekDayArr.splice(index, 1);
+            i++;
+           
+          }
+          var WeekDayVal='';
+          var j=0;
+          for(let weekDay of WeekDayArr){
+            if(j!=0){
+              WeekDayVal=WeekDayVal+','+weekDay.name;
+            }else{
+              WeekDayVal=weekDay.name;
+            }
+            j++;
+
+          }
+          
+          console.log(WeekEndVal);
+          data.data.weekEnds=WeekEndVal;
+          data.data.weekDays=WeekDayVal;
+
+        }
         this.propertyObj=data.data;
        
       }

@@ -9,6 +9,7 @@ import { JsonPipe } from '@angular/common';
 import { FormControl, FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
 import { WebService } from 'src/app/shared/services/web.service';
 import { ToastService } from 'src/app/shared/services/toast.service';
+import  *  as  day  from  'src/app/shared/data/day.json';
 export interface DialogData {
   holdingCompanyID: string;
   holdingCompanyName: string;
@@ -45,7 +46,7 @@ export class AddPropertyComponent implements OnInit {
   DataArray = [];
   countryList = [];
   currencyList=[];
-  dayList=[];
+  dayList= (day  as  any).default;
   hotelTypeList=[];
   cityList = [];
   stateList = [];
@@ -68,7 +69,7 @@ export class AddPropertyComponent implements OnInit {
   get f() { return this.formGroup.controls; }
 
   public initX(panelState): FormGroup {
-
+console.log(day);
     this.DataArray.push({
       countryList: this.countryList,
       stateList: [],
@@ -106,8 +107,7 @@ export class AddPropertyComponent implements OnInit {
       propertyHotelType: [0, { validators: [Validators.min(1)], updateOn: "change" }],
       propertyCheckIn: [, { validators: [Validators.required], updateOn: "change" }],
       propertyCheckOut: [, { validators: [Validators.required], updateOn: "change" }],
-      propertyWebsite: [, { validators: [Validators.required], updateOn: "change" }],
-      propertyWeekDays: [, { validators: [Validators.required], updateOn: "change" }],
+      propertyWebsite: [, { validators: [Validators.required], updateOn: "change" }],      
       propertyWeekends: [, { validators: [Validators.required], updateOn: "change" }],
       propertyCurrency: [0, { validators: [Validators.min(1)], updateOn: "change" }],
       propertyOtherCurrency: [, { validators: [Validators.required], updateOn: "change" }],
@@ -187,7 +187,7 @@ export class AddPropertyComponent implements OnInit {
     this.getCountryList();
     this.getCurrencyList();
     this.getHotelTypeList();
-    this.getDayList();
+    //this.getDayList();
   }
   ngOnInit() {
     this.validate();
@@ -263,19 +263,19 @@ export class AddPropertyComponent implements OnInit {
       });
   }
   getDayList() {
-    this.webService.commonMethod('day/get?pageSize=10000', null, 'GET', null)
-      .subscribe(data => {
-        if (data.succeeded) {
+    // this.webService.commonMethod('day/get?pageSize=10000', null, 'GET', null)
+    //   .subscribe(data => {
+    //     if (data.succeeded) {
           
-          this.dayList = data.data;
-          this.DataArray[0].dayList = data.data;
+    //       this.dayList = data.data;
+    //       this.DataArray[0].dayList = data.data;
       
-        }
-        else {
-          this.toast.error(data.errors);
-        }
+    //     }
+    //     else {
+    //       this.toast.error(data.errors);
+    //     }
 
-      });
+    //   });
   }
   getStateList(countryID, i) {
 
@@ -314,11 +314,7 @@ export class AddPropertyComponent implements OnInit {
           }        
         }
         var weekDayArr=[];
-        for(let weekDay of control.controls["propertyWeekDays"].value){
-          if(weekDay!=0){
-            weekDayArr.push({"DayID":weekDay});
-          }        
-        }
+      
         var weekEndArr=[];
         for(let weekEnd of control.controls["propertyWeekends"].value){
           if(weekEnd!=0){

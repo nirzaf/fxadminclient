@@ -47,7 +47,7 @@
             <div fxFlex="24%" fxFlex.xs="100%">
                 <mat-form-field [style.width.%]="100" floatLabel="always"> 
                     <mat-label>Code</mat-label>
-                    <input matInput  placeholder="Code" formControlName="holdingCompanyCode" >
+                    <input matInput  placeholder="Code" formControlName="holdingCompanyCode" readonly >
                     <mat-error
                     *ngIf="editCompanyForm.get('holdingCompanyCode').hasError('required')">
                     Code is <strong>required</strong>

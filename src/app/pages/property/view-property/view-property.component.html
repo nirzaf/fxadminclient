@@ -208,14 +208,7 @@
                         WeekDays
                     </div>
                     <div fxFlex="100%">
-                        <ng-container *ngFor="let day of propertyObj.weekDays; let ix=index" >
-                            <ng-container *ngIf="ix==0">
-                                {{day.dayName}}
-                            </ng-container>
-                            <ng-container *ngIf="ix!=0">
-                                , {{day.dayName}}
-                            </ng-container>
-                            </ng-container>
+                        {{propertyObj.weekDays}}
                         
                   </div>
                  
@@ -225,14 +218,8 @@
                           WeekEnds
                       </div>
                       <div fxFlex="100%">
-                        <ng-container *ngFor="let day of propertyObj.weekend; let ix=index" >
-                            <ng-container *ngIf="ix==0">
-                                {{day.dayName}}
-                            </ng-container>
-                            <ng-container *ngIf="ix!=0">
-                                , {{day.dayName}}
-                            </ng-container>
-                            </ng-container>
+                          {{propertyObj.weekEnds}}
+                   
                     </div>
                    
                     </div>

@@ -7,6 +7,7 @@ import { MatChipInputEvent } from '@angular/material/chips';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { WebService } from 'src/app/shared/services/web.service';
 import { ToastService } from 'src/app/shared/services/toast.service';
+import  *  as  dayList  from  'src/app/shared/data/day.json';
 export interface PropertyData {
   propertyID: string;
   propertyName: string;
@@ -45,7 +46,7 @@ export class EditPropertyComponent implements OnInit {
  
   countryList = [];
   currencyList=[];
-  dayList=[];
+  dayList=(dayList  as  any).default;
   
   hotelTypeList=[];
   cityList = [];
@@ -95,8 +96,7 @@ export class EditPropertyComponent implements OnInit {
       propertyHotelType: [0, { validators: [Validators.min(1)], updateOn: "change" }],
       propertyCheckIn: [, { validators: [Validators.required], updateOn: "change" }],
       propertyCheckOut: [, { validators: [Validators.required], updateOn: "change" }],
-      propertyWebsite: [, { validators: [Validators.required], updateOn: "change" }],
-      propertyWeekDays: [, { validators: [Validators.required], updateOn: "change" }],
+      propertyWebsite: [, { validators: [Validators.required], updateOn: "change" }],    
       propertyWeekends: [, { validators: [Validators.required], updateOn: "change" }],
       propertyCurrency: [0, { validators: [], updateOn: "change" }],
       propertyOtherCurrency: [, { validators: [Validators.required], updateOn: "change" }],
@@ -173,7 +173,7 @@ export class EditPropertyComponent implements OnInit {
     this.getCountryList();
     this.getCurrencyList();
     this.getHotelTypeList();
-    this.getDayList();
+    
   }
   ngOnInit() {
     this.validate();
@@ -251,26 +251,7 @@ export class EditPropertyComponent implements OnInit {
 
       });
   }
-  getDayList() {
-    this.webService.commonMethod('day/get?pageSize=10000', null, 'GET', null)
-      .subscribe(data => {
-        if (data.succeeded) {
-          
-          this.dayList = data.data;
-          this.DataObj.dayList=data.data.map(function(a) {   
-         
-            return {dayID:a.dayID,name:a.name}
-          }
-          );
-          //this.DataObj.dayList = data.data;
-      
-        }
-        else {
-          this.toast.error(data.errors);
-        }
 
-      });
-  }
   getStateList(countryID,isInitial) {
 
  
@@ -311,11 +292,7 @@ export class EditPropertyComponent implements OnInit {
           }        
         }
         var weekDayArr=[];
-        for(let weekDay of this.formGroup.controls["propertyWeekDays"].value){
-          if(weekDay!=0){
-            weekDayArr.push({"DayID":weekDay});
-          }        
-        }
+      
         var weekEndArr=[];
         for(let weekEnd of this.formGroup.controls["propertyWeekends"].value){
           if(weekEnd!=0){
@@ -414,16 +391,13 @@ export class EditPropertyComponent implements OnInit {
         this.formGroup.get('propertyCheckIn').setValue(this.tConvert(data.data.checkInTime));
         this.formGroup.get('propertyCheckOut').setValue(this.tConvert(data.data.checkOutTime));
         this.formGroup.get('propertyWebsite').setValue(data.data.website);
-        this.DataObj.propertyWeekDays=responseData.weekDays.map(function(a) {   
-         
-          return a.dayID;
+        
+        var weekEndArr = [];
+        if(responseData.weekEnds){
+          weekEndArr = data.data.weekEnds.split(',');
         }
-        );
-        this.DataObj.propertyWeekends=responseData.weekend.map(function(a) {   
-         
-          return a.dayID;
-        }
-        );
+       
+        this.DataObj.propertyWeekends=weekEndArr.map(el=>parseInt(el));
         this.formGroup.get('propertyCurrency').setValue(data.data.currencyID);
        
         this.DataObj.propertyOtherCurrency=responseData.otherCurrencies.map(function(a) {   
@@ -433,7 +407,7 @@ export class EditPropertyComponent implements OnInit {
         );
         this.formGroup.get('propertyOtherCurrency').setValue(this.DataObj.propertyOtherCurrency);
         this.formGroup.get('propertyWeekends').setValue(this.DataObj.propertyWeekends);
-        this.formGroup.get('propertyWeekDays').setValue(this.DataObj.propertyWeekDays);
+ 
        
       }
       else{

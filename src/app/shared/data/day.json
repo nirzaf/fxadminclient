@@ -1,0 +1,32 @@
+[
+    {
+        "dayID": 1,
+        "name": "MO"
+       
+    },
+    {
+        "dayID": 2,
+        "name": "TU"
+    },
+    {
+        "dayID": 3,
+        "name": "WE"
+    },
+    {
+        "dayID": 4,
+        "name": "TH"
+    },
+    {
+        "dayID": 5,
+        "name": "FR"
+    },
+    {
+        "dayID": 6,
+        "name": "SA"
+    },
+    {
+        "dayID": 7,
+        "name": "SU"
+    }
+   
+]

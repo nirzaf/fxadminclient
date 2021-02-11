@@ -79,7 +79,7 @@
                 <div fxFlex="24%" fxFlex.xs="100%">
                     <mat-form-field [style.width.%]="100" floatLabel="always"> 
                         <mat-label>Code</mat-label>
-                        <input matInput  placeholder="Code" formControlName="groupCode" >
+                        <input matInput  placeholder="Code" formControlName="groupCode" readonly>
                         <mat-error
                         *ngIf="editGroupForm.get('groupCode').hasError('required')">
                         Code is <strong>required</strong>
