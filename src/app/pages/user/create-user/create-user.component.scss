@@ -51,28 +51,41 @@ margin-top:10px;
     
 }
 li {
-  width: 2em;
-  height: 2em;
+  width: 3em;
+  height: 3em;
   text-align: center;
   line-height: 2em;
-  border-radius: 1em;
-  background: dodgerblue;
-  margin: 0 1em;
+  border-radius: 1.5em;
+  background: $primary-color;
+  margin: 0 8em;
   display: inline-block;
   color: white;
   position: relative;
-  z-index: 1;
+ 
 }
-
+li div{
+  z-index: 2 !important;
+  position:relative;
+  margin-top: 5px;
+}
+li .steptext{
+  color: $primary-color;
+  position: absolute;
+  top:50px;
+  line-height: 10px;
+  left:-25px;
+  width:100px;
+  
+}
 li::before{
   content: '';
   position: absolute;
-  top: .9em;
-  left: -4em;
-  width: 4em;
+  top: 1.3em;
+  left: -16em;
+  width: 16em;
   height: .2em;
-  background: dodgerblue;
-  z-index: 0;
+  background:$primary-color;
+  
 }
 
 
@@ -82,18 +95,60 @@ li:first-child::before {
 }
 
 .active {
-  background: dodgerblue;
+  background: $primary-color;
 }
 
-.active ~ li {
-  background: lightblue;
+.active ~ li .steptext {
+  color: #B5B5B5;
+  width:200px;
+  text-align: left;
+  left:-50px;
+  
 }
+.active ~ li {
+  background: #B5B5B5;
+}
+
 
 .active ~ li::before {
-  background: lightblue;
+  background: #B5B5B5;
 }
 
 body {
   font-family: sans-serif;
   padding: 2em;
+}
+.profile_pic{
+  max-width: 100%;
+  max-height: 70px;
+  border:2px dotted $primary-color;
+  padding: 1px;
+
+}
+.lable_txt{
+  font-size: 11px;
+   opacity:0.7;
+}
+@media screen and (max-width: 768px) {
+  li {
+
+    margin: 0 3em;
+  }
+  li::before{
+    left: -6em;
+    width: 6em;
+
+  }
+}
+
+@media screen and (max-width: 325px) {
+  li {
+
+    margin: 0 2em;
+  }
+  li::before{
+    left: -4em;
+    width: 4em;
+
+  }
 }
