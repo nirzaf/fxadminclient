@@ -147,16 +147,17 @@
         </mat-form-field>
        
         </div>
-        <div fxFlex="24%" fxFlex.xs="100%" FxLayout="row wrap">         
+        <div fxFlex="24%" fxFlex.xs="100%" FxLayout="row wrap" class="fx_disable_focus">         
             <mat-form-field [style.width.%]="100" floatLabel="always"> 
               <mat-label>Valid From</mat-label>
-              <div fxFlex="20%"><i class="fas fa-calender"></i></div>
-              <div fxFlex="80%">
-                <input matInput #input placeholder="Check in" [ngxTimepicker]="inpicker">
-           
-                <ngx-material-timepicker #inpicker></ngx-material-timepicker>
+          
+              <mat-datepicker-toggle matSuffix [for]="validfrompicker" class="user_datepicker"></mat-datepicker-toggle>
+                <input matInput #input placeholder="Valid From" [matDatepicker]="validfrompicker" [formControl]="validFrom">
+              
+                <mat-datepicker #validfrompicker></mat-datepicker>
+              
              
-              </div>
+         
               <!-- <mat-error
               *ngIf="property['controls'].propertyCheckIn.hasError('required')">
               CheckIn  is <strong>required</strong>
@@ -168,13 +169,10 @@
         <div fxFlex="22%" fxFlex.xs="100%">
           <mat-form-field [style.width.%]="100" floatLabel="always"> 
             <mat-label>Valid To</mat-label>
-            <div fxFlex="20%"><i class="fas fa-clock"></i></div>
-            <div fxFlex="80%">
-              <input matInput #input placeholder="Check in" [ngxTimepicker]="inpicker">
-         
-              <ngx-material-timepicker #inpicker></ngx-material-timepicker>
-           
-            </div>
+            <mat-datepicker-toggle matSuffix [for]="validtopicker" class="user_datepicker"></mat-datepicker-toggle>
+            <input matInput #input placeholder="Valid To" [matDatepicker]="validtopicker" [formControl]="validTO">
+          
+            <mat-datepicker #validtopicker></mat-datepicker>
             <!-- <mat-error
             *ngIf="property['controls'].propertyCheckIn.hasError('required')">
             CheckIn  is <strong>required</strong>
@@ -617,17 +615,11 @@
       <div fxFlex="24%" fxFlex.xs="100%" >
         <mat-form-field [style.width.%]="100" floatLabel="always"> 
           <mat-label>Birth Date</mat-label>
-          <div fxFlex="20%"><i class="fas fa-clock"></i></div>
-          <div fxFlex="80%">
-            <input matInput #input placeholder="Check in" [ngxTimepicker]="inpicker">
-       
-            <ngx-material-timepicker #inpicker></ngx-material-timepicker>
          
-          </div>
-          <!-- <mat-error
-          *ngIf="property['controls'].propertyCheckIn.hasError('required')">
-          CheckIn  is <strong>required</strong>
-          </mat-error> -->
+          <mat-datepicker-toggle matSuffix [for]="birthDatepicker" class="user_datepicker"></mat-datepicker-toggle>
+          <input matInput #input placeholder="Birth Date" [matDatepicker]="birthDatepicker" [formControl]="birthDate">
+        
+          <mat-datepicker #birthDatepicker></mat-datepicker>
           
       </mat-form-field>
       </div>
