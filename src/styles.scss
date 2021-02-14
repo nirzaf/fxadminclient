@@ -1727,6 +1727,13 @@ box-shadow: none;
   .user_datepicker svg{
     width:40px !important;
   }
+  .link-property-content .mat-expansion-panel-header{
+      background:#FFF6EB;
+
+  }
+  .link-property-content .mat-expansion-panel{
+    box-shadow: 0 4px 2px -2px #ccc;
+}
  /*Sirojan css */
  @media screen and (max-width: 599px) {
     .fxa_group_container .mat-expansion-panel-header{
