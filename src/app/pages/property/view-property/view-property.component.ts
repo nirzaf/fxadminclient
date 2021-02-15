@@ -35,8 +35,8 @@ export class ViewPropertyComponent implements OnInit {
   propertyData:PropertyData;
   dayListArr= (dayList  as  any).default;
   propertyObj={code:'',name:'',cityName:'',address:'',stateName:'',countryName:'',zipCode:'',   
-                    phoneNumber:'',website:'',currencyCode:'',hotelTypeName:'',checkInTime:'',checkOutTime:'',otherCurrencies:[],hotelType:'',weekDays:'',weekEnds:'',
-                    macAddresses:[],starRating:0,networkIPs:[]};
+                    phoneNumber:'',website:'',currencyCode:'',hotelTypeName:'',checkInTime:'',checkOutTime:'',otherCurrenciesArr:[],hotelType:'',weekDays:'',weekEnds:'',
+                    macAddressesArr:[],starRating:0,networkIPsArr:[]};
 
   constructor(    public dialogRef: MatDialogRef<ViewPropertyComponent>,
     @Inject(MAT_DIALOG_DATA) public _propertyData: PropertyData, private fb: FormBuilder,private webService:WebService,private toast:ToastService,public dialog: MatDialog
@@ -83,6 +83,8 @@ export class ViewPropertyComponent implements OnInit {
     this.webService.commonMethod('property/get/'+propertyID,null,'GET',null)
     .subscribe(data=>{
       if(data.succeeded){
+        console.log(data);
+     
         if(data.data.weekEnds){
          
           var weekEndArr = data.data.weekEnds.split(',');
@@ -122,7 +124,14 @@ export class ViewPropertyComponent implements OnInit {
           data.data.weekDays=WeekDayVal;
 
         }
+      
         this.propertyObj=data.data;
+        if(data.data.networkIP){
+          this.propertyObj.networkIPsArr=data.data.networkIP.split(',');
+        }
+        if(data.data.macAddresses){
+          this.propertyObj.macAddressesArr=data.data.macAddresses.split(',');
+        }
        
       }
       else{

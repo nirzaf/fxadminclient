@@ -237,7 +237,7 @@
                            Other Currency
                         </div>
                         <div fxFlex="100%">
-                            <ng-container *ngFor="let currency of propertyObj.otherCurrencies; let ix=index" >
+                            <ng-container *ngFor="let currency of propertyObj.otherCurrenciesArr; let ix=index" >
                                 <ng-container *ngIf="ix==0">
                                     {{currency.currencyCode}}
                                 </ng-container>
@@ -258,9 +258,9 @@
                         </div>
                         <div fxFlex="100%">
                             <mat-chip-list #chipList aria-label="IP selection">
-                                <mat-chip *ngFor="let netWorkIP of propertyObj.networkIPs" [selectable]="false"
+                                <mat-chip *ngFor="let netWorkIP of propertyObj.networkIPsArr" [selectable]="false"
                                          [removable]="true" >
-                                  {{netWorkIP.ipAddress}}
+                                  {{netWorkIP}}
                                   <mat-icon matChipRemove *ngIf="true">cancel</mat-icon>
                                 </mat-chip>
                                 
@@ -275,6 +275,7 @@
                    
                     </div>
                 </div>
+              
                 <div class="content">
                     <div fxFlex="100%"  fxLayout="row wrap" fxLayoutGap="15px" class="view-property-chip">
                         
@@ -283,9 +284,9 @@
                             </div>
                             <div fxFlex="100%">
                                 <mat-chip-list #chipList aria-label="IP selection">
-                                    <mat-chip *ngFor="let macAddress of propertyObj.macAddresses" [selectable]="false"
+                                    <mat-chip *ngFor="let macAddress of propertyObj.macAddressesArr" [selectable]="false"
                                              [removable]="true" >
-                                      {{macAddress.macAddress}}
+                                      {{macAddress}}
                                       <mat-icon matChipRemove *ngIf="true">cancel</mat-icon>
                                     </mat-chip>
                                     

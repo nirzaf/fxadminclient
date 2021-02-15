@@ -296,7 +296,7 @@
           <mat-chip-list #chipList aria-label="IP selection">
             <mat-chip *ngFor="let netWorkIP of DataObj.networkIPs" [selectable]="selectable"
                      [removable]="removable" (removed)="removeNetworkIP(netWorkIP)" >
-              {{netWorkIP.name}}
+              {{netWorkIP}}
               <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
             </mat-chip>
             <input formControlName="propertyNetworkIP" placeholder="Network IP"
@@ -316,7 +316,7 @@
               <mat-chip-list #macIdList aria-label="IP selection">
                 <mat-chip *ngFor="let macID of DataObj.macIDs" [selectable]="selectable"
                          [removable]="removable" (removed)="removeMacID(macID)">
-                  {{macID.name}}
+                  {{macID}}
                   <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
                 </mat-chip>
                 <input formControlName="propertyMacAddress" placeholder="Mac ID"

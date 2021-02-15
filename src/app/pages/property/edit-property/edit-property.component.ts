@@ -119,7 +119,7 @@ export class EditPropertyComponent implements OnInit {
   
     // Add our fruit
     if ((value || '').trim()) {
-      this.DataObj.networkIPs.push({ name: value.trim() });
+      this.DataObj.networkIPs.push(value.trim());
      
     }
 
@@ -145,7 +145,7 @@ export class EditPropertyComponent implements OnInit {
 
     // Add our fruit
     if ((value || '').trim()) {
-      this.DataObj.macIDs.push({ name: value.trim() });
+      this.DataObj.macIDs.push(value.trim());
       
     }
 
@@ -303,13 +303,13 @@ export class EditPropertyComponent implements OnInit {
         var macIDArr=[];
         for(let macID of this.DataObj.macIDs){
          
-          macIDArr.push({"MacAddress":macID.name});
+          macIDArr.push({"MacAddress":macID});
            
         }
         var netWorkIPArr=[];
         for(let networkIP of this.DataObj.networkIPs){
          
-          netWorkIPArr.push({"IPAddress":networkIP.name});
+          netWorkIPArr.push({"IPAddress":networkIP});
            
         }
         var propertyData = {
@@ -365,16 +365,14 @@ export class EditPropertyComponent implements OnInit {
     .subscribe(data=>{
       if(data.succeeded){
         var responseData=data.data;
-        this.DataObj.macIDs =responseData.macAddresses.map(function(a) {   
-         
-          return {name:a.macAddress}
+   
+        if(data.data.networkIP){
+          this.DataObj.networkIPs=data.data.networkIP.split(',');
         }
-        );
-        this.DataObj.networkIPs =responseData.networkIPs.map(function(a) {   
-         
-          return {name:a.ipAddress}
+        if(data.data.macAddresses){
+          this.DataObj.macIDs=data.data.macAddresses.split(',');
         }
-        );
+     
         this.formGroup.get('propertyCode').setValue(data.data.code);
         this.formGroup.get('propertyName').setValue(data.data.name);
         this.formGroup.get('propertyAddress').setValue(data.data.address);
@@ -400,7 +398,7 @@ export class EditPropertyComponent implements OnInit {
         this.DataObj.propertyWeekends=weekEndArr.map(el=>parseInt(el));
         this.formGroup.get('propertyCurrency').setValue(data.data.currencyID);
        
-        this.DataObj.propertyOtherCurrency=responseData.otherCurrencies.map(function(a) {   
+        this.DataObj.propertyOtherCurrency=responseData.otherCurrenciesArr.map(function(a) {   
          
           return a.currencyID;
         }
