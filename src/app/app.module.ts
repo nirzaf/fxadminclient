@@ -72,6 +72,7 @@ import { DeletePropertyComponent } from './pages/property/delete-property/delete
 import { CreateUserComponent } from './pages/user/create-user/create-user.component';
 import { MatPaginatorGotoComponent } from './shared/mat-paginator-goto/mat-paginator-goto.component';
 import { LinkProductComponent } from './pages/user/link-product/link-product.component';
+import { DbConnectionComponent } from './pages/common/user/db-connection/db-connection.component';
 
 
 @NgModule({
@@ -109,7 +110,8 @@ import { LinkProductComponent } from './pages/user/link-product/link-product.com
     DeletePropertyComponent,
     CreateUserComponent,
     MatPaginatorGotoComponent,
-    LinkProductComponent 
+    LinkProductComponent,
+    DbConnectionComponent 
   ],
   imports: [
     BrowserModule,

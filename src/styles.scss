@@ -1732,7 +1732,20 @@ box-shadow: none;
 
   }
   .link-property-content .mat-expansion-panel{
-    box-shadow: 0 4px 2px -2px #ccc;
+    box-shadow: 2px 2px 2px 2px #ccc;
+}
+.link-property-content .mat-expansion-panel-content{
+    padding: 10px;
+}
+.link-property-content .mat-expansion-panel{
+    margin-top:15px !important;
+}
+.link-property-content  .mat-expansion-panel-header{
+height: auto;
+padding:12px;
+}
+.disable_hover:hover{
+    background:#FFF6EB !important;
 }
  /*Sirojan css */
  @media screen and (max-width: 599px) {
