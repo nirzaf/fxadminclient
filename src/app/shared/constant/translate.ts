@@ -8,7 +8,8 @@ export const TRANSLATE = {
       "LOG_OUT": "Logout",
       "FLAT": "Flat",
       "Admin":"Admin",
-      "Hotel_Title":"Hotel Creation"
+      "Hotel_Title":"Hotel Creation",
+      "DB_CON_Title":"DB Connection Access"
     }
   },
   "fr": {
@@ -20,7 +21,8 @@ export const TRANSLATE = {
       "LOG_OUT": "Logout",
       "FLAT": "Flat",
       "Admin":"Admin",
-      "Hotel_Title":"Hotel Creation"
+      "Hotel_Title":"Hotel Creation",
+      "DB_CON_Title":"DB Connection Access"
     }
   },
   "ar": {
@@ -32,7 +34,7 @@ export const TRANSLATE = {
       "LOG_OUT": "Logout",
       "FLAT": "Flat",
       "Admin":"Admin",
-      "Hotel_Title":"Hotel Creation"
+      "DB_CON_Title":"DB Connection Access"
     }
   }
 }

@@ -1,0 +1,66 @@
+@import '../../../../config.scss';
+.example-tree-progress-bar {
+    margin-left: 30px;
+  }
+  
+  .example-tree-nested-node {
+    padding-left: 30px;
+  }
+  
+  mat-tree {
+    margin-left: 40px;
+  }
+  .mat-tree-node {
+    padding: 0;
+    background-color: white;
+  }
+  
+  .mat-nested-tree-node {
+    top: -24px;
+  }
+  
+  ul,
+  li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  li.example-tree-container {
+    border-bottom: 0;
+  }
+  
+  ul {
+    padding-left: 40px;
+  }
+  
+  li {
+    padding-left: 40px;
+    border: 1px dotted $primary-color;
+    border-width: 0 0 1px 1px;
+    position: relative;
+    top: -18px;
+  }
+  
+  li.mat-tree-node,
+  li div {
+    margin: 0;
+    position: relative;
+    top: 24px;
+  }
+  
+  li ul {
+    border-top: 1px dotted $primary-color;
+    margin-left: -40px;
+    padding-left: 60px;
+  }
+  
+  .mat-nested-tree-node:last-child ul {
+    border-left: 1px solid white;
+    margin-left: -41px;
+  }
+  
+  .mat-icon-button {
+    z-index: 100;
+  }
+  

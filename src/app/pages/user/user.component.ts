@@ -7,6 +7,7 @@ import { ToastService } from 'src/app/shared/services/toast.service';
 import {MatPaginator} from '@angular/material/paginator';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateUserComponent } from './create-user/create-user.component';
+import { UserHierarchyComponent } from './user-hierarchy/user-hierarchy.component';
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
@@ -36,6 +37,24 @@ export class UserComponent implements OnInit {
     this.GetPropertyAndGroup();
 
     this.getAPIlist();
+  }
+
+  showHirarchy(): void {
+    // if (this.holdingCompanyID != "" && this.holdingCompanyID != null) {
+    const dialogRef = this.dialog.open(UserHierarchyComponent, {
+      panelClass: 'custom-dialog-container',
+      disableClose: true,
+      data: { holdingCompanyName:'dddfdfd', holdingCompanyID: 35 }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+
+      //this.holdingCompanyName = result;
+    });
+  // } else {
+  //   this.toast.error("please select holding company");
+
+  // }
   }
   GetPropertyAndGroup() {
     let serverResponse = {"Response":"Success","Code":"FCS00001","Description":"Property And Group List","Data":[{"propertyGroupID":40531,"propertyGroupCode":40531,"propertyGroupName":"FXFD QA Group","propertyList":[{"propertyID":40529,"pmsCustCode":20007,"propertyName":"FXFD QA1 Property","hotelConnStr":"Server=;Database=;User ID=;Password=;Trusted_Connection=False","pmsVendor":"FX1","crsApplicable":false,"isGSTApplicable":false,"isInterfaceApplicable":false}]}]};

@@ -5,12 +5,15 @@ import { PropertyComponent } from './pages/property/property.component';
 
 import { SampleComponent } from './pages/sample/sample.component';
 import { UserComponent } from './pages/user/user.component';
+import { DbConnectionComponent } from './pages/user/db-connection/db-connection.component';
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'sample' },
   { path: 'sample', component: SampleComponent},
   { path: 'property', component: PropertyComponent},
   { path: 'user', component: UserComponent},
   { path: 'database', component: DatabaseComponent},
+  { path: 'DBConfig', component: DbConnectionComponent},
+
   { path: '**', pathMatch: 'full', redirectTo: 'sample' }
   
 ];
