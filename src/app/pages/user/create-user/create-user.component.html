@@ -4,7 +4,8 @@
 
 <h2 mat-dialog-title>Create User</h2>
 <app-link-product *ngIf="linkProperty"></app-link-product>
-<form *ngIf="!linkProperty">
+
+  <form [formGroup]="createUserForm" *ngIf="!linkProperty">
 <mat-dialog-content  class="mat-typography">
 
   <div>
@@ -40,11 +41,13 @@
               <mat-label>Search Holding company/ Group/ Property</mat-label>
               <input type="text"
               placeholder="Holding Company"
-              aria-label="Number"
-              matInput
-              
+              aria-label="Number" formControlName="holdingCompanyName"
+              matInput              
              >
-
+             <mat-error
+             *ngIf="createUserForm.get('holdingCompanyName').hasError('required')">
+             Code is <strong>required</strong>
+           </mat-error>
             
               <span class="fas fa-search searchspanicon themecolor"></span>
           
@@ -53,21 +56,20 @@
           <div fxFlex="24%" fxFlex.xs="100%">
             <mat-form-field [style.width.%]="100" floatLabel="always"> 
                 <mat-label>Alias</mat-label>
-                <input matInput  placeholder="Code"  >
-                <!-- <mat-error
-                *ngIf="addCompanyForm.get('holdingCompanyCode').hasError('required')">
-                Code is <strong>required</strong>
-              </mat-error> -->
+                <input matInput  placeholder="Code" formControlName="alias" >
+           
             </mat-form-field>
           </div>
           <div fxFlex="22%" fxFlex.xs="100%">
             <mat-form-field  [style.width.%]="100" floatLabel="always">
               <mat-label>Title</mat-label>
-              <mat-select placeholder="Select Title">
-                
-                <!-- <mat-option *ngFor="let country of countryList" [value]="country.countryID">{{country.countryName}}</mat-option> -->
-              
+              <mat-select placeholder="Select Title" formControlName="title">
+                <mat-option *ngFor="let title of titleList" [value]="title.titleID">{{title.name}}</mat-option>            
             </mat-select>
+            <mat-error
+            *ngIf="createUserForm.get('title').hasError('required')">
+            Title is <strong>required</strong>
+          </mat-error>
             </mat-form-field>
 
           </div>
@@ -78,17 +80,17 @@
             <div fxFlex="24%" fxFlex.xs="100%" >
               <mat-form-field [style.width.%]="100" floatLabel="always"> 
                 <mat-label>Last Name</mat-label>
-                <input matInput #input placeholder="Last Name">
-                <!-- <mat-error
-                *ngIf="addCompanyForm.get('holdingCompanyPinZip').hasError('required')">
-                PinZip is <strong>required</strong>
-              </mat-error> -->
+                <input matInput #input placeholder="Last Name" formControlName="lastName">
+                <mat-error
+                *ngIf="createUserForm.get('lastName').hasError('required')">
+                Last Name is <strong>required</strong>
+              </mat-error>
             </mat-form-field>
               </div>
               <div fxFlex="24%" fxFlex.xs="100%">
                 <mat-form-field [style.width.%]="100" floatLabel="always"> 
                   <mat-label>Middle Name</mat-label>
-                  <input matInput #input placeholder="Middle Name">
+                  <input matInput #input placeholder="Middle Name" formControlName="middleName">
                   <!-- <mat-error
                   *ngIf="addCompanyForm.get('holdingCompanyPinZip').hasError('required')">
                   PinZip is <strong>required</strong>
@@ -99,7 +101,7 @@
               <div fxFlex="24%" fxFlex.xs="100%">
                 <mat-form-field [style.width.%]="100" floatLabel="always"> 
                   <mat-label>First Name</mat-label>
-                  <input matInput #input placeholder="First Name">
+                  <input matInput #input placeholder="First Name" formControlName="firstName">
                   <!-- <mat-error
                   *ngIf="addCompanyForm.get('holdingCompanyPinZip').hasError('required')">
                   PinZip is <strong>required</strong>
@@ -109,14 +111,14 @@
               <div fxFlex="22%" fxFlex.xs="100%">
                 <mat-form-field [style.width.%]="100" floatLabel="always"> 
                   <mat-label>Gender</mat-label>
-                  <mat-select placeholder="Select Gender">
-                   
+                  <mat-select placeholder="Select Gender" formControlName="gender">
+                    <mat-option *ngFor="let gender of genderList" [value]="gender.genderID">{{gender.name}}</mat-option>
                       <!-- <mat-option *ngFor="let state of stateList" [value]="state.stateID">{{state.stateName}}</mat-option> -->
                   </mat-select>
-                        <!-- <mat-error
-                *ngIf="addCompanyForm.get('holdingCompanyState').hasError('min')">
-                State is <strong>required</strong>
-              </mat-error> -->
+                        <mat-error
+                *ngIf="createUserForm.get('gender').hasError('min')">
+                Gender is <strong>required</strong>
+              </mat-error>
               </mat-form-field>
               </div>
             </div>
@@ -126,7 +128,11 @@
       <div fxFlex="24%" fxFlex.xs="100%" >
         <mat-form-field [style.width.%]="100" floatLabel="always"> 
           <mat-label>Designation</mat-label>
-          <input matInput #input placeholder="Last Name">
+          <mat-select placeholder="Select User" formControlName="designation" >
+            <mat-option *ngFor="let designation of designationList" [value]="designation.designationID">{{designation.name}}</mat-option>
+            <!-- <mat-option *ngFor="let state of stateList" [value]="state.stateID">{{state.stateName}}</mat-option> -->
+        </mat-select>
+         
           <!-- <mat-error
           *ngIf="addCompanyForm.get('holdingCompanyPinZip').hasError('required')">
           PinZip is <strong>required</strong>
@@ -136,9 +142,9 @@
         <div fxFlex="24%" fxFlex.xs="100%">
           <mat-form-field [style.width.%]="100" floatLabel="always"> 
             <mat-label>Department</mat-label>
-            <mat-select placeholder="Select Department">
+            <mat-select placeholder="Select Department" formControlName="department">
              
-                <!-- <mat-option *ngFor="let state of stateList" [value]="state.stateID">{{state.stateName}}</mat-option> -->
+                <mat-option *ngFor="let department of departmentList" [value]="department.departmentID">{{department.name}}</mat-option>
             </mat-select>
                   <!-- <mat-error
           *ngIf="addCompanyForm.get('holdingCompanyState').hasError('min')">
@@ -148,11 +154,11 @@
        
         </div>
         <div fxFlex="24%" fxFlex.xs="100%" FxLayout="row wrap" class="fx_disable_focus">         
-            <mat-form-field [style.width.%]="100" floatLabel="always"> 
+            <mat-form-field [style.width.%]="100" floatLabel="always" > 
               <mat-label>Valid From</mat-label>
           
               <mat-datepicker-toggle matSuffix [for]="validfrompicker" class="user_datepicker"></mat-datepicker-toggle>
-                <input matInput #input placeholder="Valid From" [matDatepicker]="validfrompicker" [formControl]="validFrom">
+                <input matInput #input placeholder="Valid From" [matDatepicker]="validfrompicker"  formControlName="userValidFrom">
               
                 <mat-datepicker #validfrompicker></mat-datepicker>
               
@@ -170,7 +176,7 @@
           <mat-form-field [style.width.%]="100" floatLabel="always"> 
             <mat-label>Valid To</mat-label>
             <mat-datepicker-toggle matSuffix [for]="validtopicker" class="user_datepicker"></mat-datepicker-toggle>
-            <input matInput #input placeholder="Valid To" [matDatepicker]="validtopicker" [formControl]="validTO">
+            <input matInput #input placeholder="Valid To" [matDatepicker]="validtopicker"  formControlName="userValidTo">
           
             <mat-datepicker #validtopicker></mat-datepicker>
             <!-- <mat-error
@@ -189,8 +195,13 @@
             <div fxFlex="100%" class="lable_txt">
               Profile Picture
             </div>
+            <div fxFlex="100%" class="lable_txt">
+              <input #file type="file" accept='image/*' (change)="preview(file.files)" formControlName="profilePicture" />
+            </div>
             <div fxFlex="100%">
-              <img src="./assets/image/avatar.jpg" class="profile_pic" />
+  
+<img [src]="imgURL"  *ngIf="imgURL" class="profile_pic" >
+              <img src="./assets/image/avatar.jpg" *ngIf="!imgURL" class="profile_pic" />
             </div>
             <div fxFlex="100%" class="lable_txt">
               Max File Size is 1 MB. Use JPG or PNG
@@ -203,8 +214,8 @@
             <div fxFlex="33%" fxFlex.xs="100%">
               <mat-form-field [style.width.%]="100" floatLabel="always"> 
                 <mat-label>User</mat-label>
-                <mat-select placeholder="Select User">
-             
+                <mat-select placeholder="Select User" formControlName="userType" >
+                  <mat-option *ngFor="let userType of userTypeList" [value]="userType.userTypeID">{{userType.name}}</mat-option>
                   <!-- <mat-option *ngFor="let state of stateList" [value]="state.stateID">{{state.stateName}}</mat-option> -->
               </mat-select>
                 <!-- <mat-error
@@ -216,7 +227,7 @@
             <div fxFlex="33%" fxFlex.xs="100%">
               <mat-form-field [style.width.%]="100" floatLabel="always"> 
                   <mat-label>Login ID</mat-label>
-                  <input matInput #input placeholder="Phone Number">
+                  <input matInput #input placeholder="Login ID" formControlName="loginID">
                   <!-- <mat-error
                   *ngIf="addCompanyForm.get('holdingCompanyPhone').hasError('required')">
                   Phone Number is <strong>required</strong>
@@ -226,8 +237,8 @@
             <div fxFlex="30%" fxFlex.xs="100%">
               <mat-form-field [style.width.%]="100" floatLabel="always"> 
                 <mat-label>Password Expiry</mat-label>
-                <mat-select placeholder="Password Expiry">
-             
+                <mat-select placeholder="Password Expiry" formControlName="passwordExpiry">
+                  <mat-option *ngFor="let passwordExpiry of passWorldExpiryList" [value]="passwordExpiry.passWordExpiryVal">{{passwordExpiry.name}}</mat-option>
                   <!-- <mat-option *ngFor="let state of stateList" [value]="state.stateID">{{state.stateName}}</mat-option> -->
               </mat-select>
                 <!-- <mat-error
@@ -252,7 +263,7 @@
                      [matChipInputFor]="chipList"
                      [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                      [matChipInputAddOnBlur]="addOnBlur"
-                     (matChipInputTokenEnd)="addNetworkIP($event)">
+                     (matChipInputTokenEnd)="addNetworkIP($event)" formControlName="propertyNetworkIP">
             </mat-chip-list>
             <mat-error>Atleast 1 ip need to be added</mat-error>
           </mat-form-field>
@@ -280,7 +291,7 @@
                      [matChipInputFor]="macIdList"
                      [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                      [matChipInputAddOnBlur]="addOnBlur"
-                     (matChipInputTokenEnd)="addMacID($event)">
+                     (matChipInputTokenEnd)="addMacID($event)" formControlName="propertyMacID">
             </mat-chip-list>
           
           </mat-form-field>
@@ -296,9 +307,9 @@
             Authorized For License
           </div>
           <div FxFlex="100%">
-            <mat-radio-group aria-label="Select an option">
+            <mat-radio-group aria-label="Select an option" formControlName="isAuthorizedLicense">
               <mat-radio-button value="1">Yes</mat-radio-button>
-              <mat-radio-button value="2">No</mat-radio-button>
+              <mat-radio-button value="0">No</mat-radio-button>
             </mat-radio-group>
           </div>
        
@@ -325,7 +336,7 @@
           <div fxFlex="48%" fxFlex.xs="100%">
             <mat-form-field [style.width.%]="100" floatLabel="always"> 
                 <mat-label>Address</mat-label>
-                <textarea matInput rows="4"  placeholder="Address" style="margin-top:9px;"></textarea>
+                <textarea matInput rows="4"  placeholder="Address" style="margin-top:9px;" formControlName="officeAddress"></textarea>
                 <!-- <mat-error
                 *ngIf="addCompanyForm.get('holdingCompanyPhone').hasError('required')">
                 Phone Number is <strong>required</strong>
@@ -337,10 +348,11 @@
             <div fxFlex="50%" fxFlex.xs="100%">
               <mat-form-field [style.width.%]="100" floatLabel="always"> 
                 <mat-label>Country</mat-label>
-                <mat-select placeholder="Select Country">
-             
-                  <!-- <mat-option *ngFor="let state of stateList" [value]="state.stateID">{{state.stateName}}</mat-option> -->
-              </mat-select>
+                <mat-select placeholder="Select Country" (selectionChange)="getStateList($event.value,'O')" formControlName="officeCountry">
+                     
+                  <mat-option *ngFor="let country of countryList" [value]="country.countryID">{{country.countryName}}</mat-option>
+                </mat-select>
+            
                 <!-- <mat-error
                 *ngIf="addCompanyForm.get('holdingCompanyPhone').hasError('required')">
                 Phone Number is <strong>required</strong>
@@ -351,10 +363,10 @@
             <div fxFlex="50%" fxFlex.xs="100%">
               <mat-form-field [style.width.%]="100" floatLabel="always"> 
                 <mat-label>State</mat-label>
-                <mat-select placeholder="Select State">
-             
-                  <!-- <mat-option *ngFor="let state of stateList" [value]="state.stateID">{{state.stateName}}</mat-option> -->
-              </mat-select>
+                <mat-select placeholder="Select State" (selectionChange)="getCityList($event.value,'O')" formControlName="officeState">
+                     
+                  <mat-option *ngFor="let state of offcialStateList" [value]="state.stateID">{{state.stateName}}</mat-option>
+                </mat-select>
                 <!-- <mat-error
                 *ngIf="addCompanyForm.get('holdingCompanyPhone').hasError('required')">
                 Phone Number is <strong>required</strong>
@@ -368,10 +380,10 @@
           <div fxFlex="50%" fxFlex.xs="100%">
             <mat-form-field [style.width.%]="100" floatLabel="always"> 
               <mat-label>City</mat-label>
-              <mat-select placeholder="Select City">
-           
-                <!-- <mat-option *ngFor="let state of stateList" [value]="state.stateID">{{state.stateName}}</mat-option> -->
-            </mat-select>
+              <mat-select placeholder="Select State"  formControlName="officeCity">
+                     
+                <mat-option *ngFor="let city of officialCityList" [value]="city.cityId">{{city.name}}</mat-option>
+              </mat-select>
               <!-- <mat-error
               *ngIf="addCompanyForm.get('holdingCompanyPhone').hasError('required')">
               Phone Number is <strong>required</strong>
@@ -382,7 +394,7 @@
           <div fxFlex="50%" fxFlex.xs="100%">
             <mat-form-field [style.width.%]="100" floatLabel="always"> 
               <mat-label>Zip / Postal Code</mat-label>
-              <input matInput #input placeholder="Phone Number">
+              <input matInput #input placeholder="Phone Number" formControlName="officePostalCode"> 
               <!-- <mat-error
               *ngIf="addCompanyForm.get('holdingCompanyPhone').hasError('required')">
               Phone Number is <strong>required</strong>
@@ -399,10 +411,10 @@
       <div fxFlex="24%" fxFlex.xs="100%" style="margin-right: 15px !important;">
         <mat-form-field [style.width.%]="20" floatLabel="always"> 
           <mat-label>Mobile</mat-label>
-          <mat-select placeholder="Select Code">
-           
-            <!-- <mat-option *ngFor="let state of stateList" [value]="state.stateID">{{state.stateName}}</mat-option> -->
-        </mat-select>
+          <mat-select placeholder="Select Code"  formControlName="officeMobileCountryCode">
+                     
+            <mat-option *ngFor="let country of countryList" [value]="country.isdCode">{{country.isdCode}}</mat-option>
+          </mat-select>
           
           <!-- <mat-error
           *ngIf="addCompanyForm.get('holdingCompanyPinZip').hasError('required')">
@@ -412,7 +424,7 @@
       <mat-form-field [style.width.%]="75" floatLabel="always" style="margin-left:10px;"> 
         <mat-label></mat-label>
   
-        <input matInput #input placeholder="Mobile">
+        <input matInput #input placeholder="Mobile" formControlName="officeMobileNumber">
         <!-- <mat-error
         *ngIf="addCompanyForm.get('holdingCompanyPinZip').hasError('required')">
         PinZip is <strong>required</strong>
@@ -422,10 +434,10 @@
         <div fxFlex="24%" fxFlex.xs="100%" >
           <mat-form-field [style.width.%]="20" floatLabel="always"> 
             <mat-label>Phone</mat-label>
-            <mat-select placeholder="Select Code">
-             
-              <!-- <mat-option *ngFor="let state of stateList" [value]="state.stateID">{{state.stateName}}</mat-option> -->
-          </mat-select>
+            <mat-select placeholder="Select Code"  formControlName="officePhoneCountryCode">
+                     
+              <mat-option *ngFor="let country of countryList" [value]="country.isdCode">{{country.isdCode}}</mat-option>
+            </mat-select>
             
             <!-- <mat-error
             *ngIf="addCompanyForm.get('holdingCompanyPinZip').hasError('required')">
@@ -435,7 +447,7 @@
         <mat-form-field [style.width.%]="75" floatLabel="always" style="margin-left:10px;"> 
           <mat-label></mat-label>
     
-          <input matInput #input placeholder="Phone NO">
+          <input matInput #input placeholder="Phone NO" formControlName="officePhoneNo"> 
           <!-- <mat-error
           *ngIf="addCompanyForm.get('holdingCompanyPinZip').hasError('required')">
           PinZip is <strong>required</strong>
@@ -446,7 +458,7 @@
         <div fxFlex="25%" fxFlex.xs="100%" style="margin-right:10px;">
           <mat-form-field [style.width.%]="100" floatLabel="always"> 
             <mat-label>Extension</mat-label>
-            <input matInput #input placeholder="Extension">
+            <input matInput #input placeholder="Extension" formControlName="officeExtension">
             <!-- <mat-error
             *ngIf="addCompanyForm.get('holdingCompanyPinZip').hasError('required')">
             PinZip is <strong>required</strong>
@@ -456,7 +468,7 @@
         <div fxFlex="24%" fxFlex.xs="100%" >
           <mat-form-field [style.width.%]="100" floatLabel="always"> 
             <mat-label>Email</mat-label>
-            <input matInput #input placeholder="Email">
+            <input matInput #input placeholder="Email" formControlName="officeEmail"> 
                   <!-- <mat-error
           *ngIf="addCompanyForm.get('holdingCompanyState').hasError('min')">
           State is <strong>required</strong>
@@ -484,7 +496,7 @@
         <div fxFlex="48%" fxFlex.xs="100%">
           <mat-form-field [style.width.%]="100" floatLabel="always"> 
               <mat-label>Address</mat-label>
-              <textarea matInput rows="4"  placeholder="Address" style="margin-top:9px;"></textarea>
+              <textarea matInput rows="4"  placeholder="Address" style="margin-top:9px;" formControlName="personalAddress"></textarea>
               <!-- <mat-error
               *ngIf="addCompanyForm.get('holdingCompanyPhone').hasError('required')">
               Phone Number is <strong>required</strong>
@@ -496,10 +508,11 @@
           <div fxFlex="50%" fxFlex.xs="100%">
             <mat-form-field [style.width.%]="100" floatLabel="always"> 
               <mat-label>Country</mat-label>
-              <mat-select placeholder="Select Country">
-           
-                <!-- <mat-option *ngFor="let state of stateList" [value]="state.stateID">{{state.stateName}}</mat-option> -->
-            </mat-select>
+              <mat-select placeholder="Select Country" (selectionChange)="getStateList($event.value,'p')" formControlName="personalCountry">
+                     
+                <mat-option *ngFor="let country of countryList" [value]="country.countryID">{{country.countryName}}</mat-option>
+              </mat-select>
+          
               <!-- <mat-error
               *ngIf="addCompanyForm.get('holdingCompanyPhone').hasError('required')">
               Phone Number is <strong>required</strong>
@@ -510,10 +523,10 @@
           <div fxFlex="50%" fxFlex.xs="100%">
             <mat-form-field [style.width.%]="100" floatLabel="always"> 
               <mat-label>State</mat-label>
-              <mat-select placeholder="Select State">
-           
-                <!-- <mat-option *ngFor="let state of stateList" [value]="state.stateID">{{state.stateName}}</mat-option> -->
-            </mat-select>
+              <mat-select placeholder="Select State" (selectionChange)="getCityList($event.value,'p')" formControlName="personalState">
+                     
+                <mat-option *ngFor="let state of personalStateList" [value]="state.stateID">{{state.stateName}}</mat-option>
+              </mat-select>
               <!-- <mat-error
               *ngIf="addCompanyForm.get('holdingCompanyPhone').hasError('required')">
               Phone Number is <strong>required</strong>
@@ -527,10 +540,10 @@
         <div fxFlex="50%" fxFlex.xs="100%">
           <mat-form-field [style.width.%]="100" floatLabel="always"> 
             <mat-label>City</mat-label>
-            <mat-select placeholder="Select City">
-         
-              <!-- <mat-option *ngFor="let state of stateList" [value]="state.stateID">{{state.stateName}}</mat-option> -->
-          </mat-select>
+            <mat-select placeholder="Select State"  formControlName="personalCity">
+                     
+              <mat-option *ngFor="let city of personalCityList" [value]="city.cityId">{{city.name}}</mat-option>
+            </mat-select>
             <!-- <mat-error
             *ngIf="addCompanyForm.get('holdingCompanyPhone').hasError('required')">
             Phone Number is <strong>required</strong>
@@ -541,7 +554,7 @@
         <div fxFlex="50%" fxFlex.xs="100%">
           <mat-form-field [style.width.%]="100" floatLabel="always"> 
             <mat-label>Zip / Postal Code</mat-label>
-            <input matInput #input placeholder="Phone Number">
+            <input matInput #input placeholder="Phone Number" formControlName="personalPostalCode">
             <!-- <mat-error
             *ngIf="addCompanyForm.get('holdingCompanyPhone').hasError('required')">
             Phone Number is <strong>required</strong>
@@ -558,9 +571,9 @@
     <div fxFlex="24%" fxFlex.xs="100%" style="margin-right: 15px !important;">
       <mat-form-field [style.width.%]="20" floatLabel="always"> 
         <mat-label>Mobile</mat-label>
-        <mat-select placeholder="Select Code">
-         
-          <!-- <mat-option *ngFor="let state of stateList" [value]="state.stateID">{{state.stateName}}</mat-option> -->
+          <mat-select placeholder="Select Code"  formControlName="personalMobileCountryCode">
+                     
+        <mat-option *ngFor="let country of countryList" [value]="country.isdCode">{{country.isdCode}}</mat-option>
       </mat-select>
         
         <!-- <mat-error
@@ -571,7 +584,7 @@
     <mat-form-field [style.width.%]="75" floatLabel="always" style="margin-left:10px;"> 
       <mat-label></mat-label>
 
-      <input matInput #input placeholder="Mobile">
+      <input matInput #input placeholder="Mobile" formControlName="personalMobileNumber">
       <!-- <mat-error
       *ngIf="addCompanyForm.get('holdingCompanyPinZip').hasError('required')">
       PinZip is <strong>required</strong>
@@ -581,10 +594,12 @@
       <div fxFlex="24%" fxFlex.xs="100%" >
         <mat-form-field [style.width.%]="20" floatLabel="always"> 
           <mat-label>Phone</mat-label>
-          <mat-select placeholder="Select Code">
-           
-            <!-- <mat-option *ngFor="let state of stateList" [value]="state.stateID">{{state.stateName}}</mat-option> -->
-        </mat-select>
+          <mat-select placeholder="Select Code"  formControlName="personalPhoneCountryCode">
+                     
+            <mat-option *ngFor="let country of countryList" [value]="country.isdCode">{{country.isdCode}}</mat-option>
+          </mat-select>
+            
+       
           
           <!-- <mat-error
           *ngIf="addCompanyForm.get('holdingCompanyPinZip').hasError('required')">
@@ -594,7 +609,7 @@
       <mat-form-field [style.width.%]="75" floatLabel="always" style="margin-left:10px;"> 
         <mat-label></mat-label>
   
-        <input matInput #input placeholder="Phone NO">
+        <input matInput #input placeholder="Phone NO" formControlName="personalPhoneNumber">
         <!-- <mat-error
         *ngIf="addCompanyForm.get('holdingCompanyPinZip').hasError('required')">
         PinZip is <strong>required</strong>
@@ -605,7 +620,7 @@
       <div fxFlex="25%" fxFlex.xs="100%" style="margin-right:10px;">
         <mat-form-field [style.width.%]="100" floatLabel="always"> 
           <mat-label>Extension</mat-label>
-          <input matInput #input placeholder="Extension">
+          <input matInput #input placeholder="Extension" formControlName="personalExtension">
           <!-- <mat-error
           *ngIf="addCompanyForm.get('holdingCompanyPinZip').hasError('required')">
           PinZip is <strong>required</strong>
@@ -617,7 +632,7 @@
           <mat-label>Birth Date</mat-label>
          
           <mat-datepicker-toggle matSuffix [for]="birthDatepicker" class="user_datepicker"></mat-datepicker-toggle>
-          <input matInput #input placeholder="Birth Date" [matDatepicker]="birthDatepicker" [formControl]="birthDate">
+          <input matInput #input placeholder="Birth Date" [matDatepicker]="birthDatepicker" formControlName="userBirthDate" [formControl]="birthDate">
         
           <mat-datepicker #birthDatepicker></mat-datepicker>
           
@@ -631,7 +646,7 @@
         <div fxFlex="48%" fxFlex.xs="100%">
           <mat-form-field [style.width.%]="100" floatLabel="always"> 
               <mat-label>Remarks</mat-label>
-              <textarea matInput rows="2"  placeholder="Remarks" ></textarea>
+              <textarea matInput rows="2"  placeholder="Remarks" formControlName="remarks" ></textarea>
               <!-- <mat-error
               *ngIf="addCompanyForm.get('holdingCompanyPhone').hasError('required')">
               Phone Number is <strong>required</strong>
@@ -644,9 +659,10 @@
 </div>
 
 </mat-dialog-content>
+
 <mat-dialog-actions align="end">
     <button  mat-button type="button" class="border btnProperty" (click)="onNoClick()">Back</button>
-    <button  mat-button class="button btnProperty" type="submit" >Save & Continue</button>
+    <button  mat-button class="button btnProperty" type="submit" (click)="submitFormtest()">Save & Continue</button>
     <button  mat-button class="button btnProperty" type="submit" (click)="submitForm()">Save</button>
  
 </mat-dialog-actions>

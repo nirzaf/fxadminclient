@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24" height="24" viewBox="0 0 24 24">
+  <defs>
+    <clipPath id="clip-CTA">
+      <rect width="24" height="24"/>
+    </clipPath>
+  </defs>
+  <g id="CTA" clip-path="url(#clip-CTA)">
+    <g id="Group_15814" data-name="Group 15814" transform="translate(-733 3332)">
+      <g id="Group_12614" data-name="Group 12614" transform="translate(735 -3330)">
+        <g id="Group_12806" data-name="Group 12806" transform="translate(0 0)">
+          <g id="Group_6980" data-name="Group 6980">
+            <g id="Group_6846" data-name="Group 6846">
+              <circle id="Ellipse_87" data-name="Ellipse 87" cx="10" cy="10" r="10" fill="#2700ff"/>
+            </g>
+          </g>
+        </g>
+        <g id="Group_12807" data-name="Group 12807" transform="translate(7.446 3.135) rotate(45)">
+          <g id="Group_1364" data-name="Group 1364" transform="translate(0 0)">
+            <path id="Path_662" data-name="Path 662" d="M1.173,4.719h0a.315.315,0,0,0-.177.391.319.319,0,0,0,.376.212L5.894,4.244,4.963,5.521a.259.259,0,0,0,.307.391l.9-.374a.255.255,0,0,0,.07-.044L9.014,3.038,12.3,1.664C13.552,1.123,13.453.613,13.393.47a.687.687,0,0,0-.426-.365A2.684,2.684,0,0,0,11.821.022a1.49,1.49,0,0,1-.354-.007c-.338-.04-.569-.037-1.755.455L3.225,3.165.908,1.691a.316.316,0,0,0-.291-.026l-.424.176a.313.313,0,0,0-.18.2.32.32,0,0,0,.042.269L1.566,4.558Z" transform="matrix(0.996, -0.087, 0.087, 0.996, 0, 1.17)" fill="#fff" fill-rule="evenodd"/>
+          </g>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

@@ -49,7 +49,7 @@ export class AddSubGroupComponent  {
         this.initX(true)
       ])
     });
-    // this.formGroup.valueChanges.subscribe(data => console.log(data));
+   
   }
   get f() { return this.formGroup.controls; }
 
@@ -145,11 +145,11 @@ export class AddSubGroupComponent  {
 
 
       }
-      console.log(groups);
+     
       this.webService.commonMethod('group/post', { "Groups": groups }, 'POST', null)
         .subscribe(data => {
           if (data.succeeded) {
-            console.log(data);
+            
             // //this.countryList=data.data;
             // this.holdingCompanyData.holdingCompanyID=data.data.holdingCompanyID;
             // this.holdingCompanyData.holdingCompanyName=data.data.name;
@@ -160,19 +160,17 @@ export class AddSubGroupComponent  {
           }
 
 
-          //console.log(data);
+         
           //this.isProgressing = false;
         });
       // ...
 
-      console.log("form submitted");
-      console.log(this.formGroup.value);
+     
     }
     else {
       return;
     }
-    // console.log('value: ', this.form.value);
-    // console.log('valid: ', this.form.valid);
+
   }
 
   constructor(
@@ -230,7 +228,7 @@ export class AddSubGroupComponent  {
         if (data.succeeded) {
           var arrayControl = this.formGroup.get('formArray1') as FormArray;
           var item = arrayControl.at(i);
-          console.log(item.value);
+          
   
           this.DataArray[i].stateList = data.data;
           this.DataArray[i].cityList=[];
@@ -239,7 +237,7 @@ export class AddSubGroupComponent  {
           this.toast.error(data.errors);
           this.stateList = [];
         }
-        console.log(data);
+      
       
       });
   }

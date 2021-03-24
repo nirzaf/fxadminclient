@@ -69,7 +69,7 @@ export class AddPropertyComponent implements OnInit {
   get f() { return this.formGroup.controls; }
 
   public initX(panelState): FormGroup {
-console.log(day);
+
     this.DataArray.push({
       countryList: this.countryList,
       stateList: [],
@@ -212,7 +212,7 @@ console.log(day);
         else {
           this.toast.error(data.errors);
         }
-        console.log(data);
+ 
       
       });
   }
@@ -364,7 +364,7 @@ console.log(day);
 
 
       }
-    console.log(properties);
+
       this.webService.commonMethod('property/post', { "properties": properties }, 'POST', null)
         .subscribe(data => {
           if (data.succeeded) {

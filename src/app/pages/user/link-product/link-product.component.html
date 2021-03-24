@@ -1,5 +1,5 @@
 
-<form >
+<form [formGroup]="formGroup">
     <mat-dialog-content  class="mat-typography link-property-content">
     
       <div>
@@ -28,7 +28,7 @@
                     <div fxFlex="100%">
 <b>Select Default</b>
                     </div>
-                    <div fxFlex="100%" fxLayoutGap="10px" fxLayout.lt-sm="column">
+                    <div fxFlex="100%" fxLayoutGap="10px" fxLayout.lt-sm="column" >
                         <div fxFlex="50%" fxFlex.xs="100%">
                             <mat-form-field [style.width.%]="100" floatLabel="always"> 
                                 <mat-label>Group</mat-label>
@@ -62,10 +62,12 @@
                 
               </div>
         </div>
-        <mat-accordion>
-   
-            <mat-expansion-panel [expanded]="true"  hideToggle="true" class="mat-elevation-z0"  (opened)="PanelOpenState = true"
-            (closed)="PanelOpenState = false"  >
+      
+   <div  formArrayName="formArray1" *ngFor="let group of f.formArray1['controls']; let ix=index" [attr.data-index]="i">
+    <mat-accordion>
+
+            <mat-expansion-panel [expanded]="DataArray[ix].PanelOpenState"  hideToggle="true" class="mat-elevation-z0"  (opened)="DataArray[ix].PanelOpenState = true"
+            (closed)="DataArray[ix].PanelOpenState = false"  >
                                
               <mat-expansion-panel-header #panelH (click)="panelH._toggle()" class="disable_hover">
                 <mat-panel-title>
@@ -77,8 +79,8 @@
                   </div>
                   <div fxFlex="18%" fxFlex.xs="20%" fxLayoutAlign="end" >
                     <i  class="far fa-trash-alt themecolor iconSize moreicon" style="margin-right: 10%;"></i>
-                    <i  *ngIf="PanelOpenState" class="fas fa-angle-up themecolor iconSize moreicon"></i>
-                    <i  *ngIf="!PanelOpenState" class="fas fa-angle-down themecolor iconSize moreicon"></i>
+                    <i  *ngIf="DataArray[ix].PanelOpenState" class="fas fa-angle-up themecolor iconSize moreicon"></i>
+                    <i  *ngIf="!DataArray[ix].PanelOpenState" class="fas fa-angle-down themecolor iconSize moreicon"></i>
                 
                    
                 </div>
@@ -196,7 +198,7 @@
       <div fxFlex="100%" fxLayoutAlign="end start">
         <i  class="fas fa-plus themecolor iconSize moreicon fxcursor_pointer" style="margin-right: 15px;"></i>
     </div>
-    <div fxFlex="100%" fxLayoutAlign="end start" class="themecolor fxcursor_pointer">
+    <div fxFlex="100%" fxLayoutAlign="end start" class="themecolor fxcursor_pointer" >
        <span style="margin-right: 10px">Add</span>
     </div>
    
@@ -206,11 +208,13 @@
   </div>
 </div>
       </mat-expansion-panel>
-      </mat-accordion>
+    </mat-accordion>
+    </div>
+      
 
  <div class="content">
   <div fxFlex="100%" fxLayoutAlign="end start">
-    <div class="icon btnusercreate fxcursor_pointer" id="bigplus"  style="padding:0px 32px;"></div>
+    <div class="icon btnusercreate fxcursor_pointer" (click)="addX()" id="bigplus"  style="padding:0px 32px;"></div>
    </div>
  </div>
     

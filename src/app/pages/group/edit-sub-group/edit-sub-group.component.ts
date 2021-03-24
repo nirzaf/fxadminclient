@@ -95,8 +95,8 @@ public countryList: any = [];
       }
       
       
-       console.log(data);
-      //this.isProgressing = false;
+      
+    
     });
   }
   getgroupData(groupID){
@@ -162,7 +162,7 @@ public countryList: any = [];
           }
           
           
-           console.log(data);
+          
           //this.isProgressing = false;
         });
     } else {

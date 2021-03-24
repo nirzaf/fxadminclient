@@ -56,7 +56,7 @@ export class ViewSubGroupComponent implements OnInit {
           this.toast.success("Updated Successfully");
           // this.getCompanyGroupList(this.holdingCompanyID);
         }
-        console.log('The dialog was closed');
+     
         // this.holdingCompanyName= result.data.holdingCompanyName;
         // this.holdingCompanyID=result.data.holdingCompanyID;
       });
@@ -75,7 +75,7 @@ export class ViewSubGroupComponent implements OnInit {
       }
       
       
-       console.log(data);
+      
       //this.isProgressing = false;
     });
   }
@@ -96,7 +96,7 @@ export class ViewSubGroupComponent implements OnInit {
         // this.getCompanyGroupList(this.holdingCompanyID);
       }
       else{
-        console.log('The dialog was closed');
+       
       }
      
      

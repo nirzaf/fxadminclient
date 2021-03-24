@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24" height="24" viewBox="0 0 24 24">
+  <defs>
+    <clipPath id="clip-Stay_through_min_1">
+      <rect width="24" height="24"/>
+    </clipPath>
+  </defs>
+  <g id="Stay_through_min_1" data-name="Stay through min – 1" clip-path="url(#clip-Stay_through_min_1)">
+    <rect id="Rectangle_10425" data-name="Rectangle 10425" width="20" height="20" transform="translate(0 2)" fill="none"/>
+    <g id="Group_15819" data-name="Group 15819" transform="translate(-1205 -126)">
+      <g id="Group_15752" data-name="Group 15752" transform="translate(1207.833 134.667)">
+        <path id="Path_14706" data-name="Path 14706" d="M-26.826,1229.982a5.141,5.141,0,0,0-1.243-.523,3.888,3.888,0,0,1-1.11-.474.728.728,0,0,1-.337-.608.8.8,0,0,1,.312-.674,1.4,1.4,0,0,1,.877-.242,1.344,1.344,0,0,1,.932.294,1.04,1.04,0,0,1,.326.813h1.147a1.867,1.867,0,0,0-.309-1.045,2.027,2.027,0,0,0-.852-.726,2.855,2.855,0,0,0-1.234-.255,2.647,2.647,0,0,0-1.7.519,1.616,1.616,0,0,0-.653,1.321,1.7,1.7,0,0,0,.906,1.484,5.345,5.345,0,0,0,1.274.537,3.725,3.725,0,0,1,1.109.479.8.8,0,0,1,.308.674.785.785,0,0,1-.3.644,1.422,1.422,0,0,1-.9.244,1.633,1.633,0,0,1-1.07-.309,1.075,1.075,0,0,1-.374-.875h-1.152a1.832,1.832,0,0,0,.335,1.093,2.214,2.214,0,0,0,.938.736,3.232,3.232,0,0,0,1.323.266,2.758,2.758,0,0,0,1.724-.489,1.577,1.577,0,0,0,.635-1.319,1.755,1.755,0,0,0-.218-.889A1.983,1.983,0,0,0-26.826,1229.982Z" transform="translate(30.874 -1226.543)" fill="#e257a6"/>
+        <path id="Path_14707" data-name="Path 14707" d="M-23.8,1227.589h2.049v5.7h1.143v-5.7h2.067v-.929H-23.8Z" transform="translate(29.298 -1226.569)" fill="#e257a6"/>
+        <path id="Path_14708" data-name="Path 14708" d="M-12.129,1229.417v-2.591h-1.19v2.591h-2.592v1.19h2.591v2.591h1.19v-2.593h2.592v-1.19Z" transform="translate(27.539 -1226.607)" fill="#e257a6"/>
+      </g>
+      <rect id="Rectangle_10426" data-name="Rectangle 10426" width="20" height="20" transform="translate(1207 128)" fill="none"/>
+    </g>
+  </g>
+</svg>

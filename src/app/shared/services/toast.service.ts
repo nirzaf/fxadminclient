@@ -58,10 +58,14 @@ export class ToastService {
     }, 200);
   }
   closePopup() {
-    (<HTMLElement>document.getElementById('toast-popup')).style.top = "-150px";
-    setTimeout(()=>{
-      this.removeElement('toast-popup');
-    },1)
+    if((<HTMLElement>document.getElementById('toast-popup'))){
+      (<HTMLElement>document.getElementById('toast-popup')).style.top = "-150px";
+      setTimeout(()=>{
+        this.removeElement('toast-popup');
+      },1)
+
+    }
+ 
 
   }
 

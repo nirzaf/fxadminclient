@@ -58,7 +58,7 @@ public countryList: any = [];
       }
       
       
-       console.log(data);
+    
       //this.isProgressing = false;
     });
   }
@@ -76,7 +76,7 @@ public countryList: any = [];
       }
       
       
-       console.log(data);
+   
       //this.isProgressing = false;
     });
   }
@@ -96,7 +96,7 @@ public countryList: any = [];
       }
       
       
-       console.log(data);
+   
       //this.isProgressing = false;
     });
   }
@@ -125,7 +125,7 @@ public countryList: any = [];
       }
       
       
-       console.log(data);
+     
       //this.isProgressing = false;
     });
   }
@@ -165,8 +165,8 @@ public countryList: any = [];
           }
           
           
-           console.log(data);
-          //this.isProgressing = false;
+        
+          
         });
     } else {
      return;

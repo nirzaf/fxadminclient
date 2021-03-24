@@ -68,7 +68,7 @@ export class PropertyComponent implements OnInit {
     this.groupID = evt.value;
     this.groupName = group.name;
 
-    console.log("Radio Change");
+   
     this.propertyData = [];
     this.getPropertyList(this.groupID);
     this.searchText='';
@@ -93,7 +93,7 @@ export class PropertyComponent implements OnInit {
     this.groupID = evt.value;
 
 
-    console.log("Radio Change");
+
     this.propertyData = [];
     this.getPropertyList(this.groupID);
     this.searchText='';
@@ -184,7 +184,7 @@ export class PropertyComponent implements OnInit {
           if (result.data == "D") {
             this.getHoldingCompanyList();
           }
-          console.log('The dialog was closed');
+        
   
         });
       }else{
@@ -343,7 +343,7 @@ export class PropertyComponent implements OnInit {
         if (data.succeeded) {
           var holdingCompanyID = this.holdingCompanyID;
           var holdingCompanyName = '';
-
+         
           this.holdingCompanyOptions = data.data.map(function (a) {
             if (holdingCompanyID == a.holdingCompanyID) {
 
@@ -352,6 +352,7 @@ export class PropertyComponent implements OnInit {
             return { holdingCompanyID: a.holdingCompanyID, holdingCompanyName: a.name }
           }
           );
+         
           this.holdingCompanyName = holdingCompanyName;
           this.filteredOptions = this.companyAutoCompleteControl.valueChanges
             .pipe(

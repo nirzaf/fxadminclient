@@ -14,15 +14,60 @@ export class LinkProductComponent implements OnInit {
   groupList=[];
   propertyList=[];
   productList=[];
+ 
 
   constructor(public dialogRef: MatDialogRef<CreateUserComponent>,private fb: FormBuilder) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
+    this.validate();
+
+
+
   }
+  public validate(): void {
+    this.formGroup = this.fb.group({
+      'formArray1': this.fb.array([
+        this.initX(true)
+      ])
+    });
+   
+  }
+
   onNoClick(): void {
 
     this.dialogRef.close({ event: 'close', data: null });
   }
+  get f() { return this.formGroup.controls; }
+
+  public initX(panelState): FormGroup {
+
+    this.DataArray.push({
+      groupList: this.groupList,
+      propertyList: [],   
+      PanelOpenState:panelState,
+
+    })
+ 
+    return this.fb.group({
+
+      groupName: [, { validators: [Validators.required], updateOn: "change" }],
+      propertyName: [, { validators: [Validators.required], updateOn: "change" }],
+     
+    });
+  }
+  public addX(): void {
+    const control = <FormArray>this.f.formArray1;
+    control.push(this.initX(false));
+  }
+
+
+
+  removeX(index) {
+    const control = <FormArray>this.f.formArray1;
+    control.removeAt(index);
+
+  }
+
 //   public validate(): void {
 //     this.formGroup = this.fb.group({
 //       'formArray1': this.fb.array([

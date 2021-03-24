@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24" height="24" viewBox="0 0 24 24">
+  <defs>
+    <clipPath id="clip-Overbooking_Allowed">
+      <rect width="24" height="24"/>
+    </clipPath>
+  </defs>
+  <g id="Overbooking_Allowed" data-name="Overbooking Allowed" clip-path="url(#clip-Overbooking_Allowed)">
+    <rect id="Rectangle_10464" data-name="Rectangle 10464" width="18" height="18" rx="2" transform="translate(3 3)" fill="#68d660"/>
+  </g>
+</svg>

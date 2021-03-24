@@ -179,7 +179,7 @@ export class AddGroupComponent {
         else {
           this.toast.error(data.errors);
         }
-        console.log(data);
+      
       
       });
   }
@@ -203,7 +203,7 @@ export class AddGroupComponent {
     var arrayControl = this.formGroup.get('formArray1') as FormArray;
     var item = arrayControl.at(i);
  
-    console.log(countryID);
+  
     this.webService.commonMethod('state/get/' + countryID, null, 'GET', null)
       .subscribe(data => {
         if (data.succeeded) {

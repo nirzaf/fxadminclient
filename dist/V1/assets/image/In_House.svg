@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="48" height="48" viewBox="0 0 48 48">
+  <defs>
+    <clipPath id="clip-In_House">
+      <rect width="48" height="48"/>
+    </clipPath>
+  </defs>
+  <g id="In_House" data-name="In House" clip-path="url(#clip-In_House)">
+    <rect width="48" height="48" fill="#fff"/>
+    <g id="bed_2_" data-name="bed (2)" transform="translate(4 -68)">
+      <g id="Group_15782" data-name="Group 15782" transform="translate(11.926 85.959)">
+        <g id="Group_15781" data-name="Group 15781" transform="translate(0 0)">
+          <path id="Path_14753" data-name="Path 14753" d="M171.211,154.6H151.828c-.947,0-2.528.359-2.528,2.8v3.727h24.439V157.4C173.739,154.967,172.158,154.6,171.211,154.6Z" transform="translate(-148.178 -155.607)" fill="#fd8d25"/>
+        </g>
+      </g>
+      <g id="Group_15784" data-name="Group 15784" transform="translate(0 80)">
+        <g id="Group_15783" data-name="Group 15783" transform="translate(0 0)">
+          <path id="Path_14754" data-name="Path 14754" d="M6.414,93.628H2.556V80H0v26.417H2.556V99.595H36.641v6.814H39.2V93.628Z" transform="translate(0 -80)" fill="#fd8d25"/>
+        </g>
+      </g>
+      <g id="Group_15786" data-name="Group 15786" transform="translate(3.243 85.799)">
+        <g id="Group_15785" data-name="Group 15785" transform="translate(0 0)">
+          <ellipse id="Ellipse_177" data-name="Ellipse 177" cx="3.414" cy="3.414" rx="3.414" ry="3.414" transform="translate(1.504 -1)" fill="#fd8d25"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

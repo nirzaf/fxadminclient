@@ -201,7 +201,7 @@ export class EditPropertyComponent implements OnInit {
         else {
           this.toast.error(data.errors);
         }
-        console.log(data);
+       
       
       });
   }
@@ -342,7 +342,7 @@ export class EditPropertyComponent implements OnInit {
 
 
       
-    console.log(propertyData);
+  
       this.webService.commonMethod('property/put/'+parseInt(this.propertyData.propertyID), { "property":propertyData }, 'PUT', null)
         .subscribe(data => {
           if (data.succeeded) {
@@ -413,7 +413,7 @@ export class EditPropertyComponent implements OnInit {
       }
       
       
-       console.log(data);
+      
       //this.isProgressing = false;
     });
   }

@@ -126,7 +126,7 @@ export class HierarchyComponent {
 
 
           });
-          console.log(hierarrchyData);
+         
 
 
           this.dataSource.data = hierarrchyData;
@@ -144,7 +144,7 @@ export class HierarchyComponent {
  * Toggle the node, remove from display list
  */
   toggleNode(node) {
-    console.log(node);
+   
     let index = this.dataSource.data.findIndex(x => x.item == node.item);
 
     if (!this.treeControl.isExpanded(node)) {

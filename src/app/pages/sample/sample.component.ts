@@ -61,8 +61,7 @@ export class SampleComponent implements OnInit {
   getAPIlist(){
     this.webService.commonMethod('PropertyAndGroup/list-by-login',{"LoginID":"nitish.kumar@idsnext.com"},'POST','fxauth')
     .subscribe(data=>{
-      // this.toast.error("Api hitted success")
-      // console.log(data);
+   
       this.isProgressing = false;
     });
   }

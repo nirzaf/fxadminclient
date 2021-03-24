@@ -68,7 +68,7 @@ export class ViewPropertyComponent implements OnInit {
           this.toast.success("Updated Successfully");
           // this.getCompanyGroupList(this.holdingCompanyID);
         }
-        console.log('The dialog was closed');
+    
         // this.holdingCompanyName= result.data.holdingCompanyName;
         // this.holdingCompanyID=result.data.holdingCompanyID;
       });
@@ -83,7 +83,7 @@ export class ViewPropertyComponent implements OnInit {
     this.webService.commonMethod('property/get/'+propertyID,null,'GET',null)
     .subscribe(data=>{
       if(data.succeeded){
-        console.log(data);
+      
      
         if(data.data.weekEnds){
          
@@ -119,7 +119,7 @@ export class ViewPropertyComponent implements OnInit {
 
           }
           
-          console.log(WeekEndVal);
+   
           data.data.weekEnds=WeekEndVal;
           data.data.weekDays=WeekDayVal;
 
@@ -139,7 +139,7 @@ export class ViewPropertyComponent implements OnInit {
       }
       
       
-       console.log(data);
+      
       //this.isProgressing = false;
     });
   }
@@ -160,7 +160,7 @@ export class ViewPropertyComponent implements OnInit {
         // this.getCompanyGroupList(this.holdingCompanyID);
       }
       else{
-        console.log('The dialog was closed');
+      
       }
      
      

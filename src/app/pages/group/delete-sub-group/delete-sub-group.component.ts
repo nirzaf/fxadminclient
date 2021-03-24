@@ -49,7 +49,7 @@ export class DeleteSubGroupComponent implements OnInit {
         }
         
         
-         console.log(data);
+       
         //this.isProgressing = false;
       });
     }

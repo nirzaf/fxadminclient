@@ -100,7 +100,7 @@ export class UserComponent implements OnInit {
     this.webService.commonMethod('PropertyAndGroup/list-by-login',{"LoginID":"nitish.kumar@idsnext.com"},'POST','fxauth')
     .subscribe(data=>{
       // this.toast.error("Api hitted success")
-      // console.log(data);
+     
       this.isProgressing = false;
     });
   }
