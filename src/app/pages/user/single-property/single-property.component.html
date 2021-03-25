@@ -1,0 +1,208 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit(form.value)" class="form-horizontal">
+  <mat-dialog-content  class="mat-typography link-property-content">
+    
+    <div>
+      <div class="content">
+        <div fxFlex="100%" fxLayoutAlign="center center">
+          <ul style="margin-top: 0px;">
+            <li><div>1</div><div class="steptext">User Details</div></li>
+            <li class="active"><div>2</div><div class="steptext">Link Property / Product</div></li>
+          
+          </ul>  
+        </div>
+      </div>
+      <div class="content" style="margin-top: 15px;">
+        <div fxFlex="100%"  fxLayout="row wrap" fxLayoutGap="15px" class="fx_border_bottom" >
+            <div fxFlex="25%" fxFlex.xs="100%" fxLayout="row wrap" fxFlex.sm="100%" class="fx_subgroup_head">
+                <div fxFlex="100%">
+                    <b>Link Property/ Product for John Lee</b>
+                </div>
+                <div fxFlex="100%">
+                  <span class="lable_txt">Holding Company</span><br/>
+                  Hyaat Regency
+              </div>
+                  
+              </div>
+              <div fxFlex="73.8%" fxFlex.xs="100%"  fxLayout="row wrap"   fxLayoutAlign="end" style="background:#f5f5f5;padding: 10px;">
+                  <div fxFlex="100%">
+<b>Select Default</b>
+                  </div>
+                  <div fxFlex="100%" fxLayoutGap="10px" fxLayout.lt-sm="column" >
+                      <div fxFlex="50%" fxFlex.xs="100%">
+                          <mat-form-field [style.width.%]="100" floatLabel="always" > 
+                              <mat-label>Group</mat-label>
+                              <mat-select placeholder="Select Default Group" formControlName="defaultGroupName" (selectionChange)="getPropertyListParent($event.value)">
+                           
+                                <mat-option *ngFor="let group of groupList" [value]="group.groupID">{{group.name}}</mat-option>
+                            </mat-select>
+                              <mat-error
+                              *ngIf="form.get('defaultGroupName').hasError('required')">
+                              Default Group  is <strong>required</strong>
+                            </mat-error>
+                          </mat-form-field>
+                      </div>
+                      <div fxFlex="50%" fxFlex.xs="100%">
+                          <mat-form-field [style.width.%]="100" floatLabel="always" > 
+                              <mat-label>Property</mat-label>
+                              <mat-select placeholder="Select Default Property"  formControlName="defaultPropertyName">
+                           
+                                <mat-option *ngFor="let property of propertyList" [value]="property.propertyID">{{property.name}}</mat-option>
+                            </mat-select>
+                            <mat-error
+                            *ngIf="form.get('defaultPropertyName').hasError('required')">
+                            Default Property  is <strong>required</strong>
+                          </mat-error>
+                          </mat-form-field>
+                      </div>
+                  </div>
+          
+               
+            </div>
+              
+            </div>
+      </div>
+      <div formArrayName="property">
+        <mat-accordion *ngFor="let property of form.controls.property['controls']; let i = index" formGroupName="{{i}}">
+    
+                <mat-expansion-panel [expanded]="DataArray[i].PanelOpenState" (opened)="DataArray[i].PanelOpenState = true"
+                (closed)="DataArray[i].PanelOpenState = false"  hideToggle="true" class="mat-elevation-z0"  >
+                                   
+                  <mat-expansion-panel-header #panelH (click)="panelH._toggle()" class="disable_hover">
+                    <mat-panel-title>
+              
+              <div class="content" (click)="panelH._toggle()">
+                <div fxFlex="100%"  fxLayout="row wrap" fxLayoutGap="15px" class="fx_border_bottom" >
+                    <div fxFlex="80%" fxFlex.xs="75%" fxFlex.sm="100%" class="fx_subgroup_head">
+                        <b>Link {{i+1}}</b> - Hyaat Regency Banglore       
+                      </div>
+                      <div fxFlex="18%" fxFlex.xs="20%" fxLayoutAlign="end" >
+                        <i  *ngIf="form.controls.property.controls.length > 1" (click)="deleteProperty(i)" class="far fa-trash-alt themecolor iconSize moreicon" style="margin-right: 10%;"></i>
+                        <i  *ngIf="DataArray[i].PanelOpenState" class="fas fa-angle-up themecolor iconSize moreicon"></i>
+                        <i  *ngIf="!DataArray[i].PanelOpenState" class="fas fa-angle-down themecolor iconSize moreicon"></i>
+                    
+                       
+                    </div>
+                      
+                    </div>
+              </div>
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <div fxFlex="100%" fxLayout="row wrap">
+    
+          
+          <div fxFlex="100%" fxLayoutGap="10px">
+            <div fxFlex="45%" fxFlex.xs="100%">
+                <mat-form-field [style.width.%]="100" floatLabel="always"> 
+                    <mat-label>Group</mat-label>
+                    <mat-select placeholder="Select Group" (selectionChange)="getPropertyList($event.value,i)" formControlName="group">
+                      <mat-option *ngFor="let group of groupList" [value]="group.groupID">{{group.name}}</mat-option>
+                      
+                  </mat-select>
+                  <mat-error
+                  *ngIf="property.get('group').hasError('required')">
+                   Group  is <strong>required</strong>
+                </mat-error>
+                   
+                </mat-form-field>
+            </div>
+            <div fxFlex="45%" fxFlex.xs="100%">
+                <mat-form-field [style.width.%]="100" floatLabel="always"> 
+                    <mat-label>Property</mat-label>
+                    <mat-select placeholder="Select" formControlName="property">
+                      <mat-option *ngFor="let property of DataArray[i].propertyList" [value]="property.propertyID">{{property.name}}</mat-option>
+                      
+                  </mat-select>
+                  <mat-error
+                  *ngIf="property.get('property').hasError('required')">
+                   Property  is <strong>required</strong>
+                </mat-error>
+          
+                </mat-form-field>
+            </div>
+        </div>
+        
+        <div fxFlex="90%"  fxLayout="row wrap" formArrayName="products">
+          <div fxFlex="100%" style="margin-bottom: 10px;">
+            <b>Add Products</b>
+          </div>
+          <div fxFlex="100%" *ngFor="let product of property.controls.products.controls; let j = index" formGroupName="{{j}}"  style="background-color: #F8F8F8;padding:10px;margin-bottom: 5px;" fxLayoutGap="15px"    >
+    
+          
+          <div fxFlex="50%" fxFlex.xs="100%">
+              <mat-form-field [style.width.%]="100" floatLabel="always" > 
+                  <mat-label>Product</mat-label>
+                  <mat-select placeholder="Select Product" formControlName="productCtrl">
+                    <mat-option *ngFor="let produtcObj of productList" [value]="produtcObj.productID">{{produtcObj.name}}</mat-option>
+                
+                </mat-select>
+                <mat-error
+                *ngIf="product.get('productCtrl').hasError('required')">
+                 Product  is <strong>required</strong>
+              </mat-error>
+          
+              </mat-form-field>
+          </div>
+          <div fxFlex="25%" fxFlex.xs="100%">
+              <mat-form-field [style.width.%]="100" floatLabel="always"> 
+                  <mat-label>DB Access</mat-label>
+                  <mat-select placeholder="Select" formControlName="access">
+               
+                    <mat-option *ngFor="let access of accessList" [value]="access.accessID">{{access.name}}</mat-option>
+                </mat-select>
+                <mat-error
+                *ngIf="product.get('access').hasError('required')">
+                 Access  is <strong>required</strong>
+              </mat-error>
+              </mat-form-field>
+          </div>
+          <div fxFlex="10%" fxFlex.xs="50%" fxLayout="row wrap" *ngIf="property.controls.products.controls.length > 1" (click)="deleteProduct(i,j)">
+            <div fxFlex="100%" fxLayoutAlign="end start">
+              <i  class="far fa-trash-alt themecolor iconSize moreicon fxcursor_pointer"  style="margin-right: 15px;"></i>
+          </div>
+          <div fxFlex="100%" fxLayoutAlign="end start" class="themecolor fxcursor_pointer">
+             Delete
+          </div>
+         
+           
+        </div>
+        <div fxFlex="10%" fxFlex.xs="50%" fxLayout="row wrap" *ngIf="property.controls.products.controls.length == (j+1)" (click)="addProduct(i)">
+          <div fxFlex="100%" fxLayoutAlign="end start">
+            <i  class="fas fa-plus themecolor iconSize moreicon fxcursor_pointer" style="margin-right: 15px;"></i>
+        </div>
+        <div fxFlex="100%" fxLayoutAlign="end start" class="themecolor fxcursor_pointer"  >
+           <span style="margin-right: 10px">Add</span>
+        </div>
+       
+         
+      </div>
+      </div>
+      
+      </div>
+    </div>
+          </mat-expansion-panel>
+        </mat-accordion>
+        </div>
+    
+        <div class="content">
+            <div fxFlex="100%" fxLayoutAlign="end start">
+              <div class="icon btnusercreate fxcursor_pointer" (click)="addProperty()" id="bigplus"  style="padding:0px 32px;"></div>
+             </div>
+           </div>
+
+
+
+  
+  </div>
+  
+
+  
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+      <button  mat-button type="button" class="border btnProperty" (click)="onNoClick()">Back</button>
+      <button  mat-button class="button btnProperty" type="submit" >Save & Continue</button>
+      <button  mat-button class="button btnProperty" type="submit">Save</button>
+   
+  </mat-dialog-actions>
+
+
+</form>

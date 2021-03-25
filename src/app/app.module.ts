@@ -74,6 +74,7 @@ import { MatPaginatorGotoComponent } from './shared/mat-paginator-goto/mat-pagin
 import { LinkProductComponent } from './pages/user/link-product/link-product.component';
 import { DbConnectionComponent } from './pages/user/db-connection/db-connection.component';
 import { UserHierarchyComponent } from './pages/user/user-hierarchy/user-hierarchy.component';
+import { SinglePropertyComponent } from './pages/user/single-property/single-property.component';
 
 
 @NgModule({
@@ -113,7 +114,8 @@ import { UserHierarchyComponent } from './pages/user/user-hierarchy/user-hierarc
     MatPaginatorGotoComponent,
     LinkProductComponent,
     DbConnectionComponent,
-    UserHierarchyComponent 
+    UserHierarchyComponent,
+    SinglePropertyComponent 
   ],
   imports: [
     BrowserModule,

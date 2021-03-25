@@ -27,14 +27,14 @@
               "src/favicon.ico",
               "src/assets",
               "src/resources"
-          ],
-          "styles": [
+            ],
+            "styles": [
               "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
               "src/config.scss",
               "src/styles.scss",
               "src/assets/css/responsive.scss",
               "src/assets/css/icon.scss"
-          ],
+            ],
             "scripts": []
           },
           "configurations": {
@@ -129,5 +129,8 @@
       }
     }
   },
-  "defaultProject": "FxAdminClient"
+  "defaultProject": "FxAdminClient",
+  "cli": {
+    "analytics": "eaf58ee3-fe3b-41c7-96d8-9e769ce23247"
+  }
 }

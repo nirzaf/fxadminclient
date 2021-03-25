@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { CreateUserComponent } from '../create-user/create-user.component';
 import { FormControl, FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
+import { WebService } from 'src/app/shared/services/web.service';
+import { ToastService } from 'src/app/shared/services/toast.service';
 @Component({
   selector: 'app-link-product',
   templateUrl: './link-product.component.html',
@@ -14,140 +16,66 @@ export class LinkProductComponent implements OnInit {
   groupList=[];
   propertyList=[];
   productList=[];
- 
 
-  constructor(public dialogRef: MatDialogRef<CreateUserComponent>,private fb: FormBuilder) { }
+  linkPropertyForm: FormGroup = this.formBuilder.group({
+    defaultGroupName: [, { validators: [Validators.required], updateOn: "change" }],
+    defaultPropertyName: [, { validators: [Validators.required], updateOn: "change" }],
+    
+
+
+  });
+
+  constructor(public dialogRef: MatDialogRef<CreateUserComponent>,private fb: FormBuilder,private webService: WebService, private toast: ToastService,private formBuilder: FormBuilder) { }
 
   ngOnInit() {
-    this.validate();
-
+    
+    this.getCompanyGroupList(35);
 
 
   }
-  public validate(): void {
-    this.formGroup = this.fb.group({
-      'formArray1': this.fb.array([
-        this.initX(true)
-      ])
-    });
-   
-  }
+ 
 
   onNoClick(): void {
 
     this.dialogRef.close({ event: 'close', data: null });
   }
-  get f() { return this.formGroup.controls; }
 
-  public initX(panelState): FormGroup {
 
-    this.DataArray.push({
-      groupList: this.groupList,
-      propertyList: [],   
-      PanelOpenState:panelState,
-
-    })
  
-    return this.fb.group({
 
-      groupName: [, { validators: [Validators.required], updateOn: "change" }],
-      propertyName: [, { validators: [Validators.required], updateOn: "change" }],
-     
+
+
+
+ 
+ 
+
+getCompanyGroupList(holdingCompanyID) {
+  this.webService.commonMethod('group/getbycompany/' + holdingCompanyID, null, 'GET', null)
+    .subscribe(data => {
+      if (data.succeeded) {
+         this.groupList= data.data;
+      } else {
+        this.toast.error(data.errors);
+      }
+
     });
-  }
-  public addX(): void {
-    const control = <FormArray>this.f.formArray1;
-    control.push(this.initX(false));
-  }
+}
+getPropertyList(groupID) {
+
+  this.webService.commonMethod('property/getbygroup/' + groupID, null, 'GET', null)
+    .subscribe(data => {
+      if (data.succeeded) {
+      this.propertyList = data.data;
+      }
+      else {
+        //this.propertyData = [];
+        this.toast.error(data.errors);
+      }
 
 
-
-  removeX(index) {
-    const control = <FormArray>this.f.formArray1;
-    control.removeAt(index);
-
-  }
-
-//   public validate(): void {
-//     this.formGroup = this.fb.group({
-//       'formArray1': this.fb.array([
-//         this.initX(true)
-//       ])
-//     });
-   
-//   }
-//  // get f() { return this.formGroup.controls; }
-//   public initX2(): FormGroup {
-//     return this.fb.group({
-
-//       propertyName: [, { validators: [Validators.required], updateOn: "change" }],
-//       propertyCode: [, { validators: [Validators.required], updateOn: "change" }],
-//       propertyAddress: [, { validators: [Validators.required], updateOn: "change" }],
-//       propertyCountry: [0, { validators: [Validators.min(1)], updateOn: "change" }],
-//       propertyState: [0, { validators: [Validators.min(1)], updateOn: "change" }],
-//       propertyCity: [0, { validators: [Validators.min(1)], updateOn: "change" }],
-//       propertyPinZip: [, { validators: [Validators.required], updateOn: "change" }],
-//       propertyPhone: [, { validators: [Validators.required], updateOn: "change" }],
-//       propertyHotelType: [0, { validators: [Validators.min(1)], updateOn: "change" }],
-//       propertyCheckIn: [, { validators: [Validators.required], updateOn: "change" }],
-//       propertyCheckOut: [, { validators: [Validators.required], updateOn: "change" }],
-//       propertyWebsite: [, { validators: [Validators.required], updateOn: "change" }],      
-//       propertyWeekends: [, { validators: [Validators.required], updateOn: "change" }],
-//       propertyCurrency: [0, { validators: [Validators.min(1)], updateOn: "change" }],
-//       propertyOtherCurrency: [, { validators: [Validators.required], updateOn: "change" }],
-//       propertyNetworkIP: [, { validators: [], updateOn: "change" }],
-//       propertyMacAddress: [, { validators: [], updateOn: "change" }],
-     
-//     });
-//   }
-
-//   public initX(panelState): FormGroup {
-
-//     this.DataArray.push({
-//       groupList: this.groupList,
-//       propertyList: this.propertyList,
-//       formArray2: this.fb.array([
-//         this.initX2()
-//       ]),
-//       PanelOpenState: panelState,
-//       propertyState:0,
-//       propertyCity:0,
-//       propertyCountry:0,
-   
-//       propertyCurrency:0,
-//       propertyOtherCurrency:0,
-//       propertyWeekends:0,
-//       propertyWeekDays:0,
-//       propertyHotelType:0,
-      
-//       networkIPs:[],
-      
-//       rating:0,
-    
-//       macIDs:[]
-
-//     })
- 
-//     return this.fb.group({
-
-//       propertyName: [, { validators: [Validators.required], updateOn: "change" }],
-//       propertyCode: [, { validators: [Validators.required], updateOn: "change" }],
-//       propertyAddress: [, { validators: [Validators.required], updateOn: "change" }],
-//       propertyCountry: [0, { validators: [Validators.min(1)], updateOn: "change" }],
-//       propertyState: [0, { validators: [Validators.min(1)], updateOn: "change" }],
-//       propertyCity: [0, { validators: [Validators.min(1)], updateOn: "change" }],
-//       propertyPinZip: [, { validators: [Validators.required], updateOn: "change" }],
-//       propertyPhone: [, { validators: [Validators.required], updateOn: "change" }],
-//       propertyHotelType: [0, { validators: [Validators.min(1)], updateOn: "change" }],
-//       propertyCheckIn: [, { validators: [Validators.required], updateOn: "change" }],
-//       propertyCheckOut: [, { validators: [Validators.required], updateOn: "change" }],
-//       propertyWebsite: [, { validators: [Validators.required], updateOn: "change" }],      
-//       propertyWeekends: [, { validators: [Validators.required], updateOn: "change" }],
-//       propertyCurrency: [0, { validators: [Validators.min(1)], updateOn: "change" }],
-//       propertyOtherCurrency: [, { validators: [Validators.required], updateOn: "change" }],
-//       propertyNetworkIP: [, { validators: [], updateOn: "change" }],
-//       propertyMacAddress: [, { validators: [], updateOn: "change" }],
-     
-//     });
-//   }
+    });
+}
+onSubmit(form){
+  console.log(form);
+}
 }
