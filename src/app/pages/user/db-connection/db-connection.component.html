@@ -4,6 +4,8 @@
     <app-breadcrumb [breadCrumbList]="breadCrumb"></app-breadcrumb>
 </div>
 
+<form [formGroup]="dbConfigForm" (ngSubmit)="onSubmit(dbConfigForm.value)">
+
 
 <div class="db-config"  fxLayout="column wrap">
     
@@ -13,26 +15,88 @@
 
         <br>
           <mat-card fxFlex="100%" fxLayout="row wrap" style="padding: 16px 0px !important;">
-            <h2 style="padding:0px 20px;">Product List</h2>
-            <table mat-table [dataSource]="dataSource">
 
-                <!--- Note that these columns can be defined in any order.
-                      The actual rendered columns are set as a property on the row definition" -->
+            <div fxFlex="100%"  fxLayout="row wrap" >
+                <div fxFlex="100%"  fxLayout="row wrap" fxLayoutGap="15px" class="form-input-row" style="padding: 10px;">
+                    <div fxFlex="24%" fxFlex.xs="100%" >
+                        <mat-form-field  [style.width.%]="100" floatLabel="always">
+                            <mat-label>HoldingCompany</mat-label>
+                            <mat-select placeholder="Select Company" (selectionChange)="getCompanyGroupList($event.value)" formControlName="holdingCompany">
+                              
+                              <mat-option *ngFor="let holdingCompany of holdingCompanyList" [value]="holdingCompany.holdingCompanyID">{{holdingCompany.name}}</mat-option>
+                            
+                          </mat-select>
+        
+                          <mat-error
+                          *ngIf="dbConfigForm.get('holdingCompany').hasError('required')">
+                          Company is <strong>required</strong>
+                        </mat-error>
+                    
+                  
+                        </mat-form-field>
+                      </div>
+                      <div fxFlex="24%" fxFlex.xs="100%">
+                        <mat-form-field [style.width.%]="100" floatLabel="always"> 
+                            <mat-label>Group</mat-label>
+                            <mat-select placeholder="Select Group" (selectionChange)="getPropertyList($event.value)" formControlName="group">
+                             
+                                <mat-option *ngFor="let group of groupList" [value]="group.groupID">{{group.name}}</mat-option>
+                            </mat-select>
+                                  <mat-error
+                          *ngIf="dbConfigForm.get('group').hasError('required')">
+                          Group is <strong>required</strong>
+                        </mat-error>
+                        </mat-form-field>
+                      </div>
+                      <div fxFlex="24%" fxFlex.xs="100%">
+                        <mat-form-field [style.width.%]="100" floatLabel="always"> 
+                            <mat-label>Property</mat-label>
+                            <mat-select placeholder="Select Property" formControlName="property">                      
+                                <mat-option *ngFor="let property of propertyList" [value]="property.propertyID">{{property.name}}</mat-option>
+                            </mat-select>
+                            <mat-error
+                            *ngIf="dbConfigForm.get('property').hasError('required')">
+                            Property is <strong>required</strong>
+                          </mat-error>
+                        </mat-form-field>
+                      </div>
+                    
+                    </div>
+                    <div fxFlex="100%"  fxLayout="row wrap"  class="form-input-row">
+            <h2 style="padding:0px 20px;">Product List</h2>
+          
+              <div fxFlex="100%" class="DBheader" fxLayout="row wrap">
+<div fxFlex="20%">
+    Product
+</div>
+<div fxFlex="20%">
+    Live
+</div>
+<div fxFlex="20%">
+    Username
+</div>
+<div fxFlex="20%">
+    Password
+</div>
+<div fxFlex="20%">
+    DBName
+</div>
+              </div>
+              <div formArrayName="products" fxFlex="100%">
+
               
-                <!-- Position Column -->
-                <ng-container matColumnDef="position">
-                  <th mat-header-cell *matHeaderCellDef><b>Product</b> </th>
-                  <td mat-cell *matCellDef="let element"> {{element.productName}} </td>
-                </ng-container>
-              
-                <!-- Name Column -->
-                <ng-container matColumnDef="name">
-                  <th mat-header-cell *matHeaderCellDef> <b>Live</b> </th>
-                  <td mat-cell *matCellDef="let element"> 
+              <div  *ngFor="let product of dbConfigForm.controls.products['controls']; let i = index" formGroupName="{{i}}"  class="DBRow" fxLayout="row wrap">
+                <div fxFlex="20%">
+                    <div style="margin: 10px 20px;">
+                        {{product.controls['productName'].value}}
+                    </div>
+                  
+                </div>
+                <div fxFlex="20%">
                     <mat-form-field  floatLabel="always"> 
                         <mat-label></mat-label>
                        
-                        <input matInput #input placeholder="Live">
+                        <input matInput #input placeholder="Live" formControlName="live">
                       
                     
                         <!-- <mat-error
@@ -41,37 +105,26 @@
                         </mat-error> -->
                         
                     </mat-form-field>
-                
-                </td>
-                </ng-container>
-              
-                <!-- Weight Column -->
-                <ng-container matColumnDef="weight">
-                  <th mat-header-cell *matHeaderCellDef> <b>Username</b> </th>
-                  <td mat-cell *matCellDef="let element">  
-                        <mat-form-field  floatLabel="always"> 
-                    <mat-label></mat-label>
-                   
-                    <input matInput #input placeholder="Username">
-                  
-                
-                    <!-- <mat-error
-                    *ngIf="property['controls'].propertyCheckIn.hasError('required')">
-                    CheckIn  is <strong>required</strong>
-                    </mat-error> -->
-                    
-                </mat-form-field>
-            </td>
-                </ng-container>
-              
-                <!-- Symbol Column -->
-                <ng-container matColumnDef="symbol">
-                  <th mat-header-cell *matHeaderCellDef> <b>Password</b> </th>
-                  <td mat-cell *matCellDef="let element"> 
+                </div>
+                <div fxFlex="20%">
                     <mat-form-field  floatLabel="always"> 
                         <mat-label></mat-label>
                        
-                        <input matInput [type]="hide ? 'password' : 'text'">
+                        <input matInput #input placeholder="Username" formControlName="username">
+                      
+                    
+                        <!-- <mat-error
+                        *ngIf="property['controls'].propertyCheckIn.hasError('required')">
+                        CheckIn  is <strong>required</strong>
+                        </mat-error> -->
+                        
+                    </mat-form-field>
+                </div>
+                <div fxFlex="20%">
+                    <mat-form-field  floatLabel="always"> 
+                        <mat-label></mat-label>
+                       
+                        <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
                         <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
                         <!-- <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon> -->
                         </button>
@@ -82,13 +135,26 @@
                         CheckIn  is <strong>required</strong>
                         </mat-error> -->
                         
-                    </mat-form-field>      
-                </td>
-                </ng-container>
-              
-                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-              </table>
+                    </mat-form-field> 
+                </div>
+                <div fxFlex="20%">
+                    <mat-form-field  floatLabel="always"> 
+                        <mat-label></mat-label>
+                       
+                        <input matInput #input placeholder="DBName" formControlName="dbName">
+                      
+                    
+                        <!-- <mat-error
+                        *ngIf="property['controls'].propertyCheckIn.hasError('required')">
+                        CheckIn  is <strong>required</strong>
+                        </mat-error> -->
+                        
+                    </mat-form-field>
+                </div>
+                              </div>
+                            </div>
+              </div>
+            </div>
               <br>
          
               </mat-card>
@@ -113,4 +179,5 @@
         </div>
       </mat-card>
 </div>
+</form>
 
