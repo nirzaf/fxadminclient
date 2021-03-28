@@ -55,11 +55,13 @@ export class DbConnectionComponent implements OnInit {
   }
   addProduct(product?: any,isOpen?: any) {
     let fg = this.formBuilder.group({
-      'live': ['', Validators.compose([Validators.required])],
-      'username': ['', Validators.compose([Validators.required])],
-      'password': ['', Validators.compose([Validators.required])],
-      'dbName': ['', Validators.compose([Validators.required])],
-      'productName': [product? product.name:'', Validators.compose([Validators.required])],
+      'live': [product? product.live:''],
+      'username': [product? product.username:''],
+      'password': [product? product.password:''],
+      'dbName': [product? product.dbName:''],
+      'productName': [product? product.productName:''],
+      'productID': [product? product.productID:''],
+      'dbConnectionID': [product? product.dbConnectionID:''],
      
     });
     (<FormArray>this.dbConfigForm.get('products')).push(fg);
@@ -68,7 +70,7 @@ export class DbConnectionComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getProductList();
+    //this.getProductList();
     this.breadCrumb = ["Admin", "DB Connection Access"];
     this.getHoldingCompanyList();
 
@@ -81,6 +83,8 @@ export class DbConnectionComponent implements OnInit {
         this.productData = data.data;
         if (this.productData) {
           this.productData.forEach(product => {
+            product.dbConnectionID=null;
+            product.productName=product.name;
             this.addProduct(product);
           
           });
@@ -106,7 +110,7 @@ export class DbConnectionComponent implements OnInit {
 
   }
   getPropertyList(groupID) {
-
+    this.dbConfigForm.controls.products = new FormArray([]);
     this.webService.commonMethod('property/getbygroup/' + groupID, null, 'GET', null)
       .subscribe(data => {
         if (data.succeeded) {
@@ -121,6 +125,7 @@ export class DbConnectionComponent implements OnInit {
       });
   }
   getHoldingCompanyList() {
+
     this.webService.commonMethod('holdingcompany/get?pageSize=1000', null, 'GET', null)
       .subscribe(data => {
         if (data.succeeded) {         
@@ -136,6 +141,7 @@ export class DbConnectionComponent implements OnInit {
       });
   }
   getCompanyGroupList(holdingCompanyID) {
+    this.dbConfigForm.controls.products = new FormArray([]);
     this.webService.commonMethod('group/getbycompany/' + holdingCompanyID, null, 'GET', null)
       .subscribe(data => {
         if (data.succeeded) {
@@ -151,5 +157,71 @@ export class DbConnectionComponent implements OnInit {
 
       });
   }
-  onSubmit(formValue) {}
+  getProductByProperty(PropertyID) {
+    
+    this.webService.commonMethod('dbconnection/GetByProperty/' + PropertyID, null, 'GET', null)
+      .subscribe(data => {
+        if (data.succeeded) {
+          this.productData = data.data;
+          this.dbConfigForm.controls.products = new FormArray([]);
+          if (this.productData.length>0) {
+            this.productData.forEach(product => {
+              this.addProduct(product);
+            
+            });
+          } else {
+            this.getProductList();
+          }  
+       
+
+
+
+        } else {
+          this.toast.error(data.errors);
+        }
+
+      });
+  }
+  getControls() {
+    return (this.dbConfigForm.get('products') as FormArray).controls;
+  }
+  onSubmit(formValue) {
+
+    if (this.dbConfigForm.valid) {
+      var products = [];
+      for (let control of this.dbConfigForm.get('products')['controls']) {
+      var dbConnectionID=0;
+      if(control.controls["dbConnectionID"].value!=null){
+        dbConnectionID=control.controls["dbConnectionID"].value;
+      }
+          var productData = {
+            "HoldingCompanyID": this.dbConfigForm.controls["holdingCompany"].value,
+            "GroupID": this.dbConfigForm.controls["group"].value,
+            "PropertyID": this.dbConfigForm.controls["property"].value,
+            "ProductID": control.controls["productID"].value,
+            "Live": control.controls["live"].value,
+            "Username": control.controls["username"].value,
+            "Password": control.controls["password"].value,
+            "DBName": control.controls["dbName"].value,
+            "DBConnectionID": dbConnectionID,
+            "CreatedBy": "Sirojan",
+            "IsDeleted": false,
+            "ModifiedBy": "Sirojan"
+  
+          }
+          products.push(productData);
+       
+      }
+      this.webService.commonMethod('dbconnection/post', {'DBConnections':products}, 'POST', null)
+        .subscribe(data => {
+          if (data.succeeded) {
+
+            this.toast.success("Success Fully Saved");
+          }
+          else {
+            this.toast.error(data.errors);
+          }
+        });
+    }
+  }
 }

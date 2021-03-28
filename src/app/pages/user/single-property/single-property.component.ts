@@ -102,7 +102,7 @@ export class SinglePropertyComponent implements OnInit {
   }
 
   onSubmit(formValue) {
-    console.log(this.form.controls["defaultGroupName"].value);
+ 
     if (this.form.valid) {
       var products = [];
       for (let control of this.form.get('property')['controls']) {
@@ -114,7 +114,7 @@ export class SinglePropertyComponent implements OnInit {
             "ProductID": prdControl.controls["productCtrl"].value,
             "AccessID": prdControl.controls["access"].value,
             "CreatedBy": "Sirojan",
-            "IsDeleted": true,
+            "IsDeleted": false,
             "ModifiedBy": "Sirojan"
   
           }

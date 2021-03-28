@@ -51,7 +51,7 @@
                       <div fxFlex="24%" fxFlex.xs="100%">
                         <mat-form-field [style.width.%]="100" floatLabel="always"> 
                             <mat-label>Property</mat-label>
-                            <mat-select placeholder="Select Property" formControlName="property">                      
+                            <mat-select placeholder="Select Property" formControlName="property" (selectionChange)="getProductByProperty($event.value)">                      
                                 <mat-option *ngFor="let property of propertyList" [value]="property.propertyID">{{property.name}}</mat-option>
                             </mat-select>
                             <mat-error
@@ -62,7 +62,7 @@
                       </div>
                     
                     </div>
-                    <div fxFlex="100%"  fxLayout="row wrap"  class="form-input-row">
+                    <div fxFlex="100%"  fxLayout="row wrap"  class="form-input-row"  *ngIf="dbConfigForm.controls.products['controls'].length > 0">
             <h2 style="padding:0px 20px;">Product List</h2>
           
               <div fxFlex="100%" class="DBheader" fxLayout="row wrap">
@@ -172,7 +172,7 @@
                 <button  mat-button  class="border btnProperty">Back</button>
             </div>
             <div fxFlex="10%" fxFlex.xs="50%">
-                <button  mat-button class="button btnProperty">Save</button>
+                <button type="submit"  mat-button class="button btnProperty">Save</button>
             </div>
            
           
