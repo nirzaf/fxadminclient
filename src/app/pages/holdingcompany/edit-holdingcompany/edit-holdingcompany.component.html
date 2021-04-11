@@ -57,7 +57,7 @@
               <div fxFlex="24%" fxFlex.xs="100%">
                 <mat-form-field [style.width.%]="100" floatLabel="always"> 
                     <mat-label>Name</mat-label>
-                    <input matInput #input placeholder="Name" formControlName="holdingCompanyName">
+                    <input matInput #input placeholder="Name" formControlName="holdingCompanyName" maxlength="100">
                     <mat-error
                     *ngIf="editCompanyForm.get('holdingCompanyName').hasError('required')">
                     Name is <strong>required</strong>
@@ -67,7 +67,7 @@
               <div fxFlex="48%" fxFlex.xs="100%" >
                 <mat-form-field [style.width.%]="100" floatLabel="always"> 
                     <mat-label>Address</mat-label>
-                    <input matInput #input placeholder="Address" formControlName="holdingCompanyAddress">
+                    <input matInput #input placeholder="Address" formControlName="holdingCompanyAddress" maxlength="100">
                     <mat-error
                     *ngIf="editCompanyForm.get('holdingCompanyAddress').hasError('required')">
                     Address is <strong>required</strong>
@@ -82,7 +82,7 @@
                     <mat-form-field  [style.width.%]="100" floatLabel="always">
                         <mat-label>Country</mat-label>
                         <mat-select [(ngModel)]="country" (selectionChange)="getStateList($event.value,false)" formControlName="holdingCompanyCountry">
-                             <mat-option  [value]="0">Selec Country</mat-option>
+                             <mat-option  [value]="0">Select Country</mat-option>
                           <mat-option *ngFor="let country of countryList" [value]="country.countryID">{{country.countryName}}</mat-option>
                         
                       </mat-select>
@@ -124,7 +124,7 @@
                   <div fxFlex="22%" fxFlex.xs="100%">
                     <mat-form-field [style.width.%]="100" floatLabel="always"> 
                         <mat-label>Pin/Zip</mat-label>
-                        <input matInput #input placeholder="Pin/Zip" formControlName="holdingCompanyPinZip">
+                        <input matInput #input placeholder="Pin/Zip" formControlName="holdingCompanyPinZip" maxlength="20">
                         <mat-error
                         *ngIf="editCompanyForm.get('holdingCompanyPinZip').hasError('required')">
                         PinZip is <strong>required</strong>
@@ -139,7 +139,7 @@
               <div fxFlex="24%" fxFlex.xs="100%">
                 <mat-form-field [style.width.%]="100" floatLabel="always"> 
                     <mat-label>Phone Number</mat-label>
-                    <input matInput #input placeholder="Phone Number" formControlName="holdingCompanyPhone">
+                    <input matInput #input placeholder="Phone Number" formControlName="holdingCompanyPhone" numbersOnly maxlength="20"> 
                     <mat-error
                     *ngIf="editCompanyForm.get('holdingCompanyPhone').hasError('required')">
                     Phone Number is <strong>required</strong>

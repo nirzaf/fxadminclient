@@ -86,7 +86,7 @@
             <div fxFlex="24%" fxFlex.xs="100%" fxFlex.sm="50%">
                 <mat-form-field [style.width.%]="100" floatLabel="always"> 
                     <mat-label>Code</mat-label>
-                    <input matInput  placeholder="Code" formControlName="propertyCode" readonly>
+                    <input matInput  placeholder="Code" formControlName="propertyCode" readonly maxlength="10">
                     <mat-error
                     *ngIf="formGroup.get('propertyCode').hasError('required')">
                     Code is <strong>required</strong>
@@ -96,7 +96,7 @@
               <div fxFlex="24%" fxFlex.xs="100%" fxFlex.sm="50%">
                 <mat-form-field [style.width.%]="100" floatLabel="always"> 
                     <mat-label>Name</mat-label>
-                    <input matInput #input placeholder="Name" formControlName="propertyName">
+                    <input matInput #input placeholder="Name" formControlName="propertyName" maxlength="100">
                     <mat-error
                     *ngIf="formGroup.get('propertyName').hasError('required')">
                     Property Name is <strong>required</strong>
@@ -106,7 +106,7 @@
               <div fxFlex="48%" fxFlex.xs="100%" fxFlex.sm="50%">
                 <mat-form-field [style.width.%]="100" floatLabel="always"> 
                     <mat-label>Address</mat-label>
-                    <input matInput #input placeholder="Address" formControlName="propertyAddress">
+                    <input matInput #input placeholder="Address" formControlName="propertyAddress" maxlength="100">
                     <mat-error
                     *ngIf="formGroup.get('propertyAddress').hasError('required')">
                     Address is <strong>required</strong>
@@ -160,7 +160,7 @@
                   <div fxFlex="22%" fxFlex.xs="100%" fxFlex.sm="50%">
                     <mat-form-field [style.width.%]="100" floatLabel="always"> 
                         <mat-label>Pin/Zip</mat-label>
-                        <input matInput #input placeholder="Pin/Zip" formControlName="propertyPinZip">
+                        <input matInput #input placeholder="Pin/Zip" formControlName="propertyPinZip" maxlength="10">
                         <mat-error
                         *ngIf="formGroup.get('propertyPinZip').hasError('required')">
                         PinZip is <strong>required</strong>
@@ -175,7 +175,7 @@
               <div fxFlex="24%" fxFlex.xs="100%" fxFlex.sm="50%">
                 <mat-form-field [style.width.%]="100" floatLabel="always"> 
                     <mat-label>Phone Number</mat-label>
-                    <input matInput #input placeholder="Phone Number" formControlName="propertyPhone">
+                    <input matInput #input placeholder="Phone Number" formControlName="propertyPhone" numbersOnly maxlength="20">
                     <mat-error
                     *ngIf="formGroup.get('propertyPhone').hasError('required')">
                     Phone is <strong>required</strong>
@@ -220,9 +220,9 @@
                         <mat-label>Check Out Time</mat-label>
                         <div fxFlex="20%"><i class="fas fa-clock"></i></div>
                         <div fxFlex="80%">
-                          <input matInput #input placeholder="Check out"  [ngxTimepicker]="outpicker" formControlName="propertyCheckOut">
+                          <input matInput #input placeholder="Check out"   [ngxTimepicker]="outpicker" formControlName="propertyCheckOut">
                          
-                          <ngx-material-timepicker #outpicker></ngx-material-timepicker>
+                          <ngx-material-timepicker #outpicker ></ngx-material-timepicker>
                          
                         </div>
                         <mat-error
@@ -236,7 +236,7 @@
               <div fxFlex="22%" fxFlex.xs="100%" fxFlex.sm="50%">
                 <mat-form-field [style.width.%]="100" floatLabel="always"> 
                     <mat-label>Website</mat-label>
-                    <input matInput #input placeholder="Website" formControlName="propertyWebsite">
+                    <input matInput #input placeholder="Website" formControlName="propertyWebsite" maxlength="100">
                     <mat-error
                     *ngIf="formGroup.get('propertyWebsite').hasError('required')">
                     Website is <strong>required</strong>
@@ -303,7 +303,7 @@
                    [matChipInputFor]="chipList"
                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                    [matChipInputAddOnBlur]="addOnBlur"
-                   (matChipInputTokenEnd)="addNetworkIP($event)">
+                   (matChipInputTokenEnd)="addNetworkIP($event)" maxlength="100">
           </mat-chip-list>
         </mat-form-field>
         </div>
@@ -323,7 +323,7 @@
                        [matChipInputFor]="macIdList"
                        [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                        [matChipInputAddOnBlur]="addOnBlur"
-                       (matChipInputTokenEnd)="addMacID($event)">
+                       (matChipInputTokenEnd)="addMacID($event)" maxlength="100">
               </mat-chip-list>
             
             </mat-form-field>

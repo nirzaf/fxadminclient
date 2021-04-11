@@ -60,7 +60,7 @@
            
               <mat-form-field [style.width.%]="100" floatLabel="always"> 
                   <mat-label>Code</mat-label>
-                  <input matInput  placeholder="Code" formControlName="groupCode">
+                  <input matInput  placeholder="Code" formControlName="groupCode" maxlength="10">
                   <mat-error
                   *ngIf="group['controls'].groupCode.hasError('required')">
                   Code is <strong>required</strong>
@@ -73,7 +73,7 @@
             <div fxFlex="24%" fxFlex.xs="100%" fxFlex.sm="50%">
               <mat-form-field [style.width.%]="100" floatLabel="always"> 
                   <mat-label>Name</mat-label>
-                  <input matInput #input placeholder="Name" formControlName="groupName">
+                  <input matInput #input placeholder="Name" formControlName="groupName" maxlength="100">
                   <mat-error
                   *ngIf="group['controls'].groupName.hasError('required')">
                   Group Name is <strong>required</strong>
@@ -84,7 +84,7 @@
             <div fxFlex="48%" fxFlex.xs="100%" fxFlex.sm="50%">
               <mat-form-field [style.width.%]="100" floatLabel="always"> 
                   <mat-label>Address</mat-label>
-                  <input matInput #input placeholder="Address" formControlName="groupAddress">
+                  <input matInput #input placeholder="Address" formControlName="groupAddress" maxlength="100">
                   <mat-error
                   *ngIf="group['controls'].groupAddress.hasError('required')">
                   Address is <strong>required</strong>
@@ -138,7 +138,7 @@
                 <div fxFlex="22%" fxFlex.xs="100%" fxFlex.sm="50%">
                   <mat-form-field [style.width.%]="100" floatLabel="always"> 
                       <mat-label>Pin/Zip</mat-label>
-                      <input matInput #input placeholder="Pin/Zip" formControlName="groupPinZip">
+                      <input matInput #input placeholder="Pin/Zip" formControlName="groupPinZip" maxlength="10">
                       <mat-error
                       *ngIf="group['controls'].groupPinZip.hasError('required')">
                       PinZip is <strong>required</strong>
@@ -153,7 +153,7 @@
             <div fxFlex="24%" fxFlex.xs="100%" fxFlex.sm="50%">
               <mat-form-field [style.width.%]="100" floatLabel="always"> 
                   <mat-label>Phone Number</mat-label>
-                  <input matInput #input placeholder="Phone Number" formControlName="groupPhone">
+                  <input matInput #input placeholder="Phone Number" formControlName="groupPhone" numbersOnly maxlength="20">
                   <mat-error
                   *ngIf="group['controls'].groupPhone.hasError('required')">
                   Phone is <strong>required</strong>

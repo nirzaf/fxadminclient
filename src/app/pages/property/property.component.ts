@@ -104,11 +104,12 @@ export class PropertyComponent implements OnInit {
     const dialogRef = this.dialog.open(AddHoldingcompanyComponent, {
       panelClass: 'custom-dialog-container',
 
-      data: { holdingCompanyName: this.holdingCompanyName, holdingCompanyID: this.holdingCompanyID },
+      data: { holdingCompanyName: null, holdingCompanyID: null },
 
     });
 
     dialogRef.afterClosed().subscribe(result => {
+     
       if (result.data.holdingCompanyID > 0) {
         this.toast.success("Successfully Added");
         this.holdingCompanyName = result.data.holdingCompanyName;

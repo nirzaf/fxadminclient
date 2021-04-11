@@ -16,8 +16,8 @@ export interface DialogData {
 
 export class AddHoldingcompanyComponent {
   addCompanyForm: FormGroup = this.formBuilder.group({
-    holdingCompanyName: [, { validators: [Validators.required], updateOn: "change" }],
-    holdingCompanyCode: [, { validators: [Validators.required], updateOn: "change" }],
+    holdingCompanyName: [, { validators: [Validators.required,], updateOn: "change" }],
+    holdingCompanyCode: [, { validators: [Validators.required,Validators.maxLength(10)], updateOn: "change" }],
     holdingCompanyAddress: [, { validators: [Validators.required], updateOn: "change" }],
     holdingCompanyCountry: [0, { validators: [Validators.min(1)], updateOn: "change" }],
     holdingCompanyState: [0, { validators: [Validators.min(1)], updateOn: "change" }],
@@ -135,6 +135,14 @@ export class AddHoldingcompanyComponent {
 
 
       });
+  }
+  resetForm() {
+    this.addCompanyForm.reset();
+    this.stateList=[];
+    this.cityList=[];  
+  
+   
+   
   }
 
 

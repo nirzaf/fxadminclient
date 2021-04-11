@@ -227,6 +227,11 @@ export class CreateUserComponent implements OnInit {
       var netWorkIPs =   this.networkIPs.map(function(val) {
         return val.name;
       }).join(',');
+
+      const postData = new FormData();
+// postData.append('HoldingCompanyID', data.title);
+// postData.append('description', data.description);
+// postData.append('image', data.image);
       var userData = {
         "HoldingCompanyID": parseInt(this.createUserForm.controls['holdingCompanyName'].value),
         "Alias":this.createUserForm.controls['alias'].value,

@@ -33,7 +33,8 @@ export class ViewPropertyComponent implements OnInit {
 
   
   propertyData:PropertyData;
-  dayListArr= (dayList  as  any).default;
+  dayListArr= [];
+  
   propertyObj={code:'',name:'',cityName:'',address:'',stateName:'',countryName:'',zipCode:'',   
                     phoneNumber:'',website:'',currencyCode:'',hotelTypeName:'',checkInTime:'',checkOutTime:'',otherCurrenciesArr:[],hotelType:'',weekDays:'',weekEnds:'',
                     macAddressesArr:[],starRating:0,networkIPsArr:[]};
@@ -42,6 +43,7 @@ export class ViewPropertyComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public _propertyData: PropertyData, private fb: FormBuilder,private webService:WebService,private toast:ToastService,public dialog: MatDialog
     ) {
       this.propertyData = _propertyData;
+      this.dayListArr= (dayList  as  any).default;
       this.getPropertyData(_propertyData.propertyID);
 
      }
@@ -80,47 +82,74 @@ export class ViewPropertyComponent implements OnInit {
     return this.dayListArr.filter(x => x.dayID == id);
   }
   getPropertyData(propertyID){
+    console.log(this.dayListArr);
     this.webService.commonMethod('property/get/'+propertyID,null,'GET',null)
     .subscribe(data=>{
       if(data.succeeded){
       
      
         if(data.data.weekEnds){
-         
+          console.log(this.dayListArr);
           var weekEndArr = data.data.weekEnds.split(',');
-         
+          
           var WeekEndVal='';
+          
           var i=0;
-          var WeekDayArr=[...this.dayListArr];
+         
+         //var WeekDayArr=this.dayListArr;
+         const WeekDayArr  = Object.assign([], this.dayListArr);
+          // console.log(WeekDayArr);
           for(let weekEnd of  weekEndArr)
           {
+           
             if(i!=0){
-              WeekEndVal=WeekEndVal+','+this.getDayNameById(weekEnd)[0].name;
+              WeekEndVal=WeekEndVal+', '+this.getDayNameById(weekEnd)[0].name;
             }else{
               WeekEndVal=this.getDayNameById(weekEnd)[0].name;
             }
-            var index = WeekDayArr.map(x => {
-              return x.dayID;
-            }).indexOf(weekEnd);
             
-            WeekDayArr.splice(index, 1);
+
+           
+            
             i++;
            
           }
-          var WeekDayVal='';
-          var j=0;
-          for(let weekDay of WeekDayArr){
-            if(j!=0){
-              WeekDayVal=WeekDayVal+','+weekDay.name;
-            }else{
-              WeekDayVal=weekDay.name;
-            }
-            j++;
-
-          }
+        
+        
           
    
           data.data.weekEnds=WeekEndVal;
+          //
+
+        }
+        if(data.data.weekDays){
+          var WeekDayVal='';
+          var weekDayArr = data.data.weekDays.split(',');
+          
+       
+          var i=0;
+         
+        
+          for(let weekDay of  weekDayArr)
+          {
+           
+            if(i!=0){
+              WeekDayVal=WeekDayVal+', '+this.getDayNameById(weekDay)[0].name;
+            }else{
+              WeekDayVal=this.getDayNameById(weekDay)[0].name;
+            }
+            
+
+           
+            
+            i++;
+           
+          }
+        
+        
+          
+   
+      
           data.data.weekDays=WeekDayVal;
 
         }

@@ -60,7 +60,7 @@
         <div fxFlex="24%" fxFlex.xs="100%" fxFlex.sm="50%">
             <mat-form-field [style.width.%]="100" floatLabel="always"> 
                 <mat-label>Code</mat-label>
-                <input matInput  placeholder="Code" formControlName="propertyCode">
+                <input matInput  placeholder="Code" formControlName="propertyCode" maxlength="10">
                 <mat-error
                 *ngIf="property['controls'].propertyCode.hasError('required')">
                 Code is <strong>required</strong>
@@ -70,7 +70,7 @@
           <div fxFlex="24%" fxFlex.xs="100%" fxFlex.sm="50%">
             <mat-form-field [style.width.%]="100" floatLabel="always"> 
                 <mat-label>Name</mat-label>
-                <input matInput #input placeholder="Name" formControlName="propertyName">
+                <input matInput #input placeholder="Name" formControlName="propertyName" maxlength="100">
                 <mat-error
                 *ngIf="property['controls'].propertyName.hasError('required')">
                 Group Name is <strong>required</strong>
@@ -80,7 +80,7 @@
           <div fxFlex="48%" fxFlex.xs="100%" fxFlex.sm="50%">
             <mat-form-field [style.width.%]="100" floatLabel="always"> 
                 <mat-label>Address</mat-label>
-                <input matInput #input placeholder="Address" formControlName="propertyAddress">
+                <input matInput #input placeholder="Address" formControlName="propertyAddress" maxlength="100">
                 <mat-error
                 *ngIf="property['controls'].propertyAddress.hasError('required')">
                 Address is <strong>required</strong>
@@ -134,7 +134,7 @@
               <div fxFlex="22%" fxFlex.xs="100%" fxFlex.sm="50%">
                 <mat-form-field [style.width.%]="100" floatLabel="always"> 
                     <mat-label>Pin/Zip</mat-label>
-                    <input matInput #input placeholder="Pin/Zip" formControlName="propertyPinZip">
+                    <input matInput #input placeholder="Pin/Zip" formControlName="propertyPinZip" maxlength="10">
                     <mat-error
                     *ngIf="property['controls'].propertyPinZip.hasError('required')">
                     PinZip is <strong>required</strong>
@@ -149,7 +149,7 @@
           <div fxFlex="24%" fxFlex.xs="100%" fxFlex.sm="50%">
             <mat-form-field [style.width.%]="100" floatLabel="always"> 
                 <mat-label>Phone Number</mat-label>
-                <input matInput #input placeholder="Phone Number" formControlName="propertyPhone">
+                <input matInput #input placeholder="Phone Number" formControlName="propertyPhone" numbersOnly maxlength="20">
                 <mat-error
                 *ngIf="property['controls'].propertyPhone.hasError('required')">
                 Phone is <strong>required</strong>
@@ -177,7 +177,7 @@
                     <mat-label>Check in Time</mat-label>
                     <div fxFlex="20%"><i class="fas fa-clock"></i></div>
                     <div fxFlex="80%">
-                      <input matInput #input placeholder="Check in" [ngxTimepicker]="inpicker" formControlName="propertyCheckIn">
+                      <input matInput #input placeholder="Check in" [ngxTimepicker]="inpicker"  formControlName="propertyCheckIn">
                  
                       <ngx-material-timepicker #inpicker></ngx-material-timepicker>
                    
@@ -186,17 +186,18 @@
                     *ngIf="property['controls'].propertyCheckIn.hasError('required')">
                     CheckIn  is <strong>required</strong>
                   </mat-error>
-                    
+                    .
                 </mat-form-field>
                 </div>
                 <div fxFlex="50%" fxFlex.xs="100%" fxFlex.sm="50%">
+               
                   <mat-form-field [style.width.%]="100" floatLabel="always"> 
                     <mat-label>Check Out Time</mat-label>
                     <div fxFlex="20%"><i class="fas fa-clock"></i></div>
                     <div fxFlex="80%">
-                      <input matInput #input placeholder="Check out"  [ngxTimepicker]="outpicker" formControlName="propertyCheckOut">
+                      <input matInput #input placeholder="Check out"   [ngxTimepicker]="outpicker"  max="{{property['controls'].propertyCheckIn.value}}"   formControlName="propertyCheckOut">
                      
-                      <ngx-material-timepicker #outpicker></ngx-material-timepicker>
+                      <ngx-material-timepicker #outpicker #max></ngx-material-timepicker>
                      
                     </div>
                     <mat-error
@@ -210,7 +211,7 @@
           <div fxFlex="22%" fxFlex.xs="100%" fxFlex.sm="50%">
             <mat-form-field [style.width.%]="100" floatLabel="always"> 
                 <mat-label>Website</mat-label>
-                <input matInput #input placeholder="Website" formControlName="propertyWebsite">
+                <input matInput #input placeholder="Website" formControlName="propertyWebsite" maxlength="100">
                 <mat-error
                 *ngIf="property['controls'].propertyWebsite.hasError('required')">
                 Website is <strong>required</strong>
@@ -277,7 +278,7 @@
                [matChipInputFor]="chipList"
                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                [matChipInputAddOnBlur]="addOnBlur"
-               (matChipInputTokenEnd)="addNetworkIP($event,ix)">
+               (matChipInputTokenEnd)="addNetworkIP($event,ix)" maxlength="100">
       </mat-chip-list>
       <mat-error>Atleast 1 ip need to be added</mat-error>
     </mat-form-field>
@@ -298,7 +299,7 @@
                    [matChipInputFor]="macIdList"
                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                    [matChipInputAddOnBlur]="addOnBlur"
-                   (matChipInputTokenEnd)="addMacID($event,ix)">
+                   (matChipInputTokenEnd)="addMacID($event,ix)" maxlength="100">
           </mat-chip-list>
         
         </mat-form-field>

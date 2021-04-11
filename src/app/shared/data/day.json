@@ -1,32 +1,32 @@
 [
     {
         "dayID": 1,
-        "name": "MO"
+        "name": "Monday"
        
     },
     {
         "dayID": 2,
-        "name": "TU"
+        "name": "Tuesday"
     },
     {
         "dayID": 3,
-        "name": "WE"
+        "name": "Wednesday"
     },
     {
         "dayID": 4,
-        "name": "TH"
+        "name": "Thursday"
     },
     {
         "dayID": 5,
-        "name": "FR"
+        "name": "Friday"
     },
     {
         "dayID": 6,
-        "name": "SA"
+        "name": "Saturday"
     },
     {
         "dayID": 7,
-        "name": "SU"
+        "name": "Sunday"
     }
    
 ]

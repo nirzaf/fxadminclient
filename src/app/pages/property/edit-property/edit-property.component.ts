@@ -308,10 +308,15 @@ export class EditPropertyComponent implements OnInit {
         }
         var netWorkIPArr=[];
         for(let networkIP of this.DataObj.networkIPs){
-         
-          netWorkIPArr.push({"IPAddress":networkIP});
-           
+
+          netWorkIPArr.push({"IPAddress":networkIP});           
         }
+        if(!this.validateCheckTime(this.formGroup.controls["propertyCheckIn"].value,this.formGroup.controls["propertyCheckOut"].value)){
+          
+          this.toast.error("Checkout time must be less then CheckIn time");
+          return false;
+        }
+        
         var propertyData = {
           "PropertyID": parseInt(this.propertyData.propertyID),
           "Name": this.formGroup.controls["propertyName"].value,
@@ -360,6 +365,29 @@ export class EditPropertyComponent implements OnInit {
     }
 
   }
+  validateCheckTime(checkInTime,chekcOutTime):boolean{
+    var jdt1=Date.parse('20 Aug 2000 '+checkInTime);
+		var jdt2=Date.parse('20 Aug 2000 '+chekcOutTime);
+		
+	/*	if(jdt1=='NaN')
+		{
+			alert('invalid start time');
+			return false;
+		}
+		if(jdt2=='NaN')
+		{
+			alert('invalid end time');
+			return false;
+		}*/
+	  	if (jdt1>jdt2)
+		{
+		 return true;
+		}
+		else
+		{
+			return false;
+		}
+  }
   getPropertyData(propertyID){
     this.webService.commonMethod('property/get/'+propertyID,null,'GET',null)
     .subscribe(data=>{
@@ -372,6 +400,7 @@ export class EditPropertyComponent implements OnInit {
         if(data.data.macAddresses){
           this.DataObj.macIDs=data.data.macAddresses.split(',');
         }
+        
      
         this.formGroup.get('propertyCode').setValue(data.data.code);
         this.formGroup.get('propertyName').setValue(data.data.name);

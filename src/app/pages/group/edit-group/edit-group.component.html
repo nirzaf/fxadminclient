@@ -47,7 +47,7 @@
                 <div fxFlex="24%" fxFlex.xs="100%">
                     <mat-form-field [style.width.%]="100" floatLabel="always"> 
                         <mat-label>Code</mat-label>
-                        <input matInput  placeholder="Code" formControlName="groupCode" readonly >
+                        <input matInput  placeholder="Code" formControlName="groupCode" readonly maxlength="10">
                         <mat-error
                         *ngIf="editGroupForm.get('groupCode').hasError('required')">
                         Code is <strong>required</strong>
@@ -57,7 +57,7 @@
                   <div fxFlex="24%" fxFlex.xs="100%">
                     <mat-form-field [style.width.%]="100" floatLabel="always"> 
                         <mat-label>Name</mat-label>
-                        <input matInput #input placeholder="Name" formControlName="groupName">
+                        <input matInput #input placeholder="Name" formControlName="groupName" maxlength="100">
                         <mat-error
                         *ngIf="editGroupForm.get('groupName').hasError('required')">
                         Name is <strong>required</strong>
@@ -67,7 +67,7 @@
                   <div fxFlex="48%" fxFlex.xs="100%" >
                     <mat-form-field [style.width.%]="100" floatLabel="always"> 
                         <mat-label>Address</mat-label>
-                        <input matInput #input placeholder="Address" formControlName="groupAddress">
+                        <input matInput #input placeholder="Address" formControlName="groupAddress" maxlength="100">
                         <mat-error
                         *ngIf="editGroupForm.get('groupAddress').hasError('required')">
                         Address is <strong>required</strong>
@@ -138,7 +138,7 @@
                   <div fxFlex="24%" fxFlex.xs="100%">
                     <mat-form-field [style.width.%]="100" floatLabel="always"> 
                         <mat-label>Phone Number</mat-label>
-                        <input matInput #input placeholder="Phone Number" formControlName="groupPhone">
+                        <input matInput #input placeholder="Phone Number" formControlName="groupPhone"  numbersOnly>
                         <mat-error
                         *ngIf="editGroupForm.get('groupPhone').hasError('required')">
                         Phone Number is <strong>required</strong>

@@ -85,7 +85,7 @@ export class AddPropertyComponent implements OnInit {
       propertyWeekends:0,
       propertyWeekDays:0,
       propertyHotelType:0,
-      
+      CheckInValid:true,
       networkIPs:[],
       
       rating:0,
@@ -191,6 +191,7 @@ export class AddPropertyComponent implements OnInit {
   }
   ngOnInit() {
     this.validate();
+    
   }
   onRatingChanged(rating, i) {
  
@@ -301,6 +302,29 @@ export class AddPropertyComponent implements OnInit {
       
       });
   }
+  validateCheckTime(checkInTime,chekcOutTime):boolean{
+    var jdt1=Date.parse('20 Aug 2000 '+checkInTime);
+		var jdt2=Date.parse('20 Aug 2000 '+chekcOutTime);
+		
+	/*	if(jdt1=='NaN')
+		{
+			alert('invalid start time');
+			return false;
+		}
+		if(jdt2=='NaN')
+		{
+			alert('invalid end time');
+			return false;
+		}*/
+	  	if (jdt1>jdt2)
+		{
+		 return true;
+		}
+		else
+		{
+			return false;
+		}
+  }
   onSubmit() {
    
     if (this.formGroup.valid) {
@@ -333,6 +357,11 @@ export class AddPropertyComponent implements OnInit {
          
           netWorkIPArr.push({"IPAddress":networkIP.name});
            
+        }
+        if(!this.validateCheckTime(control.controls["propertyCheckIn"].value,control.controls["propertyCheckOut"].value)){
+          
+          this.toast.error("Checkout time must be less then CheckIn time");
+          return false;
         }
         var groupData = {
           "GroupID": parseInt(this.holdingCompanyData.groupID),
