@@ -31,8 +31,17 @@
                       placeholder="User Name"
                       aria-label="Number"
                       matInput
-                      
+                      [formControl]="searchMoviesCtrl"
+                      [matAutocomplete]="auto"
                      >
+                     <mat-autocomplete #auto="matAutocomplete">
+                        <mat-option *ngIf="isLoading" class="is-loading">Loading...</mat-option>
+                        <ng-container *ngIf="!isLoading">
+                          <mat-option *ngFor="let movie of filteredMovies" [value]="movie.userID">
+                            <span><b>{{movie.firstName}}</b>- ({{movie.companyName}})</span>
+                          </mat-option>
+                        </ng-container>
+                      </mat-autocomplete>
        
                     
                       <span class="fas fa-search searchspanicon themecolor"></span>
@@ -45,51 +54,70 @@
                 </div>
                
             </div>
+            <ng-container *ngIf="errorMsg; else elseTemplate">
+                {{errorMsg}}
+              </ng-container>
+              <ng-template #elseTemplate>
+                <h5>Selected Value: {{searchMoviesCtrl.value}}</h5>
+              </ng-template>
             <div fxFlex="100%" fxFlex.xs="100%" fxFlex.sm="100%" fxLayout="column"  fxLayout.lt-sm="column"   fxLayoutGap="15px">
-    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+               
 
-        <!-- Checkbox Column -->
-        <ng-container matColumnDef="select">
-            <th mat-header-cell *matHeaderCellDef>
-                <mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()" [indeterminate]="selection.hasValue() && !isAllSelected()" [aria-label]="checkboxLabel()">
-                </mat-checkbox>
-            </th>
-            <td mat-cell *matCellDef="let row">
-                <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null" [checked]="selection.isSelected(row)" [aria-label]="checkboxLabel(row)">
-                </mat-checkbox>
-            </td>
-        </ng-container>
-    
-        <!-- Position Column -->
-        <ng-container matColumnDef="position">
-            <th mat-header-cell *matHeaderCellDef> User ID </th>
-            <td mat-cell *matCellDef="let element"> {{element.position}} </td>
-        </ng-container>
-    
-        <!-- Name Column -->
-        <ng-container matColumnDef="name">
-            <th mat-header-cell *matHeaderCellDef> Name </th>
-            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-        </ng-container>
-    
-        <!-- Weight Column -->
-        <ng-container matColumnDef="weight">
-            <th mat-header-cell *matHeaderCellDef> Email </th>
-            <td mat-cell *matCellDef="let element"> {{element.email}} </td>
-        </ng-container>
-    
-        <!-- Symbol Column -->
-        <ng-container matColumnDef="symbol">
-            <th mat-header-cell *matHeaderCellDef> Status </th>
-            <td mat-cell *matCellDef="let element"> <mat-slide-toggle></mat-slide-toggle> </td>
-        </ng-container>
-    
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row)">
-        </tr>
-    </table>
+                <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+                    <!-- Checkbox Column -->
+                    <ng-container matColumnDef="select">
+                        <th mat-header-cell *matHeaderCellDef>
+                            <mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()" [indeterminate]="selection.hasValue() && !isAllSelected()" [aria-label]="checkboxLabel()">
+                            </mat-checkbox>
+                        </th>
+                        <td mat-cell *matCellDef="let row">
+                            <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null" [checked]="selection.isSelected(row)" [aria-label]="checkboxLabel(row)">
+                            </mat-checkbox>
+                        </td>
+                    </ng-container>
+                
+                    <!-- Position Column -->
+                    <ng-container matColumnDef="companyName">
+                        <th mat-header-cell *matHeaderCellDef> Holding Company </th>
+                        <td mat-cell *matCellDef="let element"> {{element.companyName}} </td>
+                    </ng-container>
+                
+                    <!-- Name Column -->
+                    <ng-container matColumnDef="groupName">
+                        <th mat-header-cell *matHeaderCellDef> Group </th>
+                        <td mat-cell *matCellDef="let element"> {{element.groupName}}</td>
+                    </ng-container>
+                    
+                    <ng-container matColumnDef="propertyName">
+                        <th mat-header-cell *matHeaderCellDef> Property </th>
+                        <td mat-cell *matCellDef="let element"> {{element.propertyName}}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="userID">
+                        <th mat-header-cell *matHeaderCellDef> User ID </th>
+                        <td mat-cell *matCellDef="let element"> {{element.userID}}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="firstName">
+                        <th mat-header-cell *matHeaderCellDef> Name</th>
+                        <td mat-cell *matCellDef="let element"> {{element.firstName}}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="loginID">
+                        <th mat-header-cell *matHeaderCellDef> Email </th>
+                        <td mat-cell *matCellDef="let element"> {{element.loginID}}</td>
+                    </ng-container>
+                
+                    <!-- Symbol Column -->
+                    <ng-container matColumnDef="accessID">
+                        <th mat-header-cell *matHeaderCellDef> Status </th>
+                        <td mat-cell *matCellDef="let element"> <mat-slide-toggle></mat-slide-toggle> </td>
+                    </ng-container>
+                
+                     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr> 
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;" > 
+                    </tr> 
+                </table>
     <div fxFlex="100%">
-        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+        <!-- <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator> -->
         <!-- <mat-paginator-goto [pageSizeOptions]="[5, 10, 25, 100]"
         showFirstLastButtons></mat-paginator-goto> -->
       

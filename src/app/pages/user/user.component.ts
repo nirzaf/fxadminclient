@@ -8,13 +8,37 @@ import {MatPaginator} from '@angular/material/paginator';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateUserComponent } from './create-user/create-user.component';
 import { UserHierarchyComponent } from './user-hierarchy/user-hierarchy.component';
+import { FormControl } from '@angular/forms';
+import { debounceTime, finalize, switchMap, tap } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
+export interface PeriodicElement {   
+  position:number;
+  userID: number;
+  userProductID: number;
+  holdingCompanyID: number; 
+  firstName: string;
+  titleID: number;
+  loginID:string;
+  companyName:string;
+  propertyName:string;
+  groupName:string;
+  groupID:number;
+  propertyID:number;
+  productID:number;
+  accessID:number;
+
+}
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.scss']
 })
 export class UserComponent implements OnInit {
-
+  searchMoviesCtrl = new FormControl();
+  filteredMovies: any;
+  isLoading = false;
+  errorMsg: string;
+  
   public isProgressing: boolean = true;
   public loaderMessage: string = "Loading...";
 
@@ -25,18 +49,50 @@ export class UserComponent implements OnInit {
   public pmsCustCode: number = 20007;
   public GroupList: any = [];
   public PropertyList: any= [];
+  public userProductList:any=[];
 
+  displayedColumns: string[];
+  dataSource: MatTableDataSource<PeriodicElement>;
 
-
+  selection = new SelectionModel<PeriodicElement>(true, []);
   
 
-  constructor(private webService:WebService,private toast:ToastService,public dialog: MatDialog) { }
+  constructor(private webService:WebService,private toast:ToastService,public dialog: MatDialog,private http: HttpClient) { }
 
   ngOnInit() {
     this.breadCrumb = ["Admin", "User Configuration"];
     this.GetPropertyAndGroup();
 
     this.getAPIlist();
+    this.getUserProductListByUser(11);
+    this.searchMoviesCtrl.valueChanges
+      .pipe(
+       
+        debounceTime(500),
+        tap(() => {
+          this.errorMsg = "";
+          this.filteredMovies = [];
+          this.isLoading = true;
+        }),
+        switchMap(value => this.http.get(`https://localhost:44358/api/v1/user/searchuser/${value ? value: 'NAN'}`  )
+          .pipe(
+            finalize(() => {
+              this.isLoading = false
+            }),
+          )
+        )
+      )
+      .subscribe(data => {
+        if (data == undefined) {
+          this.errorMsg = data['Error'];
+          this.filteredMovies = [];
+        } else {
+          this.errorMsg = "";
+          this.filteredMovies = data["data"];
+        }
+
+        console.log(this.filteredMovies);
+      });
   }
 
   showHirarchy(): void {
@@ -104,13 +160,40 @@ export class UserComponent implements OnInit {
       this.isProgressing = false;
     });
   }
+  getUserProductListByUser(userID) {
+    this.webService.commonMethod('user/get?userID='+userID+'&pageSize=1000&pageNumber=1', null, 'GET', null)
+      .subscribe(data => {
+        if (data.succeeded) {
+          this.userProductList=data.data;
+          var userPrdData=[];
+          var i=0;
+          userPrdData = data.data.map(function (a) {
+            a.select=false;
+            a.position=i;
+            //a.select=this.selection;
+            i++;
+            return a;
+          }
+          );
+          console.log(userPrdData);
+          this.userProductList=userPrdData;
+        
+        
+          this.dataSource = new MatTableDataSource <PeriodicElement> (userPrdData);
+          this.displayedColumns =  ['select', 'companyName','groupName','propertyName','userID','firstName','loginID','accessID'];
+          this.selection = new SelectionModel<PeriodicElement>(true, []);
+          console.log(this.dataSource);
+          //this.propertyData = data.data;
+        } else {
+          this.toast.error(data.errors);
+        }
 
+      });
+  }
   
 
 
-  displayedColumns: string[] = ['select', 'position', 'name', 'weight', 'symbol'];
-  dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
-  selection = new SelectionModel<PeriodicElement>(true, []);
+
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   ngAfterViewInit() {
@@ -140,20 +223,14 @@ export class UserComponent implements OnInit {
   }
 
 }
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
-  email:string;
-}
 
-const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 3984, name: 'John Lee',email: 'john@gmail.com', weight: 4.0026, symbol: 'He'},
-  {position: 3984, name: 'John Lee',email: 'john@gmail.com', weight: 4.0026, symbol: 'He'},
-  {position: 3984, name: 'John Lee',email: 'john@gmail.com', weight: 4.0026, symbol: 'He'},
-  {position: 3984, name: 'John Lee',email: 'john@gmail.com', weight: 4.0026, symbol: 'He'},
-  {position: 3984, name: 'John Lee',email: 'john@gmail.com', weight: 4.0026, symbol: 'He'},
-  {position: 3984, name: 'John Lee',email: 'john@gmail.com', weight: 4.0026, symbol: 'He'},
 
-];
+// const ELEMENT_DATA: PeriodicElement[] = [
+//   {position: 3984, name: 'John Lee',email: 'john@gmail.com', weight: 4.0026, symbol: 'He'},
+//   {position: 3984, name: 'John Lee',email: 'john@gmail.com', weight: 4.0026, symbol: 'He'},
+//   {position: 3984, name: 'John Lee',email: 'john@gmail.com', weight: 4.0026, symbol: 'He'},
+//   {position: 3984, name: 'John Lee',email: 'john@gmail.com', weight: 4.0026, symbol: 'He'},
+//   {position: 3984, name: 'John Lee',email: 'john@gmail.com', weight: 4.0026, symbol: 'He'},
+//   {position: 3984, name: 'John Lee',email: 'john@gmail.com', weight: 4.0026, symbol: 'He'},
+
+// ];
