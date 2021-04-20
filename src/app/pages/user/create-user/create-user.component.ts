@@ -14,6 +14,7 @@ import * as _moment from 'moment';
 import {default as _rollupMoment} from 'moment';
 import { WebService } from 'src/app/shared/services/web.service';
 import { ToastService } from 'src/app/shared/services/toast.service';
+import { HttpHeaders } from '@angular/common/http';
 
 const moment = _rollupMoment || _moment;
 
@@ -145,19 +146,28 @@ export class CreateUserComponent implements OnInit {
   preview(files) {
     if (files.length === 0)
       return;
+      const file = files[0];
+      if (file == undefined) return;
+     
+      let formData = new FormData();
+      formData.append('document', files[0], files[0].name);
+      this.webService.UploadDocument("file/upload",formData).
+      subscribe(data => {
+        this.imgURL = data; 
+          console.log(data);
+      })
+    // var mimeType = files[0].type;
+    // if (mimeType.match(/image\/*/) == null) {
+    //   this.message = "Only images are supported.";
+    //   return;
+    // }
  
-    var mimeType = files[0].type;
-    if (mimeType.match(/image\/*/) == null) {
-      this.message = "Only images are supported.";
-      return;
-    }
- 
-    var reader = new FileReader();
-    this.imagePath = files;
-    reader.readAsDataURL(files[0]); 
-    reader.onload = (_event) => { 
-      this.imgURL = reader.result; 
-    }
+    // var reader = new FileReader();
+    // this.imagePath = files;
+    // reader.readAsDataURL(files[0]); 
+    // reader.onload = (_event) => { 
+    //   this.imgURL = reader.result; 
+    // }
   }
   onNoClick(): void {
 
@@ -214,6 +224,17 @@ export class CreateUserComponent implements OnInit {
   submitFormtest(){
     this.linkProperty=true;
   }
+  // UploadDocument(url: string, data: any) {
+  //   let url_type: string = "Config";
+  //   let headers = {
+  //     headers: new HttpHeaders({
+  //       'enctype': 'multipart/form-data',
+  //       'Authorization': 'bearer ' + this.optoken
+  //     })
+  //   };
+  //   return this.http.post(this.URL[url_type] + '/' + url, data, headers);
+ 
+  // }
   submitForm(){
     if (this.createUserForm.valid) {
       var isLicense=false;
@@ -232,6 +253,10 @@ export class CreateUserComponent implements OnInit {
 // postData.append('HoldingCompanyID', data.title);
 // postData.append('description', data.description);
 // postData.append('image', data.image);
+var imageName=null;
+if(this.imgURL!=null && this.imgURL!=""){
+  imageName=this.imgURL.substr(this.imgURL.lastIndexOf("/") + 1);
+}
       var userData = {
         "HoldingCompanyID": parseInt(this.createUserForm.controls['holdingCompanyName'].value),
         "Alias":this.createUserForm.controls['alias'].value,
@@ -244,7 +269,7 @@ export class CreateUserComponent implements OnInit {
         "DepartmentID": this.createUserForm.controls['department'].value,
         "ValidFrom": this.createUserForm.controls['userValidFrom'].value,
         "ValidTo": this.createUserForm.controls['userValidTo'].value,          
-        "UserImageName":this.createUserForm.controls['profilePicture'].value,
+        //"UserImageName":this.createUserForm.controls['profilePicture'].value,
         "IsAuthorized":isLicense,
         "UserTypeID":this.createUserForm.controls['userType'].value,
         "LoginID": this.createUserForm.controls['loginID'].value,
@@ -272,8 +297,9 @@ export class CreateUserComponent implements OnInit {
         "PersonalPhoneNumber":this.createUserForm.controls['personalPhoneNumber'].value,
         "BirthDate":this.createUserForm.controls['userBirthDate'].value,
         "Remarks":this.createUserForm.controls['remarks'].value,
+        "UserImageName":imageName,
         // "ImagePhysicalPath":this.createUserForm.controls['holdingCompanyName'].value,
-        // "ImageVirtualPath":this.createUserForm.controls['holdingCompanyName'].value,
+        "ImageVirtualPath":this.imgURL,
         // "FileName":this.createUserForm.controls['holdingCompanyName'].value,
         "CreatedBy":"Sirojan",
         "MacAddress":MacIds,
@@ -307,6 +333,7 @@ export class CreateUserComponent implements OnInit {
     }
 
   }
+
   getDepartmentList() {
     this.webService.commonMethod('department/get?pageSize=100', null, 'GET', null)
       .subscribe(data => {

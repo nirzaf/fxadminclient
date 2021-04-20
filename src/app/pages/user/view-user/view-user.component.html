@@ -1,0 +1,74 @@
+<h2 mat-dialog-title>
+    <div fxFlex="100%" fxLayout="row wrap" class="headercontainer" fxLayout.lt-sm="column">
+<div fxFlex="75%" fxFlex.xs="100%"><i class="fas fa-arrow-left themecolor titlearrowicon"   (click)="close()" style="font-size: 24px;"></i> View User</div>
+<div fxFlex="25%" fxFlex.xs="100%" class="headerAction">
+    <div fxFlex="50%" fxFlex.sm="40%" fxLayout="row wrap" class="editcontainer">
+        <div fxFlex="100%">
+            <i class="fas fa-pencil-alt themecolor fxcursor_pointer" (click)="editUser()"></i>
+        </div>
+        <div fxFlex="100%" class="headeredittext fxcursor_pointer" (click)="editUser()">
+            Edit
+        </div>
+     
+    </div>
+    <div fxFlex="50%" fxFlex.sm="40%" fxLayout="row wrap">
+        <div fxFlex="100%">
+            <i class="far fa-trash-alt themecolor fxcursor_pointer" (click)="delete()"></i>
+        </div>
+        <div fxFlex="100%" class="headerdeletetext fxcursor_pointer" (click)="delete()">
+            Delete
+        </div>
+      
+    </div>
+    
+   </div>
+    </div>
+   
+</h2>
+<mat-dialog-content  class="mat-typography">
+
+    <div>
+        <div class="content-0">
+        
+       
+            <div fxFlex="100%"  fxLayout="row wrap" fxLayoutGap="15px">
+                <div fxFlex="24%" fxFlex.xs="100%" fxLayout="row wrap">
+                    <div fxFlex="100%" class="labeltext">
+                        Holding Company Name
+                    </div>
+                    <div fxFlex="100%">
+                        {{userObj.holdingCompanyName}}
+                  </div>
+                 
+                  </div>
+                  <div fxFlex="24%" fxFlex.xs="100%" fxLayout="row wrap">
+                      <div fxFlex="100%" class="labeltext">
+                          Alias
+                      </div>
+                      <div fxFlex="100%">
+                        {{userObj.alias}}
+                    </div>
+                   
+                    </div>
+                    <div fxFlex="24%" fxFlex.xs="100%" fxLayout="row wrap">
+                      <div fxFlex="100%" class="labeltext">
+                          Title
+                      </div>
+                      <div fxFlex="100%">
+                        {{userObj.titleName}}
+                    </div>
+                   
+                    </div>
+                    <div fxFlex="22%" fxFlex.xs="100%" fxLayout="row wrap">
+                        <div fxFlex="100%" class="labeltext">
+                            LastName
+                        </div>
+                        <div fxFlex="100%">
+                            {{userObj.lastName}}
+                      </div>
+                     
+                      </div>
+                </div>
+            </div>
+        </div>
+        </mat-dialog-content>

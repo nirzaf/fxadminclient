@@ -11,6 +11,8 @@ import { UserHierarchyComponent } from './user-hierarchy/user-hierarchy.componen
 import { FormControl } from '@angular/forms';
 import { debounceTime, finalize, switchMap, tap } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
+import { ViewUserComponent } from './view-user/view-user.component';
+
 export interface PeriodicElement {   
   position:number;
   userID: number;
@@ -38,7 +40,7 @@ export class UserComponent implements OnInit {
   filteredMovies: any;
   isLoading = false;
   errorMsg: string;
-  
+  SelectedUserProduct:any;
   public isProgressing: boolean = true;
   public loaderMessage: string = "Loading...";
 
@@ -64,7 +66,7 @@ export class UserComponent implements OnInit {
     this.GetPropertyAndGroup();
 
     this.getAPIlist();
-    this.getUserProductListByUser(11);
+    //this.getUserProductListByUser(11);
     this.searchMoviesCtrl.valueChanges
       .pipe(
        
@@ -94,7 +96,16 @@ export class UserComponent implements OnInit {
         console.log(this.filteredMovies);
       });
   }
-
+  displayFn(userProduct?: any): string | undefined {
+    console.log("displayFn");
+    console.log(userProduct);
+    return userProduct ? userProduct.firstName+'-'+userProduct.companyName : undefined;
+  }
+  OnUserProductSelect(SelectedUserProduct) {
+    this.getUserProductListByUser(SelectedUserProduct.userID);
+    console.log("Onchange");
+    console.log(SelectedUserProduct);
+  }
   showHirarchy(): void {
     // if (this.holdingCompanyID != "" && this.holdingCompanyID != null) {
     const dialogRef = this.dialog.open(UserHierarchyComponent, {
@@ -160,6 +171,22 @@ export class UserComponent implements OnInit {
       this.isProgressing = false;
     });
   }
+  viewUser(row){
+    console.log(row);
+    const dialogRef = this.dialog.open(ViewUserComponent, {
+      panelClass:['create-user-modal','viewmore-dialog-container'] ,
+      //minHeight: '800px',    
+      data: {
+userID:row.userID
+      },
+      autoFocus: false
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      //this.getPropertyList(this.groupID);
+
+    });
+  }
   getUserProductListByUser(userID) {
     this.webService.commonMethod('user/get?userID='+userID+'&pageSize=1000&pageNumber=1', null, 'GET', null)
       .subscribe(data => {
@@ -180,7 +207,7 @@ export class UserComponent implements OnInit {
         
         
           this.dataSource = new MatTableDataSource <PeriodicElement> (userPrdData);
-          this.displayedColumns =  ['select', 'companyName','groupName','propertyName','userID','firstName','loginID','accessID'];
+          this.displayedColumns =  ['companyName','groupName','propertyName','userID','firstName','loginID','accessID'];
           this.selection = new SelectionModel<PeriodicElement>(true, []);
           console.log(this.dataSource);
           //this.propertyData = data.data;

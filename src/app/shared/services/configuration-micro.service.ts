@@ -7,7 +7,8 @@ export class ConfigurationMicroService {
     // for dev
     fx1adminapi: "https://fortuneclouddevapi.azurewebsites.net/v1/configuration",
     fxauth : "https://qafxauthentication.azurewebsites.net/api",
-    fxadminapi:"https://localhost:44358/api/v1"
+    fxadminapi:"https://localhost:44358/api/v1",
+    fxdocumentuploadapi:"https://fortunecloudqaapi.idsnext.live/v1/configuration"
   };
 
   constructor() {

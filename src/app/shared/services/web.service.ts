@@ -45,11 +45,11 @@ export class WebService {
 
 
   UploadDocument(url: string, data: any) {
-    let url_type: string = "Config";
+    let url_type: string = "fxdocumentuploadapi";
     let headers = {
       headers: new HttpHeaders({
         'enctype': 'multipart/form-data',
-        'Authorization': 'bearer ' + this.optoken
+        //'Authorization': 'bearer ' + this.optoken
       })
     };
     return this.http.post(this.URL[url_type] + '/' + url, data, headers);

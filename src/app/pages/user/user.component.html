@@ -32,12 +32,12 @@
                       aria-label="Number"
                       matInput
                       [formControl]="searchMoviesCtrl"
-                      [matAutocomplete]="auto"
+                      [matAutocomplete]="auto"  [(ngModel)]="SelectedUserProduct"
                      >
-                     <mat-autocomplete #auto="matAutocomplete">
+                     <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
                         <mat-option *ngIf="isLoading" class="is-loading">Loading...</mat-option>
                         <ng-container *ngIf="!isLoading">
-                          <mat-option *ngFor="let movie of filteredMovies" [value]="movie.userID">
+                          <mat-option *ngFor="let movie of filteredMovies" [value]="movie" (click)="OnUserProductSelect(SelectedUserProduct)">
                             <span><b>{{movie.firstName}}</b>- ({{movie.companyName}})</span>
                           </mat-option>
                         </ng-container>
@@ -54,19 +54,14 @@
                 </div>
                
             </div>
-            <ng-container *ngIf="errorMsg; else elseTemplate">
-                {{errorMsg}}
-              </ng-container>
-              <ng-template #elseTemplate>
-                <h5>Selected Value: {{searchMoviesCtrl.value}}</h5>
-              </ng-template>
+        
             <div fxFlex="100%" fxFlex.xs="100%" fxFlex.sm="100%" fxLayout="column"  fxLayout.lt-sm="column"   fxLayoutGap="15px">
                
 
                 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
                     <!-- Checkbox Column -->
-                    <ng-container matColumnDef="select">
+                    <!-- <ng-container matColumnDef="select">
                         <th mat-header-cell *matHeaderCellDef>
                             <mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()" [indeterminate]="selection.hasValue() && !isAllSelected()" [aria-label]="checkboxLabel()">
                             </mat-checkbox>
@@ -75,7 +70,7 @@
                             <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null" [checked]="selection.isSelected(row)" [aria-label]="checkboxLabel(row)">
                             </mat-checkbox>
                         </td>
-                    </ng-container>
+                    </ng-container> -->
                 
                     <!-- Position Column -->
                     <ng-container matColumnDef="companyName">
@@ -113,7 +108,7 @@
                     </ng-container>
                 
                      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr> 
-                    <tr mat-row *matRowDef="let row; columns: displayedColumns;" > 
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="viewUser(row)" style="cursor: pointer;"> 
                     </tr> 
                 </table>
     <div fxFlex="100%">

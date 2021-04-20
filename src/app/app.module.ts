@@ -75,6 +75,7 @@ import { LinkProductComponent } from './pages/user/link-product/link-product.com
 import { DbConnectionComponent } from './pages/user/db-connection/db-connection.component';
 import { UserHierarchyComponent } from './pages/user/user-hierarchy/user-hierarchy.component';
 import { SinglePropertyComponent } from './pages/user/single-property/single-property.component';
+import { ViewUserComponent } from './pages/user/view-user/view-user.component';
 
 
 @NgModule({
@@ -115,7 +116,8 @@ import { SinglePropertyComponent } from './pages/user/single-property/single-pro
     LinkProductComponent,
     DbConnectionComponent,
     UserHierarchyComponent,
-    SinglePropertyComponent 
+    SinglePropertyComponent,
+    ViewUserComponent 
   ],
   imports: [
     BrowserModule,
