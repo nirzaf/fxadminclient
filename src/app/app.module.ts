@@ -38,6 +38,7 @@ import { OnlyNumberDirective } from './shared/directives/only-number.directive';
 import { FilterPipe } from './shared/pipe/filter.pipe';
 
 import { TogglePipe } from './shared/pipe/toggle.pipe';
+import { ZeroPipe } from './shared/pipe/zero.pipe';
 import { SampleComponent } from './pages/sample/sample.component';
 import { DatabaseComponent } from './pages/database/database.component';
 import { PropertyComponent } from './pages/property/property.component';
@@ -117,7 +118,8 @@ import { ViewUserComponent } from './pages/user/view-user/view-user.component';
     DbConnectionComponent,
     UserHierarchyComponent,
     SinglePropertyComponent,
-    ViewUserComponent 
+    ViewUserComponent,
+    ZeroPipe
   ],
   imports: [
     BrowserModule,

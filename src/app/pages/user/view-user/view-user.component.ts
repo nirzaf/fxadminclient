@@ -1,8 +1,10 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ToastService } from 'src/app/shared/services/toast.service';
 import { WebService } from 'src/app/shared/services/web.service';
+import { MatIconRegistry } from '@angular/material/icon/icon-registry';
 import  *  as  titleList  from  'src/app/shared/data/title.json';
+import  *  as  genderList  from  'src/app/shared/data/gender.json';
 export interface UserData {
   userID: number;
   userName: string;
@@ -16,12 +18,18 @@ export interface UserData {
 export class ViewUserComponent implements OnInit {
 
   titleListArr= (titleList  as  any).default;
-
+  genderListArr= (genderList  as  any).default;
   userData:UserData;
-  userObj={holdingCompanyName:'',alias:'',titleID:'',lastName:'',titleName:'',countryName:'',zipCode:'',   
-                    phoneNumber:'',website:'',currencyCode:'',hotelTypeName:'',checkInTime:'',checkOutTime:'',otherCurrenciesArr:[],hotelType:'',weekDays:'',weekEnds:'',
-                    macAddressesArr:[],starRating:0,networkIPsArr:[]};
-  constructor(public dialogRef: MatDialogRef<ViewUserComponent>,private webService:WebService,@Inject(MAT_DIALOG_DATA) public _userData: UserData,private toast:ToastService) {
+  userObj={holdingCompanyName:'',alias:'',titleID:'',lastName:'',titleName:'',middleName:'',firstName:'',genderName:'',   
+  genderID:'',designationID:'',designationName:'',departmentName:'',validFromDateView:'',validToDateView:'',imageVirtualPath:'',userTypeName:'',loginID:'',passwordExpiryDays:''
+  ,isAuthorized:'',macAddressesArr:[],networkIPsArr:[],officeAddress:'',officeCountryName:'',officeStateName:'',officeCityName:'',officeZipCode:'',
+  officeMobileCountryCode:'',officeMobile:'',officePhoneCountryCode:'',officePhone:'',officeExtension:'',officeEmail:'',
+  personalAddress:'',personalCountryName:'',personalStateName:'',personalCityName:'',personalZipCode:'',personalMobileCountryCode:'',personalMobileNo:'',
+  personalPhoneCountryCode:'',personalPhoneNumber:'',personalEmail:'',birthDate:'',remarks:'',birthDateView:''
+};
+  
+  constructor(public dialogRef: MatDialogRef<ViewUserComponent>,private webService:WebService,@Inject(MAT_DIALOG_DATA) public _userData: UserData,private toast:ToastService
+  ,public dialog: MatDialog) {
     this.userData = _userData;
 
 
@@ -44,6 +52,10 @@ export class ViewUserComponent implements OnInit {
 
     return this.titleListArr.filter(x => x.titleID == id);
   }
+  getGenderNameById(id:string):any{
+
+    return this.genderListArr.filter(x => x.genderID == id);
+  }
   getUserData(userID){
     //console.log(this.dayListArr);
     this.webService.commonMethod('user/GetById/'+userID,null,'GET',null)
@@ -51,7 +63,13 @@ export class ViewUserComponent implements OnInit {
       if(data.succeeded){
       this.userObj=data.data;
         this.userObj.titleName=this.getTitleNameById(data.data.titleID)[0].name;
-     
+        this.userObj.genderName=this.getGenderNameById(data.data.genderID)[0].name;
+        if(data.data.ipAddress){
+          this.userObj.networkIPsArr=data.data.ipAddress.split(',');
+        }
+        if(data.data.macAddress){
+          this.userObj.macAddressesArr=data.data.macAddress.split(',');
+        }
         // if(data.data.weekEnds){
         //   console.log(this.dayListArr);
         //   var weekEndArr = data.data.weekEnds.split(',');

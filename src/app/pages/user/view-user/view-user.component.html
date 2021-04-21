@@ -70,5 +70,417 @@
                       </div>
                 </div>
             </div>
+            <div class="content">
+        
+       
+                <div fxFlex="100%"  fxLayout="row wrap" fxLayoutGap="15px">
+                    <div fxFlex="24%" fxFlex.xs="100%" fxLayout="row wrap">
+                        <div fxFlex="100%" class="labeltext">
+                            Middle Name
+                        </div>
+                        <div fxFlex="100%">
+                            {{userObj.middleName}}
+                      </div>
+                     
+                      </div>
+                      <div fxFlex="24%" fxFlex.xs="100%" fxLayout="row wrap">
+                          <div fxFlex="100%" class="labeltext">
+                              First Name
+                          </div>
+                          <div fxFlex="100%">
+                            {{userObj.firstName}}
+                        </div>
+                       
+                        </div>
+                        <div fxFlex="24%" fxFlex.xs="100%" fxLayout="row wrap">
+                          <div fxFlex="100%" class="labeltext">
+                              Gender
+                          </div>
+                          <div fxFlex="100%">
+                            {{userObj.genderName}}
+                        </div>
+                       
+                        </div>
+                        <div fxFlex="22%" fxFlex.xs="100%" fxLayout="row wrap">
+                            <div fxFlex="100%" class="labeltext">
+                                Designation
+                            </div>
+                            <div fxFlex="100%">
+                                {{userObj.designationName}}
+                          </div>
+                         
+                          </div>
+                    </div>
+                </div>
+                <div class="content">
+        
+       
+                    <div fxFlex="100%"  fxLayout="row wrap" fxLayoutGap="15px">
+                        <div fxFlex="24%" fxFlex.xs="100%" fxLayout="row wrap">
+                            <div fxFlex="100%" class="labeltext">
+                                Department
+                            </div>
+                            <div fxFlex="100%">
+                                {{userObj.departmentName}}
+                          </div>
+                         
+                          </div>
+                          <div fxFlex="24%" fxFlex.xs="100%" fxLayout="row wrap">
+                              <div fxFlex="100%" class="labeltext">
+                                  Valid From
+                              </div>
+                              <div fxFlex="100%">
+                                {{userObj.validFromDateView}}
+                            </div>
+                           
+                            </div>
+                            <div fxFlex="24%" fxFlex.xs="100%" fxLayout="row wrap">
+                              <div fxFlex="100%" class="labeltext">
+                                Valid To
+                              </div>
+                              <div fxFlex="100%">
+                                {{userObj.validToDateView}}
+                            </div>
+                           
+                            </div>
+                            <div fxFlex="22%" fxFlex.xs="100%" fxLayout="row wrap">
+                                <div fxFlex="100%" class="labeltext">
+                                    Profile Photo
+                                </div>
+                                <div fxFlex="100%">
+                                    <img src="{{userObj.imageVirtualPath}}"  class="profile_pic" />  
+                              </div>
+                             
+                              </div>
+                        </div>
+                    </div>
+                    <div class="content">
+        
+       
+                        <div fxFlex="100%"  fxLayout="row wrap" fxLayoutGap="15px">
+                            <div fxFlex="24%" fxFlex.xs="100%" fxLayout="row wrap">
+                                <div fxFlex="100%" class="labeltext">
+                                    User Type
+                                </div>
+                                <div fxFlex="100%">
+                                    {{userObj.userTypeName}}
+                              </div>
+                             
+                              </div>
+                              <div fxFlex="24%" fxFlex.xs="100%" fxLayout="row wrap">
+                                  <div fxFlex="100%" class="labeltext">
+                                     Login ID
+                                  </div>
+                                  <div fxFlex="100%">
+                                    {{userObj.loginID}}
+                                </div>
+                               
+                                </div>
+                                <div fxFlex="24%" fxFlex.xs="100%" fxLayout="row wrap">
+                                  <div fxFlex="100%" class="labeltext">
+                                   passwordExpiry Days
+                                  </div>
+                                  <div fxFlex="100%">
+                                    {{userObj.passwordExpiryDays | zero}}
+                                </div>
+                               
+                                </div>
+                                <div fxFlex="22%" fxFlex.xs="100%" fxLayout="row wrap">
+                                    <div fxFlex="100%" class="labeltext">
+                                      Authorized For License
+                                    </div>
+                                    <div fxFlex="100%">
+                                    
+                                        {{userObj.isAuthorized | toggle}}
+                                  </div>
+                                 
+                                  </div>
+                            </div>
+                        </div>
+                        <div class="content">
+                            <div fxFlex="50%"  fxLayout="row wrap" fxLayoutGap="0px" class="view-property-chip">
+                                
+                                    <div fxFlex="100%" class="labeltext">
+                                        Property Network IP
+                                    </div>
+                                    <div fxFlex="100%">
+                                        <mat-chip-list #chipList aria-label="IP selection">
+                                            <mat-chip *ngFor="let netWorkIP of userObj.networkIPsArr" [selectable]="false"
+                                                     [removable]="true" >
+                                              {{netWorkIP}}
+                                              <mat-icon matChipRemove *ngIf="true">cancel</mat-icon>
+                                            </mat-chip>
+                                            
+                                          </mat-chip-list>
+                                      
+                                        
+                                  </div>
+                                
+                                 
+                               
+                                  
+                               
+                                </div>
+                                <div fxFlex="50%"  fxLayout="row wrap" fxLayoutGap="15px" class="view-property-chip">
+                        
+                                    <div fxFlex="100%" class="labeltext">
+                                       Network Mac ID
+                                    </div>
+                                    <div fxFlex="100%">
+                                        <mat-chip-list #chipList aria-label="IP selection">
+                                            <mat-chip *ngFor="let macAddress of userObj.macAddressesArr" [selectable]="false"
+                                                     [removable]="true" >
+                                              {{macAddress}}
+                                              <mat-icon matChipRemove *ngIf="true">cancel</mat-icon>
+                                            </mat-chip>
+                                            
+                                          </mat-chip-list>
+                                    
+                                        
+                                  </div>
+                                 
+                                 
+                               
+                                  
+                               
+                                </div>
+                            </div>
+                            <div class="content">
+                                <div fxFlex="100%"  fxLayout="row wrap" fxLayoutGap="15px" class="fx_border_bottom" >
+                                    <div fxFlex="80%" fxFlex.xs="75%" fxFlex.sm="100%" class="fx_subgroup_head">
+                                        Official Contact           
+                                      </div>
+                                      <div fxFlex="18%" fxFlex.xs="20%" fxLayoutAlign="end" >
+                                          
+                                  
+                                       
+                                    </div>
+                                      
+                                    </div>
+                              </div>
+                            <div class="content">
+        
+       
+                                <div fxFlex="100%"  fxLayout="row wrap" fxLayoutGap="15px">
+                                    <div fxFlex="24%" fxFlex.xs="100%" fxLayout="row wrap">
+                                        <div fxFlex="100%" class="labeltext">
+                                           Address
+                                        </div>
+                                        <div fxFlex="100%">
+                                            {{userObj.officeAddress}}
+                                      </div>
+                                     
+                                      </div>
+                                      <div fxFlex="24%" fxFlex.xs="100%" fxLayout="row wrap">
+                                          <div fxFlex="100%" class="labeltext">
+                                             Country
+                                          </div>
+                                          <div fxFlex="100%">
+                                            {{userObj.officeCountryName}}
+                                        </div>
+                                       
+                                        </div>
+                                        <div fxFlex="24%" fxFlex.xs="100%" fxLayout="row wrap">
+                                          <div fxFlex="100%" class="labeltext">
+                                          State
+                                          </div>
+                                          <div fxFlex="100%">
+                                            {{userObj.officeStateName}}
+                                        </div>
+                                       
+                                        </div>
+                                        <div fxFlex="22%" fxFlex.xs="100%" fxLayout="row wrap">
+                                            <div fxFlex="100%" class="labeltext">
+                                             City
+                                            </div>
+                                            <div fxFlex="100%">
+                                            
+                                                {{userObj.officeCityName}}
+                                          </div>
+                                         
+                                          </div>
+                                    </div>
+                                </div>
+                                <div class="content">
+        
+       
+                                    <div fxFlex="100%"  fxLayout="row wrap" fxLayoutGap="15px">
+                                        <div fxFlex="24%" fxFlex.xs="100%" fxLayout="row wrap">
+                                            <div fxFlex="100%" class="labeltext">
+                                              Zip / PostalCode
+                                            </div>
+                                            <div fxFlex="100%">
+                                                {{userObj.officeZipCode}}
+                                          </div>
+                                         
+                                          </div>
+                                          <div fxFlex="24%" fxFlex.xs="100%" fxLayout="row wrap">
+                                              <div fxFlex="100%" class="labeltext">
+                                                Mobile
+                                              </div>
+                                              <div fxFlex="100%">
+                                                {{userObj.officeMobileCountryCode}} {{userObj.officeMobile}}
+                                            </div>
+                                           
+                                            </div>
+                                            <div fxFlex="24%" fxFlex.xs="100%" fxLayout="row wrap">
+                                              <div fxFlex="100%" class="labeltext">
+                                              Phone
+                                              </div>
+                                              <div fxFlex="100%">
+                                                {{userObj.officePhoneCountryCode}} {{userObj.officePhone}}
+                                            </div>
+                                           
+                                            </div>
+                                            <div fxFlex="22%" fxFlex.xs="100%" fxLayout="row wrap">
+                                                <div fxFlex="100%" class="labeltext">
+                                                  Extension
+                                                </div>
+                                                <div fxFlex="100%">
+                                                
+                                                    {{userObj.officeExtension}}
+                                              </div>
+                                             
+                                              </div>
+                                        </div>
+                                    </div>
+                                    <div class="content">
+        
+       
+                                        <div fxFlex="100%"  fxLayout="row wrap" fxLayoutGap="15px">
+                                            <div fxFlex="24%" fxFlex.xs="100%" fxLayout="row wrap">
+                                                <div fxFlex="100%" class="labeltext">
+                                                  Email
+                                                </div>
+                                                <div fxFlex="100%">
+                                                    {{userObj.officeEmail}}
+                                              </div>
+                                             
+                                              </div>
+                                            </div>
+                                        </div>
+                                        <div class="content">
+                                            <div fxFlex="100%"  fxLayout="row wrap" fxLayoutGap="15px" class="fx_border_bottom" >
+                                                <div fxFlex="80%" fxFlex.xs="75%" fxFlex.sm="100%" class="fx_subgroup_head">
+                                                    Personal Contact           
+                                                  </div>
+                                                  <div fxFlex="18%" fxFlex.xs="20%" fxLayoutAlign="end" >
+                                                      
+                                              
+                                                   
+                                                </div>
+                                                  
+                                                </div>
+                                          </div>
+                                          <div class="content">
+        
+       
+                                            <div fxFlex="100%"  fxLayout="row wrap" fxLayoutGap="15px">
+                                                <div fxFlex="24%" fxFlex.xs="100%" fxLayout="row wrap">
+                                                    <div fxFlex="100%" class="labeltext">
+                                                       Address
+                                                    </div>
+                                                    <div fxFlex="100%">
+                                                        {{userObj.personalAddress}}
+                                                  </div>
+                                                 
+                                                  </div>
+                                                  <div fxFlex="24%" fxFlex.xs="100%" fxLayout="row wrap">
+                                                      <div fxFlex="100%" class="labeltext">
+                                                         Country
+                                                      </div>
+                                                      <div fxFlex="100%">
+                                                        {{userObj.personalCountryName}}
+                                                    </div>
+                                                   
+                                                    </div>
+                                                    <div fxFlex="24%" fxFlex.xs="100%" fxLayout="row wrap">
+                                                      <div fxFlex="100%" class="labeltext">
+                                                      State
+                                                      </div>
+                                                      <div fxFlex="100%">
+                                                        {{userObj.personalStateName}}
+                                                    </div>
+                                                   
+                                                    </div>
+                                                    <div fxFlex="22%" fxFlex.xs="100%" fxLayout="row wrap">
+                                                        <div fxFlex="100%" class="labeltext">
+                                                         City
+                                                        </div>
+                                                        <div fxFlex="100%">
+                                                        
+                                                            {{userObj.personalCityName}}
+                                                      </div>
+                                                     
+                                                      </div>
+                                                </div>
+                                            </div>
+                                            <div class="content">
+                    
+                   
+                                                <div fxFlex="100%"  fxLayout="row wrap" fxLayoutGap="15px">
+                                                    <div fxFlex="24%" fxFlex.xs="100%" fxLayout="row wrap">
+                                                        <div fxFlex="100%" class="labeltext">
+                                                          Zip / PostalCode
+                                                        </div>
+                                                        <div fxFlex="100%">
+                                                            {{userObj.personalZipCode}}
+                                                      </div>
+                                                     
+                                                      </div>
+                                                      <div fxFlex="24%" fxFlex.xs="100%" fxLayout="row wrap">
+                                                          <div fxFlex="100%" class="labeltext">
+                                                            Mobile
+                                                          </div>
+                                                          <div fxFlex="100%">
+                                                            {{userObj.personalMobileCountryCode}} {{userObj.personalMobileNo}}
+                                                        </div>
+                                                       
+                                                        </div>
+                                                        <div fxFlex="24%" fxFlex.xs="100%" fxLayout="row wrap">
+                                                          <div fxFlex="100%" class="labeltext">
+                                                          Phone
+                                                          </div>
+                                                          <div fxFlex="100%">
+                                                            {{userObj.personalPhoneCountryCode}} {{userObj.personalPhoneNumber}}
+                                                        </div>
+                                                       
+                                                        </div>
+                                                        <div fxFlex="22%" fxFlex.xs="100%" fxLayout="row wrap">
+                                                            <div fxFlex="100%" class="labeltext">
+                                                              Birth Date
+                                                            </div>
+                                                            <div fxFlex="100%">
+                                                            
+                                                                {{userObj.birthDateView}}
+                                                          </div>
+                                                         
+                                                          </div>
+                                                    </div>
+                                                </div>
+                                                <div class="content">
+                    
+                   
+                                                    <div fxFlex="100%"  fxLayout="row wrap" fxLayoutGap="15px">
+                                                        <div fxFlex="24%" fxFlex.xs="100%" fxLayout="row wrap">
+                                                            <div fxFlex="100%" class="labeltext">
+                                                              Email
+                                                            </div>
+                                                            <div fxFlex="100%">
+                                                                {{userObj.personalEmail}}
+                                                          </div>
+                                                         
+                                                          </div>
+                                                          <div fxFlex="24%" fxFlex.xs="100%" fxLayout="row wrap">
+                                                            <div fxFlex="100%" class="labeltext">
+                                                              Remarks
+                                                            </div>
+                                                            <div fxFlex="100%">
+                                                              {{userObj.remarks}}
+                                                          </div>
+                                                         
+                                                          </div>
+                                                        </div>
+                                                    </div>
         </div>
         </mat-dialog-content>
