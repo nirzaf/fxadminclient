@@ -5,6 +5,7 @@ import { WebService } from 'src/app/shared/services/web.service';
 import { MatIconRegistry } from '@angular/material/icon/icon-registry';
 import  *  as  titleList  from  'src/app/shared/data/title.json';
 import  *  as  genderList  from  'src/app/shared/data/gender.json';
+import { EditUserComponent } from '../edit-user/edit-user.component';
 export interface UserData {
   userID: number;
   userName: string;
@@ -40,8 +41,27 @@ export class ViewUserComponent implements OnInit {
     this.getUserData(this.userData.userID);
   }
   editUser():any{
+    const dialogRef = this.dialog.open(EditUserComponent, {
+      panelClass: ['create-user-modal','viewmore-dialog-container'],
+      disableClose: true ,
+      
+      //minHeight: '800px',    
+      data: {userName: this.userData.userName, userID: this.userData.userID}
+    });
 
+    dialogRef.afterClosed().subscribe(result => {
+      if(result.data==1){
+      
+        this.getUserData(this.userData.userID);
+        this.toast.success("Updated Successfully");
+        // this.getCompanyGroupList(this.holdingCompanyID);
+      }
+    
+      // this.holdingCompanyName= result.data.holdingCompanyName;
+      // this.holdingCompanyID=result.data.holdingCompanyID;
+    });
   }
+
   delete():any{
 
   }
@@ -69,80 +89,7 @@ export class ViewUserComponent implements OnInit {
         }
         if(data.data.macAddress){
           this.userObj.macAddressesArr=data.data.macAddress.split(',');
-        }
-        // if(data.data.weekEnds){
-        //   console.log(this.dayListArr);
-        //   var weekEndArr = data.data.weekEnds.split(',');
-          
-        //   var WeekEndVal='';
-          
-        //   var i=0;
-         
-        //  //var WeekDayArr=this.dayListArr;
-        //  const WeekDayArr  = Object.assign([], this.dayListArr);
-        //   // console.log(WeekDayArr);
-        //   for(let weekEnd of  weekEndArr)
-        //   {
-           
-        //     if(i!=0){
-        //       WeekEndVal=WeekEndVal+', '+this.getDayNameById(weekEnd)[0].name;
-        //     }else{
-        //       WeekEndVal=this.getDayNameById(weekEnd)[0].name;
-        //     }
-            
-
-           
-            
-        //     i++;
-           
-        //   }
-        
-        
-          
-   
-        //   data.data.weekEnds=WeekEndVal;
-        //   //
-
-        // }
-        // if(data.data.weekDays){
-        //   var WeekDayVal='';
-        //   var weekDayArr = data.data.weekDays.split(',');
-          
-       
-        //   var i=0;
-         
-        
-        //   for(let weekDay of  weekDayArr)
-        //   {
-           
-        //     if(i!=0){
-        //       WeekDayVal=WeekDayVal+', '+this.getDayNameById(weekDay)[0].name;
-        //     }else{
-        //       WeekDayVal=this.getDayNameById(weekDay)[0].name;
-        //     }
-            
-
-           
-            
-        //     i++;
-           
-        //   }
-        
-        
-          
-   
-      
-        //   data.data.weekDays=WeekDayVal;
-
-        // }
-      
-        // this.propertyObj=data.data;
-        // if(data.data.networkIP){
-        //   this.propertyObj.networkIPsArr=data.data.networkIP.split(',');
-        // }
-        // if(data.data.macAddresses){
-        //   this.propertyObj.macAddressesArr=data.data.macAddresses.split(',');
-        // }
+        }      
        
       }
       else{

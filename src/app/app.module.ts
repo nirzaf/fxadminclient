@@ -77,6 +77,7 @@ import { DbConnectionComponent } from './pages/user/db-connection/db-connection.
 import { UserHierarchyComponent } from './pages/user/user-hierarchy/user-hierarchy.component';
 import { SinglePropertyComponent } from './pages/user/single-property/single-property.component';
 import { ViewUserComponent } from './pages/user/view-user/view-user.component';
+import { EditUserComponent } from './pages/user/edit-user/edit-user.component';
 
 
 @NgModule({
@@ -119,7 +120,8 @@ import { ViewUserComponent } from './pages/user/view-user/view-user.component';
     UserHierarchyComponent,
     SinglePropertyComponent,
     ViewUserComponent,
-    ZeroPipe
+    ZeroPipe,
+    EditUserComponent
   ],
   imports: [
     BrowserModule,
