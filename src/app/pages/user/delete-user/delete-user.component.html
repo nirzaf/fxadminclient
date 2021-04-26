@@ -1,0 +1,10 @@
+<mat-dialog-content>
+	<p>
+		Are you sure you want to delete <b>{{userData.userName}}</b> ?
+	</p>
+</mat-dialog-content>
+<mat-dialog-actions align="center">
+	<button mat-raised-button color="primary" (click)="onConfirmClick()" tabindex="1">Yes</button>
+	<button mat-raised-button mat-dialog-close tabindex="-1">No</button>
+</mat-dialog-actions>
+

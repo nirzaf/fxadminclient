@@ -6,6 +6,7 @@ import { MatIconRegistry } from '@angular/material/icon/icon-registry';
 import  *  as  titleList  from  'src/app/shared/data/title.json';
 import  *  as  genderList  from  'src/app/shared/data/gender.json';
 import { EditUserComponent } from '../edit-user/edit-user.component';
+import { DeleteUserComponent } from '../delete-user/delete-user.component';
 export interface UserData {
   userID: number;
   userName: string;
@@ -63,10 +64,33 @@ export class ViewUserComponent implements OnInit {
   }
 
   delete():any{
+    const dialogRef = this.dialog.open(DeleteUserComponent, {
+      //panelClass: ['viewmore-dialog-container'],
+      disableClose: true ,
+      
+      //minHeight: '800px',    
+      data: {userName: this.userData.userName, userID: this.userData.userID}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result.data==1){
+        //this.dialogRef.close( { event: 'close', data: this.holdingCompanyData });
+        this.dialogRef.close( { event: 'close', data:"D" });
+        
+        // this.getCompanyGroupList(this.holdingCompanyID);
+      }
+      else{
+     
+      }
+     
+     
+    });
 
   }
+  
   close():any{
 
+    this.dialogRef.close({ event: 'close', data: null });
   }
   getTitleNameById(id:string):any{
 
@@ -94,11 +118,8 @@ export class ViewUserComponent implements OnInit {
       }
       else{
         this.toast.error(data.errors);
-      }
+      }   
       
-      
-      
-      //this.isProgressing = false;
     });
   }
 

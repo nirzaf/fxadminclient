@@ -231,6 +231,7 @@ if(this.imgURL!=null && this.imgURL!=""){
   imageName=this.imgURL.substr(this.imgURL.lastIndexOf("/") + 1);
 }
       var userData = {
+        "UserID":this._userData.userID,
         "HoldingCompanyID": parseInt(this.createUserForm.controls['holdingCompanyName'].value),
         "Alias":this.createUserForm.controls['alias'].value,
         "TitleID":this.createUserForm.controls['title'].value,
@@ -279,18 +280,18 @@ if(this.imgURL!=null && this.imgURL!=""){
         "IPAddress":netWorkIPs
        
       }
-      this.webService.commonMethod('user/post', userData, 'POST', null)
+      this.webService.commonMethod('user/put/'+this._userData.userID,userData, 'PUT', null)
       .subscribe(data => {
         if (data.succeeded) {
           if (data.data == 0) {
             this.toast.error("Some Error Occured");
           }
           else {
-            this.toast.success("Data Saved Successfully");
-            this.linkProperty=true;
+            //this.toast.success("Data Saved Successfully");
+            //this.linkProperty=true;
             // this.holdingCompanyData.holdingCompanyID = data.data;
             // this.holdingCompanyData.holdingCompanyName = '';
-            //this.dialogRef.close({ event: 'close', data: null});
+            this.dialogRef.close({ event: 'close', data: 1});
 
           }
 
@@ -445,7 +446,7 @@ if(this.imgURL!=null && this.imgURL!=""){
         this.createUserForm.get('department').setValue(data.data.departmentID);
         this.createUserForm.get('userValidFrom').setValue(data.data.validFrom);
         this.createUserForm.get('userValidTo').setValue(data.data.validTo);
-        this.createUserForm.get('profilePicture').setValue(data.data.userImageName);
+        //this.createUserForm.get('profilePicture').setValue(data.data.userImageName);
         this.createUserForm.get('userType').setValue(data.data.userTypeID);
         this.createUserForm.get('loginID').setValue(data.data.loginID);
         this.createUserForm.get('passwordExpiry').setValue(data.data.passwordExpiryDays);
@@ -475,7 +476,8 @@ if(this.imgURL!=null && this.imgURL!=""){
         this.createUserForm.get('isAuthorizedLicense').setValue(isLicense);
         
         this.imgURL=data.data.imageVirtualPath;
-       
+        console.log("Image Path");
+       console.log(this.imgURL);
        
   
         if(data.data.ipAddress){

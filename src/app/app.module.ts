@@ -78,6 +78,7 @@ import { UserHierarchyComponent } from './pages/user/user-hierarchy/user-hierarc
 import { SinglePropertyComponent } from './pages/user/single-property/single-property.component';
 import { ViewUserComponent } from './pages/user/view-user/view-user.component';
 import { EditUserComponent } from './pages/user/edit-user/edit-user.component';
+import { DeleteUserComponent } from './pages/user/delete-user/delete-user.component';
 
 
 @NgModule({
@@ -121,7 +122,8 @@ import { EditUserComponent } from './pages/user/edit-user/edit-user.component';
     SinglePropertyComponent,
     ViewUserComponent,
     ZeroPipe,
-    EditUserComponent
+    EditUserComponent,
+    DeleteUserComponent
   ],
   imports: [
     BrowserModule,

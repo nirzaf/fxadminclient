@@ -4,7 +4,7 @@
   <form [formGroup]="createUserForm"  #createForm="ngForm" (ngSubmit)="submitForm()">
 <h2 mat-dialog-title>
     <div fxFlex="100%" fxLayout="row wrap" class="headercontainer" fxLayout.lt-sm="column">
-<div fxFlex="70%" fxFlex.xs="100%"><i class="fas fa-arrow-left themecolor titlearrowicon"   (click)="close()" style="font-size: 24px;"></i> View Holding Company</div>
+<div fxFlex="70%" fxFlex.xs="100%"><i class="fas fa-arrow-left themecolor titlearrowicon"   (click)="close()" style="font-size: 24px;"></i> Edit User</div>
 <div fxFlex="30%" fxFlex.xs="100%" class="headerAction">
     <div fxFlex="33%"  fxLayout="row wrap" class="cancelcontainer">
         <div fxFlex="100%">
@@ -44,7 +44,7 @@
 <mat-dialog-content  class="mat-typography">
 
   <div>
-    <div class="content">
+    <!-- <div class="content">
       <div fxFlex="100%" fxLayoutAlign="center center">
         <ul style="margin-top: 0px;">
           <li class="active"><div>1</div><div class="steptext">User Details</div></li>
@@ -52,7 +52,7 @@
         
         </ul>  
       </div>
-    </div>
+    </div> -->
     <div class="content">
       <div fxFlex="100%"  fxLayout="row wrap" fxLayoutGap="15px" class="fx_border_bottom" >
           <div fxFlex="80%" fxFlex.xs="75%" fxFlex.sm="100%" class="fx_subgroup_head">
@@ -237,6 +237,7 @@
   
 <img [src]="imgURL"  *ngIf="imgURL" class="profile_pic" >
               <img src="./assets/image/avatar.jpg" *ngIf="!imgURL" class="profile_pic" />
+           
             </div>
             <div fxFlex="100%" class="lable_txt">
               Max File Size is 1 MB. Use JPG or PNG
@@ -695,10 +696,5 @@
 
 </mat-dialog-content>
 
-<mat-dialog-actions align="end">
-    <button  mat-button type="button" class="border btnProperty" (click)="onNoClick()">Back</button>
-    <button  mat-button class="button btnProperty" type="submit" (click)="submitFormtest()">Save & Continue</button>
-    <button  mat-button class="button btnProperty" type="submit" (click)="submitForm()">Save</button>
- 
-</mat-dialog-actions>
+
 </form>

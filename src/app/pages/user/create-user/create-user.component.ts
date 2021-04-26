@@ -14,7 +14,8 @@ import * as _moment from 'moment';
 import {default as _rollupMoment} from 'moment';
 import { WebService } from 'src/app/shared/services/web.service';
 import { ToastService } from 'src/app/shared/services/toast.service';
-import { HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { debounceTime, finalize, switchMap, tap } from 'rxjs/operators';
 
 const moment = _rollupMoment || _moment;
 
@@ -58,8 +59,14 @@ export interface MacID {
   styleUrls: ['./create-user.component.scss']
 })
 export class CreateUserComponent implements OnInit {
+  errorMsg: string;
+  SelectedCompany:any;
+  isLoading = false;
+  public isProgressing: boolean = true;
+  public loaderMessage: string = "Loading...";
+  holdingCompanies: any;
   createUserForm: FormGroup = this.formBuilder.group({
-    holdingCompanyName: [, { validators: [Validators.required], updateOn: "change" }],
+    holdingCompanyName: [],
     alias: [, { validators: [Validators.required], updateOn: "change" }],
     title: [, { validators: [Validators.required], updateOn: "change" }],
     lastName: [, { validators: [], updateOn: "change" }],
@@ -108,7 +115,11 @@ export class CreateUserComponent implements OnInit {
   imgURL: any;
   public message: string;
  
- 
+  OnUserProductSelect(SelectedUserProduct) {
+    //this.getUserProductListByUser(SelectedUserProduct.userID);
+    console.log("Onchange");
+    console.log(SelectedUserProduct);
+  }
 
   validFrom = new FormControl();
   validTO = new FormControl();
@@ -133,7 +144,8 @@ export class CreateUserComponent implements OnInit {
   public officialCityList: any = [];
   public countryList: any = [];
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
-  constructor(public dialogRef: MatDialogRef<CreateUserComponent>,private formBuilder: FormBuilder,private webService:WebService,private toast: ToastService) {
+  constructor(public dialogRef: MatDialogRef<CreateUserComponent>,private formBuilder: FormBuilder,private webService:WebService,private toast: ToastService
+    ,private http: HttpClient) {
     this.getDepartmentList();
     this.getUserTypeList();
     this.getDesignationList();
@@ -141,6 +153,34 @@ export class CreateUserComponent implements OnInit {
        }
 
   ngOnInit(): void {
+    this.createUserForm.get('holdingCompanyName').valueChanges
+    .pipe(
+       
+      debounceTime(500),
+      tap(() => {
+        this.errorMsg = "";
+        this.holdingCompanies = [];
+        this.isLoading = true;
+      }),
+      switchMap(value => this.http.get(`https://localhost:44358/api/v1/user/searchcompany/${value ? value: 'NAN'}`  )
+        .pipe(
+          finalize(() => {
+            this.isLoading = false
+          }),
+        )
+      )
+    )
+    .subscribe(data => {
+      if (data == undefined) {
+        this.errorMsg = data['Error'];
+        this.holdingCompanies = [];
+      } else {
+        this.errorMsg = "";
+        this.holdingCompanies = data["data"];
+      }
+
+      console.log(this.holdingCompanies);
+    });
     
   }
   preview(files) {

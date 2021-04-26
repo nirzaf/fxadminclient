@@ -40,10 +40,21 @@
             <mat-form-field [style.width.%]="100" floatLabel="always"> 
               <mat-label>Search Holding company/ Group/ Property</mat-label>
               <input type="text"
-              placeholder="Holding Company"
-              aria-label="Number" formControlName="holdingCompanyName"
-              matInput              
+              placeholder="User Name"
+              aria-label="Number"
+              matInput
+              [formControl]="holdingCompanyName"
+              [matAutocomplete]="auto"  [(ngModel)]="SelectedCompany"
              >
+             <mat-autocomplete #auto="matAutocomplete">
+                <mat-option *ngIf="isLoading" class="is-loading">Loading...</mat-option>
+                <ng-container *ngIf="!isLoading">
+                  <mat-option *ngFor="let holdingCompany of holdingCompanies" [value]="holdingCompany.holdingCompanyID" (click)="OnUserProductSelect(SelectedCompany)">
+                    <span><b>{{holdingCompany.companyName}}</b></span>
+                  </mat-option>
+                </ng-container>
+              </mat-autocomplete>
+            
              <mat-error
              *ngIf="createUserForm.get('holdingCompanyName').hasError('required')">
              Code is <strong>required</strong>
