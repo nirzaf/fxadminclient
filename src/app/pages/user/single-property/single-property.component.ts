@@ -10,6 +10,7 @@ import { MatDialogRef } from '@angular/material/dialog';
   styleUrls: ['./single-property.component.scss']
 })
 export class SinglePropertyComponent implements OnInit {
+  @Input() userID: any[];  
   DataArray = [];
   groupList=[];
   propertyList=[];
@@ -108,7 +109,7 @@ export class SinglePropertyComponent implements OnInit {
       for (let control of this.form.get('property')['controls']) {
         for(let prdControl of control.get('products')['controls']){
           var productData = {
-            "UserID": 11,
+            "UserID": this.userID,
             "GroupID": control.controls["group"].value,
             "PropertyID": control.controls["property"].value,
             "ProductID": prdControl.controls["productCtrl"].value,
@@ -122,7 +123,7 @@ export class SinglePropertyComponent implements OnInit {
         }
       }
       var reqData={"UserProducts": products,"DefaultGroupID":this.form.controls["defaultGroupName"].value,
-                  "DefaultPropertyID":this.form.controls["defaultPropertyName"].value,UserID:11};
+                  "DefaultPropertyID":this.form.controls["defaultPropertyName"].value,UserID:this.userID};
                   console.log(reqData);
     
       this.webService.commonMethod('userproduct/post', reqData, 'POST', null)

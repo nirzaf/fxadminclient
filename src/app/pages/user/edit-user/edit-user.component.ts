@@ -10,11 +10,17 @@ import  *  as  passwordExpiry  from  'src/app/shared/data/passwordexpiry.json';
 import { CreateUserComponent } from '../create-user/create-user.component';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { UserData } from '../view-user/view-user.component';
+import { debounceTime, finalize, switchMap, tap } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
 export interface DialogData {
 
 }
 export interface NetworkIP {
   name: string;
+}
+export interface Company {
+  companyName:string;
+  holdingCompanyID:number;
 }
 export interface MacID {
   name: string;
@@ -25,8 +31,17 @@ export interface MacID {
   styleUrls: ['./edit-user.component.scss']
 })
 export class EditUserComponent implements OnInit {
+  holdingCompanyID:any;
+  savedUserID:any;
+  errorMsg: string;
+  saveSuccess=false;
+  SelectedCompany:Company={companyName:null,holdingCompanyID:0};
+  isLoading = false;
+  public loaderMessage: string = "Loading...";
+  holdingCompanies: any;
+
   createUserForm: FormGroup = this.formBuilder.group({
-    holdingCompanyName: [, { validators: [Validators.required], updateOn: "change" }],
+    'holdingCompanyName': new FormControl(null, Validators.required),
     alias: [, { validators: [Validators.required], updateOn: "change" }],
     title: [, { validators: [Validators.required], updateOn: "change" }],
     lastName: [, { validators: [], updateOn: "change" }],
@@ -101,7 +116,7 @@ export class EditUserComponent implements OnInit {
   public countryList: any = [];
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
   constructor(public dialogRef: MatDialogRef<CreateUserComponent>,private formBuilder: FormBuilder,private webService:WebService,private toast: ToastService,
-    @Inject(MAT_DIALOG_DATA) public _userData: UserData) {
+    @Inject(MAT_DIALOG_DATA) public _userData: UserData,private http: HttpClient) {
     this.getDepartmentList();
     this.getUserTypeList();
     this.getDesignationList();
@@ -110,7 +125,45 @@ export class EditUserComponent implements OnInit {
        }
 
   ngOnInit(): void {
-    
+    this.createUserForm.get('holdingCompanyName').valueChanges
+    .pipe(
+       
+      debounceTime(500),
+      tap(() => {
+        this.errorMsg = "";
+        this.holdingCompanies = [];
+        this.isLoading = true;
+      }),
+      switchMap(value => this.http.get(`https://localhost:44358/api/v1/user/searchcompany/${value ? value: 'NAN'}`  )
+        .pipe(
+          finalize(() => {
+            this.isLoading = false
+          }),
+        )
+      )
+    )
+    .subscribe(data => {
+      if (data == undefined) {
+        this.errorMsg = data['Error'];
+        this.holdingCompanies = [];
+      } else {
+        this.errorMsg = "";
+        this.holdingCompanies = data["data"];
+      }
+
+      console.log(this.holdingCompanies);
+    });
+  }
+  OnCompanySelect(SelectedCompany) {
+    this.holdingCompanyID=SelectedCompany.holdingCompanyID;
+    //this.getUserProductListByUser(SelectedUserProduct.userID);
+    console.log("Onchange");
+    console.log(SelectedCompany);
+  }
+  displayFn(company?: any): string | undefined {
+    console.log("displayFn");
+    console.log(company);
+    return company ? company.companyName: undefined;
   }
   close(): void {
 
@@ -232,7 +285,7 @@ if(this.imgURL!=null && this.imgURL!=""){
 }
       var userData = {
         "UserID":this._userData.userID,
-        "HoldingCompanyID": parseInt(this.createUserForm.controls['holdingCompanyName'].value),
+        "HoldingCompanyID": parseInt(this.holdingCompanyID),
         "Alias":this.createUserForm.controls['alias'].value,
         "TitleID":this.createUserForm.controls['title'].value,
         "LastName": this.createUserForm.controls['lastName'].value,
@@ -435,7 +488,9 @@ if(this.imgURL!=null && this.imgURL!=""){
         if(data.data.isAuthorized){
           isLicense="1";
         }
-        this.createUserForm.get('holdingCompanyName').setValue(data.data.holdingCompanyID);
+        // this.SelectedCompany.companyName=data.data.holdingCompanyName;
+        // this.SelectedCompany.holdingCompanyID=data.data.holdingCompanyID;
+        this.createUserForm.get('holdingCompanyName').setValue({companyName:data.data.holdingCompanyName, holdingCompanyID:data.data.holdingCompanyID});
         this.createUserForm.get('alias').setValue(data.data.alias);
         this.createUserForm.get('title').setValue(data.data.titleID);
         this.createUserForm.get('lastName').setValue(data.data.lastName);

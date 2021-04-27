@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { CreateUserComponent } from '../create-user/create-user.component';
 import { FormControl, FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
@@ -10,6 +10,9 @@ import { ToastService } from 'src/app/shared/services/toast.service';
   styleUrls: ['./link-product.component.scss']
 })
 export class LinkProductComponent implements OnInit {
+  @Input() holdingCompanyID: any[];  
+  
+  @Input() userID: any[];  
   PanelOpenState=true;
   formGroup: FormGroup;
   DataArray = [];
@@ -28,9 +31,9 @@ export class LinkProductComponent implements OnInit {
   constructor(public dialogRef: MatDialogRef<CreateUserComponent>,private fb: FormBuilder,private webService: WebService, private toast: ToastService,private formBuilder: FormBuilder) { }
 
   ngOnInit() {
-    
-    this.getCompanyGroupList(35);
-
+    console.log("OnInit");
+    this.getCompanyGroupList(this.holdingCompanyID);
+    console.log(this.holdingCompanyID);
 
   }
  

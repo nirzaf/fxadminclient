@@ -3,7 +3,7 @@
 
 
 <h2 mat-dialog-title>Create User</h2>
-<app-link-product *ngIf="linkProperty"></app-link-product>
+<app-link-product  [holdingCompanyID]="holdingCompanyID" [userID]="savedUserID" *ngIf="linkProperty"></app-link-product>
 
   <form [formGroup]="createUserForm" *ngIf="!linkProperty">
 <mat-dialog-content  class="mat-typography">
@@ -37,20 +37,21 @@
     <div fxFlex="100%"  fxLayout="row wrap" fxLayoutGap="15px">
      
           <div fxFlex="49%" fxFlex.xs="100%" >
+        
             <mat-form-field [style.width.%]="100" floatLabel="always"> 
               <mat-label>Search Holding company/ Group/ Property</mat-label>
               <input type="text"
               placeholder="User Name"
               aria-label="Number"
               matInput
-              [formControl]="holdingCompanyName"
-              [matAutocomplete]="auto"  [(ngModel)]="SelectedCompany"
+              formControlName="holdingCompanyName"
+              [matAutocomplete]="auto"  [(ngModel)]="SelectedCompany" 
              >
-             <mat-autocomplete #auto="matAutocomplete">
+             <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
                 <mat-option *ngIf="isLoading" class="is-loading">Loading...</mat-option>
                 <ng-container *ngIf="!isLoading">
-                  <mat-option *ngFor="let holdingCompany of holdingCompanies" [value]="holdingCompany.holdingCompanyID" (click)="OnUserProductSelect(SelectedCompany)">
-                    <span><b>{{holdingCompany.companyName}}</b></span>
+                  <mat-option *ngFor="let holdingCompany of holdingCompanies" [value]="holdingCompany" (click)="OnCompanySelect(SelectedCompany)">
+                    <span>{{holdingCompany.companyName}}</span>
                   </mat-option>
                 </ng-container>
               </mat-autocomplete>
@@ -673,7 +674,7 @@
 
 <mat-dialog-actions align="end">
     <button  mat-button type="button" class="border btnProperty" (click)="onNoClick()">Back</button>
-    <button  mat-button class="button btnProperty" type="submit" (click)="submitFormtest()">Save & Continue</button>
+    <button  mat-button class="button btnProperty" type="submit" (click)="SaveContinue()">Save & Continue</button>
     <button  mat-button class="button btnProperty" type="submit" (click)="submitForm()">Save</button>
  
 </mat-dialog-actions>

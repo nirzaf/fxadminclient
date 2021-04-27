@@ -59,14 +59,19 @@ export interface MacID {
   styleUrls: ['./create-user.component.scss']
 })
 export class CreateUserComponent implements OnInit {
+  holdingCompanyID:any;
+  savedUserID:any;
   errorMsg: string;
+  saveSuccess=false;
   SelectedCompany:any;
   isLoading = false;
   public isProgressing: boolean = true;
   public loaderMessage: string = "Loading...";
   holdingCompanies: any;
+  holdingCmpName = new FormControl('', Validators.required);
   createUserForm: FormGroup = this.formBuilder.group({
-    holdingCompanyName: [],
+   
+    'holdingCompanyName': new FormControl(null, Validators.required),
     alias: [, { validators: [Validators.required], updateOn: "change" }],
     title: [, { validators: [Validators.required], updateOn: "change" }],
     lastName: [, { validators: [], updateOn: "change" }],
@@ -183,6 +188,18 @@ export class CreateUserComponent implements OnInit {
     });
     
   }
+  
+  OnCompanySelect(SelectedCompany) {
+    this.holdingCompanyID=SelectedCompany.holdingCompanyID;
+    //this.getUserProductListByUser(SelectedUserProduct.userID);
+    console.log("Onchange");
+    console.log(SelectedCompany);
+  }
+  displayFn(company?: any): string | undefined {
+    console.log("displayFn");
+    console.log(company);
+    return company ? company.companyName: undefined;
+  }
   preview(files) {
     if (files.length === 0)
       return;
@@ -261,8 +278,13 @@ export class CreateUserComponent implements OnInit {
     }
   }
 
-  submitFormtest(){
-    this.linkProperty=true;
+  SaveContinue(){
+    //this.linkProperty=true;
+     this.submitForm();
+    // if(this.saveSuccess){
+     
+    // }
+    
   }
   // UploadDocument(url: string, data: any) {
   //   let url_type: string = "Config";
@@ -298,7 +320,7 @@ if(this.imgURL!=null && this.imgURL!=""){
   imageName=this.imgURL.substr(this.imgURL.lastIndexOf("/") + 1);
 }
       var userData = {
-        "HoldingCompanyID": parseInt(this.createUserForm.controls['holdingCompanyName'].value),
+        "HoldingCompanyID": this.holdingCompanyID,
         "Alias":this.createUserForm.controls['alias'].value,
         "TitleID":this.createUserForm.controls['title'].value,
         "LastName": this.createUserForm.controls['lastName'].value,
@@ -354,7 +376,10 @@ if(this.imgURL!=null && this.imgURL!=""){
           }
           else {
             this.toast.success("Data Saved Successfully");
+            this.savedUserID=data.data;
+            this.saveSuccess=true;
             this.linkProperty=true;
+           
             // this.holdingCompanyData.holdingCompanyID = data.data;
             // this.holdingCompanyData.holdingCompanyName = '';
             //this.dialogRef.close({ event: 'close', data: null});
