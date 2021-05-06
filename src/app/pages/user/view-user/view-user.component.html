@@ -1,8 +1,8 @@
 <h2 mat-dialog-title>
     <div fxFlex="100%" fxLayout="row wrap" class="headercontainer" fxLayout.lt-sm="column">
-<div fxFlex="75%" fxFlex.xs="100%"><i class="fas fa-arrow-left themecolor titlearrowicon"   (click)="close()" style="font-size: 24px;"></i> View User</div>
-<div fxFlex="25%" fxFlex.xs="100%" class="headerAction">
-    <div fxFlex="50%" fxFlex.sm="40%" fxLayout="row wrap" class="editcontainer">
+<div fxFlex="70%" fxFlex.xs="100%"><i class="fas fa-arrow-left themecolor titlearrowicon"   (click)="close()" style="font-size: 24px;"></i> View User</div>
+<div fxFlex="30%" fxFlex.xs="100%" class="headerAction">
+    <div fxFlex="33%"  fxLayout="row wrap" class="editcontainer">
         <div fxFlex="100%">
             <i class="fas fa-pencil-alt themecolor fxcursor_pointer" (click)="editUser()"></i>
         </div>
@@ -10,8 +10,17 @@
             Edit
         </div>
      
-    </div>
-    <div fxFlex="50%" fxFlex.sm="40%" fxLayout="row wrap">
+    </div>  
+    <div fxFlex="33%" fxFlex.sm="40%" fxLayout="row wrap">
+        <div fxFlex="100%">
+            <i class="fas fa-sitemap   createicon" (click)="showHirarchy()"></i><br/>
+        </div>
+        <div fxFlex="100%" class="headerdeletetext fxcursor_pointer" style="margin-left: -15px;" (click)="showHirarchy()">
+            Hierarchy
+        </div>
+      
+    </div>  
+    <div fxFlex="33%" fxFlex.sm="40%" fxLayout="row wrap">
         <div fxFlex="100%">
             <i class="far fa-trash-alt themecolor fxcursor_pointer" (click)="delete()"></i>
         </div>
@@ -20,6 +29,7 @@
         </div>
       
     </div>
+  
     
    </div>
     </div>

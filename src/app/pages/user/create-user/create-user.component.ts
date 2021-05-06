@@ -60,6 +60,7 @@ export interface MacID {
 })
 export class CreateUserComponent implements OnInit {
   holdingCompanyID:any;
+  holdingCompanyName:any;
   savedUserID:any;
   errorMsg: string;
   saveSuccess=false;
@@ -84,7 +85,7 @@ export class CreateUserComponent implements OnInit {
     userValidTo:[, { validators: [], updateOn: "change" }],
     profilePicture:[, { validators: [], updateOn: "change" }],
     userType:[, { validators: [], updateOn: "change" }],
-    loginID:[, { validators: [], updateOn: "change" }],
+    loginID:[, { validators: [Validators.required], updateOn: "change" }],
     passwordExpiry:[, { validators: [], updateOn: "change" }],
     propertyNetworkIP:[, { validators: [], updateOn: "change" }],
     propertyMacID:[, { validators: [], updateOn: "change" }],
@@ -191,6 +192,7 @@ export class CreateUserComponent implements OnInit {
   
   OnCompanySelect(SelectedCompany) {
     this.holdingCompanyID=SelectedCompany.holdingCompanyID;
+    this.holdingCompanyName=SelectedCompany.companyName;
     //this.getUserProductListByUser(SelectedUserProduct.userID);
     console.log("Onchange");
     console.log(SelectedCompany);

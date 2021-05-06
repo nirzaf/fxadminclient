@@ -3,7 +3,7 @@
 
 
 <h2 mat-dialog-title>Create User</h2>
-<app-link-product  [holdingCompanyID]="holdingCompanyID" [userID]="savedUserID" *ngIf="linkProperty"></app-link-product>
+<app-link-product  [holdingCompanyID]="holdingCompanyID"  [holdingCompanyName]="holdingCompanyName" [userID]="savedUserID" *ngIf="linkProperty"></app-link-product>
 
   <form [formGroup]="createUserForm" *ngIf="!linkProperty">
 <mat-dialog-content  class="mat-typography">
@@ -39,9 +39,9 @@
           <div fxFlex="49%" fxFlex.xs="100%" >
         
             <mat-form-field [style.width.%]="100" floatLabel="always"> 
-              <mat-label>Search Holding company/ Group/ Property</mat-label>
+              <mat-label>Search Holding company/ Group/ Property<span class="redColor">*</span></mat-label>
               <input type="text"
-              placeholder="User Name"
+              placeholder="Holding Company Name"
               aria-label="Number"
               matInput
               formControlName="holdingCompanyName"
@@ -58,7 +58,7 @@
             
              <mat-error
              *ngIf="createUserForm.get('holdingCompanyName').hasError('required')">
-             Code is <strong>required</strong>
+             HoldingCompany is <strong>required</strong>
            </mat-error>
             
               <span class="fas fa-search searchspanicon themecolor"></span>
@@ -67,14 +67,17 @@
           </div>
           <div fxFlex="24%" fxFlex.xs="100%">
             <mat-form-field [style.width.%]="100" floatLabel="always"> 
-                <mat-label>Alias</mat-label>
-                <input matInput  placeholder="Code" formControlName="alias" >
-           
+                <mat-label>Alias<span class="redColor">*</span></mat-label>
+                <input matInput  placeholder="Alias" formControlName="alias" >
+                <mat-error
+                *ngIf="createUserForm.get('alias').hasError('required')">
+            Alias is <strong>required</strong>
+              </mat-error>
             </mat-form-field>
           </div>
           <div fxFlex="22%" fxFlex.xs="100%">
             <mat-form-field  [style.width.%]="100" floatLabel="always">
-              <mat-label>Title</mat-label>
+              <mat-label>Title<span class="redColor">*</span></mat-label>
               <mat-select placeholder="Select Title" formControlName="title">
                 <mat-option *ngFor="let title of titleList" [value]="title.titleID">{{title.name}}</mat-option>            
             </mat-select>
@@ -226,7 +229,7 @@
             <div fxFlex="33%" fxFlex.xs="100%">
               <mat-form-field [style.width.%]="100" floatLabel="always"> 
                 <mat-label>User</mat-label>
-                <mat-select placeholder="Select User" formControlName="userType" >
+                <mat-select placeholder="User Type" formControlName="userType" >
                   <mat-option *ngFor="let userType of userTypeList" [value]="userType.userTypeID">{{userType.name}}</mat-option>
                   <!-- <mat-option *ngFor="let state of stateList" [value]="state.stateID">{{state.stateName}}</mat-option> -->
               </mat-select>
@@ -238,8 +241,12 @@
             </div>
             <div fxFlex="33%" fxFlex.xs="100%">
               <mat-form-field [style.width.%]="100" floatLabel="always"> 
-                  <mat-label>Login ID</mat-label>
+                  <mat-label>Login ID<span class="redColor">*</span></mat-label>
                   <input matInput #input placeholder="Login ID" formControlName="loginID">
+                  <mat-error
+                  *ngIf="createUserForm.get('loginID').hasError('required')">
+                  LoginID is <strong>required</strong>
+                </mat-error>
                   <!-- <mat-error
                   *ngIf="addCompanyForm.get('holdingCompanyPhone').hasError('required')">
                   Phone Number is <strong>required</strong>
@@ -263,58 +270,6 @@
        
          
         <div fxFlex="100%">
-          <mat-form-field class="network-ip-chip-list user-chip" floatLabel="always">
-            <mat-label>Property Network IP</mat-label>
-            <mat-chip-list #chipList aria-label="IP selection">
-              <mat-chip *ngFor="let netWorkIP of networkIPs" [selectable]="selectable"
-                       [removable]="removable" (removed)="removeNetworkIP(netWorkIP)" >
-                {{netWorkIP.name}}
-                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
-              </mat-chip>
-              <input  placeholder="Network IP"
-                     [matChipInputFor]="chipList"
-                     [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                     [matChipInputAddOnBlur]="addOnBlur"
-                     (matChipInputTokenEnd)="addNetworkIP($event)" formControlName="propertyNetworkIP">
-            </mat-chip-list>
-            <mat-error>Atleast 1 ip need to be added</mat-error>
-          </mat-form-field>
-          </div>
-        </div>
-         
-      </div>
-</div>
-<div class="content-0">
-      
-     
-  <div fxFlex="100%"  fxLayout="row wrap" fxLayoutGap="15px">
-   
-        <div fxFlex="73%" fxFlex.xs="100%" >
-         
-          <mat-form-field class="network-ip-chip-list user-chip" floatLabel="always">
-            <mat-label>Network Mac ID</mat-label>
-            <mat-chip-list #macIdList aria-label="IP selection">
-              <mat-chip *ngFor="let macID of macIDs" [selectable]="selectable"
-                       [removable]="removable" (removed)="removeMacID(macID)">
-                {{macID.name}}
-                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
-              </mat-chip>
-              <input  placeholder="Mac ID"
-                     [matChipInputFor]="macIdList"
-                     [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                     [matChipInputAddOnBlur]="addOnBlur"
-                     (matChipInputTokenEnd)="addMacID($event)" formControlName="propertyMacID">
-            </mat-chip-list>
-          
-          </mat-form-field>
-
-          
-           
-        
-        
-        </div>
- 
-        <div fxFlex="22%" fxFlex.xs="100%" fxLayout="column wrap" fxLayoutGap="15px">
           <div FxFlex="100%" style="font-size: 12px;opacity: 0.5;">
             Authorized For License
           </div>
@@ -324,11 +279,81 @@
               <mat-radio-button value="0">No</mat-radio-button>
             </mat-radio-group>
           </div>
-       
-      
+          </div>
         </div>
+         
       </div>
+</div>
+
+  <div class="content">
+    <div fxFlex="100%"  fxLayout="row wrap" fxLayoutGap="15px" class="fx_border_bottom" >
+        <div fxFlex="80%" fxFlex.xs="75%" fxFlex.sm="100%" class="fx_subgroup_head">
+          Access controllers <i class="fas fa-info  cancelicon" matTooltip="Mac ID information"  ></i>         
+          </div>
+          <div fxFlex="18%" fxFlex.xs="20%" fxLayoutAlign="end" >
+              
+      
+           
+        </div>
+          
+        </div>
   </div>
+  <div class="content-0">
+      
+     
+    <div fxFlex="100%"  fxLayout="row wrap" fxLayoutGap="15px">
+     
+          <div fxFlex="49%" fxFlex.xs="100%" >
+          
+            <mat-form-field class="network-ip-chip-list user-chip" floatLabel="always">
+           
+              <mat-label>Network Mac ID </mat-label>   
+            
+             
+              <mat-chip-list #macIdList aria-label="IP selection">
+                <mat-chip *ngFor="let macID of macIDs" [selectable]="selectable"
+                         [removable]="removable" (removed)="removeMacID(macID)">
+                  {{macID.name}}
+                  <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                </mat-chip>
+                <input  placeholder="Mac ID"
+                       [matChipInputFor]="macIdList"
+                       [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                       [matChipInputAddOnBlur]="addOnBlur"
+                       (matChipInputTokenEnd)="addMacID($event)" formControlName="propertyMacID">
+              </mat-chip-list>
+           
+            </mat-form-field>
+  
+            
+             
+          
+          
+          </div>
+   
+          <div fxFlex="49%" fxFlex.xs="100%" fxLayout="column wrap" fxLayoutGap="15px">
+            <mat-form-field class="network-ip-chip-list user-chip" floatLabel="always">
+              <mat-label>Property Network IP</mat-label>  
+              <mat-chip-list #chipList aria-label="IP selection">
+                <mat-chip *ngFor="let netWorkIP of networkIPs" [selectable]="selectable"
+                         [removable]="removable" (removed)="removeNetworkIP(netWorkIP)" >
+                  {{netWorkIP.name}}
+                  <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                </mat-chip>
+                <input  placeholder="Network IP"
+                       [matChipInputFor]="chipList"
+                       [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                       [matChipInputAddOnBlur]="addOnBlur"
+                       (matChipInputTokenEnd)="addNetworkIP($event)" formControlName="propertyNetworkIP">
+              </mat-chip-list>
+              <mat-error>Atleast 1 ip need to be added</mat-error>
+            </mat-form-field>
+         
+         
+        
+          </div>
+        </div>
+    </div>
   <div class="content">
     <div fxFlex="100%"  fxLayout="row wrap" fxLayoutGap="15px" class="fx_border_bottom" >
         <div fxFlex="80%" fxFlex.xs="75%" fxFlex.sm="100%" class="fx_subgroup_head">
@@ -675,7 +700,7 @@
 <mat-dialog-actions align="end">
     <button  mat-button type="button" class="border btnProperty" (click)="onNoClick()">Back</button>
     <button  mat-button class="button btnProperty" type="submit" (click)="SaveContinue()">Save & Continue</button>
-    <button  mat-button class="button btnProperty" type="submit" (click)="submitForm()">Save</button>
+    <button  mat-button class="button btnProperty" type="submit" (click)="SaveContinue()">Save</button>
  
 </mat-dialog-actions>
 </form>

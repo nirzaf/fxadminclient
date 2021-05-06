@@ -19,7 +19,7 @@
                 </div>
                 <div fxFlex="100%">
                   <span class="lable_txt">Holding Company</span><br/>
-                  Hyaat Regency
+                 {{holdingCompanyName}}
               </div>
                   
               </div>
@@ -73,7 +73,7 @@
               <div class="content" (click)="panelH._toggle()">
                 <div fxFlex="100%"  fxLayout="row wrap" fxLayoutGap="15px" class="fx_border_bottom" >
                     <div fxFlex="80%" fxFlex.xs="75%" fxFlex.sm="100%" class="fx_subgroup_head">
-                        <b>Link {{i+1}}</b> - Hyaat Regency Banglore       
+                        <b>Link {{i+1}}</b> - {{holdingCompanyName}}       
                       </div>
                       <div fxFlex="18%" fxFlex.xs="20%" fxLayoutAlign="end" >
                         <i  *ngIf="form.controls.property.controls.length > 1" (click)="deleteProperty(i)" class="far fa-trash-alt themecolor iconSize moreicon" style="margin-right: 10%;"></i>

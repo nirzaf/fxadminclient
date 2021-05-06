@@ -7,6 +7,7 @@ import  *  as  titleList  from  'src/app/shared/data/title.json';
 import  *  as  genderList  from  'src/app/shared/data/gender.json';
 import { EditUserComponent } from '../edit-user/edit-user.component';
 import { DeleteUserComponent } from '../delete-user/delete-user.component';
+import { UserHierarchyComponent } from '../user-hierarchy/user-hierarchy.component';
 export interface UserData {
   userID: number;
   userName: string;
@@ -22,7 +23,7 @@ export class ViewUserComponent implements OnInit {
   titleListArr= (titleList  as  any).default;
   genderListArr= (genderList  as  any).default;
   userData:UserData;
-  userObj={holdingCompanyName:'',alias:'',titleID:'',lastName:'',titleName:'',middleName:'',firstName:'',genderName:'',   
+  userObj={holdingCompanyID:0,holdingCompanyName:'',alias:'',titleID:'',lastName:'',titleName:'',middleName:'',firstName:'',genderName:'',   
   genderID:'',designationID:'',designationName:'',departmentName:'',validFromDateView:'',validToDateView:'',imageVirtualPath:'',userTypeName:'',loginID:'',passwordExpiryDays:''
   ,isAuthorized:'',macAddressesArr:[],networkIPsArr:[],officeAddress:'',officeCountryName:'',officeStateName:'',officeCityName:'',officeZipCode:'',
   officeMobileCountryCode:'',officeMobile:'',officePhoneCountryCode:'',officePhone:'',officeExtension:'',officeEmail:'',
@@ -40,6 +41,27 @@ export class ViewUserComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUserData(this.userData.userID);
+  }
+  showHirarchy():any{
+    const dialogRef = this.dialog.open(UserHierarchyComponent, {
+      panelClass: ['create-user-modal','viewmore-dialog-container'], 
+      disableClose: true ,
+      
+      //minHeight: '800px',    
+      data: {holdingCompanyID: this.userObj.holdingCompanyID, userID: this.userData.userID}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result.data==1){
+      
+        this.getUserData(this.userData.userID);
+        this.toast.success("Updated Successfully");
+        // this.getCompanyGroupList(this.holdingCompanyID);
+      }
+    
+      // this.holdingCompanyName= result.data.holdingCompanyName;
+      // this.holdingCompanyID=result.data.holdingCompanyID;
+    });
   }
   editUser():any{
     const dialogRef = this.dialog.open(EditUserComponent, {

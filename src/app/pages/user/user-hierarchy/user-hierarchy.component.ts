@@ -9,9 +9,15 @@ export interface CompanyData {
   holdingCompanyID: string;
   holdingCompanyName: string;
 }
+export interface HierarchyData {
+  userID: number;
+  holdingCompanyID: string;
+ 
+}
+
 export class HierarchyNode {
   children: BehaviorSubject<HierarchyNode[]>;
-  constructor(public item: string, children?: HierarchyNode[], public parent?: HierarchyNode) {
+  constructor(public item: string, children?: HierarchyNode[]) {
     this.children = new BehaviorSubject(children === undefined ? [] : children);
   }
 }
@@ -67,7 +73,7 @@ export class UserHierarchyComponent  {
 
   public isProgressing: boolean = false;
   public loaderMessage: string = "Loading...";
-  holdingCompanyData: CompanyData;
+  hierarchyData: HierarchyData;
   recursive: boolean = false;
   levels = new Map<HierarchyNode, number>();
   treeControl: NestedTreeControl<HierarchyNode>;
@@ -75,14 +81,14 @@ export class UserHierarchyComponent  {
 
   dataSource: MatTreeNestedDataSource<HierarchyNode>;
 
-  constructor(private changeDetectorRef: ChangeDetectorRef, public dialogRef: MatDialogRef<UserHierarchyComponent>, @Inject(MAT_DIALOG_DATA) public _holdingCompanyData: CompanyData,
-    private webService: WebService, private toast: ToastService
+  constructor(private changeDetectorRef: ChangeDetectorRef, public dialogRef: MatDialogRef<UserHierarchyComponent>,
+    private webService: WebService,@Inject(MAT_DIALOG_DATA) public _hierarchyData: HierarchyData, private toast: ToastService
   ) {
-    this.holdingCompanyData = _holdingCompanyData;
+    this.hierarchyData = _hierarchyData;
     this.treeControl = new NestedTreeControl<HierarchyNode>(this.getChildren);
     this.dataSource = new MatTreeNestedDataSource();
     this.dataSource.data = TREE_DATA;
-    //this.getHierarchyData(_holdingCompanyData.holdingCompanyID);
+    this.getHierarchyData(this._hierarchyData.holdingCompanyID);
 
 
 
@@ -95,7 +101,7 @@ export class UserHierarchyComponent  {
     return node.children.value.length > 0;
   }
   onNoClick(): void {
-    this.dialogRef.close({ event: 'close', data: null });
+    this.dialogRef.close({ event: 'close', data: {holdingCompanyID: this._hierarchyData.holdingCompanyID, userID: this._hierarchyData.userID} });
   }
   getHierarchyData(holdingCompanyID: string) {
     this.webService.commonMethod('holdingcompany/gethierarchy/' + holdingCompanyID, null, 'GET', null)

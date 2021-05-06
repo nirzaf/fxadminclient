@@ -11,6 +11,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 })
 export class SinglePropertyComponent implements OnInit {
   @Input() userID: any[];  
+  @Input() holdingCompanyName: any[];  
   DataArray = [];
   groupList=[];
   propertyList=[];

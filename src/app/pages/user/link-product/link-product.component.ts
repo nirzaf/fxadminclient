@@ -12,6 +12,7 @@ import { ToastService } from 'src/app/shared/services/toast.service';
 export class LinkProductComponent implements OnInit {
   @Input() holdingCompanyID: any[];  
   
+  @Input() holdingCompanyName: any[];  
   @Input() userID: any[];  
   PanelOpenState=true;
   formGroup: FormGroup;

@@ -62,6 +62,7 @@ export class UserComponent implements OnInit {
   constructor(private webService:WebService,private toast:ToastService,public dialog: MatDialog,private http: HttpClient) { }
 
   ngOnInit() {
+    this.getAllUserData()
     this.breadCrumb = ["Admin", "User Configuration"];
     this.GetPropertyAndGroup();
 
@@ -207,8 +208,40 @@ userID:row.userID
         
         
           this.dataSource = new MatTableDataSource <PeriodicElement> (userPrdData);
-          this.displayedColumns =  ['companyName','groupName','propertyName','userID','firstName','loginID','accessID'];
+          this.displayedColumns =  ['companyName','groupName','propertyName','userID','firstName','loginID','defaultGroupID'];
           this.selection = new SelectionModel<PeriodicElement>(true, []);
+          console.log("User Loading...");
+          console.log(this.dataSource);
+          //this.propertyData = data.data;
+        } else {
+          this.toast.error(data.errors);
+        }
+
+      });
+  }
+  getAllUserData() {
+    this.webService.commonMethod('user/get', null, 'GET', null)
+      .subscribe(data => {
+        if (data.succeeded) {
+          this.userProductList=data.data;
+          var userPrdData=[];
+          var i=0;
+          userPrdData = data.data.map(function (a) {
+            a.select=false;
+            a.position=i;
+            //a.select=this.selection;
+            i++;
+            return a;
+          }
+          );
+          console.log(userPrdData);
+          this.userProductList=userPrdData;
+        
+        
+          this.dataSource = new MatTableDataSource <PeriodicElement> (userPrdData);
+          this.displayedColumns =  ['companyName','groupName','propertyName','userID','firstName','loginID','defaultGroupID'];
+          this.selection = new SelectionModel<PeriodicElement>(true, []);
+          console.log("User Loading...");
           console.log(this.dataSource);
           //this.propertyData = data.data;
         } else {

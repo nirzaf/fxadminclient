@@ -15,14 +15,14 @@
             <div fxFlex="100%" fxFlex.xs="100%" fxFlex.sm="100%" fxLayout="row"  fxLayout.lt-sm="column"   fxLayoutGap="15px">
                 <div fxFlex="75%" fxFlex.xs="100%" fxLayout="row wrap" fxFlex.sm="50%" fxLayoutAlign="end start" class="disableicon" style="opacity: 0.5;"> 
                    
-                    <div fxFlex="7%" fxFlex.sm="33%" fxFlex.xs="33%" >
+                    <!-- <div fxFlex="7%" fxFlex.sm="33%" fxFlex.xs="33%" >
                         <i class="fas fa-trash-alt   createicon"></i><br/>
                         <div class="createtext">Delete</div>
                     </div>
                     <div fxFlex="7%" fxFlex.sm="33%" fxFlex.xs="33%" >
                         <i class="fas fa-sitemap   createicon" (click)="showHirarchy()"></i><br/>
                         <div class="createtext" (click)="showHirarchy()">Hierarchy</div>
-                    </div>
+                    </div> -->
                   </div>
                 <div fxFlex="25%" fxFlex.xs="100%" fxLayoutGap="25px" fxLayout.lt-xs="column">
                   <mat-form-field [style.width.%]="90" floatLabel="always"> 
@@ -75,18 +75,18 @@
                     <!-- Position Column -->
                     <ng-container matColumnDef="companyName">
                         <th mat-header-cell *matHeaderCellDef> Holding Company </th>
-                        <td mat-cell *matCellDef="let element"> {{element.companyName}} </td>
+                        <td mat-cell *matCellDef="let element"> {{element.holdingCompanyName}} </td>
                     </ng-container>
                 
                     <!-- Name Column -->
                     <ng-container matColumnDef="groupName">
                         <th mat-header-cell *matHeaderCellDef> Group </th>
-                        <td mat-cell *matCellDef="let element"> {{element.groupName}}</td>
+                        <td mat-cell *matCellDef="let element"> {{element.defaultGroupName}}</td>
                     </ng-container>
                     
                     <ng-container matColumnDef="propertyName">
                         <th mat-header-cell *matHeaderCellDef> Property </th>
-                        <td mat-cell *matCellDef="let element"> {{element.propertyName}}</td>
+                        <td mat-cell *matCellDef="let element"> {{element.defaultPropertyName}}</td>
                     </ng-container>
                     <ng-container matColumnDef="userID">
                         <th mat-header-cell *matHeaderCellDef> User ID </th>
@@ -102,7 +102,7 @@
                     </ng-container>
                 
                     <!-- Symbol Column -->
-                    <ng-container matColumnDef="accessID">
+                    <ng-container matColumnDef="defaultGroupID">
                         <th mat-header-cell *matHeaderCellDef> Status </th>
                         <td mat-cell *matCellDef="let element"> <mat-slide-toggle></mat-slide-toggle> </td>
                     </ng-container>
@@ -112,9 +112,10 @@
                     </tr> 
                 </table>
     <div fxFlex="100%">
+        
         <!-- <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator> -->
-        <!-- <mat-paginator-goto [pageSizeOptions]="[5, 10, 25, 100]"
-        showFirstLastButtons></mat-paginator-goto> -->
+        <mat-paginator-goto [pageSizeOptions]="[5, 10, 25, 100]"
+        showFirstLastButtons></mat-paginator-goto>
       
         <div class="icon btnusercreate fxcursor_pointer" id="bigplus" (click)="CreateUser()" style="padding:0px 32px;"></div>
     </div>

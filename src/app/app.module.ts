@@ -48,6 +48,7 @@ import { AddGroupComponent } from './pages/group/add-group/add-group.component';
 import { AddPropertyComponent } from './pages/property/add-property/add-property.component';
 import { AddSubGroupComponent } from './pages/group/add-sub-group/add-sub-group.component';
 import {MatExpansionModule} from '@angular/material/expansion';
+import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTreeModule} from '@angular/material/tree';
 import {MatChipsModule} from '@angular/material/chips';
 import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
@@ -157,7 +158,9 @@ import { DeleteUserComponent } from './pages/user/delete-user/delete-user.compon
     MatSnackBarModule,
     StarRatingModule,
     NgxOrgChartModule,
-    MatTreeModule 
+    MatTreeModule,
+    MatTooltipModule
+    
   
   ],
   exports: [],

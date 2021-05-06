@@ -75,7 +75,7 @@
             <mat-form-field [style.width.%]="100" floatLabel="always"> 
               <mat-label>Search Holding company/ Group/ Property</mat-label>
               <input type="text"
-              placeholder="User Name"
+              placeholder="Holding Company"
               aria-label="Number"
               matInput
               formControlName="holdingCompanyName"
@@ -260,7 +260,7 @@
             <div fxFlex="33%" fxFlex.xs="100%">
               <mat-form-field [style.width.%]="100" floatLabel="always"> 
                 <mat-label>User</mat-label>
-                <mat-select placeholder="Select User" formControlName="userType" >
+                <mat-select placeholder="User Type" formControlName="userType" >
                   <mat-option *ngFor="let userType of userTypeList" [value]="userType.userTypeID">{{userType.name}}</mat-option>
                   <!-- <mat-option *ngFor="let state of stateList" [value]="state.stateID">{{state.stateName}}</mat-option> -->
               </mat-select>
@@ -296,24 +296,7 @@
           </div>
        
          
-        <div fxFlex="100%">
-          <mat-form-field class="network-ip-chip-list user-chip" floatLabel="always">
-            <mat-label>Property Network IP</mat-label>
-            <mat-chip-list #chipList aria-label="IP selection">
-              <mat-chip *ngFor="let netWorkIP of networkIPs" [selectable]="selectable"
-                       [removable]="removable" (removed)="removeNetworkIP(netWorkIP)" >
-                {{netWorkIP.name}}
-                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
-              </mat-chip>
-              <input  placeholder="Network IP"
-                     [matChipInputFor]="chipList"
-                     [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                     [matChipInputAddOnBlur]="addOnBlur"
-                     (matChipInputTokenEnd)="addNetworkIP($event)" formControlName="propertyNetworkIP">
-            </mat-chip-list>
-            <mat-error>Atleast 1 ip need to be added</mat-error>
-          </mat-form-field>
-          </div>
+      
         </div>
          
       </div>
@@ -323,32 +306,9 @@
      
   <div fxFlex="100%"  fxLayout="row wrap" fxLayoutGap="15px">
    
-        <div fxFlex="73%" fxFlex.xs="100%" >
-         
-          <mat-form-field class="network-ip-chip-list user-chip" floatLabel="always">
-            <mat-label>Network Mac ID</mat-label>
-            <mat-chip-list #macIdList aria-label="IP selection">
-              <mat-chip *ngFor="let macID of macIDs" [selectable]="selectable"
-                       [removable]="removable" (removed)="removeMacID(macID)">
-                {{macID.name}}
-                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
-              </mat-chip>
-              <input  placeholder="Mac ID"
-                     [matChipInputFor]="macIdList"
-                     [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                     [matChipInputAddOnBlur]="addOnBlur"
-                     (matChipInputTokenEnd)="addMacID($event)" formControlName="propertyMacID">
-            </mat-chip-list>
-          
-          </mat-form-field>
-
-          
-           
-        
-        
-        </div>
+      
  
-        <div fxFlex="22%" fxFlex.xs="100%" fxLayout="column wrap" fxLayoutGap="15px">
+        <div fxFlex="100%" fxFlex.xs="100%" fxLayout="column wrap" fxLayoutGap="15px">
           <div FxFlex="100%" style="font-size: 12px;opacity: 0.5;">
             Authorized For License
           </div>
@@ -363,6 +323,62 @@
         </div>
       </div>
   </div>
+  <div class="content">
+    <div fxFlex="100%"  fxLayout="row wrap" fxLayoutGap="15px" class="fx_border_bottom" >
+        <div fxFlex="80%" fxFlex.xs="75%" fxFlex.sm="100%" class="fx_subgroup_head">
+          Access controllers <i class="fas fa-info" matTooltip="Mac ID information"  ></i>         
+          </div>
+          <div fxFlex="18%" fxFlex.xs="20%" fxLayoutAlign="end" >
+              
+      
+           
+        </div>
+          
+        </div>
+  </div>
+  <div class="content-0">
+      
+     
+    <div fxFlex="100%"  fxLayout="row wrap" fxLayoutGap="15px">
+     
+          <div fxFlex="49%" fxFlex.xs="100%" >
+            <mat-form-field class="network-ip-chip-list user-chip" floatLabel="always">
+              <mat-label>Network Mac ID</mat-label>
+              <mat-chip-list #macIdList aria-label="IP selection">
+                <mat-chip *ngFor="let macID of macIDs" [selectable]="selectable"
+                         [removable]="removable" (removed)="removeMacID(macID)">
+                  {{macID.name}}
+                  <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                </mat-chip>
+                <input  placeholder="Mac ID"
+                       [matChipInputFor]="macIdList"
+                       [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                       [matChipInputAddOnBlur]="addOnBlur"
+                       (matChipInputTokenEnd)="addMacID($event)" formControlName="propertyMacID">
+              </mat-chip-list>
+            
+            </mat-form-field>
+            </div>
+            <div fxFlex="49%" fxFlex.xs="100%" >
+              <mat-form-field class="network-ip-chip-list user-chip" floatLabel="always">
+                <mat-label>Property Network IP</mat-label>
+                <mat-chip-list #chipList aria-label="IP selection">
+                  <mat-chip *ngFor="let netWorkIP of networkIPs" [selectable]="selectable"
+                           [removable]="removable" (removed)="removeNetworkIP(netWorkIP)" >
+                    {{netWorkIP.name}}
+                    <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                  </mat-chip>
+                  <input  placeholder="Network IP"
+                         [matChipInputFor]="chipList"
+                         [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                         [matChipInputAddOnBlur]="addOnBlur"
+                         (matChipInputTokenEnd)="addNetworkIP($event)" formControlName="propertyNetworkIP">
+                </mat-chip-list>
+                <mat-error>Atleast 1 ip need to be added</mat-error>
+              </mat-form-field>
+            </div>
+            </div>
+            </div>
   <div class="content">
     <div fxFlex="100%"  fxLayout="row wrap" fxLayoutGap="15px" class="fx_border_bottom" >
         <div fxFlex="80%" fxFlex.xs="75%" fxFlex.sm="100%" class="fx_subgroup_head">

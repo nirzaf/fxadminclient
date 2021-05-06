@@ -490,6 +490,7 @@ if(this.imgURL!=null && this.imgURL!=""){
         }
         // this.SelectedCompany.companyName=data.data.holdingCompanyName;
         // this.SelectedCompany.holdingCompanyID=data.data.holdingCompanyID;
+        this.holdingCompanyID=data.data.holdingCompanyID;
         this.createUserForm.get('holdingCompanyName').setValue({companyName:data.data.holdingCompanyName, holdingCompanyID:data.data.holdingCompanyID});
         this.createUserForm.get('alias').setValue(data.data.alias);
         this.createUserForm.get('title').setValue(data.data.titleID);
