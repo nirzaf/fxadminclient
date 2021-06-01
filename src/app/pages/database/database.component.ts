@@ -11,5 +11,4 @@ export class DatabaseComponent implements OnInit {
 
   ngOnInit() {
   }
-
 }

@@ -76,7 +76,8 @@ export class CommonService {
 
 
   // Convert Date Format
-  formatDate(date, format, seperator, isTime?: boolean) { //"Format:dd-mm-yy,mm-dd-yy,dd/mm/yy,dd:mm:yy" & Seperator - '-','/',',',':'
+  formatDate(date, format, seperator, isTime?: boolean) {
+    //"Format:dd-mm-yy,mm-dd-yy,dd/mm/yy,dd:mm:yy" & Separator - '-','/',',',':'
     if (date != "" && date != undefined) {
 
       if (typeof date == 'string' && date.includes("GMT+")) {
@@ -119,6 +120,7 @@ export class CommonService {
       }
     }
   }
+
   padValue(value): number {
     return (Number(value) < 10) ? "0" + value : value;
   }
@@ -134,7 +136,6 @@ export class CommonService {
       if (hh.length < 2) hh = '0' + hh;
       if (mm.length < 2) mm = '0' + mm;
       return hh + ':' + mm;
-
     }
   }
 
@@ -180,7 +181,6 @@ export class CommonService {
     for (let i in t) {
       newArray.push(t[i]);
     }
-
     return newArray;
   }
 
@@ -273,7 +273,6 @@ export class CommonService {
       return (num).toFixed(decimal).replace(/\d(?=(\d{3})+\.)/g, '$&' + seperator);
     }
   }
-
 }
 
 

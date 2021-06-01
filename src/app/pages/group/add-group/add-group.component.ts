@@ -37,22 +37,19 @@ export class AddGroupComponent {
 
   ngOnInit() {
     this.validate();
-
-
-
   }
+
   public validate(): void {
     this.formGroup = this.fb.group({
       'formArray1': this.fb.array([
         this.initX(true)
       ])
     });
-   
+
   }
   get f() { return this.formGroup.controls; }
 
   public initX(panelState): FormGroup {
-
     this.DataArray.push({
       countryList: this.countryList,
       stateList: [],
@@ -61,11 +58,9 @@ export class AddGroupComponent {
       groupState:0,
       groupCity:0,
       groupCountry:0,
-
     })
- 
-    return this.fb.group({
 
+    return this.fb.group({
       groupName: [, { validators: [Validators.required], updateOn: "change" }],
       groupCode: [, { validators: [Validators.required], updateOn: "change" }],
       groupAddress: [, { validators: [Validators.required], updateOn: "change" }],
@@ -78,11 +73,6 @@ export class AddGroupComponent {
       countryList: this.fb.array(this.countryList),
       stateList: this.fb.array([]),
       cityList: this.fb.array([]),
-
-
-
-
-
     });
   }
 
@@ -96,8 +86,8 @@ export class AddGroupComponent {
   removeX(index) {
     const control = <FormArray>this.f.formArray1;
     control.removeAt(index);
-
   }
+
   resetForm() {
     this.formGroup.reset();
     var i=0;
@@ -107,11 +97,10 @@ export class AddGroupComponent {
       control.controls["groupCity"].setValue(0);
       this.DataArray[i].stateList=[];
       this.DataArray[i].cityList=[];
-      
       i++;
     }
-   
-   
+
+
   }
   trackByFn(index: any, item: any) {
     return index;
@@ -137,27 +126,21 @@ export class AddGroupComponent {
 
         }
         groups.push(groupData);
-        ;
-
-
       }
-    
+
       this.webService.commonMethod('group/post', { "Groups": groups }, 'POST', null)
         .subscribe(data => {
           if (data.succeeded) {
-
             this.dialogRef.close({ event: 'close', data: this.holdingCompanyData });
           }
           else {
             this.toast.error(data.errors);
           }
         });
-      
     }
     else {
       return;
     }
-
   }
 
   constructor(
@@ -172,15 +155,11 @@ export class AddGroupComponent {
     this.webService.commonMethod('city/get/' + stateID, null, 'GET', null)
       .subscribe(data => {
         if (data.succeeded) {
-     
           this.DataArray[i].cityList = data.data;
-         
         }
         else {
           this.toast.error(data.errors);
         }
-      
-      
       });
   }
 
@@ -190,8 +169,6 @@ export class AddGroupComponent {
         if (data.succeeded) {
           this.DataArray[0].countryList = data.data;
           this.countryList = data.data;
-         
-      
         }
         else {
           this.toast.error(data.errors);
@@ -202,36 +179,26 @@ export class AddGroupComponent {
   getStateList(countryID, i) {
     var arrayControl = this.formGroup.get('formArray1') as FormArray;
     var item = arrayControl.at(i);
- 
-  
+
+
     this.webService.commonMethod('state/get/' + countryID, null, 'GET', null)
       .subscribe(data => {
         if (data.succeeded) {
           var arrayControl = this.formGroup.get('formArray1') as FormArray;
           var item = arrayControl.at(i);
-          
           //this.formGroup.get('formArray1')['controls'][i]["groupState"]=0;
           this.DataArray[i].stateList = data.data;
           this.DataArray[i].cityList=[];
          // item.value.groupState = 0;
-         
-
         }
         else {
           this.toast.error(data.errors);
           this.stateList = [];
         }
-
-
-   
-      
       });
   }
 
   onNoClick(): void {
     this.dialogRef.close({ event: 'close', data: this.holdingCompanyData });
   }
-
-
-
 }

@@ -1,5 +1,5 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -47,12 +47,12 @@ import { AddHoldingcompanyComponent } from './pages/holdingcompany/add/add-holdi
 import { AddGroupComponent } from './pages/group/add-group/add-group.component';
 import { AddPropertyComponent } from './pages/property/add-property/add-property.component';
 import { AddSubGroupComponent } from './pages/group/add-sub-group/add-sub-group.component';
-import {MatExpansionModule} from '@angular/material/expansion';
-import {MatTooltipModule} from '@angular/material/tooltip';
-import {MatTreeModule} from '@angular/material/tree';
-import {MatChipsModule} from '@angular/material/chips';
-import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
-import {MatIconModule} from '@angular/material/icon';
+import { MatExpansionModule} from '@angular/material/expansion';
+import { MatTooltipModule} from '@angular/material/tooltip';
+import { MatTreeModule } from '@angular/material/tree';
+import { MatChipsModule } from '@angular/material/chips';
+import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
+import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { StarRatingModule } from 'angular-star-rating';
 import { StarRatingComponent } from './shared/star-rating/star-rating.component';
