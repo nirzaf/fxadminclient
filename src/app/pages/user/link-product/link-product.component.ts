@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { CreateUserComponent } from '../create-user/create-user.component';
-import { FormControl, FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { WebService } from 'src/app/shared/services/web.service';
 import { ToastService } from 'src/app/shared/services/toast.service';
 @Component({
@@ -9,11 +9,11 @@ import { ToastService } from 'src/app/shared/services/toast.service';
   templateUrl: './link-product.component.html',
   styleUrls: ['./link-product.component.scss']
 })
+
 export class LinkProductComponent implements OnInit {
-  @Input() holdingCompanyID: any[];  
-  
-  @Input() holdingCompanyName: any[];  
-  @Input() userID: any[];  
+  @Input() holdingCompanyID: any[];
+  @Input() holdingCompanyName: any[];
+  @Input() userID: any[];
   PanelOpenState=true;
   formGroup: FormGroup;
   DataArray = [];
@@ -24,9 +24,6 @@ export class LinkProductComponent implements OnInit {
   linkPropertyForm: FormGroup = this.formBuilder.group({
     defaultGroupName: [, { validators: [Validators.required], updateOn: "change" }],
     defaultPropertyName: [, { validators: [Validators.required], updateOn: "change" }],
-    
-
-
   });
 
   constructor(public dialogRef: MatDialogRef<CreateUserComponent>,private fb: FormBuilder,private webService: WebService, private toast: ToastService,private formBuilder: FormBuilder) { }
@@ -35,23 +32,12 @@ export class LinkProductComponent implements OnInit {
     console.log("OnInit");
     this.getCompanyGroupList(this.holdingCompanyID);
     console.log(this.holdingCompanyID);
-
   }
- 
+
 
   onNoClick(): void {
-
     this.dialogRef.close({ event: 'close', data: null });
   }
-
-
- 
-
-
-
-
- 
- 
 
 getCompanyGroupList(holdingCompanyID) {
   this.webService.commonMethod('group/getbycompany/' + holdingCompanyID, null, 'GET', null)
@@ -61,7 +47,6 @@ getCompanyGroupList(holdingCompanyID) {
       } else {
         this.toast.error(data.errors);
       }
-
     });
 }
 getPropertyList(groupID) {
@@ -75,8 +60,6 @@ getPropertyList(groupID) {
         //this.propertyData = [];
         this.toast.error(data.errors);
       }
-
-
     });
 }
 onSubmit(form){

@@ -24,8 +24,6 @@ export class AddHoldingcompanyComponent {
     holdingCompanyCity: [0, { validators: [Validators.min(1)], updateOn: "change" }],
     holdingCompanyPinZip: [, { validators: [Validators.required], updateOn: "change" }],
     holdingCompanyPhone: [, { validators: [Validators.required], updateOn: "change" }],
-
-
   });
 
 
@@ -38,10 +36,9 @@ export class AddHoldingcompanyComponent {
   constructor(
     public dialogRef: MatDialogRef<AddHoldingcompanyComponent>,
     @Inject(MAT_DIALOG_DATA) public holdingCompanyData: DialogData, private webService: WebService, private toast: ToastService, private formBuilder: FormBuilder) {
-
     this.getCountryList();
-
   }
+
   submitForm(): void {
     if (this.addCompanyForm.valid) {
       var postData = {
@@ -68,17 +65,11 @@ export class AddHoldingcompanyComponent {
               this.holdingCompanyData.holdingCompanyID = data.data;
               this.holdingCompanyData.holdingCompanyName = '';
               this.dialogRef.close({ event: 'close', data: this.holdingCompanyData });
-
             }
-
           }
           else {
             this.toast.error(data.errors);
           }
-
-
-
-
         });
     } else {
       return;
@@ -86,7 +77,6 @@ export class AddHoldingcompanyComponent {
 
   }
   onNoClick(): void {
-
     this.dialogRef.close({ event: 'close', data: this.holdingCompanyData });
   }
   getCityList(stateID) {
@@ -94,15 +84,10 @@ export class AddHoldingcompanyComponent {
       .subscribe(data => {
         if (data.succeeded) {
           this.cityList = data.data;
-
-
         }
         else {
           this.toast.error(data.errors);
         }
-
-
-
       });
   }
 
@@ -111,8 +96,6 @@ export class AddHoldingcompanyComponent {
       .subscribe(data => {
         if (data.succeeded) {
           this.countryList = data.data;
-
-
         }
         else {
           this.toast.error(data.errors);
@@ -126,24 +109,16 @@ export class AddHoldingcompanyComponent {
         if (data.succeeded) {
           this.stateList = data.data;
           this.cityList = [];
-
         }
         else {
           this.toast.error(data.errors);
           this.stateList = [];
         }
-
-
       });
   }
   resetForm() {
     this.addCompanyForm.reset();
     this.stateList=[];
-    this.cityList=[];  
-  
-   
-   
+    this.cityList=[];
   }
-
-
 }
