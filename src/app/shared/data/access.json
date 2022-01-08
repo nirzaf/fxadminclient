@@ -1,13 +1,10 @@
 [
     {
         "accessID": 1,
-        "name": "UAT"
-       
+        "name": "UAT"  
     },
     {
         "accessID": 2,
         "name": "LIVE"
     }
- 
-   
 ]

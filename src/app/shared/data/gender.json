@@ -1,13 +1,10 @@
 [
     {
         "genderID": 1,
-        "name": "Male"
-       
+        "name": "Male"    
     },
     {
         "genderID": 2,
         "name": "Female"
     }
- 
-   
 ]
