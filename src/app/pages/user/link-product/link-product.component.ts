@@ -27,13 +27,11 @@ export class LinkProductComponent implements OnInit {
   });
 
   constructor(public dialogRef: MatDialogRef<CreateUserComponent>,private fb: FormBuilder,private webService: WebService, private toast: ToastService,private formBuilder: FormBuilder) { }
-
   ngOnInit() {
     console.log("OnInit");
     this.getCompanyGroupList(this.holdingCompanyID);
     console.log(this.holdingCompanyID);
   }
-
 
   onNoClick(): void {
     this.dialogRef.close({ event: 'close', data: null });
@@ -50,7 +48,6 @@ getCompanyGroupList(holdingCompanyID) {
     });
 }
 getPropertyList(groupID) {
-
   this.webService.commonMethod('property/getbygroup/' + groupID, null, 'GET', null)
     .subscribe(data => {
       if (data.succeeded) {
@@ -65,4 +62,5 @@ getPropertyList(groupID) {
 onSubmit(form){
   console.log(form);
 }
+
 }
