@@ -33,15 +33,11 @@ export class AddSubGroupComponent  {
   formGroup: FormGroup;
   holdingCompanyData: DialogData;
   value = this.fb.group({
-
   });
 
 
   ngOnInit() {
     this.validate();
-
-
-
   }
   public validate(): void {
     this.formGroup = this.fb.group({
@@ -49,12 +45,10 @@ export class AddSubGroupComponent  {
         this.initX(true)
       ])
     });
-   
+
   }
   get f() { return this.formGroup.controls; }
-
   public initX(panelState): FormGroup {
-
     this.DataArray.push({
       countryList: this.countryList,
       stateList: [],
@@ -62,12 +56,10 @@ export class AddSubGroupComponent  {
       PanelOpenState: panelState,
       groupState:0,
       groupCity:0
-
     })
-    
+
     //alert("calling...");
     return this.fb.group({
-
       groupName: [, { validators: [Validators.required], updateOn: "change" }],
       groupCode: [, { validators: [Validators.required], updateOn: "change" }],
       groupAddress: [, { validators: [Validators.required], updateOn: "change" }],
@@ -76,15 +68,9 @@ export class AddSubGroupComponent  {
       groupCity: [0, { validators: [Validators.min(1)], updateOn: "change" }],
       groupPinZip: [, { validators: [Validators.required], updateOn: "change" }],
       groupPhone: [, { validators: [Validators.required], updateOn: "change" }],
-
       countryList: this.fb.array(this.countryList),
       stateList: this.fb.array([]),
       cityList: this.fb.array([]),
-
-
-
-
-
     });
   }
   resetForm() {
@@ -96,18 +82,13 @@ export class AddSubGroupComponent  {
       control.controls["groupCity"].setValue(0);
       this.DataArray[i].stateList=[];
       this.DataArray[i].cityList=[];
-      
       i++;
     }
-   
-   
   }
   public addX(): void {
     const control = <FormArray>this.f.formArray1;
     control.push(this.initX(false));
   }
-
-
 
   removeX(index) {
     const control = <FormArray>this.f.formArray1;
@@ -122,9 +103,9 @@ export class AddSubGroupComponent  {
 
   onSubmit() {
     if (this.formGroup.valid) {
-      var groups = [];
+      let groups = [];
       for (let control of this.formGroup.get('formArray1')['controls']) {
-        var groupData = {
+        let groupData = {
           "HoldingCompanyID": this.holdingCompanyData.holdingCompanyID,
           "Name": control.controls["groupName"].value,
           "Code": control.controls["groupCode"].value,
@@ -135,21 +116,16 @@ export class AddSubGroupComponent  {
           "PhoneNumber": control.controls["groupPhone"].value,
           "ParentGroupID":this.holdingCompanyData.groupID,
           "Address": control.controls["groupAddress"].value,
-          "CreatedBy": "Sirojan",
+          "CreatedBy": "Fazrin",
           "IsActive": true,
-          "ModifiedBy": "Sirojan",
-
+          "ModifiedBy": "Fazrin",
         }
         groups.push(groupData);
-        ;
-
-
       }
-     
+
       this.webService.commonMethod('group/post', { "Groups": groups }, 'POST', null)
         .subscribe(data => {
           if (data.succeeded) {
-            
             // //this.countryList=data.data;
             // this.holdingCompanyData.holdingCompanyID=data.data.holdingCompanyID;
             // this.holdingCompanyData.holdingCompanyName=data.data.name;
@@ -158,19 +134,13 @@ export class AddSubGroupComponent  {
           else {
             this.toast.error(data.errors);
           }
-
-
-         
           //this.isProgressing = false;
         });
       // ...
-
-     
     }
     else {
       return;
     }
-
   }
 
   constructor(
@@ -190,14 +160,10 @@ export class AddSubGroupComponent  {
           // item.value.stateList=state;
           // item.value.cityList=data.data;
           this.DataArray[i].cityList = data.data;
-         
         }
         else {
           this.toast.error(data.errors);
         }
-
-
-       
         //this.isProgressing = false;
       });
   }
@@ -207,29 +173,22 @@ export class AddSubGroupComponent  {
       .subscribe(data => {
         if (data.succeeded) {
           this.DataArray[0].countryList = data.data;
-          this.countryList = data.data;          
-        
+          this.countryList = data.data;
         }
         else {
           this.toast.error(data.errors);
         }
-
-
-        
         //this.isProgressing = false;
       });
   }
   getStateList(countryID, i) {
-    var arrayControl = this.formGroup.get('formArray1') as FormArray;
-    var item = arrayControl.at(i);
-    
+    let arrayControl = this.formGroup.get('formArray1') as FormArray;
+    let item = arrayControl.at(i);
     this.webService.commonMethod('state/get/' + countryID, null, 'GET', null)
       .subscribe(data => {
         if (data.succeeded) {
-          var arrayControl = this.formGroup.get('formArray1') as FormArray;
-          var item = arrayControl.at(i);
-          
-  
+          let arrayControl = this.formGroup.get('formArray1') as FormArray;
+          let item = arrayControl.at(i);
           this.DataArray[i].stateList = data.data;
           this.DataArray[i].cityList=[];
         }
@@ -237,15 +196,10 @@ export class AddSubGroupComponent  {
           this.toast.error(data.errors);
           this.stateList = [];
         }
-      
-      
       });
   }
 
   onNoClick(): void {
     this.dialogRef.close({ event: 'close', data: this.holdingCompanyData });
   }
-
-
-
 }
