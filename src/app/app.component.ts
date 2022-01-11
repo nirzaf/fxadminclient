@@ -15,7 +15,7 @@ import { TRANSLATE } from './shared/constant/translate';
 })
 
 export class AppComponent {
- 
+
   isProgressing: boolean = true;
   accountingDate: string = "1st Dec 2020";
   accountingStatus: string = "Pending";
@@ -25,9 +25,8 @@ export class AppComponent {
   propertyName: string = "TAJ Vivantha";
   propertyAddress: string = "Bangalore";
   Pmscust = 20007;
-  
+
   sidemenuList: any = [
-    
     {
       "name": "User",
       "id": 2,
@@ -49,16 +48,14 @@ export class AppComponent {
   ];
   constructor(
     public router: Router,
-    private localStorageService: LocalStorageService,
-    private commonService: CommonService,
-    public _webServices: WebService
+    private localStorageService: LocalStorageService
   ) {
 
   }
 
-  
 
-  navigatePage(routeURL: string) {    
+
+  navigatePage(routeURL: string) {
     this.router.navigate(['/', routeURL]);
   }
 

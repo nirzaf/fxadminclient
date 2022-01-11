@@ -81,10 +81,8 @@ export class HierarchyComponent {
     this.dataSource = new MatTreeNestedDataSource();
     this.dataSource.data = [];
     this.getHierarchyData(_holdingCompanyData.holdingCompanyID);
-
-
-
   }
+
   getChildren = (node: HierarchyNode) => {
     return node.children;
   };
@@ -92,6 +90,7 @@ export class HierarchyComponent {
   hasChildren = (index: number, node: HierarchyNode) => {
     return node.children.value.length > 0;
   }
+
   onNoClick(): void {
     this.dialogRef.close({ event: 'close', data: null });
   }
@@ -99,44 +98,31 @@ export class HierarchyComponent {
     this.webService.commonMethod('holdingcompany/gethierarchy/' + holdingCompanyID, null, 'GET', null)
       .subscribe(data => {
         if (data.succeeded) {
-          var hierarrchyData = [];
+          let hierarchyData = [];
           data.data.groups.map(function (group) {
 
-            var subGroupData = [];
+            let subGroupData = [];
             group.subGroups.map(function (subgroup) {
-              var propertyData = [];
+              let propertyData = [];
               subgroup.properties.map(function (property) {
                 propertyData.push(new HierarchyNode(property.propertyName));
-
-
               });
               subGroupData.push(new HierarchyNode(subgroup.subGroupName, propertyData));
-
             });
-            
+
             group.properties.map(function (property) {
               subGroupData.push(new HierarchyNode(property.propertyName));
-
-
             });
-           
-            var groupData = new HierarchyNode(group.groupName, subGroupData);
-            hierarrchyData.push(groupData);
 
-
-
+            let groupData = new HierarchyNode(group.groupName, subGroupData);
+            hierarchyData.push(groupData);
           });
-         
-
-
-          this.dataSource.data = hierarrchyData;
+          this.dataSource.data = hierarchyData;
           this.isProgressing=false;
         }
         else {
           this.toast.error(data.errors);
         }
-
-
       });
   }
 
@@ -144,20 +130,12 @@ export class HierarchyComponent {
  * Toggle the node, remove from display list
  */
   toggleNode(node) {
-   
     let index = this.dataSource.data.findIndex(x => x.item == node.item);
-
     if (!this.treeControl.isExpanded(node)) {
       this.treeControl.expand(this.dataSource.data[index])
       //this.treeControl.collapseAll();
-
     } else {
       this.treeControl.collapse(this.dataSource.data[index]);
     }
-
-
-
-
-
   }
 }
