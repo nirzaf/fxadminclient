@@ -1,10 +1,11 @@
-import { ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { BehaviorSubject } from 'rxjs';
-import { MatTreeFlattener, MatTreeNestedDataSource } from '@angular/material/tree';
-import { NestedTreeControl } from '@angular/cdk/tree';
-import { WebService } from 'src/app/shared/services/web.service';
-import { ToastService } from 'src/app/shared/services/toast.service';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject} from '@angular/core';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import {BehaviorSubject} from 'rxjs';
+import {MatTreeNestedDataSource} from '@angular/material/tree';
+import {NestedTreeControl} from '@angular/cdk/tree';
+import {WebService} from 'src/app/shared/services/web.service';
+import {ToastService} from 'src/app/shared/services/toast.service';
+
 export interface CompanyData {
   holdingCompanyID: string;
   holdingCompanyName: string;
@@ -60,7 +61,8 @@ const TREE_DATA = [
 @Component({
   selector: 'app-hierarchy',
   templateUrl: './hierarchy.component.html',
-  styleUrls: ['./hierarchy.component.scss']
+  styleUrls: ['./hierarchy.component.scss'],
+  changeDetection : ChangeDetectionStrategy.OnPush
 })
 export class HierarchyComponent {
   public isProgressing: boolean = true;

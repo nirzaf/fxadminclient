@@ -9,8 +9,8 @@
         <div fxFlex="100%" class="headeredittext fxcursor_pointer" (click)="editUser()">
             Edit
         </div>
-     
-    </div>  
+
+    </div>
     <div fxFlex="33%" fxFlex.sm="40%" fxLayout="row wrap">
         <div fxFlex="100%">
             <i class="fas fa-sitemap   createicon" (click)="showHirarchy()"></i><br/>
@@ -18,8 +18,8 @@
         <div fxFlex="100%" class="headerdeletetext fxcursor_pointer" style="margin-left: -15px;" (click)="showHirarchy()">
             Hierarchy
         </div>
-      
-    </div>  
+
+    </div>
     <div fxFlex="33%" fxFlex.sm="40%" fxLayout="row wrap">
         <div fxFlex="100%">
             <i class="far fa-trash-alt themecolor fxcursor_pointer" (click)="delete()"></i>
@@ -27,20 +27,20 @@
         <div fxFlex="100%" class="headerdeletetext fxcursor_pointer" (click)="delete()">
             Delete
         </div>
-      
+
     </div>
-  
-    
+
+
    </div>
     </div>
-   
+
 </h2>
 <mat-dialog-content  class="mat-typography">
 
     <div>
         <div class="content-0">
-        
-       
+
+
             <div fxFlex="100%"  fxLayout="row wrap" fxLayoutGap="15px">
                 <div fxFlex="24%" fxFlex.xs="100%" fxLayout="row wrap">
                     <div fxFlex="100%" class="labeltext">
@@ -49,7 +49,7 @@
                     <div fxFlex="100%">
                         {{userObj.holdingCompanyName}}
                   </div>
-                 
+
                   </div>
                   <div fxFlex="24%" fxFlex.xs="100%" fxLayout="row wrap">
                       <div fxFlex="100%" class="labeltext">
@@ -58,7 +58,7 @@
                       <div fxFlex="100%">
                         {{userObj.alias}}
                     </div>
-                   
+
                     </div>
                     <div fxFlex="24%" fxFlex.xs="100%" fxLayout="row wrap">
                       <div fxFlex="100%" class="labeltext">
@@ -67,7 +67,7 @@
                       <div fxFlex="100%">
                         {{userObj.titleName}}
                     </div>
-                   
+
                     </div>
                     <div fxFlex="22%" fxFlex.xs="100%" fxLayout="row wrap">
                         <div fxFlex="100%" class="labeltext">
@@ -76,13 +76,11 @@
                         <div fxFlex="100%">
                             {{userObj.lastName}}
                       </div>
-                     
+
                       </div>
                 </div>
             </div>
             <div class="content">
-        
-       
                 <div fxFlex="100%"  fxLayout="row wrap" fxLayoutGap="15px">
                     <div fxFlex="24%" fxFlex.xs="100%" fxLayout="row wrap">
                         <div fxFlex="100%" class="labeltext">
@@ -91,7 +89,7 @@
                         <div fxFlex="100%">
                             {{userObj.middleName}}
                       </div>
-                     
+
                       </div>
                       <div fxFlex="24%" fxFlex.xs="100%" fxLayout="row wrap">
                           <div fxFlex="100%" class="labeltext">
@@ -100,7 +98,7 @@
                           <div fxFlex="100%">
                             {{userObj.firstName}}
                         </div>
-                       
+
                         </div>
                         <div fxFlex="24%" fxFlex.xs="100%" fxLayout="row wrap">
                           <div fxFlex="100%" class="labeltext">
@@ -109,7 +107,7 @@
                           <div fxFlex="100%">
                             {{userObj.genderName}}
                         </div>
-                       
+
                         </div>
                         <div fxFlex="22%" fxFlex.xs="100%" fxLayout="row wrap">
                             <div fxFlex="100%" class="labeltext">
@@ -118,13 +116,13 @@
                             <div fxFlex="100%">
                                 {{userObj.designationName}}
                           </div>
-                         
+
                           </div>
                     </div>
                 </div>
                 <div class="content">
-        
-       
+
+
                     <div fxFlex="100%"  fxLayout="row wrap" fxLayoutGap="15px">
                         <div fxFlex="24%" fxFlex.xs="100%" fxLayout="row wrap">
                             <div fxFlex="100%" class="labeltext">
@@ -133,7 +131,7 @@
                             <div fxFlex="100%">
                                 {{userObj.departmentName}}
                           </div>
-                         
+
                           </div>
                           <div fxFlex="24%" fxFlex.xs="100%" fxLayout="row wrap">
                               <div fxFlex="100%" class="labeltext">
@@ -142,7 +140,7 @@
                               <div fxFlex="100%">
                                 {{userObj.validFromDateView}}
                             </div>
-                           
+
                             </div>
                             <div fxFlex="24%" fxFlex.xs="100%" fxLayout="row wrap">
                               <div fxFlex="100%" class="labeltext">
@@ -151,22 +149,22 @@
                               <div fxFlex="100%">
                                 {{userObj.validToDateView}}
                             </div>
-                           
+
                             </div>
                             <div fxFlex="22%" fxFlex.xs="100%" fxLayout="row wrap">
                                 <div fxFlex="100%" class="labeltext">
                                     Profile Photo
                                 </div>
                                 <div fxFlex="100%">
-                                    <img src="{{userObj.imageVirtualPath}}"  class="profile_pic" height="50px" />  
+                                    <img src="{{userObj.imageVirtualPath}}"  class="profile_pic" height="50px" />
                               </div>
-                             
+
                               </div>
                         </div>
                     </div>
                     <div class="content">
-        
-       
+
+
                         <div fxFlex="100%"  fxLayout="row wrap" fxLayoutGap="15px">
                             <div fxFlex="24%" fxFlex.xs="100%" fxLayout="row wrap">
                                 <div fxFlex="100%" class="labeltext">
@@ -175,7 +173,7 @@
                                 <div fxFlex="100%">
                                     {{userObj.userTypeName}}
                               </div>
-                             
+
                               </div>
                               <div fxFlex="24%" fxFlex.xs="100%" fxLayout="row wrap">
                                   <div fxFlex="100%" class="labeltext">
@@ -184,7 +182,7 @@
                                   <div fxFlex="100%">
                                     {{userObj.loginID}}
                                 </div>
-                               
+
                                 </div>
                                 <div fxFlex="24%" fxFlex.xs="100%" fxLayout="row wrap">
                                   <div fxFlex="100%" class="labeltext">
@@ -193,23 +191,23 @@
                                   <div fxFlex="100%">
                                     {{userObj.passwordExpiryDays | zero}}
                                 </div>
-                               
+
                                 </div>
                                 <div fxFlex="22%" fxFlex.xs="100%" fxLayout="row wrap">
                                     <div fxFlex="100%" class="labeltext">
                                       Authorized For License
                                     </div>
                                     <div fxFlex="100%">
-                                    
+
                                         {{userObj.isAuthorized | toggle}}
                                   </div>
-                                 
+
                                   </div>
                             </div>
                         </div>
                         <div class="content">
                             <div fxFlex="50%"  fxLayout="row wrap" fxLayoutGap="0px" class="view-property-chip">
-                                
+
                                     <div fxFlex="100%" class="labeltext">
                                         Property Network IP
                                     </div>
@@ -220,19 +218,19 @@
                                               {{netWorkIP}}
                                               <mat-icon matChipRemove *ngIf="true">cancel</mat-icon>
                                             </mat-chip>
-                                            
+
                                           </mat-chip-list>
-                                      
-                                        
+
+
                                   </div>
-                                
-                                 
-                               
-                                  
-                               
+
+
+
+
+
                                 </div>
                                 <div fxFlex="50%"  fxLayout="row wrap" fxLayoutGap="15px" class="view-property-chip">
-                        
+
                                     <div fxFlex="100%" class="labeltext">
                                        Network Mac ID
                                     </div>
@@ -243,34 +241,34 @@
                                               {{macAddress}}
                                               <mat-icon matChipRemove *ngIf="true">cancel</mat-icon>
                                             </mat-chip>
-                                            
+
                                           </mat-chip-list>
-                                    
-                                        
+
+
                                   </div>
-                                 
-                                 
-                               
-                                  
-                               
+
+
+
+
+
                                 </div>
                             </div>
                             <div class="content">
                                 <div fxFlex="100%"  fxLayout="row wrap" fxLayoutGap="15px" class="fx_border_bottom" >
                                     <div fxFlex="80%" fxFlex.xs="75%" fxFlex.sm="100%" class="fx_subgroup_head">
-                                        Official Contact           
+                                        Official Contact
                                       </div>
                                       <div fxFlex="18%" fxFlex.xs="20%" fxLayoutAlign="end" >
-                                          
-                                  
-                                       
+
+
+
                                     </div>
-                                      
+
                                     </div>
                               </div>
                             <div class="content">
-        
-       
+
+
                                 <div fxFlex="100%"  fxLayout="row wrap" fxLayoutGap="15px">
                                     <div fxFlex="24%" fxFlex.xs="100%" fxLayout="row wrap">
                                         <div fxFlex="100%" class="labeltext">
@@ -279,7 +277,7 @@
                                         <div fxFlex="100%">
                                             {{userObj.officeAddress}}
                                       </div>
-                                     
+
                                       </div>
                                       <div fxFlex="24%" fxFlex.xs="100%" fxLayout="row wrap">
                                           <div fxFlex="100%" class="labeltext">
@@ -288,7 +286,7 @@
                                           <div fxFlex="100%">
                                             {{userObj.officeCountryName}}
                                         </div>
-                                       
+
                                         </div>
                                         <div fxFlex="24%" fxFlex.xs="100%" fxLayout="row wrap">
                                           <div fxFlex="100%" class="labeltext">
@@ -297,23 +295,23 @@
                                           <div fxFlex="100%">
                                             {{userObj.officeStateName}}
                                         </div>
-                                       
+
                                         </div>
                                         <div fxFlex="22%" fxFlex.xs="100%" fxLayout="row wrap">
                                             <div fxFlex="100%" class="labeltext">
                                              City
                                             </div>
                                             <div fxFlex="100%">
-                                            
+
                                                 {{userObj.officeCityName}}
                                           </div>
-                                         
+
                                           </div>
                                     </div>
                                 </div>
                                 <div class="content">
-        
-       
+
+
                                     <div fxFlex="100%"  fxLayout="row wrap" fxLayoutGap="15px">
                                         <div fxFlex="24%" fxFlex.xs="100%" fxLayout="row wrap">
                                             <div fxFlex="100%" class="labeltext">
@@ -322,7 +320,7 @@
                                             <div fxFlex="100%">
                                                 {{userObj.officeZipCode}}
                                           </div>
-                                         
+
                                           </div>
                                           <div fxFlex="24%" fxFlex.xs="100%" fxLayout="row wrap">
                                               <div fxFlex="100%" class="labeltext">
@@ -331,7 +329,7 @@
                                               <div fxFlex="100%">
                                                 {{userObj.officeMobileCountryCode}} {{userObj.officeMobile}}
                                             </div>
-                                           
+
                                             </div>
                                             <div fxFlex="24%" fxFlex.xs="100%" fxLayout="row wrap">
                                               <div fxFlex="100%" class="labeltext">
@@ -340,23 +338,23 @@
                                               <div fxFlex="100%">
                                                 {{userObj.officePhoneCountryCode}} {{userObj.officePhone}}
                                             </div>
-                                           
+
                                             </div>
                                             <div fxFlex="22%" fxFlex.xs="100%" fxLayout="row wrap">
                                                 <div fxFlex="100%" class="labeltext">
                                                   Extension
                                                 </div>
                                                 <div fxFlex="100%">
-                                                
+
                                                     {{userObj.officeExtension}}
                                               </div>
-                                             
+
                                               </div>
                                         </div>
                                     </div>
                                     <div class="content">
-        
-       
+
+
                                         <div fxFlex="100%"  fxLayout="row wrap" fxLayoutGap="15px">
                                             <div fxFlex="24%" fxFlex.xs="100%" fxLayout="row wrap">
                                                 <div fxFlex="100%" class="labeltext">
@@ -365,26 +363,26 @@
                                                 <div fxFlex="100%">
                                                     {{userObj.officeEmail}}
                                               </div>
-                                             
+
                                               </div>
                                             </div>
                                         </div>
                                         <div class="content">
                                             <div fxFlex="100%"  fxLayout="row wrap" fxLayoutGap="15px" class="fx_border_bottom" >
                                                 <div fxFlex="80%" fxFlex.xs="75%" fxFlex.sm="100%" class="fx_subgroup_head">
-                                                    Personal Contact           
+                                                    Personal Contact
                                                   </div>
                                                   <div fxFlex="18%" fxFlex.xs="20%" fxLayoutAlign="end" >
-                                                      
-                                              
-                                                   
+
+
+
                                                 </div>
-                                                  
+
                                                 </div>
                                           </div>
                                           <div class="content">
-        
-       
+
+
                                             <div fxFlex="100%"  fxLayout="row wrap" fxLayoutGap="15px">
                                                 <div fxFlex="24%" fxFlex.xs="100%" fxLayout="row wrap">
                                                     <div fxFlex="100%" class="labeltext">
@@ -393,7 +391,7 @@
                                                     <div fxFlex="100%">
                                                         {{userObj.personalAddress}}
                                                   </div>
-                                                 
+
                                                   </div>
                                                   <div fxFlex="24%" fxFlex.xs="100%" fxLayout="row wrap">
                                                       <div fxFlex="100%" class="labeltext">
@@ -402,7 +400,7 @@
                                                       <div fxFlex="100%">
                                                         {{userObj.personalCountryName}}
                                                     </div>
-                                                   
+
                                                     </div>
                                                     <div fxFlex="24%" fxFlex.xs="100%" fxLayout="row wrap">
                                                       <div fxFlex="100%" class="labeltext">
@@ -411,23 +409,23 @@
                                                       <div fxFlex="100%">
                                                         {{userObj.personalStateName}}
                                                     </div>
-                                                   
+
                                                     </div>
                                                     <div fxFlex="22%" fxFlex.xs="100%" fxLayout="row wrap">
                                                         <div fxFlex="100%" class="labeltext">
                                                          City
                                                         </div>
                                                         <div fxFlex="100%">
-                                                        
+
                                                             {{userObj.personalCityName}}
                                                       </div>
-                                                     
+
                                                       </div>
                                                 </div>
                                             </div>
                                             <div class="content">
-                    
-                   
+
+
                                                 <div fxFlex="100%"  fxLayout="row wrap" fxLayoutGap="15px">
                                                     <div fxFlex="24%" fxFlex.xs="100%" fxLayout="row wrap">
                                                         <div fxFlex="100%" class="labeltext">
@@ -436,7 +434,7 @@
                                                         <div fxFlex="100%">
                                                             {{userObj.personalZipCode}}
                                                       </div>
-                                                     
+
                                                       </div>
                                                       <div fxFlex="24%" fxFlex.xs="100%" fxLayout="row wrap">
                                                           <div fxFlex="100%" class="labeltext">
@@ -445,7 +443,7 @@
                                                           <div fxFlex="100%">
                                                             {{userObj.personalMobileCountryCode}} {{userObj.personalMobileNo}}
                                                         </div>
-                                                       
+
                                                         </div>
                                                         <div fxFlex="24%" fxFlex.xs="100%" fxLayout="row wrap">
                                                           <div fxFlex="100%" class="labeltext">
@@ -454,23 +452,23 @@
                                                           <div fxFlex="100%">
                                                             {{userObj.personalPhoneCountryCode}} {{userObj.personalPhoneNumber}}
                                                         </div>
-                                                       
+
                                                         </div>
                                                         <div fxFlex="22%" fxFlex.xs="100%" fxLayout="row wrap">
                                                             <div fxFlex="100%" class="labeltext">
                                                               Birth Date
                                                             </div>
                                                             <div fxFlex="100%">
-                                                            
+
                                                                 {{userObj.birthDateView}}
                                                           </div>
-                                                         
+
                                                           </div>
                                                     </div>
                                                 </div>
                                                 <div class="content">
-                    
-                   
+
+
                                                     <div fxFlex="100%"  fxLayout="row wrap" fxLayoutGap="15px">
                                                         <div fxFlex="24%" fxFlex.xs="100%" fxLayout="row wrap">
                                                             <div fxFlex="100%" class="labeltext">
@@ -479,7 +477,7 @@
                                                             <div fxFlex="100%">
                                                                 {{userObj.personalEmail}}
                                                           </div>
-                                                         
+
                                                           </div>
                                                           <div fxFlex="24%" fxFlex.xs="100%" fxLayout="row wrap">
                                                             <div fxFlex="100%" class="labeltext">
@@ -488,7 +486,7 @@
                                                             <div fxFlex="100%">
                                                               {{userObj.remarks}}
                                                           </div>
-                                                         
+
                                                           </div>
                                                         </div>
                                                     </div>

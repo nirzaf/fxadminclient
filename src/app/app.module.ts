@@ -160,8 +160,6 @@ import { DeleteUserComponent } from './pages/user/delete-user/delete-user.compon
     NgxOrgChartModule,
     MatTreeModule,
     MatTooltipModule
-    
-  
   ],
   exports: [],
   entryComponents:[],

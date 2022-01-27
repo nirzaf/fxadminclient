@@ -13,11 +13,11 @@ import { debounceTime, finalize, switchMap, tap } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { ViewUserComponent } from './view-user/view-user.component';
 
-export interface PeriodicElement {   
+export interface PeriodicElement {
   position:number;
   userID: number;
   userProductID: number;
-  holdingCompanyID: number; 
+  holdingCompanyID: number;
   firstName: string;
   titleID: number;
   loginID:string;
@@ -57,7 +57,7 @@ export class UserComponent implements OnInit {
   dataSource: MatTableDataSource<PeriodicElement>;
 
   selection = new SelectionModel<PeriodicElement>(true, []);
-  
+
 
   constructor(private webService:WebService,private toast:ToastService,public dialog: MatDialog,private http: HttpClient) { }
 
@@ -70,7 +70,7 @@ export class UserComponent implements OnInit {
     //this.getUserProductListByUser(11);
     this.searchMoviesCtrl.valueChanges
       .pipe(
-       
+
         debounceTime(500),
         tap(() => {
           this.errorMsg = "";
@@ -133,7 +133,7 @@ export class UserComponent implements OnInit {
         "GroupID": a.propertyGroupID
       })
       for (let b of a.propertyList) {
-     
+
           this.PropertyList.push({
             "propertyID": b.propertyID,
             "pmsCustCode": b.pmsCustCode,
@@ -143,17 +143,17 @@ export class UserComponent implements OnInit {
             "pmsVendor": b.pmsVendor
           })
         }
-      }    
-    
+      }
+
   }
 
   CreateUser(): void {
-  
+
       const dialogRef = this.dialog.open(CreateUserComponent, {
         panelClass:['custom-dialog-container','create-user-modal'] ,
-        //minHeight: '800px',    
+        //minHeight: '800px',
         data: {
- 
+
         },
         autoFocus: false
       });
@@ -162,13 +162,13 @@ export class UserComponent implements OnInit {
         //this.getPropertyList(this.groupID);
 
       });
-   
+
   }
   getAPIlist(){
     this.webService.commonMethod('PropertyAndGroup/list-by-login',{"LoginID":"nitish.kumar@idsnext.com"},'POST','fxauth')
     .subscribe(data=>{
       // this.toast.error("Api hitted success")
-     
+
       this.isProgressing = false;
     });
   }
@@ -176,7 +176,7 @@ export class UserComponent implements OnInit {
     console.log(row);
     const dialogRef = this.dialog.open(ViewUserComponent, {
       panelClass:['create-user-modal','viewmore-dialog-container'] ,
-      //minHeight: '800px',    
+      //minHeight: '800px',
       data: {
 userID:row.userID
       },
@@ -193,8 +193,8 @@ userID:row.userID
       .subscribe(data => {
         if (data.succeeded) {
           this.userProductList=data.data;
-          var userPrdData=[];
-          var i=0;
+          let userPrdData: any[];
+          let i = 0;
           userPrdData = data.data.map(function (a) {
             a.select=false;
             a.position=i;
@@ -205,8 +205,8 @@ userID:row.userID
           );
           console.log(userPrdData);
           this.userProductList=userPrdData;
-        
-        
+
+
           this.dataSource = new MatTableDataSource <PeriodicElement> (userPrdData);
           this.displayedColumns =  ['companyName','groupName','propertyName','userID','firstName','loginID','defaultGroupID'];
           this.selection = new SelectionModel<PeriodicElement>(true, []);
@@ -236,8 +236,8 @@ userID:row.userID
           );
           console.log(userPrdData);
           this.userProductList=userPrdData;
-        
-        
+
+
           this.dataSource = new MatTableDataSource <PeriodicElement> (userPrdData);
           this.displayedColumns =  ['companyName','groupName','propertyName','userID','firstName','loginID','defaultGroupID'];
           this.selection = new SelectionModel<PeriodicElement>(true, []);
@@ -250,7 +250,7 @@ userID:row.userID
 
       });
   }
-  
+
 
 
 
