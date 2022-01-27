@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {AuthGuardService} from "../../shared/services/auth-guard.service";
 
 @Component({
   selector: 'app-database',
@@ -8,7 +9,6 @@ import { Component, OnInit } from '@angular/core';
 export class DatabaseComponent implements OnInit {
 
   constructor() { }
-
   ngOnInit() {
   }
 }
